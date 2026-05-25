@@ -460,6 +460,7 @@
 		}
 	</style>
 </head>
+
 <body>
 
 	<div id="loadingOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.8); z-index:9999; flex-direction:column; justify-content:center; align-items:center;">
@@ -568,7 +569,7 @@
 				const payload = { action, ...data };
 				const response = await fetch(GOOGLE_SCRIPT_URL, {
 					method: 'POST',
-					mode: 'cors',
+					mode: 'cors', applyFilters
 					headers: { 'Content-Type': 'text/plain' },
 					body: JSON.stringify(payload)
 				});
@@ -950,9 +951,9 @@
 		window.updatePatient = updatePatient; window.deletePatient = deletePatient;
 		window.applyFilters = applyFilters; window.clearFilters = clearFilters;
 		window.sortTable = sortTable; window.exportToExcel = exportToExcel;
-	</script>
-</body>
-</html>ilters = applyFilters; window.clearFilters = clearFilters;
+	
+
+ilters = applyFilters; window.clearFilters = clearFilters;
 		window.sortTable = sortTable; window.exportToExcel = exportToExcel;
 	</script>
 </body>
