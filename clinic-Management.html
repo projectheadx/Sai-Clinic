@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sai Clinic & Diagnostics - Patient Management Suite</title>
+	<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<style>
+		:root {
+			--primary: #1a6e5f;
+			--primary-dark: #0c4e46;
+			--accent: #2c9a8a;
+			--surface-dark: #0a2540;
+			--bg-light: #eef3fc;
+			--text-main: #1a2e3f;
+			--border-color: #d0dae3;
+		}
+
+		/* Table cells content overflow fix */
+		td {
+			max-width: 200px;
+			white-space: normal;
+			word-wrap: break-word;
+			word-break: break-word;
+			vertical-align: top;
+		}
+
+			/* Specific complaint column styling */
+			td:nth-child(9) {
+				min-width: 150px;
+				font-size: 0.85rem;
+				color: #444;
+			}
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Plus Jakarta Sans', sans-serif;
+			background: var(--bg-light);
+			color: var(--text-main);
+			min-height: 100vh;
+		}
+
+		.login-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+			background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+			padding: 1rem;
+		}
+
+		.login-card {
+			background: white;
+			border-radius: 2rem;
+			padding: 2.5rem;
+			width: 100%;
+			max-width: 420px;
+			box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+		}
+
+			.login-card h2 {
+				color: var(--primary-dark);
+				font-size: 1.8rem;
+				margin-bottom: 0.5rem;
+				font-weight: 700;
+			}
+
+		.clinic-name {
+			font-size: 0.9rem;
+			color: #666;
+			margin-bottom: 1.5rem;
+			font-weight: 500;
+		}
+
+		.input-group {
+			margin-bottom: 1.2rem;
+		}
+
+			.input-group label {
+				display: block;
+				margin-bottom: 0.4rem;
+				font-weight: 600;
+				color: #4a6272;
+				font-size: 0.85rem;
+			}
+
+			.input-group input {
+				width: 100%;
+				padding: 0.8rem 1rem;
+				border: 1px solid var(--border-color);
+				border-radius: 0.8rem;
+				font-size: 1rem;
+				font-family: inherit;
+			}
+
+		.login-btn {
+			width: 100%;
+			background: var(--primary);
+			color: white;
+			border: none;
+			padding: 0.9rem;
+			border-radius: 0.8rem;
+			font-size: 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: background 0.2s;
+		}
+
+			.login-btn:hover {
+				background: var(--primary-dark);
+			}
+
+		.error-msg {
+			color: #dc3545;
+			font-size: 0.85rem;
+			margin-top: 0.5rem;
+			text-align: center;
+		}
+
+		.main-app {
+			display: none;
+			max-width: 1400px;
+			margin: 0 auto;
+			padding: 1.5rem;
+		}
+
+		.app-header {
+			background: white;
+			border-radius: 1.2rem;
+			padding: 1.2rem 1.8rem;
+			margin-bottom: 1.5rem;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 1rem;
+			box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+		}
+
+			.app-header h2 {
+				font-size: 1.5rem;
+				font-weight: 700;
+				color: var(--primary-dark);
+			}
+
+		.sync-status {
+			background: #d4edda;
+			color: #155724;
+			padding: 0.4rem 1rem;
+			border-radius: 2rem;
+			font-size: 0.8rem;
+			font-weight: 600;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.4rem;
+		}
+
+		.logout-btn {
+			background: #dc3545;
+			color: white;
+			border: none;
+			padding: 0.5rem 1.2rem;
+			border-radius: 2rem;
+			cursor: pointer;
+			font-weight: 600;
+			font-size: 0.85rem;
+		}
+
+		.doctor-card {
+			background: linear-gradient(135deg, #f0faf8 0%, #e6f4f1 100%);
+			border-left: 5px solid var(--accent);
+		}
+
+		.form-card {
+			background: white;
+			border-radius: 1.2rem;
+			padding: 1.5rem;
+			margin-bottom: 1.5rem;
+			box-shadow: 0 4px 16px rgba(15, 98, 254, 0.02);
+			border: 1px solid var(--border-color);
+		}
+
+		.form-title {
+			font-size: 1.2rem;
+			font-weight: 700;
+			color: var(--primary-dark);
+			margin-bottom: 1.2rem;
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.form-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+			gap: 1.2rem;
+		}
+
+		.form-field {
+			display: flex;
+			flex-direction: column;
+		}
+
+			.form-field label {
+				font-size: 0.8rem;
+				font-weight: 700;
+				color: #4a6272;
+				margin-bottom: 0.4rem;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+			}
+
+			.form-field input, .form-field select, .form-field textarea {
+				padding: 0.75rem;
+				border: 1px solid var(--border-color);
+				border-radius: 0.6rem;
+				font-size: 0.95rem;
+				font-family: inherit;
+			}
+
+		.submit-btn {
+			background: var(--primary);
+			color: white;
+			border: none;
+			padding: 0.8rem 1.8rem;
+			border-radius: 0.8rem;
+			font-weight: 600;
+			cursor: pointer;
+			margin-top: 1.2rem;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+			font-size: 0.95rem;
+		}
+
+			.submit-btn:hover {
+				background: var(--primary-dark);
+			}
+
+		.doctor-list {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.8rem;
+			margin: 1rem 0;
+		}
+
+		.doctor-tag {
+			background: var(--primary);
+			color: white;
+			padding: 0.4rem 1rem;
+			border-radius: 2rem;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+			font-size: 0.85rem;
+			font-weight: 500;
+		}
+
+			.doctor-tag .remove-doc {
+				background: rgba(255,255,255,0.3);
+				border: none;
+				color: white;
+				border-radius: 50%;
+				width: 20px;
+				height: 20px;
+				cursor: pointer;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+		.add-doctor-form {
+			display: flex;
+			gap: 0.5rem;
+			flex-wrap: wrap;
+			margin-top: 1rem;
+		}
+
+			.add-doctor-form input {
+				padding: 0.6rem 1rem;
+				border: 1px solid var(--border-color);
+				border-radius: 0.6rem;
+				flex: 1;
+				min-width: 240px;
+				font-family: inherit;
+			}
+
+		.small-btn {
+			background: var(--accent);
+			color: white;
+			border: none;
+			padding: 0.6rem 1.2rem;
+			border-radius: 0.6rem;
+			cursor: pointer;
+			font-weight: 600;
+		}
+
+		.filters-bar {
+			background: white;
+			border-radius: 1rem;
+			padding: 1.2rem 1.5rem;
+			margin-bottom: 1.5rem;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 1rem;
+			align-items: flex-end;
+			border: 1px solid var(--border-color);
+		}
+
+		.filter-group {
+			flex: 1;
+			min-width: 160px;
+		}
+
+			.filter-group label {
+				font-size: 0.75rem;
+				font-weight: 700;
+				color: #4a6272;
+				display: block;
+				margin-bottom: 0.4rem;
+				text-transform: uppercase;
+			}
+
+			.filter-group input, .filter-group select {
+				width: 100%;
+				padding: 0.65rem;
+				border: 1px solid var(--border-color);
+				border-radius: 0.6rem;
+				font-family: inherit;
+			}
+
+		.search-btn, .clear-btn, .export-btn {
+			padding: 0.65rem 1.4rem;
+			border-radius: 0.6rem;
+			font-weight: 600;
+			cursor: pointer;
+			border: none;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+			font-size: 0.9rem;
+		}
+
+		.search-btn {
+			background: var(--primary);
+			color: white;
+		}
+
+		.clear-btn {
+			background: #637381;
+			color: white;
+		}
+
+		.export-btn {
+			background: var(--accent);
+			color: white;
+		}
+
+		.table-container {
+			background: white;
+			border-radius: 1.2rem;
+			padding: 1.2rem;
+			overflow-x: auto;
+			border: 1px solid var(--border-color);
+			box-shadow: 0 4px 16px rgba(0,0,0,0.01);
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		th, td {
+			padding: 0.9rem 0.8rem;
+			text-align: left;
+			border-bottom: 1px solid #e2e8f0;
+			font-size: 0.95rem;
+		}
+
+		th {
+			background: #f8fafc;
+			font-weight: 700;
+			color: var(--primary-dark);
+			cursor: pointer;
+		}
+
+		.edit-btn, .delete-btn {
+			background: none;
+			border: none;
+			cursor: pointer;
+			font-size: 1.1rem;
+			padding: 0.2rem 0.4rem;
+		}
+
+		.edit-btn {
+			color: var(--accent);
+		}
+
+		.delete-btn {
+			color: #dc3545;
+		}
+
+		.pagination {
+			display: flex;
+			justify-content: center;
+			gap: 0.5rem;
+			margin-top: 1.2rem;
+			flex-wrap: wrap;
+		}
+
+		.page-btn {
+			padding: 0.4rem 0.8rem;
+			border: 1px solid var(--border-color);
+			background: white;
+			border-radius: 0.4rem;
+			cursor: pointer;
+			font-weight: 500;
+		}
+
+			.page-btn.active {
+				background: var(--primary);
+				color: white;
+				border-color: var(--primary);
+			}
+
+		.stats {
+			margin-top: 0.8rem;
+			font-size: 0.85rem;
+			color: #637381;
+			text-align: center;
+			font-weight: 500;
+		}
+
+		.fees-summary {
+			background: #e6f4f0;
+			border-radius: 0.8rem;
+			padding: 0.7rem 1.2rem;
+			margin-top: 0.8rem;
+			font-weight: 700;
+			color: var(--primary-dark);
+			display: inline-block;
+			border: 1px solid #cbdcd7;
+		}
+
+		@media (max-width: 700px) {
+			.main-app {
+				padding: 1rem;
+			}
+
+			th, td {
+				padding: 0.6rem;
+				font-size: 0.8rem;
+			}
+		}
+	</style>
+</head>
+<body>
+
+	<div id="loadingOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.8); z-index:9999; flex-direction:column; justify-content:center; align-items:center;">
+		<i class="fas fa-circle-notch fa-spin fa-3x" style="color:var(--primary); margin-bottom:1rem;"></i>
+		<div style="font-weight:700; color:var(--primary-dark);">Syncing Ledger Pipeline... Please wait</div>
+	</div>
+
+	<div id="loginPage" class="login-container">
+		<div class="login-card">
+			<h2><i class="fas fa-clinic-medical"></i> SAI CLINIC</h2>
+			<div class="clinic-name">Patient Billing & Database Console Panel</div>
+			<div class="input-group"><label>Username / ID</label><input type="text" id="loginUsername" placeholder="Enter administrative token"></div>
+			<div class="input-group"><label>Security Password</label><input type="password" id="loginPassword" placeholder="••••••••"></div>
+			<button class="login-btn" onclick="handleLogin()"><i class="fas fa-shield-check"></i> Authorize Entry</button>
+			<div id="loginError" class="error-msg"></div>
+			<div style="margin-top:1.2rem; font-size:0.8rem; text-align:center; color:#888; font-weight:500;">Default Access Credentials: admin / admin123</div>
+		</div>
+	</div>
+
+	<div id="mainApp" class="main-app">
+		<div class="app-header">
+			<h2><i class="fas fa-server"></i> Sai Clinic Records Infrastructure</h2>
+			<div style="display:flex; gap:1rem; align-items:center;">
+				<span id="syncStatus" class="sync-status"><i class="fas fa-cloud-check"></i> Connected</span>
+				<button class="logout-btn" onclick="logout()"><i class="fas fa-power-off"></i> Disconnect</button>
+			</div>
+		</div>
+
+		<div class="form-card doctor-card">
+			<div class="form-title"><i class="fas fa-user-doctor"></i> Empaneled Doctor Registry</div>
+			<div id="doctorListContainer" class="doctor-list">Loading active clinicians...</div>
+			<div class="add-doctor-form">
+				<input type="text" id="newDoctorName" placeholder="Enter clinician name (e.g., Dr. S. Sangami)">
+				<button class="small-btn" onclick="addDoctor()"><i class="fas fa-user-plus"></i> Register Doctor</button>
+			</div>
+			<div style="font-size:0.75rem; color:#856404; margin-top:0.6rem; font-weight:500;"><i class="fas fa-circle-info"></i> Registrations configured here map directly onto target drop-down entry systems.</div>
+		</div>
+
+		<div class="form-card">
+			<div class="form-title"><i class="fas fa-file-medical"></i> Daily Patient Admission Intake</div>
+			<div class="form-grid">
+				<div class="form-field"><label>Allocated Clinician *</label><select id="patDoctor"><option value="">-- Select Doctor --</option></select></div>
+				<div class="form-field"><label>Patient Legal Name *</label><input type="text" id="patName" placeholder="Full name profile"></div>
+				<div class="form-field"><label>Patient Age</label><input type="number" id="patAge" placeholder="Years"></div>
+				<div class="form-field"><label>Gender Matrix</label><select id="patGender"><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select></div>
+				<div class="form-field"><label>Mobile Contact</label><input type="text" id="patPhone" placeholder="10-digit number"></div>
+				<div class="form-field"><label>Intake Timestamp</label><input type="date" id="patDate"></div>
+				<div class="form-field"><label>Consultation Fees (₹)</label><input type="number" id="patFees" placeholder="INR amount" value="0"></div>
+				<div class="form-field"><label>Primary Diagnosis / Complaints</label><textarea id="patComplaint" rows="2" placeholder="Symptoms, diagnostic mapping notes..."></textarea></div>
+			</div>
+			<button class="submit-btn" onclick="addPatient()"><i class="fas fa-cloud-arrow-up"></i> Commit Record Entry</button>
+		</div>
+
+		<div class="filters-bar">
+			<div class="filter-group"><label><i class="fas fa-magnifying-glass"></i> Patient Search</label><input type="text" id="searchInput" placeholder="Name / Phone parameter"></div>
+			<div class="filter-group"><label><i class="fas fa-filter"></i> Doctor Target</label><select id="filterDoctor"><option value="">All Active Doctors</option></select></div>
+			<div class="filter-group"><label><i class="fas fa-calendar-days"></i> Timeline From</label><input type="date" id="filterFrom"></div>
+			<div class="filter-group"><label><i class="fas fa-calendar-days"></i> Timeline To</label><input type="date" id="filterTo"></div>
+			<div><button class="search-btn" onclick="applyFilters()"><i class="fas fa-filter"></i> Apply Filters</button></div>
+			<div><button class="clear-btn" onclick="clearFilters()"><i class="fas fa-trash-can"></i> Reset</button></div>
+			<div><button class="export-btn" onclick="exportToExcel()"><i class="fas fa-file-csv"></i> Export Dataset</button></div>
+		</div>
+
+		<div class="table-container">
+			<table id="patientTable">
+				<thead>
+					<tr>
+						<th onclick="sortTable('id')">System ID 🔽</th>
+						<th onclick="sortTable('doctor')">Target Clinician</th>
+						<th onclick="sortTable('name')">Patient Profile</th>
+						<th onclick="sortTable('age')">Age</th>
+						<th onclick="sortTable('gender')">Gender</th>
+						<th onclick="sortTable('phone')">Contact</th>
+						<th onclick="sortTable('date')">Visit Date</th>
+						<th onclick="sortTable('fees')">Collected Fees</th>
+						<th>Diagnostics / Complaint Summary</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody id="tableBody"></tbody>
+			</table>
+			<div id="paginationControls" class="pagination"></div>
+			<div id="tableStats" class="stats"></div>
+			<div id="totalFeesDisplay" class="fees-summary"></div>
+		</div>
+	</div>
+
+	<script>
+		// 🔥 LIVE CORE BACKEND INTERACTION PIPELINE
+		const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwjHt-QbpIAl5qWWtpNhcP6Ds9jKT54Hwr47RR_wDWqtPwdhXvyRM71npCZt23fCFeX/exec";
+
+		let patients = [];
+		let doctors = [];
+		let currentPage = 1;
+		const rowsPerPage = 10;
+		let sortColumn = 'id';
+		let sortDirection = 'desc';
+
+		async function callGoogleAPI(action, data = {}) {
+			const overlay = document.getElementById('loadingOverlay');
+			try {
+				if (overlay) overlay.style.display = 'flex';
+				const statusEl = document.getElementById('syncStatus');
+				if (statusEl) statusEl.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Syncing...';
+
+				const payload = { action, ...data };
+				const response = await fetch(GOOGLE_SCRIPT_URL, {
+					method: 'POST',
+					mode: 'cors',
+					headers: { 'Content-Type': 'text/plain' },
+					body: JSON.stringify(payload)
+				});
+
+				if (!response.ok) throw new Error(`HTTP status failure: ${response.status}`);
+				const result = await response.json();
+
+				if (statusEl) {
+					statusEl.innerHTML = result.success ? '<i class="fas fa-circle-check"></i> Synchronized' : '<i class="fas fa-circle-xmark"></i> Pipeline Fault';
+					setTimeout(() => { statusEl.innerHTML = '<i class="fas fa-cloud-check"></i> System Ready'; }, 2000);
+				}
+				return result;
+			} catch (error) {
+				console.error("API Gateway Interruption Error:", error);
+				return { success: false, error: error.message };
+			} finally {
+				if (overlay) overlay.style.display = 'none';
+			}
+		}
+
+		async function loadData() {
+			const tbody = document.getElementById('tableBody');
+			const cachedPatients = localStorage.getItem('sai_patients_cache');
+			const cachedDoctors = localStorage.getItem('sai_doctors_cache');
+
+			if (cachedPatients && cachedDoctors && patients.length === 0) {
+				patients = JSON.parse(cachedPatients);
+				doctors = JSON.parse(cachedDoctors);
+				updateUI();
+				renderTable();
+			} else if (tbody && patients.length === 0) {
+				tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding:3rem;"><i class="fas fa-circle-notch fa-spin fa-2x" style="color:var(--primary)"></i><br><br>Pulling encrypted database records...</td></tr>';
+			}
+
+			try {
+				const pResult = await callGoogleAPI("getPatients");
+				if (pResult.success && pResult.patients) {
+					patients = pResult.patients;
+					patients.forEach(p => { if (p.fees === undefined) p.fees = 0; });
+					localStorage.setItem('sai_patients_cache', JSON.stringify(patients));
+				}
+
+				const dResult = await callGoogleAPI("getDoctors");
+				if (dResult.success && dResult.doctors) {
+					doctors = dResult.doctors;
+					localStorage.setItem('sai_doctors_cache', JSON.stringify(doctors));
+				}
+
+				updateUI();
+				renderTable();
+			} catch (error) {
+				console.error("Background auto sync structural failure:", error);
+			}
+		}
+
+		function updateUI() {
+			const patSelect = document.getElementById('patDoctor');
+			const filterSelect = document.getElementById('filterDoctor');
+			const container = document.getElementById('doctorListContainer');
+
+			if (patSelect) {
+				patSelect.innerHTML = '<option value="">-- Select Doctor --</option>';
+				doctors.forEach(doc => {
+					patSelect.innerHTML += `<option value="${escapeHtml(doc.name)}">${escapeHtml(doc.name)}</option>`;
+				});
+			}
+			if (filterSelect) {
+				filterSelect.innerHTML = '<option value="">All Active Doctors</option>';
+				doctors.forEach(doc => {
+					filterSelect.innerHTML += `<option value="${escapeHtml(doc.name)}">${escapeHtml(doc.name)}</option>`;
+				});
+			}
+			if (container) {
+				if (doctors.length === 0) {
+					container.innerHTML = '<span style="color:#999; font-size:0.85rem;">No active medical practitioners registered.</span>';
+				} else {
+					container.innerHTML = '';
+					doctors.forEach(doc => {
+						container.innerHTML += `
+								<div class="doctor-tag">
+									<i class="fas fa-user-md"></i> ${escapeHtml(doc.name)}
+									<button class="remove-doc" onclick="deleteDoctor(${doc.id})"><i class="fas fa-xmark"></i></button>
+								</div>`;
+					});
+				}
+			}
+		}
+
+		async function addDoctor() {
+			const name = document.getElementById('newDoctorName').value.trim();
+			if (!name) return alert("Validation Failed: Enter doctor signature name");
+
+			const newId = doctors.length > 0 ? Math.max(...doctors.map(d => d.id)) + 1 : 1;
+			const result = await callGoogleAPI("saveDoctor", { doctor: { id: newId, name: name } });
+
+			if (result.success) {
+				document.getElementById('newDoctorName').value = '';
+				await loadData();
+			} else {
+				alert("Transaction aborted: Doctor registry rejected entry.");
+			}
+		}
+
+		async function deleteDoctor(id) {
+			if (confirm("Revoke this clinician registration from entry framework?")) {
+				const result = await callGoogleAPI("deleteDoctor", { id: id });
+				if (result.success) await loadData();
+			}
+		}
+
+		function generateNextId() {
+			if (patients.length === 0) return 1001;
+			return Math.max(...patients.map(p => Number(p.id) || 0)) + 1;
+		}
+
+		async function addPatient() {
+			const doctor = document.getElementById('patDoctor').value;
+			const name = document.getElementById('patName').value.trim();
+
+			if (!doctor || !name) return alert("System Alert: Practitioner Assignment and Patient Profile Identifier required!");
+
+			const patientData = {
+				id: generateNextId(),
+				doctor: doctor,
+				name: name,
+				age: parseInt(document.getElementById('patAge').value) || '',
+				gender: document.getElementById('patGender').value,
+				phone: document.getElementById('patPhone').value.trim(),
+				date: document.getElementById('patDate').value || new Date().toISOString().split('T')[0],
+				fees: parseInt(document.getElementById('patFees').value) || 0,
+				complaint: document.getElementById('patComplaint').value.trim() || '—'
+			};
+
+			// Optimistic instant local interface projection
+			patients.unshift(patientData);
+			localStorage.setItem('sai_patients_cache', JSON.stringify(patients));
+			renderTable();
+			clearPatientForm();
+
+			const statusEl = document.getElementById('syncStatus');
+			if (statusEl) statusEl.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Syncing to Cloud Sheets...';
+
+			fetch(GOOGLE_SCRIPT_URL, {
+				method: 'POST',
+				mode: 'cors',
+				headers: { 'Content-Type': 'text/plain' },
+				body: JSON.stringify({ action: "savePatient", patient: patientData })
+			})
+				.then(response => response.json())
+				.then(result => {
+					if (result.success) {
+						if (statusEl) {
+							statusEl.innerHTML = '<i class="fas fa-circle-check"></i> Master Ledger Verified';
+							setTimeout(() => { statusEl.innerHTML = '<i class="fas fa-cloud-check"></i> System Ready'; }, 2000);
+						}
+						loadData();
+					} else {
+						if (statusEl) statusEl.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Sync Error';
+						alert("Google Sheet-la store aagala machi! Local state preserved. Check network uplink.");
+					}
+				})
+				.catch(err => {
+					console.error("Uplink terminal dynamic timeout execution failed:", err);
+					if (statusEl) statusEl.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Network Error';
+				});
+		}
+
+		function clearPatientForm() {
+			document.getElementById('patDoctor').value = '';
+			document.getElementById('patName').value = '';
+			document.getElementById('patAge').value = '';
+			document.getElementById('patGender').value = 'Male';
+			document.getElementById('patPhone').value = '';
+			document.getElementById('patDate').value = new Date().toISOString().split('T')[0];
+			document.getElementById('patFees').value = '0';
+			document.getElementById('patComplaint').value = '';
+		}
+
+		let editModeId = null;
+		function editPatient(id) {
+			const p = patients.find(pat => Number(pat.id) === id);
+			if (!p) return;
+
+			document.getElementById('patDoctor').value = p.doctor;
+			document.getElementById('patName').value = p.name;
+			document.getElementById('patAge').value = p.age;
+			document.getElementById('patGender').value = p.gender;
+			document.getElementById('patPhone').value = p.phone;
+			document.getElementById('patDate').value = p.date;
+			document.getElementById('patFees').value = p.fees;
+			document.getElementById('patComplaint').value = p.complaint === '—' ? '' : p.complaint;
+			editModeId = id;
+
+			const btn = document.querySelector('.submit-btn');
+			btn.innerHTML = '<i class="fas fa-user-pen"></i> Apply Modified Ledger Record';
+			btn.setAttribute('onclick', 'updatePatient()');
+		}
+
+		async function updatePatient() {
+			if (!editModeId) return;
+			const updated = {
+				id: editModeId,
+				doctor: document.getElementById('patDoctor').value,
+				name: document.getElementById('patName').value.trim(),
+				age: parseInt(document.getElementById('patAge').value) || '',
+				gender: document.getElementById('patGender').value,
+				phone: document.getElementById('patPhone').value.trim(),
+				date: document.getElementById('patDate').value,
+				fees: parseInt(document.getElementById('patFees').value) || 0,
+				complaint: document.getElementById('patComplaint').value.trim() || '—'
+			};
+
+			const result = await callGoogleAPI("updatePatient", { patient: updated });
+			if (result.success) {
+				clearPatientForm();
+				editModeId = null;
+				const btn = document.querySelector('.submit-btn');
+				btn.innerHTML = '<i class="fas fa-cloud-arrow-up"></i> Commit Record Entry';
+				btn.setAttribute('onclick', 'addPatient()');
+				await loadData();
+			}
+		}
+
+		async function deletePatient(id) {
+			if (confirm("Permanently erase this patient architectural log? (Irreversible action)")) {
+				const result = await callGoogleAPI("deletePatient", { id: id });
+				if (result.success) await loadData();
+			}
+		}
+
+		function getFilteredPatients() {
+			const search = document.getElementById('searchInput')?.value.trim().toLowerCase() || '';
+			const doctorFilter = document.getElementById('filterDoctor')?.value || '';
+			const fromDate = document.getElementById('filterFrom')?.value || '';
+			const toDate = document.getElementById('filterTo')?.value || '';
+
+			let filtered = [...patients];
+
+			if (search) {
+				filtered = filtered.filter(p => {
+					const patientName = String(p.name || '').toLowerCase();
+					const patientPhone = String(p.phone || '');
+					return patientName.includes(search) || patientPhone.includes(search);
+				});
+			}
+
+			if (doctorFilter) filtered = filtered.filter(p => p.doctor === doctorFilter);
+			if (fromDate) filtered = filtered.filter(p => p.date >= fromDate);
+			if (toDate) filtered = filtered.filter(p => p.date <= toDate);
+
+			filtered.sort((a, b) => {
+				let aVal = a[sortColumn], bVal = b[sortColumn];
+				if (['id', 'age', 'fees'].includes(sortColumn)) {
+					aVal = Number(aVal) || 0; bVal = Number(bVal) || 0;
+				}
+				if (typeof aVal === 'string') {
+					aVal = aVal.toLowerCase(); bVal = bVal.toLowerCase();
+				}
+				return sortDirection === 'asc' ? (aVal > bVal ? 1 : -1) : (aVal < bVal ? 1 : -1);
+			});
+			return filtered;
+		}
+
+		function renderTable() {
+			const filtered = getFilteredPatients();
+			const totalPages = Math.ceil(filtered.length / rowsPerPage) || 1;
+			const start = (currentPage - 1) * rowsPerPage;
+			const paginated = filtered.slice(start, start + rowsPerPage);
+
+			const tbody = document.getElementById('tableBody');
+			if (!tbody) return;
+			tbody.innerHTML = '';
+
+			if (paginated.length === 0) {
+				tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding:2rem;">No record rows matching specified query profiles.</td></tr>';
+			} else {
+				paginated.forEach(p => {
+					tbody.innerHTML += `
+							<tr>
+								<td><strong>#${p.id}</strong></td>
+								<td><strong style="color:var(--primary); font-weight:600;">${escapeHtml(p.doctor)}</strong></td>
+								<td>${escapeHtml(p.name)}</td>
+								<td>${p.age || '—'}</td>
+								<td>${p.gender}</td>
+								<td>${p.phone || '—'}</td>
+								<td>${p.date}</td>
+								<td style="font-weight:700; color:var(--primary-dark);">₹${p.fees}</td>
+								<td>${escapeHtml(p.complaint)}</td>
+								<td>
+									<button class="edit-btn" onclick="editPatient(${p.id})"><i class="fas fa-user-pen"></i></button>
+									<button class="delete-btn" onclick="deletePatient(${p.id})"><i class="fas fa-trash-can"></i></button>
+								</td>
+							</tr>`;
+				});
+			}
+
+			const pagDiv = document.getElementById('paginationControls');
+			pagDiv.innerHTML = '';
+			if (totalPages > 1) {
+				for (let i = 1; i <= totalPages; i++) {
+					const btn = document.createElement('button');
+					btn.innerText = i;
+					btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+					btn.onclick = () => { currentPage = i; renderTable(); };
+					pagDiv.appendChild(btn);
+				}
+			}
+
+			const totalFees = filtered.reduce((sum, p) => sum + (Number(p.fees) || 0), 0);
+			document.getElementById('totalFeesDisplay').innerHTML = `<i class="fas fa-indian-rupee-sign"></i> Total Accounts Collection: ₹${totalFees.toLocaleString('en-IN')} | Matrix Group: ${filtered.length} Patients Documented`;
+			document.getElementById('tableStats').innerHTML = `Showing rows ${start + 1}-${Math.min(start + rowsPerPage, filtered.length)} of ${filtered.length} total matrix items | Page ${currentPage} of ${totalPages}`;
+		}
+
+		function applyFilters() { currentPage = 1; renderTable(); }
+		function clearFilters() {
+			document.getElementById('searchInput').value = '';
+			document.getElementById('filterDoctor').value = '';
+			document.getElementById('filterFrom').value = '';
+			document.getElementById('filterTo').value = '';
+			currentPage = 1; renderTable();
+		}
+
+		function sortTable(column) {
+			sortDirection = (sortColumn === column && sortDirection === 'asc') ? 'desc' : 'asc';
+			sortColumn = column;
+			renderTable();
+		}
+
+		function escapeHtml(str) {
+			if (!str) return '';
+			return String(str).replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m]));
+		}
+
+		function exportToExcel() {
+			const filtered = getFilteredPatients();
+			if (filtered.length === 0) return alert("Process Interrupted: No record rows to package output");
+			let csv = [["ID", "Doctor", "Patient Name", "Age", "Gender", "Phone", "Date", "Fees", "Complaint"].join(",")];
+			filtered.forEach(p => csv.push(`"${p.id}","${p.doctor}","${p.name}","${p.age}","${p.gender}","${p.phone}","${p.date}","${p.fees}","${(p.complaint || '').replace(/"/g, '""')}"`));
+			const blob = new Blob(["\uFEFF" + csv.join('\n')], { type: 'text/csv;charset=utf-8;' });
+			const link = document.createElement('a');
+			link.href = URL.createObjectURL(blob);
+			link.setAttribute('download', `sai_clinic_patient_export.csv`);
+			link.click();
+		}
+
+		function handleLogin() {
+			const u = document.getElementById('loginUsername').value.trim();
+			const p = document.getElementById('loginPassword').value.trim();
+			if (u === 'admin' && p === 'admin123') {
+				localStorage.setItem('sai_isLoggedIn', 'true');
+				document.getElementById('loginPage').style.display = 'none';
+				document.getElementById('mainApp').style.display = 'block';
+				loadData();
+			} else {
+				document.getElementById('loginError').innerText = 'Access Revoked: Invalid security credentials profile!';
+			}
+		}
+
+		function logout() {
+			localStorage.removeItem('sai_isLoggedIn');
+			document.getElementById('loginPage').style.display = 'flex';
+			document.getElementById('mainApp').style.display = 'none';
+		}
+
+		if (localStorage.getItem('sai_isLoggedIn') === 'true') {
+			document.getElementById('loginPage').style.display = 'none';
+			document.getElementById('mainApp').style.display = 'block';
+			loadData();
+		}
+
+		document.addEventListener('DOMContentLoaded', () => {
+			const today = new Date().toISOString().split('T')[0];
+			if (document.getElementById('patDate')) document.getElementById('patDate').value = today;
+		});
+
+		window.handleLogin = handleLogin; window.logout = logout;
+		window.addDoctor = addDoctor; window.deleteDoctor = deleteDoctor;
+		window.addPatient = addPatient; window.editPatient = editPatient;
+		window.updatePatient = updatePatient; window.deletePatient = deletePatient;
+		window.applyFilters = applyFilters; window.clearFilters = clearFilters;
+		window.sortTable = sortTable; window.exportToExcel = exportToExcel;
+	</script>
+</body>
+</html>
