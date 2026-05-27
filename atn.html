@@ -155,7 +155,6 @@
 		</div>
 	</div>
 
-	<!-- Register Modal -->
 	<div class="modal fade" id="registerModal" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -186,13 +185,11 @@
 
 	<script>
 		// ==================== CONFIG ====================
-		// Google Sheets URL (your working URL)
 		const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbzBltz0ilgm3NWotn6iNOzRqUx2hnxYEue3MqMQeGTxVzriUBVR157q701AsflJgnNOag/exec";
 
-		// Alternative model URLs (try these)
 		const MODEL_URLS = [
-			'https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights',
 			'https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/weights',
+			'https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights',
 			'https://unpkg.com/face-api.js@0.22.2/weights'
 		];
 
@@ -206,19 +203,14 @@
 		let modelsReady = false;
 		let registeredFaces = {};
 		let todayAttendance = [];
-		let currentModelIndex = 0;
 
-		// ==================== LOAD MODELS WITH FALLBACK ====================
+		// ==================== LOAD MODELS ====================
 		async function loadModels() {
 			const loadMsg = document.getElementById('loadMsg');
-
 			for (let i = 0; i < MODEL_URLS.length; i++) {
 				const url = MODEL_URLS[i];
-				loadMsg.innerText = `Trying model source ${i + 1}/${MODEL_URLS.length}: ${url.substring(0, 50)}...`;
-
+				loadMsg.innerText = `Trying model source ${i + 1}/${MODEL_URLS.length}...`;
 				try {
-					console.log('Loading from:', url);
-
 					await faceapi.nets.tinyFaceDetector.loadFromUri(url);
 					await faceapi.nets.faceLandmark68Net.loadFromUri(url);
 					await faceapi.nets.faceRecognitionNet.loadFromUri(url);
@@ -228,17 +220,12 @@
 					updateStatus('✅ Face recognition ready! Register your face.', 'success');
 					loadData();
 					return;
-
 				} catch (e) {
 					console.log(`Failed from ${url}:`, e.message);
-					continue;
 				}
 			}
-
-			// If all fail, show manual solution
 			document.getElementById('loadingOverlay').style.display = 'none';
-			updateStatus('⚠️ Models failed to load. Using manual mode. Click Register to add employees.', 'warning');
-			modelsReady = false;
+			updateStatus('⚠️ Models failed to load. Using manual mode.', 'warning');
 			loadData();
 		}
 
@@ -251,14 +238,12 @@
 					updateFaceMatcher();
 					renderRegisteredList();
 				}
-
 				const today = new Date().toDateString();
 				const savedAtt = localStorage.getItem(`att_${today}`);
 				if (savedAtt) {
 					todayAttendance = JSON.parse(savedAtt);
 					renderAttendance();
 				}
-
 				const count = Object.keys(registeredFaces).length;
 				if (count > 0) {
 					updateStatus(`✅ ${count} face(s) registered. Start camera!`, 'success');
@@ -293,7 +278,6 @@
 
 		function updateFaceMatcher() {
 			if (!faceapi || !faceapi.LabeledFaceDescriptors) return;
-
 			const labels = Object.keys(registeredFaces);
 			if (labels.length === 0) return;
 
@@ -306,7 +290,6 @@
 					});
 				}
 			});
-
 			if (labeledDescriptors.length > 0) {
 				faceMatcher = new faceapi.FaceMatcher(labeledDescriptors, 0.6);
 			}
@@ -315,12 +298,10 @@
 		function renderRegisteredList() {
 			const container = document.getElementById('registeredList');
 			const names = Object.keys(registeredFaces);
-
 			if (names.length === 0) {
 				container.innerHTML = '<span class="text-muted small">No faces registered</span>';
 				return;
 			}
-
 			container.innerHTML = names.map(name => `
 					<span class="badge bg-primary registered-badge" onclick="manualAttendance('${name.replace(/'/g, "\\'")}')">
 						<i class="fas fa-user me-1"></i>${registeredFaces[name].name}
@@ -334,7 +315,6 @@
 				tbody.innerHTML = '<tr><td colspan="3" class="text-center py-3 text-muted">No records yet</td></tr>';
 				return;
 			}
-
 			tbody.innerHTML = todayAttendance.map(r => `
 					<tr>
 						<td><strong>${escapeHtml(r.displayName)}</strong><br><small>${r.empId}</small></td>
@@ -348,8 +328,7 @@
 			const now = new Date();
 			const timeStr = now.toLocaleTimeString('en-IN');
 			const dateStr = now.toLocaleDateString('en-IN');
-			const hour = now.getHours();
-			const status = hour < 12 ? 'IN' : 'OUT';
+			const status = now.getHours() < 12 ? 'IN' : 'OUT';
 
 			const already = todayAttendance.some(r => r.fullName === fullName && r.status === status && r.date === dateStr);
 			if (already) {
@@ -372,9 +351,7 @@
 
 		function manualAttendance(fullName) {
 			const emp = registeredFaces[fullName];
-			if (emp) {
-				markAttendance(fullName, emp.id, emp.name);
-			}
+			if (emp) markAttendance(fullName, emp.id, emp.name);
 		}
 
 		// ==================== CAMERA ====================
@@ -382,7 +359,7 @@
 			try {
 				if (stream) stopCamera();
 				stream = await navigator.mediaDevices.getUserMedia({
-					video: { width: 480, height: 360, facingMode: 'user' }
+					video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: 'user' }
 				});
 				video.srcObject = stream;
 				await video.play();
@@ -392,7 +369,7 @@
 				updateStatus('🎥 Camera ON - Show your face', 'success');
 
 				if (detectInterval) clearInterval(detectInterval);
-				detectInterval = setInterval(detectFaces, 500);
+				detectInterval = setInterval(detectFaces, 600);
 			} catch (e) {
 				updateStatus('❌ Camera error: ' + e.message, 'danger');
 			}
@@ -411,32 +388,20 @@
 			}
 		}
 
+		// ==================== DETECTION WITH MIRROR FIX ====================
 		async function detectFaces() {
-			if (!video.videoWidth || !faceMatcher || !modelsReady) {
-				// Draw guide if models not ready
-				if (video.videoWidth) {
-					canvas.width = video.videoWidth;
-					canvas.height = video.videoHeight;
-					ctx.clearRect(0, 0, canvas.width, canvas.height);
-					ctx.fillStyle = 'rgba(255,255,255,0.5)';
-					ctx.font = '16px Arial';
-					ctx.fillText('Models loading...', 20, 50);
-				}
-				return;
-			}
+			if (!video.videoWidth || !faceMatcher || !modelsReady) return;
 
 			canvas.width = video.videoWidth;
 			canvas.height = video.videoHeight;
 
 			try {
-				const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
+				const options = new faceapi.TinyFaceDetectorOptions({ inputSize: 224, scoreThreshold: 0.5 });
+				const detections = await faceapi.detectAllFaces(video, options)
 					.withFaceLandmarks()
 					.withFaceDescriptors();
 
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
-				ctx.save();
-				ctx.scale(-1, 1);
-				ctx.translate(-canvas.width, 0);
 
 				const resized = faceapi.resizeResults(detections, { width: canvas.width, height: canvas.height });
 				const todayKey = new Date().toDateString();
@@ -447,16 +412,21 @@
 					const match = faceMatcher.findBestMatch(det.descriptor);
 					const fullName = match.label !== 'unknown' ? match.label : null;
 
+					// Fixed Mirror tracking map formula
+					const mirroredX = canvas.width - box.x - box.width;
+
 					ctx.strokeStyle = fullName ? '#00ff00' : '#ff4444';
 					ctx.lineWidth = 3;
-					ctx.strokeRect(box.x, box.y, box.width, box.height);
+					ctx.strokeRect(mirroredX, box.y, box.width, box.height);
 
 					let displayText = fullName ? (registeredFaces[fullName]?.name || fullName) : 'Unknown';
 					ctx.fillStyle = fullName ? 'rgba(0,200,0,0.8)' : 'rgba(200,0,0,0.8)';
-					ctx.fillRect(box.x, box.y - 28, Math.max(ctx.measureText(displayText).width + 20, 80), 25);
+
+					const textWidth = ctx.measureText(displayText).width + 20;
+					ctx.fillRect(mirroredX, box.y - 28, Math.max(textWidth, 80), 25);
 					ctx.fillStyle = '#fff';
-					ctx.font = 'bold 16px Arial';
-					ctx.fillText(displayText, box.x + 8, box.y - 10);
+					ctx.font = 'bold 14px Arial';
+					ctx.fillText(displayText, mirroredX + 8, box.y - 10);
 
 					if (fullName && registeredFaces[fullName]) {
 						const key = `${fullName}_${todayKey}`;
@@ -464,12 +434,10 @@
 							window.recognizedToday[key] = true;
 							const emp = registeredFaces[fullName];
 							markAttendance(fullName, emp.id, emp.name);
-							setTimeout(() => delete window.recognizedToday[key], 3600000);
+							setTimeout(() => delete window.recognizedToday[key], 900000); // 15 mins cool-off
 						}
 					}
 				}
-
-				ctx.restore();
 			} catch (e) {
 				console.log('Detection error:', e);
 			}
@@ -496,9 +464,9 @@
 
 			try {
 				let detection = null;
-
 				if (modelsReady && faceapi) {
-					detection = await faceapi.detectSingleFace(video, new faceapi.TinyFaceDetectorOptions())
+					const options = new faceapi.TinyFaceDetectorOptions({ inputSize: 224, scoreThreshold: 0.5 });
+					detection = await faceapi.detectSingleFace(video, options)
 						.withFaceLandmarks()
 						.withFaceDescriptor();
 				}
@@ -511,25 +479,20 @@
 						id: id,
 						descriptors: [Array.from(detection.descriptor)]
 					};
+					saveFaces();
+					alert(`✅ ${name} (${id}) registered successfully with face data!`);
 				} else {
-					// Fallback: register without face descriptor
-					registeredFaces[fullName] = {
-						name: name,
-						id: id,
-						descriptors: []
-					};
+					registeredFaces[fullName] = { name: name, id: id, descriptors: [] };
+					saveFaces();
+					alert(`⚠️ Face not clear, but profile saved! Click name badge for manual log.`);
 				}
 
-				saveFaces();
-
-				alert(`✅ ${name} (${id}) registered!\n\nStart camera and show your face.`);
 				bootstrap.Modal.getInstance(document.getElementById('registerModal')).hide();
 				document.getElementById('empName').value = '';
 				document.getElementById('empId').value = '';
-				updateStatus(`✅ Registered: ${name}`, 'success');
 
 			} catch (e) {
-				alert('Error: ' + e.message);
+				alert('Registration Error: ' + e.message);
 			} finally {
 				captureBtn.disabled = false;
 				captureBtn.innerHTML = '<i class="fas fa-camera me-2"></i>Capture & Register';
@@ -542,7 +505,7 @@
 
 		function exportCSV() {
 			if (todayAttendance.length === 0) {
-				alert('No records');
+				alert('No records to export');
 				return;
 			}
 			let csv = 'Employee Name,ID,Time,Status\n';
@@ -561,19 +524,14 @@
 			const msgSpan = document.getElementById('statusMsg');
 			alertDiv.className = `alert alert-${type} d-flex align-items-center mb-3`;
 			msgSpan.innerHTML = msg;
-			console.log(msg);
 		}
 
 		function escapeHtml(str) {
 			return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;');
 		}
 
-		// ==================== START ====================
 		loadModels();
-
-		window.onbeforeunload = () => {
-			if (stream) stopCamera();
-		};
+		window.onbeforeunload = () => { if (stream) stopCamera(); };
 	</script>
 </body>
 </html>
