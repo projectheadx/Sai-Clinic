@@ -187,10 +187,10 @@
 		// ==================== CONFIG ====================
 		const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbzBltz0ilgm3NWotn6iNOzRqUx2hnxYEue3MqMQeGTxVzriUBVR157q701AsflJgnNOag/exec";
 
+		// Updated paths ensuring reliable hosting for weights
 		const MODEL_URLS = [
-			'https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/weights',
-			'https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights',
-			'https://unpkg.com/face-api.js@0.22.2/weights'
+			'https://raw.githubusercontent.com/karthikmk-repo/face-models/main/weights', // Custom stable backup proxy if needed
+			'https://justadudewhohacks.github.io/face-api.js/weights'
 		];
 
 		// ==================== VARIABLES ====================
@@ -224,8 +224,9 @@
 					console.log(`Failed from ${url}:`, e.message);
 				}
 			}
+			// Fallback soft-landing if GitHub drops connection
 			document.getElementById('loadingOverlay').style.display = 'none';
-			updateStatus('⚠️ Models failed to load. Using manual mode.', 'warning');
+			updateStatus('⚠️ Models failed to network sync. Using manual fallback mode.', 'warning');
 			loadData();
 		}
 
@@ -304,7 +305,7 @@
 			}
 			container.innerHTML = names.map(name => `
 					<span class="badge bg-primary registered-badge" onclick="manualAttendance('${name.replace(/'/g, "\\'")}')">
-						<i class="fas fa-user me-1"></i>${registeredFaces[name].name}
+						<i class="fas fa-user me-1"></i>${escapeHtml(registeredFaces[name].name)}
 					</span>
 				`).join('');
 		}
@@ -317,9 +318,9 @@
 			}
 			tbody.innerHTML = todayAttendance.map(r => `
 					<tr>
-						<td><strong>${escapeHtml(r.displayName)}</strong><br><small>${r.empId}</small></td>
-						<td>${r.time}</td>
-						<td><span class="badge ${r.status === 'IN' ? 'bg-success' : 'bg-warning'}">${r.status}</span></td>
+						<td><strong>${escapeHtml(r.displayName || r.fullName || 'Unknown')}</strong><br><small>${escapeHtml(r.empId || '')}</small></td>
+						<td>${escapeHtml(r.time || '')}</td>
+						<td><span class="badge ${r.status === 'IN' ? 'bg-success' : 'bg-warning'}">${escapeHtml(r.status || 'IN')}</span></td>
 					</tr>
 				`).join('');
 		}
@@ -412,7 +413,6 @@
 					const match = faceMatcher.findBestMatch(det.descriptor);
 					const fullName = match.label !== 'unknown' ? match.label : null;
 
-					// Fixed Mirror tracking map formula
 					const mirroredX = canvas.width - box.x - box.width;
 
 					ctx.strokeStyle = fullName ? '#00ff00' : '#ff4444';
@@ -434,7 +434,7 @@
 							window.recognizedToday[key] = true;
 							const emp = registeredFaces[fullName];
 							markAttendance(fullName, emp.id, emp.name);
-							setTimeout(() => delete window.recognizedToday[key], 900000); // 15 mins cool-off
+							setTimeout(() => delete window.recognizedToday[key], 900000);
 						}
 					}
 				}
@@ -480,11 +480,11 @@
 						descriptors: [Array.from(detection.descriptor)]
 					};
 					saveFaces();
-					alert(`✅ ${name} (${id}) registered successfully with face data!`);
+					alert(`✅ ${name} (${id}) registered successfully!`);
 				} else {
 					registeredFaces[fullName] = { name: name, id: id, descriptors: [] };
 					saveFaces();
-					alert(`⚠️ Face not clear, but profile saved! Click name badge for manual log.`);
+					alert(`⚠️ Face clear-ah illa, but profile saved! Click badge for manual log.`);
 				}
 
 				bootstrap.Modal.getInstance(document.getElementById('registerModal')).hide();
@@ -501,6 +501,12 @@
 
 		function showRegisterModal() {
 			new bootstrap.Modal(document.getElementById('registerModal')).show();
+		}
+
+		// Safe string escape check handler
+		function escapeHtml(str) {
+			if (!str) return '';
+			return String(str).replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;');
 		}
 
 		function exportCSV() {
@@ -522,12 +528,10 @@
 		function updateStatus(msg, type) {
 			const alertDiv = document.getElementById('statusAlert');
 			const msgSpan = document.getElementById('statusMsg');
-			alertDiv.className = `alert alert-${type} d-flex align-items-center mb-3`;
-			msgSpan.innerHTML = msg;
-		}
-
-		function escapeHtml(str) {
-			return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;');
+			if (alertDiv && msgSpan) {
+				alertDiv.className = `alert alert-${type} d-flex align-items-center mb-3`;
+				msgSpan.innerHTML = msg;
+			}
 		}
 
 		loadModels();
