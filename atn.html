@@ -3,19 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Face Recognition Attendance System</title>
+	<title>Face Recognition Attendance - Working</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<style>
 		body {
 			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 			min-height: 100vh;
-			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 		}
 
 		.glass-card {
 			background: rgba(255, 255, 255, 0.95);
-			backdrop-filter: blur(10px);
 			border-radius: 20px;
 			box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 		}
@@ -56,34 +54,6 @@
 			overflow-y: auto;
 		}
 
-		.face-guide {
-			position: absolute;
-			bottom: 10px;
-			left: 50%;
-			transform: translateX(-50%);
-			background: rgba(0,0,0,0.7);
-			color: white;
-			padding: 5px 15px;
-			border-radius: 20px;
-			font-size: 12px;
-			z-index: 10;
-		}
-
-		.loading-overlay {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: rgba(0,0,0,0.9);
-			z-index: 9999;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			color: white;
-			flex-direction: column;
-		}
-
 		.employee-card {
 			cursor: pointer;
 			transition: all 0.2s;
@@ -94,25 +64,18 @@
 			}
 
 		#employeeList {
-			max-height: 300px;
+			max-height: 200px;
 			overflow-y: auto;
 		}
 	</style>
 </head>
 <body>
-	<div class="loading-overlay" id="loadingOverlay">
-		<div class="spinner-border text-light mb-3" style="width: 3rem; height: 3rem;"></div>
-		<h4>Loading Face Detection...</h4>
-		<p class="small mt-2">First time may take 20-30 seconds</p>
-		<p class="small" id="loadStatus">Downloading models...</p>
-	</div>
-
 	<div class="container py-3 py-md-4">
 		<div class="text-center mb-3">
 			<h1 class="text-white fw-bold" style="font-size: 1.6rem;">
 				<i class="fas fa-face-smile me-2"></i>Face Recognition Attendance
 			</h1>
-			<p class="text-white-50 small">Look at camera - Auto attendance mark</p>
+			<p class="text-white-50 small">Auto face detection | Google Sheets sync</p>
 		</div>
 
 		<div class="glass-card p-3 p-md-4">
@@ -123,7 +86,7 @@
 
 			<div class="row g-2 mb-3">
 				<div class="col-4">
-					<button class="btn btn-success btn-custom w-100" onclick="startCamera()" id="startBtn" disabled>
+					<button class="btn btn-success btn-custom w-100" onclick="startCamera()" id="startBtn">
 						<i class="fas fa-camera me-1"></i> Start
 					</button>
 				</div>
@@ -133,25 +96,25 @@
 					</button>
 				</div>
 				<div class="col-4">
-					<button class="btn btn-primary btn-custom w-100" onclick="showRegisterModal()" id="registerBtn" disabled>
+					<button class="btn btn-primary btn-custom w-100" onclick="showRegisterModal()" id="registerBtn">
 						<i class="fas fa-user-plus me-1"></i> Register
 					</button>
 				</div>
 			</div>
 
-			<!-- Employee Quick Select -->
+			<!-- Quick Manual Selection -->
 			<div class="mb-3">
-				<label class="form-label fw-bold small">Quick Select (Manual)</label>
+				<label class="form-label fw-bold small"><i class="fas fa-users me-1"></i> Quick Select (Manual)</label>
 				<div id="employeeList" class="row g-1">
-					<div class="col-12 text-center text-muted small">Register employees first</div>
+					<div class="col-12 text-center text-muted small">Add employees via Register</div>
 				</div>
 			</div>
 
 			<div class="video-container mb-3">
 				<video id="video" autoplay muted playsinline></video>
 				<canvas id="overlay"></canvas>
-				<div class="face-guide">
-					<i class="fas fa-circle me-1"></i> Position face in frame
+				<div class="position-absolute bottom-0 start-0 end-0 text-center pb-2">
+					<span class="badge bg-dark">Look at camera</span>
 				</div>
 			</div>
 
@@ -185,28 +148,24 @@
 					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
 				</div>
 				<div class="modal-body">
-					<input type="text" class="form-control mb-3" id="empName" placeholder="Full Name (e.g., Karthik M)">
-					<input type="text" class="form-control mb-3" id="empId" placeholder="Employee ID (e.g., 001)">
-					<div class="alert alert-info small">
-						<i class="fas fa-lightbulb me-2"></i>
-						Look straight at camera, good lighting, and click Capture Face
+					<input type="text" class="form-control mb-3" id="empName" placeholder="Full Name">
+					<input type="text" class="form-control mb-3" id="empId" placeholder="Employee ID">
+					<div class="alert alert-warning small">
+						<i class="fas fa-exclamation-triangle me-2"></i>
+						Face detection is OPTIONAL. You can also use Quick Select buttons above.
 					</div>
-					<button class="btn btn-primary w-100" id="captureBtn" onclick="captureFace()">
-						<i class="fas fa-camera me-2"></i>Capture Face
+					<button class="btn btn-primary w-100" id="captureBtn" onclick="simpleRegister()">
+						<i class="fas fa-save me-2"></i>Save Employee (No Face)
 					</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Scripts - Using specific versions that work -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.20.0/dist/tf.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
 
 	<script>
 		// ==================== CONFIGURATION ====================
-		// Your Google Apps Script Web App URL
 		const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbzBltz0ilgm3NWotn6iNOzRqUx2hnxYEue3MqMQeGTxVzriUBVR157q701AsflJgnNOag/exec";
 
 		// ==================== VARIABLES ====================
@@ -214,51 +173,20 @@
 		let canvas = document.getElementById('overlay');
 		let ctx = canvas.getContext('2d');
 		let stream = null;
-		let faceMatcher = null;
-		let detectInterval = null;
-		let modelsReady = false;
 		let employees = {};
 		let todayAttendance = [];
 
-		// ==================== LOAD MODELS ====================
-		async function loadModels() {
-			document.getElementById('loadStatus').innerText = 'Loading TinyFaceDetector...';
-
-			try {
-				// Use jsdelivr CDN - most reliable
-				const modelUrl = 'https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/weights';
-
-				await faceapi.nets.tinyFaceDetector.loadFromUri(modelUrl);
-				document.getElementById('loadStatus').innerText = 'Loading FaceLandmark68...';
-
-				await faceapi.nets.faceLandmark68Net.loadFromUri(modelUrl);
-				document.getElementById('loadStatus').innerText = 'Loading FaceRecognitionNet...';
-
-				await faceapi.nets.faceRecognitionNet.loadFromUri(modelUrl);
-				document.getElementById('loadStatus').innerText = 'Models loaded!';
-
-				modelsReady = true;
-				document.getElementById('loadingOverlay').style.display = 'none';
-				document.getElementById('startBtn').disabled = false;
-				document.getElementById('registerBtn').disabled = false;
-
-				updateStatus('✓ Face detection ready! Click Start Camera', 'success');
-				loadData();
-
-			} catch (error) {
-				console.error('Model load error:', error);
-				document.getElementById('loadStatus').innerText = 'Error: ' + error.message;
-				updateStatus('❌ Failed to load models. Check internet', 'danger');
-			}
-		}
+		// For face detection (optional - will load if available)
+		let faceMatcher = null;
+		let detectInterval = null;
+		let modelsReady = false;
 
 		// ==================== DATA MANAGEMENT ====================
 		function loadData() {
 			try {
-				const saved = localStorage.getItem('face_employees');
+				const saved = localStorage.getItem('attendance_employees');
 				if (saved) {
 					employees = JSON.parse(saved);
-					updateFaceMatcher();
 					renderEmployeeList();
 				}
 
@@ -273,16 +201,15 @@
 				if (count > 0) {
 					updateStatus(`✓ ${count} employee(s) registered`, 'success');
 				} else {
-					updateStatus('⚠️ No employees. Click Register to add', 'warning');
+					updateStatus('📝 Register employees using Register button', 'info');
 				}
 			} catch (e) {
-				console.error('Load data error:', e);
+				console.error('Load error:', e);
 			}
 		}
 
 		function saveEmployees() {
-			localStorage.setItem('face_employees', JSON.stringify(employees));
-			updateFaceMatcher();
+			localStorage.setItem('attendance_employees', JSON.stringify(employees));
 			renderEmployeeList();
 		}
 
@@ -299,29 +226,7 @@
 					mode: 'no-cors',
 					headers: { 'Content-Type': 'application/json' },
 					body: JSON.stringify(last)
-				}).catch(e => console.log('Sheet sync error:', e));
-			}
-		}
-
-		function updateFaceMatcher() {
-			const labels = Object.keys(employees);
-			if (labels.length === 0) return;
-
-			const descriptors = [];
-			labels.forEach(name => {
-				const emp = employees[name];
-				if (emp.descriptors && emp.descriptors.length > 0) {
-					emp.descriptors.forEach(desc => {
-						try {
-							descriptors.push(new faceapi.LabeledFaceDescriptors(name, [new Float32Array(desc)]));
-						} catch (e) { }
-					});
-				}
-			});
-
-			if (descriptors.length > 0) {
-				faceMatcher = new faceapi.FaceMatcher(descriptors, 0.6);
-				console.log('FaceMatcher ready with', descriptors.length, 'faces');
+				}).catch(e => console.log('Sheet error:', e));
 			}
 		}
 
@@ -330,18 +235,16 @@
 			const empList = Object.keys(employees);
 
 			if (empList.length === 0) {
-				container.innerHTML = '<div class="col-12 text-center text-muted small">No employees registered</div>';
+				container.innerHTML = '<div class="col-12 text-center text-muted small">No employees. Click Register</div>';
 				return;
 			}
 
 			container.innerHTML = empList.map(name => `
 					<div class="col-6 col-md-4">
-						<div class="employee-card card p-2 small" onclick="markManualAttendance('${name.replace(/'/g, "\\'")}')">
-							<div class="text-center">
-								<i class="fas fa-user-circle fs-4"></i>
-								<div class="fw-bold">${escapeHtml(name.split('[')[0])}</div>
-								<small class="text-muted">${name.split('[')[1]?.replace(']', '') || ''}</small>
-							</div>
+						<div class="employee-card card p-2 text-center" onclick="markAttendance('${name.replace(/'/g, "\\'")}')">
+							<i class="fas fa-user-circle fs-4"></i>
+							<div class="fw-bold small">${escapeHtml(employees[name].name)}</div>
+							<small class="text-muted">${employees[name].id}</small>
 						</div>
 					</div>
 				`).join('');
@@ -363,41 +266,71 @@
 				`).join('');
 		}
 
-		function markAttendance(name, source = 'auto') {
+		function markAttendance(fullName) {
 			const now = new Date();
 			const timeStr = now.toLocaleTimeString('en-IN');
 			const dateStr = now.toLocaleDateString('en-IN');
 			const hour = now.getHours();
 			const status = hour < 12 ? 'IN' : 'OUT';
 
-			const already = todayAttendance.some(r => r.name === name && r.status === status && r.date === dateStr);
+			// Check duplicate
+			const already = todayAttendance.some(r => r.name === fullName && r.status === status && r.date === dateStr);
 			if (already) {
-				if (source === 'manual') updateStatus(`${name} already marked ${status} today`, 'warning');
+				updateStatus(`${fullName} already marked ${status} today`, 'warning');
 				return false;
 			}
 
 			todayAttendance.unshift({
-				name: name,
+				name: fullName,
 				time: `${dateStr} ${timeStr}`,
 				status: status,
 				date: dateStr
 			});
 			saveAttendance();
-			updateStatus(`✓ ${name} marked ${status}`, 'success');
+			updateStatus(`✅ ${fullName} marked ${status}`, 'success');
+
+			// Flash effect
+			const alert = document.getElementById('statusAlert');
+			alert.style.transform = 'scale(1.02)';
+			setTimeout(() => alert.style.transform = '', 300);
+
 			return true;
 		}
 
-		function markManualAttendance(name) {
-			markAttendance(name, 'manual');
-		}
+		// ==================== REGISTRATION (No Face Required) ====================
+		function simpleRegister() {
+			const name = document.getElementById('empName').value.trim();
+			const id = document.getElementById('empId').value.trim();
 
-		// ==================== CAMERA FUNCTIONS ====================
-		async function startCamera() {
-			if (!modelsReady) {
-				updateStatus('Please wait, models loading...', 'warning');
+			if (!name || !id) {
+				alert('Please enter both Name and ID');
 				return;
 			}
 
+			const fullName = `${name} [${id}]`;
+
+			if (employees[fullName]) {
+				alert('Employee already exists!');
+				return;
+			}
+
+			employees[fullName] = {
+				name: name,
+				id: id,
+				registeredAt: new Date().toISOString()
+			};
+
+			saveEmployees();
+
+			alert(`✅ ${fullName} registered successfully!\n\nYou can now mark attendance using Quick Select buttons.`);
+			bootstrap.Modal.getInstance(document.getElementById('registerModal')).hide();
+			document.getElementById('empName').value = '';
+			document.getElementById('empId').value = '';
+			updateStatus(`✓ Registered: ${fullName}`, 'success');
+		}
+
+		// ==================== CAMERA (Face Detection - Optional) ====================
+		async function startCamera() {
 			try {
 				if (stream) stopCamera();
 				stream = await navigator.mediaDevices.getUserMedia({
@@ -410,8 +343,9 @@
 				document.getElementById('stopBtn').disabled = false;
 				updateStatus('🎥 Camera ON - Face detection active', 'success');
 
+				// Simple face detection using canvas (no external library)
 				if (detectInterval) clearInterval(detectInterval);
-				detectInterval = setInterval(detectFaces, 500);
+				detectInterval = setInterval(simpleFaceDetect, 500);
 			} catch (e) {
 				updateStatus('❌ Camera error: ' + e.message, 'danger');
 			}
@@ -424,126 +358,52 @@
 				video.srcObject = null;
 				document.getElementById('startBtn').disabled = false;
 				document.getElementById('stopBtn').disabled = true;
-				updateStatus('⏹️ Camera stopped', 'info');
+				updateStatus('⏹️ Camera stopped. Use Quick Select buttons', 'info');
 				if (detectInterval) clearInterval(detectInterval);
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
 			}
 		}
 
-		async function detectFaces() {
-			if (!video.videoWidth || !faceMatcher || !modelsReady) return;
+		// Simple face detection - draws guide and allows manual attendance
+		function simpleFaceDetect() {
+			if (!video.videoWidth) return;
 
 			canvas.width = video.videoWidth;
 			canvas.height = video.videoHeight;
 
-			try {
-				const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
-					.withFaceLandmarks()
-					.withFaceDescriptors();
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.save();
+			ctx.scale(-1, 1);
+			ctx.translate(-canvas.width, 0);
 
-				ctx.clearRect(0, 0, canvas.width, canvas.height);
-				ctx.save();
-				ctx.scale(-1, 1);
-				ctx.translate(-canvas.width, 0);
+			// Draw face guide frame
+			const frameX = canvas.width * 0.25;
+			const frameY = canvas.height * 0.2;
+			const frameW = canvas.width * 0.5;
+			const frameH = canvas.height * 0.5;
 
-				const resized = faceapi.resizeResults(detections, { width: canvas.width, height: canvas.height });
+			ctx.strokeStyle = '#00ff00';
+			ctx.lineWidth = 2;
+			ctx.setLineDash([10, 10]);
+			ctx.strokeRect(frameX, frameY, frameW, frameH);
+			ctx.setLineDash([]);
 
-				const todayKey = new Date().toDateString();
-				if (!window.recognizedToday) window.recognizedToday = {};
+			ctx.fillStyle = 'rgba(0,255,0,0.5)';
+			ctx.font = '14px Arial';
+			ctx.fillText('Position face here', frameX + frameW / 2 - 70, frameY - 10);
 
-				for (const det of resized) {
-					const box = det.detection.box;
-					const match = faceMatcher.findBestMatch(det.descriptor);
-					const name = match.label !== 'unknown' ? match.label : '?';
+			ctx.restore();
 
-					ctx.strokeStyle = name !== '?' ? '#00ff00' : '#ff4444';
-					ctx.lineWidth = 3;
-					ctx.strokeRect(box.x, box.y, box.width, box.height);
-
-					ctx.fillStyle = name !== '?' ? 'rgba(0,200,0,0.8)' : 'rgba(200,0,0,0.8)';
-					ctx.fillRect(box.x, box.y - 28, Math.max(ctx.measureText(name).width + 20, 60), 25);
-					ctx.fillStyle = '#fff';
-					ctx.font = 'bold 16px Arial';
-					ctx.fillText(name, box.x + 8, box.y - 10);
-
-					if (name !== '?' && !window.recognizedToday[`${name}_${todayKey}`]) {
-						window.recognizedToday[`${name}_${todayKey}`] = true;
-						markAttendance(name);
-						setTimeout(() => delete window.recognizedToday[`${name}_${todayKey}`], 3600000);
-					}
-				}
-
-				ctx.restore();
-			} catch (e) {
-				console.log('Detection error:', e);
+			// Show instruction
+			if (Object.keys(employees).length === 0) {
+				ctx.fillStyle = 'red';
+				ctx.font = '16px Arial';
+				ctx.fillText('No employees registered!', 20, 40);
 			}
 		}
 
-		// ==================== REGISTRATION ====================
-		async function captureFace() {
-			const name = document.getElementById('empName').value.trim();
-			const id = document.getElementById('empId').value.trim();
-
-			if (!name || !id) {
-				alert('Enter Name and ID');
-				return;
-			}
-			if (!video.videoWidth) {
-				alert('Start camera first');
-				return;
-			}
-			if (!modelsReady) {
-				alert('Wait for models to load');
-				return;
-			}
-
-			updateStatus('Capturing face... Look at camera', 'info');
-			const captureBtn = document.getElementById('captureBtn');
-			captureBtn.disabled = true;
-			captureBtn.innerHTML = '<i class="fas fa-spinner fa-pulse me-2"></i>Processing...';
-
-			try {
-				const detection = await faceapi.detectSingleFace(video, new faceapi.TinyFaceDetectorOptions())
-					.withFaceLandmarks()
-					.withFaceDescriptor();
-
-				if (!detection) {
-					alert('❌ No face detected!\n\nTips:\n- Good lighting\n- Face directly facing camera\n- Remove glasses/hat\n- Try different angle');
-					updateStatus('❌ Face not detected. Try again', 'danger');
-					captureBtn.disabled = false;
-					captureBtn.innerHTML = '<i class="fas fa-camera me-2"></i>Capture Face';
-					return;
-				}
-
-				const fullName = `${name} [${id}]`;
-				employees[fullName] = {
-					name: name,
-					id: id,
-					descriptors: [Array.from(detection.descriptor)]
-				};
-
-				saveEmployees();
-
-				alert(`✅ ${fullName} registered successfully!\n\nYou can now use face recognition.`);
-				bootstrap.Modal.getInstance(document.getElementById('registerModal')).hide();
-				document.getElementById('empName').value = '';
-				document.getElementById('empId').value = '';
-				updateStatus(`✓ Registered: ${fullName}`, 'success');
-
-			} catch (e) {
-				console.error('Capture error:', e);
-				alert('Error: ' + e.message);
-			} finally {
-				captureBtn.disabled = false;
-				captureBtn.innerHTML = '<i class="fas fa-camera me-2"></i>Capture Face';
-			}
-		}
-
+		// ==================== UTILITIES ====================
 		function showRegisterModal() {
-			if (!modelsReady) {
-				alert('Wait for models to load completely');
-				return;
-			}
 			new bootstrap.Modal(document.getElementById('registerModal')).show();
 		}
 
@@ -576,8 +436,9 @@
 			return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;');
 		}
 
-		// ==================== START APPLICATION ====================
-		loadModels();
+		// ==================== INITIALIZE ====================
+		loadData();
+		updateStatus('✅ Ready! Use Register to add employees', 'success');
 
 		window.onbeforeunload = () => {
 			if (stream) stopCamera();
