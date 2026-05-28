@@ -3,29 +3,34 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Machi Advanced Billing App</title>
+	<title>Machi Corporate Billing & TDS Ledger</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		body {
-			background-color: #f4f6f9;
+			background-color: #f4f7fc;
 			font-family: 'Segoe UI', system-ui, sans-serif;
 		}
 
 		.card {
 			border: none;
-			box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+			box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 			border-radius: 12px;
 		}
 
 		.bg-cancelled {
 			background-color: #f8d7da !important;
-			opacity: 0.7;
+			opacity: 0.6;
 			text-decoration: line-through;
 		}
 
-		.action-btn-group {
-			display: flex;
-			gap: 4px;
+		.table th {
+			background-color: #f1f4f9;
+			font-weight: 600;
+			font-size: 0.85rem;
+		}
+
+		.table td {
+			font-size: 0.9rem;
 		}
 	</style>
 </head>
@@ -33,137 +38,132 @@
 
 	<div class="container-fluid px-4 py-4">
 		<div class="d-flex justify-content-between align-items-center mb-4">
-			<h2 class="text-primary fw-bold m-0">🧾 Machi Billing Manager Pro</h2>
-			<button class="btn btn-outline-success fw-bold" onclick="exportToExcel()">📊 Export to Excel (.csv)</button>
+			<h2 class="text-primary fw-bold m-0">💼 Machi Premium Billing & TDS Tracker</h2>
+			<button class="btn btn-success fw-bold" onclick="exportToExcel()">📊 Export Ledger (.csv)</button>
 		</div>
 
 		<div class="row g-4">
-			<!-- Left Column: Add Invoice Form -->
 			<div class="col-xl-3 col-lg-4">
-				<div class="card p-4 sticky-top" style="top: 20px; z-index: 10;">
-					<h4 class="mb-3 text-secondary border-bottom pb-2">New Invoice</h4>
+				<div class="card p-4 sticky-top" style="top: 20px;">
+					<h5 class="mb-3 text-secondary border-bottom pb-2">Generate Invoice</h5>
 					<form id="invoiceForm">
 						<div class="mb-2">
 							<label class="form-label small fw-bold">Invoice No</label>
-							<input type="text" id="invoiceNo" class="form-control" required placeholder="INV-2026-001">
+							<input type="text" id="invoiceNo" class="form-control form-control-sm" required placeholder="INV/26-27/01">
 						</div>
 						<div class="mb-2">
 							<label class="form-label small fw-bold">Invoice Date</label>
-							<input type="date" id="invoiceDate" class="form-control" required>
+							<input type="date" id="invoiceDate" class="form-control form-control-sm" required>
 						</div>
 						<div class="mb-2">
-							<label class="form-label small fw-bold">Client Name (Received From)</label>
-							<input type="text" id="receivedFrom" class="form-control" required placeholder="Client Company Ltd">
+							<label class="form-label small fw-bold">Client Name</label>
+							<input type="text" id="receivedFrom" class="form-control form-control-sm" required placeholder="Corporate Client">
 						</div>
+
+						<div class="row g-2 mb-2">
+							<div class="col-7">
+								<label class="form-label small fw-bold text-dark">Total Project Val (₹)</label>
+								<input type="number" id="projectValue" class="form-control form-control-sm" required placeholder="50000" oninput="calculateMilestoneAmount()">
+							</div>
+							<div class="col-5">
+								<label class="form-label small fw-bold text-dark">Bill %</label>
+								<select id="billPercentage" class="form-select form-select-sm" onchange="calculateMilestoneAmount()">
+									<option value="10">10%</option>
+									<option value="20">20%</option>
+									<option value="25" selected>25%</option>
+									<option value="50">50%</option>
+									<option value="75">75%</option>
+									<option value="100">100%</option>
+								</select>
+							</div>
+						</div>
+
 						<div class="mb-2">
-							<label class="form-label small fw-bold">Base Amount (₹)</label>
-							<input type="number" id="amount" class="form-control" required placeholder="0.00" oninput="calculateGstAndTotal()">
+							<label class="form-label small text-muted">Calculated Base Amount (₹)</label>
+							<input type="number" id="amount" class="form-control form-control-sm bg-light" readonly>
 						</div>
-						<div class="row mb-2">
+
+						<div class="row mb-3 g-2">
 							<div class="col">
 								<label class="form-label small text-muted">GST (18%)</label>
-								<input type="number" id="gstAmt" class="form-control bg-light" readonly placeholder="0.00">
+								<input type="number" id="gstAmt" class="form-control form-control-sm bg-light" readonly>
 							</div>
 							<div class="col">
-								<label class="form-label small fw-bold text-success">Total Amount</label>
-								<input type="number" id="totalAmount" class="form-control bg-light fw-bold text-success" readonly placeholder="0.00">
+								<label class="form-label small fw-bold text-success">Total Bill (₹)</label>
+								<input type="number" id="totalAmount" class="form-control form-control-sm bg-light fw-bold text-success" readonly>
 							</div>
 						</div>
-						<div class="mb-2">
-							<label class="form-label small fw-bold">Description</label>
-							<textarea id="description" class="form-control" rows="2" placeholder="Frontend dev milestone updates..."></textarea>
-						</div>
+
 						<div class="mb-3">
-							<label class="form-label small text-muted">Received Date <span class="badge bg-light text-secondary">Optional Later</span></label>
-							<input type="date" id="amountReceivedDate" class="form-control">
+							<label class="form-label small fw-bold">Work Scope Description</label>
+							<textarea id="description" class="form-control form-control-sm" rows="2" placeholder="Milestone notes..."></textarea>
 						</div>
-						<button type="submit" class="btn btn-primary w-100 fw-bold py-2">💾 Save Invoice</button>
+
+						<button type="submit" class="btn btn-primary w-100 fw-bold">💾 Save Invoice</button>
 					</form>
 				</div>
 			</div>
 
-			<!-- Right Column: Filter & Invoices list -->
 			<div class="col-xl-9 col-lg-8">
-				<!-- Filter Logic Container -->
 				<div class="card p-4 mb-4">
-					<h5 class="mb-3 text-secondary">🔎 Filter & Search Workspace</h5>
 					<div class="row g-2">
 						<div class="col-md-4">
-							<input type="text" id="textSearch" class="form-control" placeholder="Search Client Name / Inv No..." oninput="filterAndResetPage()">
+							<input type="text" id="textSearch" class="form-control form-control-sm" placeholder="Search Client / Inv No..." oninput="filterAndResetPage()">
 						</div>
 						<div class="col-md-4">
-							<div class="input-group">
-								<span class="input-group-text small">From</span>
+							<div class="input-group input-group-sm">
+								<span class="input-group-text">From</span>
 								<input type="date" id="fromDate" class="form-control" onchange="filterAndResetPage()">
 							</div>
 						</div>
 						<div class="col-md-4">
-							<div class="input-group">
-								<span class="input-group-text small">To</span>
+							<div class="input-group input-group-sm">
+								<span class="input-group-text">To</span>
 								<input type="date" id="toDate" class="form-control" onchange="filterAndResetPage()">
 							</div>
 						</div>
 					</div>
-					<div class="d-flex justify-content-between align-items-center mt-3">
-						<div class="text-muted small">
-							Rows per page:
-							<select id="rowsPerPage" onchange="changeRowsPerPage()" class="form-select form-select-sm d-inline-block w-auto">
-								<option value="5">5</option>
-								<option value="10" selected>10</option>
-								<option value="25">25</option>
-							</select>
-						</div>
-						<button class="btn btn-sm btn-outline-secondary" onclick="clearFilters()">Clear Filters</button>
-					</div>
 				</div>
 
-				<!-- Table Card -->
 				<div class="card p-4">
 					<div class="d-flex justify-content-between align-items-center mb-3">
-						<h5 class="m-0 text-secondary fw-bold">Live Invoice Tracker</h5>
-						<button class="btn btn-sm btn-primary" onclick="fetchInvoices()">🔄 Sync Sheet</button>
+						<h5 class="m-0 text-secondary fw-bold">Live Billing Execution Panel</h5>
+						<button class="btn btn-sm btn-outline-primary" onclick="fetchInvoices()">🔄 Reload Sheets</button>
 					</div>
 
 					<div class="table-responsive">
-						<table class="table align-middle table-bordered fs-6">
-							<thead class="table-light">
+						<table class="table align-middle table-hover table-bordered">
+							<thead>
 								<tr>
-									<th>Date</th>
-									<th>Inv No</th>
-									<th>Client Name</th>
+									<th>Invoice Details</th>
+									<th>Client Metric</th>
 									<th>Base Amt</th>
 									<th>GST (18%)</th>
-									<th>Total</th>
-									<th>Description</th>
-									<th style="width: 220px;">Received Date Status</th>
-									<th class="text-center">Actions</th>
+									<th>Total Bill</th>
+									<th class="table-info text-center" style="width: 250px;">Received & TDS Update Workspace</th>
+									<th class="text-danger">Difference / Bal</th>
+									<th class="text-center">Action</th>
 								</tr>
 							</thead>
 							<tbody id="invoiceTableBody">
 								<tr>
-									<td colspan="9" class="text-center text-muted py-4">Waiting connection with Apps Script API...</td>
+									<td colspan="8" class="text-center text-muted py-4">Waiting connection setup variables...</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 
-					<!-- Pagination Footer Navigation -->
 					<div class="d-flex justify-content-between align-items-center mt-3">
-						<div id="paginationInfo" class="text-muted small">Showing 0 of 0 entries</div>
-						<nav>
-							<ul class="pagination pagination-sm m-0" id="paginationControls">
-								<!-- Dynamic controls append here -->
-							</ul>
-						</nav>
+						<div id="paginationInfo" class="text-muted small">Showing 0 of 0 logs</div>
+						<nav><ul class="pagination pagination-sm m-0" id="paginationControls"></ul></nav>
 					</div>
-
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<script>
-		// ⚠️ ENTER YOUR ACTUAL DEPLOYED GOOGLE APPS SCRIPT LINK HERE
+		// ⚠️ DEPLOYED WEB APP API URL PASTE HERE
 		const API_URL = "https://script.google.com/macros/s/AKfycbzisY99cBJJzVx41R9oMR3XM1wh5dqg6J0kqviSQh2AILrXT3od6RAH2BDuX_fbf5qgTg/exec";
 
 		let allInvoices = [];
@@ -171,11 +171,18 @@
 		let currentPage = 1;
 		let recordsPerPage = 10;
 
-		function calculateGstAndTotal() {
-			const amt = parseFloat(document.getElementById('amount').value) || 0;
-			const gst = amt * 0.18;
+		// Automatic Milestone Calculation Engine
+		function calculateMilestoneAmount() {
+			const totalProjectVal = parseFloat(document.getElementById('projectValue').value) || 0;
+			const selectedPercent = parseFloat(document.getElementById('billPercentage').value) || 0;
+
+			// Base Amount = (Project Value * Percent) / 100
+			const calculatedBase = (totalProjectVal * selectedPercent) / 100;
+			document.getElementById('amount').value = calculatedBase.toFixed(2);
+
+			const gst = calculatedBase * 0.18;
 			document.getElementById('gstAmt').value = gst.toFixed(2);
-			document.getElementById('totalAmount').value = (amt + gst).toFixed(2);
+			document.getElementById('totalAmount').value = (calculatedBase + gst).toFixed(2);
 		}
 
 		window.onload = function () {
@@ -188,19 +195,15 @@
 			try {
 				const response = await fetch(API_URL);
 				allInvoices = await response.json();
-				// Show latest entry first chronologically
 				allInvoices.reverse();
 				filterData();
 			} catch (error) {
-				console.error("Fetch failure:", error);
-				document.getElementById('invoiceTableBody').innerHTML = `<tr><td colspan="9" class="text-center text-danger">Error fetching sync arrays. Check CORS/URL path keys.</td></tr>`;
+				console.error(error);
+				document.getElementById('invoiceTableBody').innerHTML = `<tr><td colspan="8" class="text-center text-danger">API Link Validation Failed.</td></tr>`;
 			}
 		}
 
-		function filterAndResetPage() {
-			currentPage = 1;
-			filterData();
-		}
+		function filterAndResetPage() { currentPage = 1; filterData(); }
 
 		function filterData() {
 			const searchText = document.getElementById('textSearch').value.toLowerCase();
@@ -208,46 +211,30 @@
 			const toDateStr = document.getElementById('toDate').value;
 
 			filteredInvoices = allInvoices.filter(item => {
-				const matchText = item.invoiceNo.toLowerCase().includes(searchText) ||
-					item.receivedFrom.toLowerCase().includes(searchText);
-
+				const matchText = item.invoiceNo.toLowerCase().includes(searchText) || item.receivedFrom.toLowerCase().includes(searchText);
 				let matchDate = true;
 				if (item.invoiceDate) {
 					const itemDate = new Date(item.invoiceDate).setHours(0, 0, 0, 0);
-					if (fromDateStr) {
-						const fromD = new Date(fromDateStr).setHours(0, 0, 0, 0);
-						if (itemDate < fromD) matchDate = false;
-					}
-					if (toDateStr) {
-						const toD = new Date(toDateStr).setHours(0, 0, 0, 0);
-						if (itemDate > toD) matchDate = false;
-					}
-				} else if (fromDateStr || toDateStr) {
-					matchDate = false;
+					if (fromDateStr) { if (itemDate < new Date(fromDateStr).setHours(0, 0, 0, 0)) matchDate = false; }
+					if (toDateStr) { if (itemDate > new Date(toDateStr).setHours(0, 0, 0, 0)) matchDate = false; }
 				}
 				return matchText && matchDate;
 			});
-
 			renderPaginatedTable();
 		}
 
-		// Client-Side Pagination rendering logic
 		function renderPaginatedTable() {
 			const tbody = document.getElementById('invoiceTableBody');
 			tbody.innerHTML = "";
 
 			const totalRecords = filteredInvoices.length;
 			const totalPages = Math.ceil(totalRecords / recordsPerPage) || 1;
-
-			if (currentPage > totalPages) currentPage = totalPages;
-
 			const startIndex = (currentPage - 1) * recordsPerPage;
 			const endIndex = Math.min(startIndex + recordsPerPage, totalRecords);
 			const paginatedItems = filteredInvoices.slice(startIndex, startIndex + recordsPerPage);
 
 			if (paginatedItems.length === 0) {
-				tbody.innerHTML = `<tr><td colspan="9" class="text-center text-muted">No configuration match profiles tracked.</td></tr>`;
-				updatePaginationControls(totalPages, totalRecords, 0, 0);
+				tbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted">No configuration match profiles tracked.</td></tr>`;
 				return;
 			}
 
@@ -256,37 +243,55 @@
 				const rowClass = isCancelled ? "bg-cancelled" : "";
 				const fInvDate = item.invoiceDate ? new Date(item.invoiceDate).toLocaleDateString('en-IN') : '-';
 
-				// Build Contextual Received Date Element
-				let receivedSection = "";
+				// Variance Dynamic formatting
+				const diffValue = parseFloat(item.variance || 0);
+				let diffBadging = `<span class="fw-bold text-danger">₹${diffValue.toFixed(2)}</span>`;
+				if (diffValue <= 0 && !isCancelled) {
+					diffBadging = `<span class="badge bg-success">Fully Cleared (₹0)</span>`;
+				}
+
+				// Calculation Entry Form Layout
+				let updateSection = "";
 				if (isCancelled) {
-					receivedSection = `<span class="text-danger fw-bold">CANCELLED</span>`;
-				} else if (item.amountReceivedDate) {
-					receivedSection = `<span class="badge bg-success">Received: ${new Date(item.amountReceivedDate).toLocaleDateString('en-IN')}</span>`;
+					updateSection = `<span class="text-danger fw-bold">CANCELLED PROFILE</span>`;
+				} else if (item.amountReceivedDate && diffValue <= 0) {
+					updateSection = `
+						<div class="small">
+							<b class="text-success">✔ Cleared:</b> ₹${parseFloat(item.receivedAmount).toFixed(2)}<br>
+							<b class="text-secondary">TDS Ded:</b> ₹${parseFloat(item.tdsAmount).toFixed(2)}<br>
+							<small class="text-muted">On: ${new Date(item.amountReceivedDate).toLocaleDateString('en-IN')}</small>
+						</div>`;
 				} else {
-					receivedSection = `
-						<div class="input-group input-group-sm">
-							<input type="date" id="date-inline-${item.invoiceNo}" class="form-control form-control-sm">
-							<button class="btn btn-outline-primary btn-sm" onclick="saveInlineDate('${item.invoiceNo}')">Save</button>
+					// If pending or partial payment, show update workspace inside the cell row
+					updateSection = `
+						<div class="p-2 border rounded bg-light shadow-sm">
+							<div class="mb-1">
+								<input type="date" id="col-date-${item.invoiceNo}" class="form-control form-control-sm" title="Received Date">
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<input type="number" id="col-rec-${item.invoiceNo}" class="form-control" placeholder="Received Amt" title="Received Amt">
+								<input type="number" id="col-tds-${item.invoiceNo}" class="form-control" placeholder="TDS Amt" title="TDS Amt">
+							</div>
+							<button class="btn btn-primary btn-sm w-100 fw-bold py-0" style="font-size:0.75rem;" onclick="saveCollectionEntry('${item.invoiceNo}', ${item.totalAmount})">Update Payment</button>
 						</div>`;
 				}
 
-				// Build Actions Element
-				let actionSection = "";
-				if (!isCancelled) {
-					actionSection = `<button class="btn btn-xs btn-danger btn-sm px-2" onclick="cancelInvoice('${item.invoiceNo}')">🚫 Cancel</button>`;
-				} else {
-					actionSection = `<span class="text-muted small">No Actions</span>`;
-				}
+				let actionSection = !isCancelled ? `<button class="btn btn-outline-danger btn-sm" onclick="cancelInvoice('${item.invoiceNo}')">🚫 Cancel</button>` : `-`;
 
 				const row = `<tr class="${rowClass}">
-					<td>${fInvDate}</td>
-					<td class="fw-bold">${item.invoiceNo}</td>
-					<td>${item.receivedFrom}</td>
+					<td>
+						<b class="text-primary">${item.invoiceNo}</b><br>
+						<small class="text-muted">Date: ${fInvDate}</small>
+					</td>
+					<td>
+						<b>${item.receivedFrom}</b><br>
+						<small class="text-secondary">Proj Val: ₹${item.projectValue} (${item.billPercentage})</small>
+					</td>
 					<td>₹${parseFloat(item.amount).toFixed(2)}</td>
 					<td>₹${parseFloat(item.gstAmt).toFixed(2)}</td>
-					<td class="fw-bold text-success">₹${parseFloat(item.totalAmount).toFixed(2)}</td>
-					<td><small class="text-muted">${item.description || '-'}</small></td>
-					<td>${receivedSection}</td>
+					<td class="fw-bold">₹${parseFloat(item.totalAmount).toFixed(2)}</td>
+					<td class="table-info">${updateSection}</td>
+					<td>${diffBadging}</td>
 					<td class="text-center">${actionSection}</td>
 				</tr>`;
 				tbody.insertAdjacentHTML('beforeend', row);
@@ -295,142 +300,102 @@
 			updatePaginationControls(totalPages, totalRecords, startIndex + 1, endIndex);
 		}
 
+		// Dynamic Calculation updates client side
+		async function saveCollectionEntry(invoiceNo, totalBillAmount) {
+			const dateVal = document.getElementById(`col-date-${invoiceNo}`).value;
+			const receivedVal = parseFloat(document.getElementById(`col-rec-${invoiceNo}`).value) || 0;
+			const tdsVal = parseFloat(document.getElementById(`col-tds-${invoiceNo}`).value) || 0;
+
+			if (!dateVal) { alert("Machi, Payment Received Date rumba mukkiyam!"); return; }
+			if (receivedVal <= 0) { alert("Enter valid received collection amount!"); return; }
+
+			// Variance Equation: Total Bill - (Received Amount + TDS)
+			const varianceVal = totalBillAmount - (receivedVal + tdsVal);
+
+			if (!confirm(`Machi, confirm payment logging for invoice ${invoiceNo}?\nReceived: ₹${receivedVal}\nTDS: ₹${tdsVal}\nRemaining Variance: ₹${varianceVal.toFixed(2)}`)) return;
+
+			try {
+				await fetch(API_URL, {
+					method: "POST",
+					mode: "no-cors",
+					body: JSON.stringify({
+						action: "updateCollection",
+						invoiceNo: invoiceNo,
+						amountReceivedDate: dateVal,
+						receivedAmount: receivedVal,
+						tdsAmount: tdsVal,
+						variance: varianceVal
+					})
+				});
+				alert("Payment and TDS log synced successfully with Google Sheet!");
+				fetchInvoices();
+			} catch (e) { alert("API writing failure stream encountered."); }
+		}
+
+		async function cancelInvoice(invoiceNo) {
+			if (!confirm(`Machi, are you sure you want to CANCEL ${invoiceNo}?`)) return;
+			try {
+				await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({ action: "cancelInvoice", invoiceNo: invoiceNo }) });
+				alert("Invoice Status Updated to Cancelled.");
+				fetchInvoices();
+			} catch (e) { alert("Error updating status payload registry."); }
+		}
+
 		function updatePaginationControls(totalPages, totalRecords, start, end) {
 			document.getElementById('paginationInfo').innerText = `Showing ${start} to ${end} of ${totalRecords} entries`;
-			const controls = document.getElementById('paginationControls');
-			controls.innerHTML = "";
-
-			// Prev Button
+			const controls = document.getElementById('paginationControls'); controls.innerHTML = "";
 			controls.insertAdjacentHTML('beforeend', `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}"><a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Prev</a></li>`);
-
-			// Number Nodes
 			for (let i = 1; i <= totalPages; i++) {
 				controls.insertAdjacentHTML('beforeend', `<li class="page-item ${currentPage === i ? 'active' : ''}"><a class="page-link" href="#" onclick="changePage(${i})">${i}</a></li>`);
 			}
-
-			// Next Button
 			controls.insertAdjacentHTML('beforeend', `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}"><a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Next</a></li>`);
 		}
 
 		function changePage(page) {
 			if (page < 1 || page > Math.ceil(filteredInvoices.length / recordsPerPage)) return;
-			currentPage = page;
-			renderPaginatedTable();
+			currentPage = page; renderPaginatedTable();
 		}
 
-		function changeRowsPerPage() {
-			recordsPerPage = parseInt(document.getElementById('rowsPerPage').value);
-			currentPage = 1;
-			renderPaginatedTable();
-		}
-
-		// Save Late Received Date Inline Logic
-		async function saveInlineDate(invoiceNo) {
-			const dateVal = document.getElementById(`date-inline-${invoiceNo}`).value;
-			if (!dateVal) { alert("Select a valid date first machi!"); return; }
-
-			if (!confirm(`Update collection date for ${invoiceNo}?`)) return;
-
-			try {
-				await fetch(API_URL, {
-					method: "POST",
-					mode: "no-cors",
-					body: JSON.stringify({ action: "updateDate", invoiceNo: invoiceNo, amountReceivedDate: dateVal })
-				});
-				alert("Received date updated!");
-				fetchInvoices();
-			} catch (e) { alert("Error updating date registry payload."); }
-		}
-
-		// Cancel Active Invoice Engine
-		async function cancelInvoice(invoiceNo) {
-			if (!confirm(`Machi, are you absolutely sure you want to CANCEL invoice ${invoiceNo}? This status cannot be undone.`)) return;
-
-			try {
-				await fetch(API_URL, {
-					method: "POST",
-					mode: "no-cors",
-					body: JSON.stringify({ action: "cancelInvoice", invoiceNo: invoiceNo })
-				});
-				alert("Invoice Cancelled!");
-				fetchInvoices();
-			} catch (e) { alert("Error executing cancel instructions."); }
-		}
-
-		function clearFilters() {
-			document.getElementById('textSearch').value = "";
-			document.getElementById('fromDate').value = "";
-			document.getElementById('toDate').value = "";
-			filterAndResetPage();
-		}
-
-		// Excel CSV Exporter Component
 		function exportToExcel() {
-			if (filteredInvoices.length === 0) { alert("No invoice dataset active to export."); return; }
-
-			// Creating structural comma separated variable headers
-			let csvContent = "data:text/csv;charset=utf-8,";
-			csvContent += "Invoice Date,Invoice No,Received From,Base Amount,GST Amount,Total Amount,Description,Received Date,Status\n";
-
+			if (filteredInvoices.length === 0) return;
+			let csvContent = "data:text/csv;charset=utf-8,Invoice Date,Invoice No,Client Name,Project Value,Bill Percent,Base Amount,GST Amount,Total Bill,Received Date,Received Amount,TDS Amount,Variance Balance,Status\n";
 			filteredInvoices.forEach(r => {
-				let rowData = [
-					`"${r.invoiceDate || ''}"`,
-					`"${r.invoiceNo || ''}"`,
-					`"${r.receivedFrom.replace(/"/g, '""')}"`,
-					`"${r.amount || 0}"`,
-					`"${r.gstAmt || 0}"`,
-					`"${r.totalAmount || 0}"`,
-					`"${(r.description || '').replace(/"/g, '""')}"`,
-					`"${r.amountReceivedDate || 'Pending'}"`,
-					`"${r.status || 'Active'}"`
-				].join(",");
-				csvContent += rowData + "\n";
+				csvContent += [
+					`"${r.invoiceDate || ''}"`, `"${r.invoiceNo || ''}"`, `"${r.receivedFrom}"`,
+					`"${r.projectValue}"`, `"${r.billPercentage}"`, `"${r.amount}"`,
+					`"${r.gstAmt}"`, `"${r.totalAmount}"`, `"${r.amountReceivedDate || 'Pending'}"`,
+					`"${r.receivedAmount}"`, `"${r.tdsAmount}"`, `"${r.variance}"`, `"${r.status}"`
+				].join(",") + "\n";
 			});
-
-			const encodedUri = encodeURI(csvContent);
-			const link = document.createElement("a");
-			link.setAttribute("href", encodedUri);
-			link.setAttribute("download", `Machi_Billing_Report_${new Date().toISOString().split('T')[0]}.csv`);
-			document.body.appendChild(link);
-			link.click();
-			document.body.removeChild(link);
+			const link = document.createElement("a"); link.setAttribute("href", encodeURI(csvContent));
+			link.setAttribute("download", `Machi_Premium_Ledger_${new Date().toISOString().split('T')[0]}.csv`);
+			document.body.appendChild(link); link.click(); document.body.removeChild(link);
 		}
 
-		// Save Main Form Submit
 		document.getElementById('invoiceForm').addEventListener('submit', async function (e) {
 			e.preventDefault();
-			if (API_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL") { alert("Set API URL path first machi!"); return; }
-
 			const formData = {
 				action: "newInvoice",
 				invoiceNo: document.getElementById('invoiceNo').value,
 				invoiceDate: document.getElementById('invoiceDate').value,
 				receivedFrom: document.getElementById('receivedFrom').value,
+				projectValue: document.getElementById('projectValue').value,
+				billPercentage: document.getElementById('billPercentage').value,
 				amount: document.getElementById('amount').value,
 				gstAmt: document.getElementById('gstAmt').value,
 				totalAmount: document.getElementById('totalAmount').value,
-				description: document.getElementById('description').value,
-				amountReceivedDate: document.getElementById('amountReceivedDate').value
+				description: document.getElementById('description').value
 			};
-
 			const submitBtn = e.target.querySelector('button[type="submit"]');
-			submitBtn.innerText = "Saving Data..."; submitBtn.disabled = true;
-
+			submitBtn.innerText = "Processing..."; submitBtn.disabled = true;
 			try {
-				await fetch(API_URL, {
-					method: "POST",
-					mode: "no-cors",
-					body: JSON.stringify(formData)
-				});
-				alert("Invoice Successfully Recorded!");
+				await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(formData) });
+				alert("Invoice Logged successfully!");
 				document.getElementById('invoiceForm').reset();
-				document.getElementById('invoiceDate').value = new Date().toISOString().split('T')[0];
+				calculateMilestoneAmount();
 				fetchInvoices();
-			} catch (error) {
-				alert("Connection error.");
-			} finally {
-				submitBtn.innerText = "💾 Save Invoice"; submitBtn.disabled = false;
-			}
+			} catch (error) { alert("Network sync failed."); }
+			finally { submitBtn.innerText = "💾 Save Invoice"; submitBtn.disabled = false; }
 		});
 	</script>
 </body>
