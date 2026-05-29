@@ -191,7 +191,7 @@
 		};
 
 		async function fetchInvoices() {
-			if (API_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL") return;
+			if (API_URL === "https://script.google.com/macros/s/AKfycbzisY99cBJJzVx41R9oMR3XM1wh5dqg6J0kqviSQh2AILrXT3od6RAH2BDuX_fbf5qgTg/exec") return;
 			try {
 				const response = await fetch(API_URL);
 				allInvoices = await response.json();
