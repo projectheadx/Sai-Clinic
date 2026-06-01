@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Machi Premium Corporate Ledger v4</title>
+	<title>Machi Premium Corporate Ledger v5</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		body {
@@ -52,12 +52,11 @@
 
 	<div class="container-fluid px-4 py-4">
 		<div class="d-flex justify-content-between align-items-center mb-4">
-			<h2 class="text-primary fw-bold m-0">💼 Machi Premium Billing & TDS Tracker v4</h2>
+			<h2 class="text-primary fw-bold m-0">💼 Machi Premium Billing & TDS Tracker v5</h2>
 			<button class="btn btn-success fw-bold" onclick="exportToExcel()">📊 Export Ledger (.csv)</button>
 		</div>
 
 		<div class="row g-4">
-			<!-- DYNAMIC GENERATE / EDIT INPUT BOARD -->
 			<div class="col-xl-3 col-lg-4">
 				<div class="card p-4 sticky-top" style="top: 20px; z-index: 5;">
 					<h5 id="formPanelTitle" class="mb-3 text-secondary border-bottom pb-2">Generate Invoice</h5>
@@ -77,7 +76,6 @@
 							<input type="text" id="receivedFrom" class="form-control form-control-sm" required placeholder="Corporate Client">
 						</div>
 
-						<!-- UPDATED: FLEXIBLE TEXT NUMBER FIELD REPLACED INSTEAD OF DROPDOWN OPTIONS -->
 						<div class="row g-2 mb-2">
 							<div class="col-7">
 								<label class="form-label small fw-bold text-dark">Total Project Val (₹)</label>
@@ -95,11 +93,15 @@
 						</div>
 
 						<div class="row mb-3 g-2">
-							<div class="col">
-								<label class="form-label small text-muted">GST (18%)</label>
+							<div class="col-4">
+								<label class="form-label small fw-bold text-dark">GST %</label>
+								<input type="number" step="any" id="gstPercentageField" class="form-control form-control-sm" required placeholder="e.g. 18" value="18" oninput="calculateMilestoneAmount()">
+							</div>
+							<div class="col-4">
+								<label class="form-label small text-muted">GST Amt (₹)</label>
 								<input type="number" id="gstAmt" class="form-control form-control-sm bg-light" readonly>
 							</div>
-							<div class="col">
+							<div class="col-4">
 								<label class="form-label small fw-bold text-success">Total Bill (₹)</label>
 								<input type="number" id="totalAmount" class="form-control form-control-sm bg-light fw-bold text-success" readonly>
 							</div>
@@ -118,9 +120,7 @@
 				</div>
 			</div>
 
-			<!-- LEDGER CORE TRACKING INTERFACES -->
 			<div class="col-xl-9 col-lg-8">
-				<!-- ADVANCED FILTER CONTROLS ENGINE -->
 				<div class="card p-4 mb-4">
 					<h6 class="text-secondary fw-bold mb-3">🔎 Dedicated Filtering System</h6>
 					<div class="row g-2 align-items-end">
@@ -146,7 +146,6 @@
 					</div>
 				</div>
 
-				<!-- METRIC MATRIX TRACKER -->
 				<div class="card p-4">
 					<div class="d-flex justify-content-between align-items-center mb-3">
 						<h5 class="m-0 text-secondary fw-bold">Live Billing Execution Panel</h5>
@@ -163,7 +162,7 @@
 									<th>Invoice Details</th>
 									<th>Client Metric</th>
 									<th>Base Amt</th>
-									<th>GST (18%)</th>
+									<th>GST Amount</th>
 									<th>Total Bill</th>
 									<th class="table-info text-center" style="width: 260px;">Received & TDS Update Workspace</th>
 									<th class="text-danger">Difference / Bal</th>
@@ -178,7 +177,6 @@
 						</table>
 					</div>
 
-					<!-- Pagination row selectors layout -->
 					<div class="d-flex justify-content-between align-items-center mt-3">
 						<div id="paginationInfo" class="text-muted small">Showing 0 of 0 logs</div>
 						<nav><ul class="pagination pagination-sm m-0" id="paginationControls"></ul></nav>
@@ -189,7 +187,7 @@
 	</div>
 
 	<script>
-		// ⚠️ PASTED DEPLOYED APPS SCRIPT WEB APP API LINK EXCLUSIVELY BELOW
+		// ACTIVE DEPLOYED APPS SCRIPT LINK VALIDATED BELOW
 		const API_URL = "https://script.google.com/macros/s/AKfycbx2WVUi93T3MRUj_La8-U9CQZnprL6Z-0wBv1ot6uyVy00TpsZ_Fh4J4335_aEQPeoWuQ/exec";
 
 		let allInvoices = [];
@@ -197,16 +195,18 @@
 		let currentPage = 1;
 		let recordsPerPage = 10;
 
-		// AUTOMATIC MILESTONE MATH CALCULATIONS HANDLING
+		// AUTOMATIC MILESTONE & FLEXIBLE GST METHOD MATHEMATICS
 		function calculateMilestoneAmount() {
 			const totalProjectVal = parseFloat(document.getElementById('projectValue').value) || 0;
 			const selectedPercent = parseFloat(document.getElementById('billPercentage').value) || 0;
+			const customGstPercent = parseFloat(document.getElementById('gstPercentageField').value) || 0;
 
-			// Flexible execution matrix logic values computation
+			// Compute base value dynamically
 			const calculatedBase = (totalProjectVal * selectedPercent) / 100;
 			document.getElementById('amount').value = calculatedBase.toFixed(2);
 
-			const gst = calculatedBase * 0.18;
+			// Compute dynamic GST based on flexible user input rate
+			const gst = calculatedBase * (customGstPercent / 100);
 			document.getElementById('gstAmt').value = gst.toFixed(2);
 			document.getElementById('totalAmount').value = (calculatedBase + gst).toFixed(2);
 		}
@@ -319,59 +319,59 @@
 					updateSection = `<span class="text-danger fw-bold no-strike">🚫 CANCELLED PROFILE</span>`;
 				} else if (item.amountReceivedDate && diffValue <= 0) {
 					updateSection = `
-								<div class="small">
-									<b class="text-success">✔ Cleared:</b> ₹${parseFloat(item.receivedAmount).toFixed(2)}<br>
-									<b class="text-secondary">TDS Ded (2%):</b> ₹${parseFloat(item.tdsAmount).toFixed(2)}<br>
-									<small class="text-muted">On: ${new Date(item.amountReceivedDate).toLocaleDateString('en-IN')}</small>
-								</div>`;
+							<div class="small">
+								<b class="text-success">✔ Cleared:</b> ₹${parseFloat(item.receivedAmount).toFixed(2)}<br>
+								<b class="text-secondary">TDS Ded (2%):</b> ₹${parseFloat(item.tdsAmount).toFixed(2)}<br>
+								<small class="text-muted">On: ${new Date(item.amountReceivedDate).toLocaleDateString('en-IN')}</small>
+							</div>`;
 				} else {
 					updateSection = `
-								<div class="p-2 border rounded bg-white shadow-sm no-strike">
-									<div class="mb-1">
-										<input type="date" id="col-date-${item.invoiceNo}" class="form-control form-control-sm" style="font-size:0.8rem;">
-									</div>
-									<div class="input-group input-group-sm mb-1">
-										<input type="number" id="col-rec-${item.invoiceNo}" class="form-control" placeholder="Recamt" style="font-size:0.8rem;" oninput="runAutoTdsCalculation('${item.invoiceNo}', ${item.totalAmount})">
-										<input type="number" id="col-tds-${item.invoiceNo}" class="form-control" placeholder="TDS (2%)" style="font-size:0.8rem;">
-									</div>
-									<button class="btn btn-primary btn-sm w-100 fw-bold py-1" style="font-size:0.75rem;" onclick="saveCollectionEntry('${item.invoiceNo}', ${item.totalAmount})">Update Payment</button>
-								</div>`;
+							<div class="p-2 border rounded bg-white shadow-sm no-strike">
+								<div class="mb-1">
+									<input type="date" id="col-date-${item.invoiceNo}" class="form-control form-control-sm" style="font-size:0.8rem;">
+								</div>
+								<div class="input-group input-group-sm mb-1">
+									<input type="number" id="col-rec-${item.invoiceNo}" class="form-control" placeholder="Recamt" style="font-size:0.8rem;" oninput="runAutoTdsCalculation('${item.invoiceNo}', ${item.totalAmount})">
+									<input type="number" id="col-tds-${item.invoiceNo}" class="form-control" placeholder="TDS (2%)" style="font-size:0.8rem;">
+								</div>
+								<button class="btn btn-primary btn-sm w-100 fw-bold py-1" style="font-size:0.75rem;" onclick="saveCollectionEntry('${item.invoiceNo}', ${item.totalAmount})">Update Payment</button>
+							</div>`;
 				}
 
 				let actionControls = "";
 				if (isCancelled) {
 					actionControls = `
-								<div class="no-strike d-flex flex-column gap-1">
-									<button class="btn btn-xs btn-warning btn-sm fw-bold px-2 py-0" onclick="alterInvoiceState('${item.invoiceNo}', 'Active')">🔄 Re-Activate</button>
-									<button class="btn btn-xs btn-danger btn-sm fw-bold px-2 py-0" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete</button>
-								</div>`;
+							<div class="no-strike d-flex flex-column gap-1">
+								<button class="btn btn-xs btn-warning btn-sm fw-bold px-2 py-0" onclick="alterInvoiceState('${item.invoiceNo}', 'Active')">🔄 Re-Activate</button>
+								<button class="btn btn-xs btn-danger btn-sm fw-bold px-2 py-0" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete</button>
+							</div>`;
 				} else {
 					actionControls = `
-								<div class="no-strike d-flex flex-column gap-1">
-									<div class="d-flex gap-1">
-										<button class="btn btn-xs btn-outline-secondary btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="enterEditMode('${item.invoiceNo}')">✏ Edit</button>
-										<button class="btn btn-xs btn-outline-danger btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="alterInvoiceState('${item.invoiceNo}', 'Cancelled')">🚫 Cancel</button>
-									</div>
-									<button class="btn btn-xs btn-danger btn-sm fw-bold py-0" style="font-size:0.75rem;" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete Row</button>
-								</div>`;
+							<div class="no-strike d-flex flex-column gap-1">
+								<div class="d-flex gap-1">
+									<button class="btn btn-xs btn-outline-secondary btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="enterEditMode('${item.invoiceNo}')">✏ Edit</button>
+									<button class="btn btn-xs btn-outline-danger btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="alterInvoiceState('${item.invoiceNo}', 'Cancelled')">🚫 Cancel</button>
+								</div>
+								<button class="btn btn-xs btn-danger btn-sm fw-bold py-0" style="font-size:0.75rem;" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete Row</button>
+							</div>`;
 				}
 
 				const row = `<tr class="${rowClass}">
-							<td>
-								<b class="text-primary">${item.invoiceNo}</b><br>
-								<small class="text-muted">Date: ${fInvDate}</small>
-							</td>
-							<td>
-								<b>${item.receivedFrom}</b><br>
-								<small class="text-secondary">Value: ₹${parseFloat(item.projectValue).toLocaleString('en-IN')} (${item.billPercentage})</small>
-							</td>
-							<td>₹${parseFloat(item.amount).toFixed(2)}</td>
-							<td>₹${parseFloat(item.gstAmt).toFixed(2)}</td>
-							<td class="fw-bold text-dark">₹${parseFloat(item.totalAmount).toFixed(2)}</td>
-							<td class="table-info align-top">${updateSection}</td>
-							<td>${diffBadging}</td>
-							<td class="text-center align-middle">${actionControls}</td>
-						</tr>`;
+						<td>
+							<b class="text-primary">${item.invoiceNo}</b><br>
+							<small class="text-muted">Date: ${fInvDate}</small>
+						</td>
+						<td>
+							<b>${item.receivedFrom}</b><br>
+							<small class="text-secondary">Value: ₹${parseFloat(item.projectValue).toLocaleString('en-IN')} (${item.billPercentage})</small>
+						</td>
+						<td>₹${parseFloat(item.amount).toFixed(2)}</td>
+						<td>₹${parseFloat(item.gstAmt).toFixed(2)}</td>
+						<td class="fw-bold text-dark">₹${parseFloat(item.totalAmount).toFixed(2)}</td>
+						<td class="table-info align-top">${updateSection}</td>
+						<td>${diffBadging}</td>
+						<td class="text-center align-middle">${actionControls}</td>
+					</tr>`;
 				tbody.insertAdjacentHTML('beforeend', row);
 			});
 
@@ -431,7 +431,6 @@
 			document.getElementById('projectValue').value = target.projectValue;
 			document.getElementById('description').value = target.description;
 
-			// Dynamically strip percentage string out for form field allocation
 			const rawPct = parseFloat(target.billPercentage) || 0;
 			document.getElementById('billPercentage').value = rawPct;
 
@@ -449,17 +448,15 @@
 			document.getElementById('invoiceDate').value = new Date().toISOString().split('T')[0];
 			document.getElementById('editModeFlag').value = "false";
 			document.getElementById('cancelEditBtn').classList.add('d-none');
-			document.getElementById('billPercentage').value = "25"; // Back to default placeholder
+			document.getElementById('billPercentage').value = "25";
+			document.getElementById('gstPercentageField').value = "18"; // Back to standard 18% default
 			calculateMilestoneAmount();
 		}
 
 		document.getElementById('invoiceForm').addEventListener('submit', async function (e) {
 			e.preventDefault();
-			if (API_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL") { alert("Set API link config profiles first!"); return; }
-
-			const isEditMode = document.getElementById('editModeFlag').value === "true";
 			const formData = {
-				action: isEditMode ? "editInvoice" : "newInvoice",
+				action: document.getElementById('editModeFlag').value === "true" ? "editInvoice" : "newInvoice",
 				invoiceNo: document.getElementById('invoiceNo').value,
 				invoiceDate: document.getElementById('invoiceDate').value,
 				receivedFrom: document.getElementById('receivedFrom').value,
@@ -476,7 +473,7 @@
 
 			try {
 				await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(formData) });
-				alert(isEditMode ? "Invoice specifications adjusted successfully!" : "Invoice generated and recorded!");
+				alert(document.getElementById('editModeFlag').value === "true" ? "Invoice specifications adjusted successfully!" : "Invoice generated and recorded!");
 				exitEditMode();
 				fetchInvoices();
 			} catch (err) { alert("Network sync failed stream variables."); }
