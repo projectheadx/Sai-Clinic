@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Machi Premium Corporate Ledger v6</title>
+	<title>Machi Premium Corporate Ledger v5</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		body {
@@ -46,92 +46,17 @@
 			width: 1.2rem;
 			height: 1.2rem;
 		}
-
-		/* ==================== PRINT ARCHITECTURE STYLE SYSTEM ==================== */
-		@media print {
-			body {
-				background-color: #ffffff !important;
-				color: #000000 !important;
-				font-size: 12px !important;
-			}
-
-			.container-fluid, .row, .card {
-				box-shadow: none !important;
-				margin: 0 !important;
-				padding: 0 !important;
-				border: none !important;
-				background: transparent !important;
-			}
-			/* Hide all interface configuration elements dynamically during execution */
-			col-xl-3, col-lg-4, .col-xl-9, .col-lg-8, #invoiceForm, .sticky-top, #filterSubmitBtn, #syncSheetsBtn, .pagination, #paginationInfo, .btn, h2, h5, h6, #textSearch, #fromDate, #toDate, .card {
-				display: none !important;
-			}
-
-			#printInvoiceCanvas {
-				display: block !important;
-				visibility: visible !important;
-				width: 100% !important;
-				margin: 0 !important;
-				padding: 20px !important;
-			}
-
-			.table th {
-				background-color: #f8f9fa !important;
-				color: #000000 !important;
-				-webkit-print-color-adjust: exact;
-				print-color-adjust: exact;
-			}
-		}
-
-		#printInvoiceCanvas {
-			display: none;
-			background-color: #ffffff;
-			border-radius: 8px;
-			box-shadow: 0 0 10px rgba(0,0,0,0.1);
-		}
-
-		.letterhead-bar {
-			height: 6px;
-			background: linear-gradient(90deg, #0d6efd 0%, #198754 100%);
-			width: 100%;
-			border-radius: 4px 4px 0 0;
-		}
-
-		.seal-box {
-			border: 2px dashed #dc3545;
-			color: #dc3545;
-			font-size: 0.75rem;
-			text-transform: uppercase;
-			letter-spacing: 1px;
-			padding: 10px;
-			width: 130px;
-			text-align: center;
-			font-weight: bold;
-			transform: rotate(-5deg);
-			opacity: 0.85;
-			display: inline-block;
-			margin-right: 15px;
-		}
-
-		.signature-line {
-			width: 150px;
-			border-bottom: 1px solid #333;
-			margin-top: 50px;
-			display: inline-block;
-		}
 	</style>
 </head>
 <body>
 
-	<!-- MAIN WORKSPACE APP PANEL -->
 	<div class="container-fluid px-4 py-4">
 		<div class="d-flex justify-content-between align-items-center mb-4">
-			<h2 class="text-primary fw-bold m-0">💼 Machi Premium Billing & TDS Tracker v6</h2>
+			<h2 class="text-primary fw-bold m-0">💼 Machi Premium Billing & TDS Tracker v5</h2>
 			<button class="btn btn-success fw-bold" onclick="exportToExcel()">📊 Export Ledger (.csv)</button>
 		</div>
 
 		<div class="row g-4">
-			<!-- DYNAMIC GENERATE / EDIT INPUT FORM BOARD -->
 			<div class="col-xl-3 col-lg-4">
 				<div class="card p-4 sticky-top" style="top: 20px; z-index: 5;">
 					<h5 id="formPanelTitle" class="mb-3 text-secondary border-bottom pb-2">Generate Invoice</h5>
@@ -170,7 +95,7 @@
 						<div class="row mb-3 g-2">
 							<div class="col-4">
 								<label class="form-label small fw-bold text-dark">GST %</label>
-								<input type="number" step="any" id="gstPercentageField" class="form-control form-control-sm" required placeholder="18" value="18" oninput="calculateMilestoneAmount()">
+								<input type="number" step="any" id="gstPercentageField" class="form-control form-control-sm" required placeholder="e.g. 18" value="18" oninput="calculateMilestoneAmount()">
 							</div>
 							<div class="col-4">
 								<label class="form-label small text-muted">GST Amt (₹)</label>
@@ -187,12 +112,6 @@
 							<textarea id="description" class="form-control form-control-sm" rows="2" placeholder="Milestone notes..."></textarea>
 						</div>
 
-						<!-- NEW: DIGITAL SIGNATURE & CORPORATE SEAL INCLUSION TOGGLE OPTION -->
-						<div class="form-check form-switch mb-3">
-							<input class="form-check-input" type="checkbox" id="includeSealOptionToggle" checked>
-							<label class="form-check-label small fw-bold text-secondary" for="includeSealOptionToggle">Include Stamp, Seal & Signatures</label>
-						</div>
-
 						<div class="d-flex gap-2">
 							<button type="submit" id="mainSubmitBtn" class="btn btn-primary flex-grow-1 fw-bold">💾 Save Invoice</button>
 							<button type="button" id="cancelEditBtn" class="btn btn-secondary fw-bold d-none" onclick="exitEditMode()">Cancel</button>
@@ -201,7 +120,6 @@
 				</div>
 			</div>
 
-			<!-- LEDGER MATRIX INTERFACE DISPLAY -->
 			<div class="col-xl-9 col-lg-8">
 				<div class="card p-4 mb-4">
 					<h6 class="text-secondary fw-bold mb-3">🔎 Dedicated Filtering System</h6>
@@ -248,7 +166,7 @@
 									<th>Total Bill</th>
 									<th class="table-info text-center" style="width: 260px;">Received & TDS Update Workspace</th>
 									<th class="text-danger">Difference / Bal</th>
-									<th class="text-center" style="width: 220px;">Control Actions</th>
+									<th class="text-center" style="width: 160px;">Control Actions</th>
 								</tr>
 							</thead>
 							<tbody id="invoiceTableBody">
@@ -268,119 +186,8 @@
 		</div>
 	</div>
 
-	<!-- ==================== NEW: HIGH RIGOR PDF INVOICE LETTERHEAD TEMPLATE CANVAS ==================== -->
-	<div id="printInvoiceCanvas" class="p-5">
-		<div class="letterhead-bar mb-4"></div>
-
-		<!-- Letterhead Header Layout -->
-		<div class="row align-items-center mb-5">
-			<div class="col-7">
-				<!-- Corporate Brand Identities Configuration Placeholders -->
-				<div class="d-flex align-items-center gap-3">
-					<div class="bg-primary text-white px-3 py-2 fw-bold rounded fs-3" style="letter-spacing:1px; line-height:1;">⚡</div>
-					<div>
-						<h3 class="fw-bold text-dark m-0">YOUR BUSINESS LOGO HERE</h3>
-						<small class="text-secondary font-monospace">Software & Creative Tech Solutions Studio</small>
-					</div>
-				</div>
-				<p class="text-muted small mt-3 m-0">
-					123, Growth Hub Tech Street,<br>
-					GST Road, Chennai, Tamil Nadu - 600032<br>
-					<b>GSTIN:</b> 33AAAAA0000A1Z1 | <b>Email:</b> support@machi.tech
-				</p>
-			</div>
-			<div class="col-5 text-end">
-				<h1 class="fw-bold text-secondary text-uppercase tracking-wider m-0" style="opacity:0.25; font-size:3.5rem;">Invoice</h1>
-				<div class="mt-2 small">
-					<b>Invoice ID No:</b> <span id="pdfInvId" class="fw-bold text-primary"></span><br>
-					<b>Invoice Date:</b> <span id="pdfInvDate"></span><br>
-					<b>Transaction State:</b> <span class="badge bg-success" id="pdfInvStatusBadge">Active</span>
-				</div>
-			</div>
-		</div>
-
-		<hr class="text-muted opacity-25 my-4">
-
-		<!-- Bill To / Client Metadata Details -->
-		<div class="row mb-5">
-			<div class="col-6">
-				<p class="text-uppercase small text-muted fw-bold mb-1">Invoiced Account Profile (Bill To):</p>
-				<h5 class="fw-bold text-dark m-0" id="pdfClientName"></h5>
-				<p class="text-muted small mt-2" id="pdfClientMetaDetails">
-					Corporate Enterprise Client Network Account<br>
-					Verified Procurement Allocation Channels
-				</p>
-			</div>
-		</div>
-
-		<!-- Work milestone transaction breakdown structures matrix -->
-		<table class="table table-bordered align-middle mb-5">
-			<thead class="table-light">
-				<tr>
-					<th style="width:50px;" class="text-center">Sl</th>
-					<th>Item Description & Project Milestone Allocation Profile</th>
-					<th style="width:140px;" class="text-end">Project Value</th>
-					<th style="width:100px;" class="text-center">Milestone %</th>
-					<th style="width:150px;" class="text-end">Taxable Value</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td class="text-center font-monospace">1</td>
-					<td>
-						<b class="text-dark" id="pdfInvoiceDescriptionTitle">Professional Milestone Development Deliverables Execution Log</b><br>
-						<small class="text-muted text-wrap" id="pdfInvoiceDescriptionSubtext"></small>
-					</td>
-					<td class="text-end font-monospace" id="pdfProjValueCell">₹0.00</td>
-					<td class="text-center font-monospace fw-bold text-secondary" id="pdfMilestonePercentCell">0%</td>
-					<td class="text-end font-monospace" id="pdfTaxableBaseValueCell">₹0.00</td>
-				</tr>
-				<!-- Subtotal Calculations Triggers Matrix -->
-				<tr>
-					<td colspan="3" class="border-0"></td>
-					<td class="text-end fw-bold bg-light small">Subtotal:</td>
-					<td class="text-end font-monospace bg-light fw-bold" id="pdfSummarySubtotal">₹0.00</td>
-				</tr>
-				<tr>
-					<td colspan="3" class="border-0"></td>
-					<td class="text-end fw-bold small text-secondary">GST Added (<span id="pdfGstRateLabel">0</span>%):</td>
-					<td class="text-end font-monospace text-secondary" id="pdfSummaryGstAmt">₹0.00</td>
-				</tr>
-				<tr class="table-group-divider">
-					<td colspan="3" class="border-0"></td>
-					<td class="text-end fw-bold table-primary text-primary">Grand Total:</td>
-					<td class="text-end font-monospace fw-bold table-primary text-primary fs-5" id="pdfSummaryGrandTotal">₹0.00</td>
-				</tr>
-			</tbody>
-		</table>
-
-		<!-- Terms, Notes, Stamp and Authorization signatures layer blocks -->
-		<div class="row align-items-end mt-5 pt-4">
-			<div class="col-7">
-				<h6 class="fw-bold small text-uppercase text-secondary m-0">Declaration & Payment Instructions</h6>
-				<ol class="text-muted small ps-3 mt-2" style="font-size:11px; line-height:1.5;">
-					<li>This is a system generated computer compiled digital milestone tax invoice asset profile documentation layout.</li>
-					<li>Remittances should map transaction references explicitly towards corporate allocation accounts.</li>
-					<li>TDS collections should comply natively matching 2% standard guidelines during transaction settlement cycles.</li>
-				</ol>
-			</div>
-
-			<!-- RE-CONFIGURED DYNAMIC SECTION: STAMP AND SEAL CONFIGURATIONS WRAPPER CONTROL -->
-			<div class="col-5 text-end" id="pdfAuthorizedSignatorySignatureStampWrapper">
-				<div class="seal-box" id="pdfStampSealGraphicsBlock">Corporate Seal</div>
-				<div class="text-center d-inline-block">
-					<div class="signature-line"></div>
-					<p class="small text-muted fw-bold m-0 mt-2">Authorized Signatory</p>
-					<small class="text-secondary font-monospace" style="font-size:10px;">Operations & Settlement Framework</small>
-				</div>
-			</div>
-		</div>
-
-		<hr class="text-muted opacity-25 mt-5 mb-3">
-		<p class="text-center small text-muted font-monospace m-0" style="font-size:10px;">🤝 Thank you for your partnership! Managed smoothly via Machi Ledger Core Automation Networks.</p>
-	</div>
-
 	<script>
+		// ACTIVE DEPLOYED APPS SCRIPT LINK VALIDATED BELOW
 		const API_URL = "https://script.google.com/macros/s/AKfycbx2WVUi93T3MRUj_La8-U9CQZnprL6Z-0wBv1ot6uyVy00TpsZ_Fh4J4335_aEQPeoWuQ/exec";
 
 		let allInvoices = [];
@@ -388,19 +195,23 @@
 		let currentPage = 1;
 		let recordsPerPage = 10;
 
+		// AUTOMATIC MILESTONE & FLEXIBLE GST METHOD MATHEMATICS
 		function calculateMilestoneAmount() {
 			const totalProjectVal = parseFloat(document.getElementById('projectValue').value) || 0;
 			const selectedPercent = parseFloat(document.getElementById('billPercentage').value) || 0;
 			const customGstPercent = parseFloat(document.getElementById('gstPercentageField').value) || 0;
 
+			// Compute base value dynamically
 			const calculatedBase = (totalProjectVal * selectedPercent) / 100;
 			document.getElementById('amount').value = calculatedBase.toFixed(2);
 
+			// Compute dynamic GST based on flexible user input rate
 			const gst = calculatedBase * (customGstPercent / 100);
 			document.getElementById('gstAmt').value = gst.toFixed(2);
 			document.getElementById('totalAmount').value = (calculatedBase + gst).toFixed(2);
 		}
 
+		// AUTOMATIC 2% TDS LOGIC CALCULATION REGISTRY ON EVENT
 		function runAutoTdsCalculation(invoiceNo, totalBill) {
 			const recInput = parseFloat(document.getElementById(`col-rec-${invoiceNo}`).value) || 0;
 			if (recInput > 0) {
@@ -416,6 +227,7 @@
 			fetchInvoices();
 		};
 
+		// JSONP ASYNC BACKEND CONNECTORS STREAM
 		function fetchInvoices() {
 			if (API_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL" || API_URL.trim() === "") return;
 			document.getElementById('syncSpinner').classList.remove('d-none');
@@ -444,10 +256,13 @@
 			executeFilterLogicOnly();
 		}
 
-		// FILTER INTERFACE DRIVERS CONTROL LOGIC
 		function executeFilterWorkflow() {
 			document.getElementById('filterBtnSpinner').classList.remove('d-none');
-			setTimeout(() => { currentPage = 1; executeFilterLogicOnly(); }, 300);
+			setTimeout(() => {
+				currentPage = 1;
+				executeFilterLogicOnly();
+				document.getElementById('filterBtnSpinner').classList.add('d-none');
+			}, 400);
 		}
 
 		function executeFilterLogicOnly() {
@@ -523,13 +338,12 @@
 							</div>`;
 				}
 
-				// CONTROL DEDICATED CALL SCHEDULERS INCLUDING PRINT ACTION
 				let actionControls = "";
 				if (isCancelled) {
 					actionControls = `
 							<div class="no-strike d-flex flex-column gap-1">
-								<button class="btn btn-xs btn-warning btn-sm fw-bold px-2 py-0" style="font-size:0.75rem;" onclick="alterInvoiceState('${item.invoiceNo}', 'Active')">🔄 Re-Activate</button>
-								<button class="btn btn-xs btn-danger btn-sm fw-bold px-2 py-0" style="font-size:0.75rem;" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete</button>
+								<button class="btn btn-xs btn-warning btn-sm fw-bold px-2 py-0" onclick="alterInvoiceState('${item.invoiceNo}', 'Active')">🔄 Re-Activate</button>
+								<button class="btn btn-xs btn-danger btn-sm fw-bold px-2 py-0" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete</button>
 							</div>`;
 				} else {
 					actionControls = `
@@ -538,9 +352,7 @@
 									<button class="btn btn-xs btn-outline-secondary btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="enterEditMode('${item.invoiceNo}')">✏ Edit</button>
 									<button class="btn btn-xs btn-outline-danger btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="alterInvoiceState('${item.invoiceNo}', 'Cancelled')">🚫 Cancel</button>
 								</div>
-								<!-- HIGH RIGOR TARGET ELEMENT PRINT PDF INSTRUCTION CALLOUT -->
-								<button class="btn btn-xs btn-primary btn-sm fw-bold py-0" style="font-size:0.75rem;" onclick="launchPdfInvoicePrintWorkflow('${item.invoiceNo}')">📄 Print / PDF</button>
-								<button class="btn btn-xs btn-danger btn-sm fw-bold py-0" style="font-size:0.72rem; opacity:0.6;" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete Row</button>
+								<button class="btn btn-xs btn-danger btn-sm fw-bold py-0" style="font-size:0.75rem;" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete Row</button>
 							</div>`;
 				}
 
@@ -564,52 +376,6 @@
 			});
 
 			updatePaginationControls(totalPages, totalRecords, startIndex + 1, endIndex);
-		}
-
-		/* ==================== NEW: PROFESSIONAL PDF INVOICE RENDER MATRIX WORKFLOW ==================== */
-		function launchPdfInvoicePrintWorkflow(invoiceNo) {
-			const target = allInvoices.find(item => item.invoiceNo.toString() === invoiceNo.toString());
-			if (!target) { alert("Data target validation missing error."); return; }
-
-			// 1. Data Inject into Document Object DOM nodes elements
-			document.getElementById('pdfInvId').innerText = target.invoiceNo;
-			document.getElementById('pdfInvDate').innerText = target.invoiceDate ? new Date(target.invoiceDate).toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '-';
-			document.getElementById('pdfClientName').innerText = target.receivedFrom;
-			document.getElementById('pdfInvoiceDescriptionSubtext').innerText = target.description || "Frontend and business system modules milestone deployment tracking execution deliverables logs asset.";
-
-			// Extract and parse mathematical components strings
-			const rawPct = parseFloat(target.billPercentage) || 0;
-			const pValue = parseFloat(target.projectValue) || 0;
-			const bValue = parseFloat(target.amount) || 0;
-			const gValue = parseFloat(target.gstAmt) || 0;
-			const tValue = parseFloat(target.totalAmount) || 0;
-
-			document.getElementById('pdfProjValueCell').innerText = `₹${pValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
-			document.getElementById('pdfMilestonePercentCell').innerText = `${rawPct}%`;
-			document.getElementById('pdfTaxableBaseValueCell').innerText = `₹${bValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
-			document.getElementById('pdfSummarySubtotal').innerText = `₹${bValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
-
-			// Dynamic Extraction percentage label indices calculations
-			const computedGstRate = bValue > 0 ? Math.round((gValue / bValue) * 100) : 18;
-			document.getElementById('pdfGstRateLabel').innerText = computedGstRate;
-			document.getElementById('pdfSummaryGstAmt').innerText = `₹${gValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
-			document.getElementById('pdfSummaryGrandTotal').innerText = `₹${tValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
-			document.getElementById('pdfInvStatusBadge').innerText = target.status || "Active";
-
-			// 2. CHECKBOX TOGGLE OPTION FOR OPTIONAL EMBEDDED CORPORATE SEAL STAMPS
-			const includeStampToggle = document.getElementById('includeSealOptionToggle').checked;
-			const stampWrapperElement = document.getElementById('pdfAuthorizedSignatorySignatureStampWrapper');
-
-			if (includeStampToggle) {
-				stampWrapperElement.style.display = "block";
-				stampWrapperElement.style.visibility = "visible";
-			} else {
-				stampWrapperElement.style.display = "none";
-				stampWrapperElement.style.visibility = "hidden";
-			}
-
-			// 3. Fire Native Browser Hardware Printing Framework System Channels
-			setTimeout(() => { window.print(); }, 300);
 		}
 
 		async function triggerBackendPipeline(payload, customMessage) {
@@ -683,7 +449,7 @@
 			document.getElementById('editModeFlag').value = "false";
 			document.getElementById('cancelEditBtn').classList.add('d-none');
 			document.getElementById('billPercentage').value = "25";
-			document.getElementById('gstPercentageField').value = "18";
+			document.getElementById('gstPercentageField').value = "18"; // Back to standard 18% default
 			calculateMilestoneAmount();
 		}
 
