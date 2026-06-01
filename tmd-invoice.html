@@ -457,6 +457,7 @@
 		}
 
 		/* ==================== 👉 FIXED: DYNAMIC ISOLATED POPUP WINDOW PRINT ENGINE ==================== */
+		/* ==================== 👉 THE ULTIMATE POP-UP BYPASS PRINT ENGINE ==================== */
 		function launchDynamicWindowPrint(invoiceNo) {
 			const target = allInvoices.find(item => item.invoiceNo.toString() === invoiceNo.toString());
 			if (!target) return;
@@ -490,24 +491,33 @@
 			const showSeal = document.getElementById('includeSealOptionToggle').checked;
 			document.getElementById('print_seal_wrapper').style.display = showSeal ? "inline-block" : "none";
 
-			// Extract processed innerHTML template context
+			// 👉 FIX: CREATING AN ISOLATED INVISIBLE IFRAME TO BYPASS POP-UP BLOCKERS Completely
+			let iframe = document.getElementById('machiPrintIframe');
+			if (!iframe) {
+				iframe = document.createElement('iframe');
+				iframe.id = 'machiPrintIframe';
+				iframe.style.position = 'absolute';
+				iframe.style.width = '0px';
+				iframe.style.height = '0px';
+				iframe.style.border = 'none';
+				document.body.appendChild(iframe);
+			}
+
 			const printableHtmlMarkup = document.getElementById('printInvoiceCanvas').innerHTML;
 
-			// Launching safe clean popup runtime browser window to bypass iframe css blocks
-			const printWindow = window.open('', '_blank', 'height=800,width=950');
-			printWindow.document.write('<html><head><title>Print Invoice - ' + target.invoiceNo + '</title>');
-			printWindow.document.write('</head><body style="margin:0; padding:0;">');
-			printWindow.document.write(printableHtmlMarkup);
-			printWindow.document.write('</body></html>');
+			// Injecting markup directly into the safe iframe channel
+			const doc = iframe.contentWindow.document;
+			doc.open();
+			doc.write('<html><head><title>Print Invoice</title></head><body style="margin:0; padding:20px;">');
+			doc.write(printableHtmlMarkup);
+			doc.write('</body></html>');
+			doc.close();
 
-			printWindow.document.close();
-			printWindow.focus();
-
-			// Small delay for asset stability verification inside popup window threads
+			// Small buffer for iframe styling and dom element loading stability
 			setTimeout(() => {
-				printWindow.print();
-				printWindow.close();
-			}, 350);
+				iframe.contentWindow.focus();
+				iframe.contentWindow.print();
+			}, 300);
 		}
 
 		function convertAmountToIndianWords(amount) {
