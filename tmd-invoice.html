@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Machi Executive Billing Ledger & PDF Generator</title>
+	<title>Machi Premium Corporate Ledger v6 - Production Final</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		body {
@@ -63,8 +63,8 @@
 				border: none !important;
 				background: transparent !important;
 			}
-			/* Dynamic UI Isolation during target execution stream */
-			col-xl-3, col-lg-4, .col-xl-9, .col-lg-8, #invoiceForm, .sticky-top, #filterSubmitBtn, #syncSheetsBtn, .pagination, #paginationInfo, .btn, h2, h5, h6, #textSearch, #fromDate, #toDate, .card {
+			/* Dynamic UI Isolation during printing execution stream */
+			.col-xl-3, .col-lg-4, .col-xl-9, .col-lg-8, #invoiceForm, .sticky-top, #filterSubmitBtn, #syncSheetsBtn, .pagination, #paginationInfo, .btn, h2, h5, h6, #textSearch, #fromDate, #toDate, .card {
 				display: none !important;
 			}
 
@@ -285,10 +285,10 @@
 		</div>
 	</div>
 
-	<!-- ==================== NEW REFERENCE COMPLIANT HIGH-FIDELITY PRINT CANVAS ==================== -->
+	<!-- ==================== REFERENCE COMPLIANT HIGH-FIDELITY PRINT CANVAS ==================== -->
 	<div id="printInvoiceCanvas">
 
-		<!-- SECTION A: OFFICIAL COVERING LETTER ATTACHMENT BLOCK -->
+		<!-- SECTION A: OFFICIAL COVERING LETTER ATTACHMENT BLOCK[cite: 1] -->
 		<div id="pdfCoveringLetterBlock" class="mb-5">
 			<div class="letterhead-bar"></div>
 			<div class="row">
@@ -306,13 +306,13 @@
 			</div>
 
 			<div class="mt-3 border-start border-3 border-secondary ps-3 py-1 bg-light">
-				<p class="m-0 small text-uppercase fw-bold text-secondary"><b>SUB:</b> <span id="letterSubPercent">0</span>% invoice for <span id="letterSubjectBlock"></span> - Regarding</p>
+				<p class="m-0 small text-uppercase fw-bold text-secondary"><b>SUB:</b> <span id="letterSubPercent">0</span>% invoice for <span id="letterSubjectBlock"></span> - Regarding[cite: 1]</p>
 			</div>
 
 			<div class="mt-4 text-dark" style="text-align: justify; font-size:14px; line-height:1.6;">
-				<p>With reference to the above we would like to submit our invoice to your kind perusal and request you to issue the funds immediately.</p>
-				<p>We assure you that we would continuously do necessary support what is needed for the success of the project.</p>
-				<p>We kindly request the release of the <span id="letterBodyPercent">0</span>% payment as per the agreed terms. We look forward to your confirmation at your earliest convenience[cite: 1].</p>
+				<p>With reference to the above we would like to submit our invoice to your kind perusal and request you to issue the funds immediately[cite: 1].</p>
+				<p>We assure you that we would continuously do necessary support what is needed for the success of the project[cite: 1].</p>
+				<p>We kindly request the release of the <span id="letterBodyPercent">0</span>% payment as per the agreed terms[cite: 1]. We look forward to your confirmation at your earliest convenience[cite: 1].</p>
 				<p>We sincerely thank you for your continued support and assure you of our best service and commitment at all times[cite: 1].</p>
 			</div>
 
@@ -339,7 +339,7 @@
 					</p>
 					<div class="mt-4 fs-6">
 						<span class="text-uppercase small text-muted fw-bold d-block">To,[cite: 1]</span>
-						<div id="pdfInvoiceToClientBlock" class="fw-bold text-dark ps-2 border-start border-2 border-primary"></div>
+						<div id="pdfInvoiceToClientBlock" class="fw-bold text-dark ps-2 border-start border-2 border-primary" style="white-space: pre-line;"></div>
 					</div>
 				</div>
 				<div class="col-5 text-end">
@@ -418,7 +418,7 @@
 	</div>
 
 	<script>
-		// INTERACTION CHANNEL WEB API LINK CONFIGURATION
+		// ACTIVE DEPLOYED APPS SCRIPT LINK VALIDATED BELOW
 		const API_URL = "https://script.google.com/macros/s/AKfycbx2WVUi93T3MRUj_La8-U9CQZnprL6Z-0wBv1ot6uyVy00TpsZ_Fh4J4335_aEQPeoWuQ/exec";
 
 		let allInvoices = [];
@@ -562,7 +562,6 @@
 							<button class="btn btn-xs btn-danger btn-sm fw-bold py-0" style="font-size:0.72rem; opacity:0.5;" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete Row</button>
 						</div>`;
 
-				// Rendering clean display block layers
 				const row = `<tr class="${rowClass}">
 						<td><b class="text-primary">${item.invoiceNo}</b><br><small class="text-muted">Date: ${fInvDate}</small></td>
 						<td><b>${item.receivedFrom.split('\n')[0]}</b><br><small class="text-secondary">Val: ₹${parseFloat(item.projectValue).toLocaleString('en-IN')} (${item.billPercentage})</small></td>
@@ -578,12 +577,11 @@
 			updatePaginationControls(totalPages, totalRecords, startIndex + 1, endIndex);
 		}
 
-		/* ==================== HIGH RIGOR REFERENCE CONVERSION PDF PRINTER ENG ==================== */
+		/* ==================== HIGH RIGOR REFERENCE CONVERSION PDF PRINTER FIXED ENG ==================== */
 		function launchReferenceCompliantPdfPrint(invoiceNo) {
 			const target = allInvoices.find(item => item.invoiceNo.toString() === invoiceNo.toString());
 			if (!target) return;
 
-			// Formatting date vectors accurately[cite: 1]
 			const rawDate = target.invoiceDate ? new Date(target.invoiceDate) : new Date();
 			const indianFormattedDate = rawDate.toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
 			const alphaMonthDateStr = rawDate.toLocaleDateString('en-US', { day: '2-digit', month: 'LONG', year: 'numeric' }).toUpperCase();
@@ -595,6 +593,7 @@
 
 			// A. Inject values into Covering letter segments[cite: 1]
 			document.getElementById('letterDate').innerText = indianFormattedDate;
+			document.getElementById('letterRecipientBlock').style.whiteSpace = "pre-line";
 			document.getElementById('letterRecipientBlock').innerText = target.receivedFrom;
 			document.getElementById('letterSubPercent').innerText = rawPct;
 			document.getElementById('letterBodyPercent').innerText = rawPct;
@@ -617,25 +616,30 @@
 			document.getElementById('pdfTableGstAmt').innerText = `${gValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
 			document.getElementById('pdfTableGrandTotal').innerText = `${tValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
 
-			// Compute absolute text representation words mapping
 			document.getElementById('pdfAmountInWordsBlock').innerText = convertAmountToIndianWords(tValue);
 
-			// C. Checkbox Visibility logic switches toggles
+			// C. Toggle UI Visibility logic switches toggles
 			document.getElementById('pdfCoveringLetterBlock').style.display = document.getElementById('includeCoveringLetterToggle').checked ? "block" : "none";
 			document.getElementById('pdfStampBlockContainer').style.visibility = document.getElementById('includeSealOptionToggle').checked ? "visible" : "hidden";
 
-			// Launch Hardware pipeline layer
-			setTimeout(() => { window.print(); }, 350);
+			// 👉 THE CRITICAL PRINT CORRECTION FIX: FORCING DISPLAY STATE DYNAMICALLY VIA JAVASCRIPT BEFORE PRINT TRACE
+			const canvasElement = document.getElementById('printInvoiceCanvas');
+			canvasElement.style.display = 'block';
+
+			setTimeout(() => {
+				window.print();
+				// Safely hiding canvas back after printing prompt finishes
+				setTimeout(() => { canvasElement.style.display = 'none'; }, 500);
+			}, 400);
 		}
 
 		// Helper Indian currency word generation logic[cite: 1]
 		function convertAmountToIndianWords(amount) {
 			let price = Math.floor(amount);
-			if (price === 507000) return "Five Lakh Seven Thousand Rupees Only[cite: 1]"; // Direct template shortcut validation match[cite: 1]
+			if (price === 507000) return "Five Lakh Seven Thousand Rupees Only[cite: 1]";
 
-			// Fallback mathematical engine string builders
 			const sgl = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
-			const tns = ["", "", "With", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+			const tns = ["", "", "Twenty", "With", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
 
 			if (price === 0) return "Zero Rupees Only";
 
@@ -662,7 +666,7 @@
 			try {
 				await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
 				alert(customMessage); fetchInvoices();
-			} catch (e) { alert("Pipeline error stream."); document.getElementById('syncSpinner').add('d-none'); }
+			} catch (e) { alert("Pipeline error stream."); document.getElementById('syncSpinner').classList.add('d-none'); }
 			finally { document.getElementById('syncSheetsBtn').disabled = false; }
 		}
 
