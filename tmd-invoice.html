@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Machi Premium Corporate Ledger v3</title>
+	<title>Machi Premium Corporate Ledger v4</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		body {
@@ -52,11 +52,12 @@
 
 	<div class="container-fluid px-4 py-4">
 		<div class="d-flex justify-content-between align-items-center mb-4">
-			<h2 class="text-primary fw-bold m-0">💼 Machi Premium Billing & TDS Tracker v3</h2>
+			<h2 class="text-primary fw-bold m-0">💼 Machi Premium Billing & TDS Tracker v4</h2>
 			<button class="btn btn-success fw-bold" onclick="exportToExcel()">📊 Export Ledger (.csv)</button>
 		</div>
 
 		<div class="row g-4">
+			<!-- DYNAMIC GENERATE / EDIT INPUT BOARD -->
 			<div class="col-xl-3 col-lg-4">
 				<div class="card p-4 sticky-top" style="top: 20px; z-index: 5;">
 					<h5 id="formPanelTitle" class="mb-3 text-secondary border-bottom pb-2">Generate Invoice</h5>
@@ -76,21 +77,15 @@
 							<input type="text" id="receivedFrom" class="form-control form-control-sm" required placeholder="Corporate Client">
 						</div>
 
+						<!-- UPDATED: FLEXIBLE TEXT NUMBER FIELD REPLACED INSTEAD OF DROPDOWN OPTIONS -->
 						<div class="row g-2 mb-2">
 							<div class="col-7">
 								<label class="form-label small fw-bold text-dark">Total Project Val (₹)</label>
 								<input type="number" id="projectValue" class="form-control form-control-sm" required placeholder="50000" oninput="calculateMilestoneAmount()">
 							</div>
 							<div class="col-5">
-								<label class="form-label small fw-bold text-dark">Bill %</label>
-								<select id="billPercentage" class="form-select form-select-sm" onchange="calculateMilestoneAmount()">
-									<option value="10">10%</option>
-									<option value="20">20%</option>
-									<option value="25" selected>25%</option>
-									<option value="50">50%</option>
-									<option value="75">75%</option>
-									<option value="100">100%</option>
-								</select>
+								<label class="form-label small fw-bold text-dark">Bill % Value</label>
+								<input type="number" step="any" id="billPercentage" class="form-control form-control-sm" required placeholder="e.g. 25" value="25" oninput="calculateMilestoneAmount()">
 							</div>
 						</div>
 
@@ -123,7 +118,9 @@
 				</div>
 			</div>
 
+			<!-- LEDGER CORE TRACKING INTERFACES -->
 			<div class="col-xl-9 col-lg-8">
+				<!-- ADVANCED FILTER CONTROLS ENGINE -->
 				<div class="card p-4 mb-4">
 					<h6 class="text-secondary fw-bold mb-3">🔎 Dedicated Filtering System</h6>
 					<div class="row g-2 align-items-end">
@@ -149,6 +146,7 @@
 					</div>
 				</div>
 
+				<!-- METRIC MATRIX TRACKER -->
 				<div class="card p-4">
 					<div class="d-flex justify-content-between align-items-center mb-3">
 						<h5 class="m-0 text-secondary fw-bold">Live Billing Execution Panel</h5>
@@ -180,6 +178,7 @@
 						</table>
 					</div>
 
+					<!-- Pagination row selectors layout -->
 					<div class="d-flex justify-content-between align-items-center mt-3">
 						<div id="paginationInfo" class="text-muted small">Showing 0 of 0 logs</div>
 						<nav><ul class="pagination pagination-sm m-0" id="paginationControls"></ul></nav>
@@ -190,7 +189,7 @@
 	</div>
 
 	<script>
-		// ⚠️ REPLACE THIS EXCLUSIVELY WITH YOUR DEPLOYED WEB APP LINK FROM APPS SCRIPT
+		// ⚠️ PASTED DEPLOYED APPS SCRIPT WEB APP API LINK EXCLUSIVELY BELOW
 		const API_URL = "https://script.google.com/macros/s/AKfycbx2WVUi93T3MRUj_La8-U9CQZnprL6Z-0wBv1ot6uyVy00TpsZ_Fh4J4335_aEQPeoWuQ/exec";
 
 		let allInvoices = [];
@@ -198,22 +197,24 @@
 		let currentPage = 1;
 		let recordsPerPage = 10;
 
+		// AUTOMATIC MILESTONE MATH CALCULATIONS HANDLING
 		function calculateMilestoneAmount() {
 			const totalProjectVal = parseFloat(document.getElementById('projectValue').value) || 0;
 			const selectedPercent = parseFloat(document.getElementById('billPercentage').value) || 0;
-			const calculatedBase = (totalProjectVal * selectedPercent) / 100;
 
+			// Flexible execution matrix logic values computation
+			const calculatedBase = (totalProjectVal * selectedPercent) / 100;
 			document.getElementById('amount').value = calculatedBase.toFixed(2);
+
 			const gst = calculatedBase * 0.18;
 			document.getElementById('gstAmt').value = gst.toFixed(2);
 			document.getElementById('totalAmount').value = (calculatedBase + gst).toFixed(2);
 		}
 
-		// AUTOMATIC 2% TDS LOGIC ENGINE ON INPUT
+		// AUTOMATIC 2% TDS LOGIC CALCULATION REGISTRY ON EVENT
 		function runAutoTdsCalculation(invoiceNo, totalBill) {
 			const recInput = parseFloat(document.getElementById(`col-rec-${invoiceNo}`).value) || 0;
 			if (recInput > 0) {
-				// Standard 2% corporate TDS computation
 				const calculatedTds = recInput * 0.02;
 				document.getElementById(`col-tds-${invoiceNo}`).value = calculatedTds.toFixed(2);
 			} else {
@@ -226,12 +227,10 @@
 			fetchInvoices();
 		};
 
-		// JSONP NETWORK CHANNEL RE-LOAD ENGINE
+		// JSONP ASYNC BACKEND CONNECTORS STREAM
 		function fetchInvoices() {
 			if (API_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL" || API_URL.trim() === "") return;
-
-			// Start sync spin animation
-			document.getElementById('syncSpinner').classList.remove('none', 'd-none');
+			document.getElementById('syncSpinner').classList.remove('d-none');
 
 			const oldScript = document.getElementById('jsonpScriptFetcher');
 			if (oldScript) oldScript.remove();
@@ -249,7 +248,6 @@
 		}
 
 		function handleScriptResponse(responseDataset) {
-			// Stopping dynamic loaders
 			document.getElementById('syncSpinner').classList.add('d-none');
 			document.getElementById('filterBtnSpinner').classList.add('d-none');
 
@@ -258,14 +256,13 @@
 			executeFilterLogicOnly();
 		}
 
-		// FILTER WORKING PIPELINES WITH LOADING SIMULATORS
 		function executeFilterWorkflow() {
 			document.getElementById('filterBtnSpinner').classList.remove('d-none');
 			setTimeout(() => {
 				currentPage = 1;
 				executeFilterLogicOnly();
 				document.getElementById('filterBtnSpinner').classList.add('d-none');
-			}, 400); // UI visual transition buffer
+			}, 400);
 		}
 
 		function executeFilterLogicOnly() {
@@ -306,7 +303,6 @@
 				const isCancelled = item.status === "Cancelled";
 				const rowClass = isCancelled ? "bg-cancelled" : "";
 
-				// Standard formatting for display
 				let fInvDate = "-";
 				if (item.invoiceDate) {
 					fInvDate = new Date(item.invoiceDate).toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
@@ -318,73 +314,70 @@
 					diffBadging = `<span class="badge bg-success">Fully Cleared (₹0)</span>`;
 				}
 
-				// Received columns dynamic layouts
 				let updateSection = "";
 				if (isCancelled) {
 					updateSection = `<span class="text-danger fw-bold no-strike">🚫 CANCELLED PROFILE</span>`;
 				} else if (item.amountReceivedDate && diffValue <= 0) {
 					updateSection = `
-							<div class="small">
-								<b class="text-success">✔ Cleared:</b> ₹${parseFloat(item.receivedAmount).toFixed(2)}<br>
-								<b class="text-secondary">TDS Ded (2%):</b> ₹${parseFloat(item.tdsAmount).toFixed(2)}<br>
-								<small class="text-muted">On: ${new Date(item.amountReceivedDate).toLocaleDateString('en-IN')}</small>
-							</div>`;
+								<div class="small">
+									<b class="text-success">✔ Cleared:</b> ₹${parseFloat(item.receivedAmount).toFixed(2)}<br>
+									<b class="text-secondary">TDS Ded (2%):</b> ₹${parseFloat(item.tdsAmount).toFixed(2)}<br>
+									<small class="text-muted">On: ${new Date(item.amountReceivedDate).toLocaleDateString('en-IN')}</small>
+								</div>`;
 				} else {
 					updateSection = `
-							<div class="p-2 border rounded bg-white shadow-sm no-strike">
-								<div class="mb-1">
-									<input type="date" id="col-date-${item.invoiceNo}" class="form-control form-control-sm" style="font-size:0.8rem;">
-								</div>
-								<div class="input-group input-group-sm mb-1">
-									<input type="number" id="col-rec-${item.invoiceNo}" class="form-control" placeholder="Recamt" style="font-size:0.8rem;" oninput="runAutoTdsCalculation('${item.invoiceNo}', ${item.totalAmount})">
-									<input type="number" id="col-tds-${item.invoiceNo}" class="form-control" placeholder="TDS (2%)" style="font-size:0.8rem;">
-								</div>
-								<button class="btn btn-primary btn-sm w-100 fw-bold py-1" style="font-size:0.75rem;" onclick="saveCollectionEntry('${item.invoiceNo}', ${item.totalAmount})">Update Payment</button>
-							</div>`;
+								<div class="p-2 border rounded bg-white shadow-sm no-strike">
+									<div class="mb-1">
+										<input type="date" id="col-date-${item.invoiceNo}" class="form-control form-control-sm" style="font-size:0.8rem;">
+									</div>
+									<div class="input-group input-group-sm mb-1">
+										<input type="number" id="col-rec-${item.invoiceNo}" class="form-control" placeholder="Recamt" style="font-size:0.8rem;" oninput="runAutoTdsCalculation('${item.invoiceNo}', ${item.totalAmount})">
+										<input type="number" id="col-tds-${item.invoiceNo}" class="form-control" placeholder="TDS (2%)" style="font-size:0.8rem;">
+									</div>
+									<button class="btn btn-primary btn-sm w-100 fw-bold py-1" style="font-size:0.75rem;" onclick="saveCollectionEntry('${item.invoiceNo}', ${item.totalAmount})">Update Payment</button>
+								</div>`;
 				}
 
-				// CONTROL ACTIONS SWITCHER PANEL
 				let actionControls = "";
 				if (isCancelled) {
 					actionControls = `
-							<div class="no-strike d-flex flex-column gap-1">
-								<button class="btn btn-xs btn-warning btn-sm fw-bold px-2 py-0" onclick="alterInvoiceState('${item.invoiceNo}', 'Active')">🔄 Re-Activate</button>
-								<button class="btn btn-xs btn-danger btn-sm fw-bold px-2 py-0" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete</button>
-							</div>`;
+								<div class="no-strike d-flex flex-column gap-1">
+									<button class="btn btn-xs btn-warning btn-sm fw-bold px-2 py-0" onclick="alterInvoiceState('${item.invoiceNo}', 'Active')">🔄 Re-Activate</button>
+									<button class="btn btn-xs btn-danger btn-sm fw-bold px-2 py-0" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete</button>
+								</div>`;
 				} else {
 					actionControls = `
-							<div class="no-strike d-flex flex-column gap-1">
-								<div class="d-flex gap-1">
-									<button class="btn btn-xs btn-outline-secondary btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="enterEditMode('${item.invoiceNo}')">✏ Edit</button>
-									<button class="btn btn-xs btn-outline-danger btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="alterInvoiceState('${item.invoiceNo}', 'Cancelled')">🚫 Cancel</button>
-								</div>
-								<button class="btn btn-xs btn-danger btn-sm fw-bold py-0" style="font-size:0.75rem;" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete Row</button>
-							</div>`;
+								<div class="no-strike d-flex flex-column gap-1">
+									<div class="d-flex gap-1">
+										<button class="btn btn-xs btn-outline-secondary btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="enterEditMode('${item.invoiceNo}')">✏ Edit</button>
+										<button class="btn btn-xs btn-outline-danger btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="alterInvoiceState('${item.invoiceNo}', 'Cancelled')">🚫 Cancel</button>
+									</div>
+									<button class="btn btn-xs btn-danger btn-sm fw-bold py-0" style="font-size:0.75rem;" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete Row</button>
+								</div>`;
 				}
 
 				const row = `<tr class="${rowClass}">
-						<td>
-							<b class="text-primary">${item.invoiceNo}</b><br>
-							<small class="text-muted">Date: ${fInvDate}</small>
-						</td>
-						<td>
-							<b>${item.receivedFrom}</b><br>
-							<small class="text-secondary">Value: ₹${parseFloat(item.projectValue).toLocaleString('en-IN')} (${item.billPercentage})</small>
-						</td>
-						<td>₹${parseFloat(item.amount).toFixed(2)}</td>
-						<td>₹${parseFloat(item.gstAmt).toFixed(2)}</td>
-						<td class="fw-bold text-dark">₹${parseFloat(item.totalAmount).toFixed(2)}</td>
-						<td class="table-info align-top">${updateSection}</td>
-						<td>${diffBadging}</td>
-						<td class="text-center align-middle">${actionControls}</td>
-					</tr>`;
+							<td>
+								<b class="text-primary">${item.invoiceNo}</b><br>
+								<small class="text-muted">Date: ${fInvDate}</small>
+							</td>
+							<td>
+								<b>${item.receivedFrom}</b><br>
+								<small class="text-secondary">Value: ₹${parseFloat(item.projectValue).toLocaleString('en-IN')} (${item.billPercentage})</small>
+							</td>
+							<td>₹${parseFloat(item.amount).toFixed(2)}</td>
+							<td>₹${parseFloat(item.gstAmt).toFixed(2)}</td>
+							<td class="fw-bold text-dark">₹${parseFloat(item.totalAmount).toFixed(2)}</td>
+							<td class="table-info align-top">${updateSection}</td>
+							<td>${diffBadging}</td>
+							<td class="text-center align-middle">${actionControls}</td>
+						</tr>`;
 				tbody.insertAdjacentHTML('beforeend', row);
 			});
 
 			updatePaginationControls(totalPages, totalRecords, startIndex + 1, endIndex);
 		}
 
-		// BACKEND CORE FETCH OPERATION ROUTERS
 		async function triggerBackendPipeline(payload, customMessage) {
 			document.getElementById('syncSheetsBtn').disabled = true;
 			document.getElementById('syncSpinner').classList.remove('d-none');
@@ -393,7 +386,7 @@
 				alert(customMessage);
 				fetchInvoices();
 			} catch (e) {
-				alert("Error dispatching packet registry array pipelines.");
+				alert("Error dispatching packet pipelines.");
 				document.getElementById('syncSpinner').classList.add('d-none');
 			} finally {
 				document.getElementById('syncSheetsBtn').disabled = false;
@@ -409,31 +402,28 @@
 			const varianceVal = totalBillAmount - (receivedVal + tdsVal);
 
 			const payload = { action: "updateCollection", invoiceNo: invoiceNo, amountReceivedDate: dateVal, receivedAmount: receivedVal, tdsAmount: tdsVal, variance: varianceVal };
-			triggerBackendPipeline(payload, `Payment and TDS records linked successfully for ${invoiceNo}!`);
+			triggerBackendPipeline(payload, `Payment and TDS records linked safely for ${invoiceNo}!`);
 		}
 
 		function alterInvoiceState(invoiceNo, targetStatus) {
-			if (!confirm(`Machi, are you sure you want to change status of ${invoiceNo} to "${targetStatus}"?`)) return;
+			if (!confirm(`Machi, change status of ${invoiceNo} to "${targetStatus}"?`)) return;
 			triggerBackendPipeline({ action: "changeStatus", invoiceNo: invoiceNo, status: targetStatus }, `Invoice status set to ${targetStatus}!`);
 		}
 
 		function deleteInvoiceRecord(invoiceNo) {
-			if (!confirm(`🚨 WARNING: Machi, are you sure? This will HARD DELETE ${invoiceNo} entirely from the Google Sheet rows! This cannot be undone.`)) return;
+			if (!confirm(`🚨 WARNING: Hard delete ${invoiceNo} from Sheet rows?`)) return;
 			triggerBackendPipeline({ action: "deleteInvoice", invoiceNo: invoiceNo }, `Invoice ${invoiceNo} deleted permanently from tracking logs.`);
 		}
 
-		// DYNAMIC CLIENT SIDE EDIT LOGIC FRAMEWORKS
 		function enterEditMode(invoiceNo) {
 			const target = allInvoices.find(item => item.invoiceNo.toString() === invoiceNo.toString());
 			if (!target) return;
 
-			// UI configurations to edit state
 			document.getElementById('formPanelTitle').innerText = "✏ Edit Invoice Profile";
 			document.getElementById('mainSubmitBtn').innerText = "🔄 Update Invoice";
 			document.getElementById('invoiceNo').value = target.invoiceNo;
-			document.getElementById('invoiceNo').readOnly = true; // Protect composite primary key index
+			document.getElementById('invoiceNo').readOnly = true;
 
-			// Date transformation mapping
 			if (target.invoiceDate) {
 				document.getElementById('invoiceDate').value = new Date(target.invoiceDate).toISOString().split('T')[0];
 			}
@@ -441,8 +431,8 @@
 			document.getElementById('projectValue').value = target.projectValue;
 			document.getElementById('description').value = target.description;
 
-			// Parsing percentage index match profiles
-			const rawPct = parseInt(target.billPercentage);
+			// Dynamically strip percentage string out for form field allocation
+			const rawPct = parseFloat(target.billPercentage) || 0;
 			document.getElementById('billPercentage').value = rawPct;
 
 			calculateMilestoneAmount();
@@ -459,10 +449,10 @@
 			document.getElementById('invoiceDate').value = new Date().toISOString().split('T')[0];
 			document.getElementById('editModeFlag').value = "false";
 			document.getElementById('cancelEditBtn').classList.add('d-none');
+			document.getElementById('billPercentage').value = "25"; // Back to default placeholder
 			calculateMilestoneAmount();
 		}
 
-		// FORMS EXECUTION AGENT LOGIC
 		document.getElementById('invoiceForm').addEventListener('submit', async function (e) {
 			e.preventDefault();
 			if (API_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL") { alert("Set API link config profiles first!"); return; }
@@ -493,7 +483,6 @@
 			finally { btn.disabled = false; }
 		});
 
-		// PAGINATION UTILS
 		function updatePaginationControls(totalPages, totalRecords, start, end) {
 			document.getElementById('paginationInfo').innerText = `Showing ${start} to ${end} of ${totalRecords} entries`;
 			const controls = document.getElementById('paginationControls'); controls.innerHTML = "";
