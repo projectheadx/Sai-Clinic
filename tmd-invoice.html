@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Machi Executive Billing Ledger & PDF Generator</title>
+	<title>Machi Premium Corporate Ledger v6</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		body {
@@ -47,13 +47,12 @@
 			height: 1.2rem;
 		}
 
-		/* ==================== HIGH RIGOR CORPORATE PRINT ARCHITECTURE ==================== */
+		/* ==================== PRINT ARCHITECTURE STYLE SYSTEM ==================== */
 		@media print {
 			body {
 				background-color: #ffffff !important;
 				color: #000000 !important;
-				font-size: 13px !important;
-				line-height: 1.4 !important;
+				font-size: 12px !important;
 			}
 
 			.container-fluid, .row, .card {
@@ -63,7 +62,7 @@
 				border: none !important;
 				background: transparent !important;
 			}
-			/* Dynamic UI Isolation during target execution stream */
+			/* Hide all interface configuration elements dynamically during execution */
 			col-xl-3, col-lg-4, .col-xl-9, .col-lg-8, #invoiceForm, .sticky-top, #filterSubmitBtn, #syncSheetsBtn, .pagination, #paginationInfo, .btn, h2, h5, h6, #textSearch, #fromDate, #toDate, .card {
 				display: none !important;
 			}
@@ -73,7 +72,7 @@
 				visibility: visible !important;
 				width: 100% !important;
 				margin: 0 !important;
-				padding: 10px 35px !important;
+				padding: 20px !important;
 			}
 
 			.table th {
@@ -82,68 +81,57 @@
 				-webkit-print-color-adjust: exact;
 				print-color-adjust: exact;
 			}
-
-			.page-break-before {
-				page-break-before: always;
-				margin-top: 40px;
-			}
 		}
 
 		#printInvoiceCanvas {
 			display: none;
 			background-color: #ffffff;
+			border-radius: 8px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.1);
 		}
 
 		.letterhead-bar {
-			height: 5px;
+			height: 6px;
 			background: linear-gradient(90deg, #0d6efd 0%, #198754 100%);
 			width: 100%;
-			margin-bottom: 25px;
+			border-radius: 4px 4px 0 0;
 		}
 
 		.seal-box {
 			border: 2px dashed #dc3545;
 			color: #dc3545;
-			font-size: 0.7rem;
+			font-size: 0.75rem;
 			text-transform: uppercase;
 			letter-spacing: 1px;
-			padding: 6px 12px;
+			padding: 10px;
 			width: 130px;
 			text-align: center;
 			font-weight: bold;
-			transform: rotate(-6deg);
+			transform: rotate(-5deg);
 			opacity: 0.85;
 			display: inline-block;
-			margin-right: 20px;
+			margin-right: 15px;
 		}
 
 		.signature-line {
-			width: 160px;
+			width: 150px;
 			border-bottom: 1px solid #333;
-			margin-top: 45px;
+			margin-top: 50px;
 			display: inline-block;
-		}
-
-		.bank-details-box {
-			background-color: #f8f9fa;
-			border: 1px solid #e9ecef;
-			border-radius: 6px;
-			padding: 12px 15px;
-			font-size: 0.82rem;
 		}
 	</style>
 </head>
 <body>
 
-	<!-- FRONTEND APPLICATION INTERFACE DASHBOARD -->
+	<!-- MAIN WORKSPACE APP PANEL -->
 	<div class="container-fluid px-4 py-4">
 		<div class="d-flex justify-content-between align-items-center mb-4">
-			<h2 class="text-primary fw-bold m-0">💼 Machi Premium Billing & Dynamic PDF Tracker</h2>
+			<h2 class="text-primary fw-bold m-0">💼 Machi Premium Billing & TDS Tracker v6</h2>
 			<button class="btn btn-success fw-bold" onclick="exportToExcel()">📊 Export Ledger (.csv)</button>
 		</div>
 
 		<div class="row g-4">
-			<!-- CONTROL MATRIX PANEL FORM -->
+			<!-- DYNAMIC GENERATE / EDIT INPUT FORM BOARD -->
 			<div class="col-xl-3 col-lg-4">
 				<div class="card p-4 sticky-top" style="top: 20px; z-index: 5;">
 					<h5 id="formPanelTitle" class="mb-3 text-secondary border-bottom pb-2">Generate Invoice</h5>
@@ -152,25 +140,25 @@
 
 						<div class="mb-2">
 							<label class="form-label small fw-bold">Invoice No</label>
-							<input type="text" id="invoiceNo" class="form-control form-control-sm" required placeholder="00110 APR2026">
+							<input type="text" id="invoiceNo" class="form-control form-control-sm" required placeholder="INV/26-27/01">
 						</div>
 						<div class="mb-2">
 							<label class="form-label small fw-bold">Invoice Date</label>
 							<input type="date" id="invoiceDate" class="form-control form-control-sm" required>
 						</div>
 						<div class="mb-2">
-							<label class="form-label small fw-bold">Client Recipient Authority</label>
-							<textarea id="receivedFrom" class="form-control form-control-sm" rows="3" required placeholder="The Managing Director,&#10;Tamil Nadu Tourism Development Corporation,&#10;Chennai - 600 002"></textarea>
+							<label class="form-label small fw-bold">Client Name</label>
+							<input type="text" id="receivedFrom" class="form-control form-control-sm" required placeholder="Corporate Client">
 						</div>
 
 						<div class="row g-2 mb-2">
 							<div class="col-7">
 								<label class="form-label small fw-bold text-dark">Total Project Val (₹)</label>
-								<input type="number" id="projectValue" class="form-control form-control-sm" required placeholder="1690000" oninput="calculateMilestoneAmount()">
+								<input type="number" id="projectValue" class="form-control form-control-sm" required placeholder="50000" oninput="calculateMilestoneAmount()">
 							</div>
 							<div class="col-5">
 								<label class="form-label small fw-bold text-dark">Bill % Value</label>
-								<input type="number" step="any" id="billPercentage" class="form-control form-control-sm" required placeholder="30" value="30" oninput="calculateMilestoneAmount()">
+								<input type="number" step="any" id="billPercentage" class="form-control form-control-sm" required placeholder="e.g. 25" value="25" oninput="calculateMilestoneAmount()">
 							</div>
 						</div>
 
@@ -195,19 +183,14 @@
 						</div>
 
 						<div class="mb-3">
-							<label class="form-label small fw-bold">Work Scope / Project Subject</label>
-							<textarea id="description" class="form-control form-control-sm" rows="3" placeholder="Development of an Integrated Payroll and EPF Trust Management Software..."></textarea>
+							<label class="form-label small fw-bold">Work Scope Description</label>
+							<textarea id="description" class="form-control form-control-sm" rows="2" placeholder="Milestone notes..."></textarea>
 						</div>
 
-						<!-- INTERACTIVE ACTION ARCHITECTURE CONTROLS -->
-						<div class="form-check form-switch mb-2">
-							<input class="form-check-input" type="checkbox" id="includeCoveringLetterToggle" checked>
-							<label class="form-check-label small fw-bold text-secondary" for="includeCoveringLetterToggle">Include Official Covering Letter</label>
-						</div>
-
+						<!-- NEW: DIGITAL SIGNATURE & CORPORATE SEAL INCLUSION TOGGLE OPTION -->
 						<div class="form-check form-switch mb-3">
 							<input class="form-check-input" type="checkbox" id="includeSealOptionToggle" checked>
-							<label class="form-check-label small fw-bold text-secondary" for="includeSealOptionToggle">Include Rubber Stamp & Seal</label>
+							<label class="form-check-label small fw-bold text-secondary" for="includeSealOptionToggle">Include Stamp, Seal & Signatures</label>
 						</div>
 
 						<div class="d-flex gap-2">
@@ -218,7 +201,7 @@
 				</div>
 			</div>
 
-			<!-- LEDGER MATRIX BOARD INTERFACE -->
+			<!-- LEDGER MATRIX INTERFACE DISPLAY -->
 			<div class="col-xl-9 col-lg-8">
 				<div class="card p-4 mb-4">
 					<h6 class="text-secondary fw-bold mb-3">🔎 Dedicated Filtering System</h6>
@@ -285,140 +268,119 @@
 		</div>
 	</div>
 
-	<!-- ==================== NEW REFERENCE COMPLIANT HIGH-FIDELITY PRINT CANVAS ==================== -->
-	<div id="printInvoiceCanvas">
+	<!-- ==================== NEW: HIGH RIGOR PDF INVOICE LETTERHEAD TEMPLATE CANVAS ==================== -->
+	<div id="printInvoiceCanvas" class="p-5">
+		<div class="letterhead-bar mb-4"></div>
 
-		<!-- SECTION A: OFFICIAL COVERING LETTER ATTACHMENT BLOCK -->
-		<div id="pdfCoveringLetterBlock" class="mb-5">
-			<div class="letterhead-bar"></div>
-			<div class="row">
-				<div class="col-6"><b id="letterDate" class="font-monospace"></b></div>
+		<!-- Letterhead Header Layout -->
+		<div class="row align-items-center mb-5">
+			<div class="col-7">
+				<!-- Corporate Brand Identities Configuration Placeholders -->
+				<div class="d-flex align-items-center gap-3">
+					<div class="bg-primary text-white px-3 py-2 fw-bold rounded fs-3" style="letter-spacing:1px; line-height:1;">⚡</div>
+					<div>
+						<h3 class="fw-bold text-dark m-0">YOUR BUSINESS LOGO HERE</h3>
+						<small class="text-secondary font-monospace">Software & Creative Tech Solutions Studio</small>
+					</div>
+				</div>
+				<p class="text-muted small mt-3 m-0">
+					123, Growth Hub Tech Street,<br>
+					GST Road, Chennai, Tamil Nadu - 600032<br>
+					<b>GSTIN:</b> 33AAAAA0000A1Z1 | <b>Email:</b> support@machi.tech
+				</p>
 			</div>
-
-			<div class="mt-4 fs-6 text-dark">
-				<p class="m-0">To,</p>
-				<p class="fw-bold m-0" id="letterRecipientBlock"></p>
-			</div>
-
-			<div class="mt-4">
-				<p class="m-0">Dear Sir/Madam,</p>
-				<p class="ms-3 fw-bold tracking-wide">Greetings....!</p>
-			</div>
-
-			<div class="mt-3 border-start border-3 border-secondary ps-3 py-1 bg-light">
-				<p class="m-0 small text-uppercase fw-bold text-secondary"><b>SUB:</b> <span id="letterSubPercent">0</span>% invoice for <span id="letterSubjectBlock"></span> - Regarding</p>
-			</div>
-
-			<div class="mt-4 text-dark" style="text-align: justify; font-size:14px; line-height:1.6;">
-				<p>With reference to the above we would like to submit our invoice to your kind perusal and request you to issue the funds immediately.</p>
-				<p>We assure you that we would continuously do necessary support what is needed for the success of the project.</p>
-				<p>We kindly request the release of the <span id="letterBodyPercent">0</span>% payment as per the agreed terms. We look forward to your confirmation at your earliest convenience[cite: 1].</p>
-				<p>We sincerely thank you for your continued support and assure you of our best service and commitment at all times[cite: 1].</p>
-			</div>
-
-			<div class="mt-4 row">
-				<div class="col-6">
-					<p class="mb-5">Thanking you[cite: 1]</p>
-					<p class="m-0 small text-muted">With Best Regards[cite: 1]</p>
-					<h6 class="fw-bold m-0 mt-2 text-uppercase">Patrick Vincent[cite: 1]</h6>
-					<small class="text-secondary font-monospace">CEO[cite: 1]</small>
+			<div class="col-5 text-end">
+				<h1 class="fw-bold text-secondary text-uppercase tracking-wider m-0" style="opacity:0.25; font-size:3.5rem;">Invoice</h1>
+				<div class="mt-2 small">
+					<b>Invoice ID No:</b> <span id="pdfInvId" class="fw-bold text-primary"></span><br>
+					<b>Invoice Date:</b> <span id="pdfInvDate"></span><br>
+					<b>Transaction State:</b> <span class="badge bg-success" id="pdfInvStatusBadge">Active</span>
 				</div>
 			</div>
 		</div>
 
-		<!-- SECTION B: COMMERCIAL REGISTERED FORMAL INVOICE MATRIX[cite: 1] -->
-		<div id="pdfInvoiceSheetBlock" class="page-break-before">
-			<div class="letterhead-bar"></div>
+		<hr class="text-muted opacity-25 my-4">
 
-			<div class="row mb-4 align-items-start">
-				<div class="col-7">
-					<h4 class="fw-bold text-primary m-0">TIMESMED HEALTHSOFT PVT LTD[cite: 1]</h4>
-					<p class="text-muted small m-0 mt-1" style="font-size:11px;">
-						RA Puram Branch, Chennai, Tamil Nadu[cite: 1]<br>
-						<b>PAN:</b> AAHCT9904C | <b>GSTIN:</b> 33AAHCT9904C1ZG[cite: 1]
-					</p>
-					<div class="mt-4 fs-6">
-						<span class="text-uppercase small text-muted fw-bold d-block">To,[cite: 1]</span>
-						<div id="pdfInvoiceToClientBlock" class="fw-bold text-dark ps-2 border-start border-2 border-primary"></div>
-					</div>
-				</div>
-				<div class="col-5 text-end">
-					<h2 class="fw-bold text-uppercase text-secondary tracking-wider m-0" style="opacity:0.2;">Invoice</h2>
-					<div class="mt-3 fs-6 font-monospace card p-3 border rounded text-start bg-light d-inline-block" style="min-width:250px;">
-						<b>Invoice Number:</b> <span id="pdfInvoiceIdDisplay" class="fw-bold text-primary"></span><br>
-						<b>Invoice Date:</b> <span id="pdfInvoiceDateDisplay"></span><br>
-						<b>Status Code:</b> <span id="pdfInvoiceStateLabel" class="badge bg-secondary">Active</span>
-					</div>
-				</div>
+		<!-- Bill To / Client Metadata Details -->
+		<div class="row mb-5">
+			<div class="col-6">
+				<p class="text-uppercase small text-muted fw-bold mb-1">Invoiced Account Profile (Bill To):</p>
+				<h5 class="fw-bold text-dark m-0" id="pdfClientName"></h5>
+				<p class="text-muted small mt-2" id="pdfClientMetaDetails">
+					Corporate Enterprise Client Network Account<br>
+					Verified Procurement Allocation Channels
+				</p>
 			</div>
-
-			<table class="table table-bordered align-middle my-4">
-				<thead class="table-light">
-					<tr>
-						<th>Description of Services Milestone Deliverables[cite: 1]</th>
-						<th style="width:180px;" class="text-end">Amount Payable (₹)[cite: 1]</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class="py-3">
-							<span id="pdfTablePercentage" class="fw-bold text-primary">0</span>% Invoice for <span id="pdfTableDescriptionText" class="fw-bold text-dark"></span>[cite: 1]
-							<div class="text-muted mt-2 small" style="font-size:11px;">
-								• Calculated dynamic allocation parameter based on overall contracted project value structure matrix mapping profiles[cite: 1].
-							</div>
-						</td>
-						<td class="text-end font-monospace fw-bold py-3 fs-6" id="pdfTableBaseAmt">₹0.00</td>
-					</tr>
-					<tr>
-						<td class="text-end bg-light fw-bold small">Sub Total (₹):[cite: 1]</td>
-						<td class="text-end font-monospace bg-light fw-bold" id="pdfTableSubtotal">₹0.00</td>
-					</tr>
-					<tr>
-						<td class="text-end fw-bold small text-muted">GST Added (<span id="pdfTableGstRate">0</span>%):[cite: 1]</td>
-						<td class="text-end font-monospace text-muted" id="pdfTableGstAmt">₹0.00</td>
-					</tr>
-					<tr class="table-primary">
-						<td class="text-end fw-bold text-primary">Amount Payable / Grand Total (₹):[cite: 1]</td>
-						<td class="text-end font-monospace fw-bold text-primary fs-5" id="pdfTableGrandTotal">₹0.00</td>
-					</tr>
-				</tbody>
-			</table>
-
-			<!-- Amount In Words Registry Header -->
-			<div class="p-2 border rounded bg-light mb-4 font-monospace small">
-				<b>Amount in Words:</b> <span id="pdfAmountInWordsBlock" class="text-uppercase fw-bold text-secondary"></span>[cite: 1]
-			</div>
-
-			<!-- SECTION C: DYNAMIC REGISTERED SETTLEMENT BANK CREDENTIALS MATRIX[cite: 1] -->
-			<div class="row align-items-end mt-5 pt-3">
-				<div class="col-7">
-					<div class="bank-details-box shadow-sm">
-						<h6 class="fw-bold text-uppercase text-primary border-bottom pb-1 mb-2" style="font-size:0.8rem;">🏦 Settlement Account Remittance Node[cite: 1]</h6>
-						<table class="table table-borderless table-sm m-0 p-0 font-monospace" style="font-size:11px; line-height:1.3;">
-							<tr><td class="p-0 text-muted" style="width:110px;">Account Name:</td><td class="p-0 fw-bold">Timesmed Healthsoft pvt Ltd[cite: 1]</td></tr>
-							<tr><td class="p-0 text-muted">Account No:</td><td class="p-0 fw-bold">409600099871[cite: 1]</td></tr>
-							<tr><td class="p-0 text-muted">Bank Name:</td><td class="p-0 fw-bold">RBL BANK[cite: 1]</td></tr>
-							<tr><td class="p-0 text-muted">IFSC Code:</td><td class="p-0 fw-bold">RATN0000245[cite: 1]</td></tr>
-							<tr><td class="p-0 text-muted">Branch Node:</td><td class="p-0">RA Puram Branch Chennai[cite: 1]</td></tr>
-						</table>
-					</div>
-				</div>
-				<div class="col-5 text-end" id="pdfStampBlockContainer">
-					<div class="seal-box" id="pdfRubberSealGraphics">Corporate Seal[cite: 1]</div>
-					<div class="text-center d-inline-block">
-						<div class="signature-line"></div>
-						<p class="small text-muted fw-bold m-0 mt-2">With Best Regards[cite: 1]</p>
-						<h6 class="fw-bold m-0 text-uppercase" style="font-size:0.8rem;">Patrick Vincent[cite: 1]</h6>
-						<small class="text-secondary font-monospace" style="font-size:10px;">CEO[cite: 1]</small>
-					</div>
-				</div>
-			</div>
-
 		</div>
+
+		<!-- Work milestone transaction breakdown structures matrix -->
+		<table class="table table-bordered align-middle mb-5">
+			<thead class="table-light">
+				<tr>
+					<th style="width:50px;" class="text-center">Sl</th>
+					<th>Item Description & Project Milestone Allocation Profile</th>
+					<th style="width:140px;" class="text-end">Project Value</th>
+					<th style="width:100px;" class="text-center">Milestone %</th>
+					<th style="width:150px;" class="text-end">Taxable Value</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="text-center font-monospace">1</td>
+					<td>
+						<b class="text-dark" id="pdfInvoiceDescriptionTitle">Professional Milestone Development Deliverables Execution Log</b><br>
+						<small class="text-muted text-wrap" id="pdfInvoiceDescriptionSubtext"></small>
+					</td>
+					<td class="text-end font-monospace" id="pdfProjValueCell">₹0.00</td>
+					<td class="text-center font-monospace fw-bold text-secondary" id="pdfMilestonePercentCell">0%</td>
+					<td class="text-end font-monospace" id="pdfTaxableBaseValueCell">₹0.00</td>
+				</tr>
+				<!-- Subtotal Calculations Triggers Matrix -->
+				<tr>
+					<td colspan="3" class="border-0"></td>
+					<td class="text-end fw-bold bg-light small">Subtotal:</td>
+					<td class="text-end font-monospace bg-light fw-bold" id="pdfSummarySubtotal">₹0.00</td>
+				</tr>
+				<tr>
+					<td colspan="3" class="border-0"></td>
+					<td class="text-end fw-bold small text-secondary">GST Added (<span id="pdfGstRateLabel">0</span>%):</td>
+					<td class="text-end font-monospace text-secondary" id="pdfSummaryGstAmt">₹0.00</td>
+				</tr>
+				<tr class="table-group-divider">
+					<td colspan="3" class="border-0"></td>
+					<td class="text-end fw-bold table-primary text-primary">Grand Total:</td>
+					<td class="text-end font-monospace fw-bold table-primary text-primary fs-5" id="pdfSummaryGrandTotal">₹0.00</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<!-- Terms, Notes, Stamp and Authorization signatures layer blocks -->
+		<div class="row align-items-end mt-5 pt-4">
+			<div class="col-7">
+				<h6 class="fw-bold small text-uppercase text-secondary m-0">Declaration & Payment Instructions</h6>
+				<ol class="text-muted small ps-3 mt-2" style="font-size:11px; line-height:1.5;">
+					<li>This is a system generated computer compiled digital milestone tax invoice asset profile documentation layout.</li>
+					<li>Remittances should map transaction references explicitly towards corporate allocation accounts.</li>
+					<li>TDS collections should comply natively matching 2% standard guidelines during transaction settlement cycles.</li>
+				</ol>
+			</div>
+
+			<!-- RE-CONFIGURED DYNAMIC SECTION: STAMP AND SEAL CONFIGURATIONS WRAPPER CONTROL -->
+			<div class="col-5 text-end" id="pdfAuthorizedSignatorySignatureStampWrapper">
+				<div class="seal-box" id="pdfStampSealGraphicsBlock">Corporate Seal</div>
+				<div class="text-center d-inline-block">
+					<div class="signature-line"></div>
+					<p class="small text-muted fw-bold m-0 mt-2">Authorized Signatory</p>
+					<small class="text-secondary font-monospace" style="font-size:10px;">Operations & Settlement Framework</small>
+				</div>
+			</div>
+		</div>
+
+		<hr class="text-muted opacity-25 mt-5 mb-3">
+		<p class="text-center small text-muted font-monospace m-0" style="font-size:10px;">🤝 Thank you for your partnership! Managed smoothly via Machi Ledger Core Automation Networks.</p>
 	</div>
 
 	<script>
-		// INTERACTION CHANNEL WEB API LINK CONFIGURATION
 		const API_URL = "https://script.google.com/macros/s/AKfycbx2WVUi93T3MRUj_La8-U9CQZnprL6Z-0wBv1ot6uyVy00TpsZ_Fh4J4335_aEQPeoWuQ/exec";
 
 		let allInvoices = [];
@@ -464,21 +426,25 @@
 			const script = document.createElement('script');
 			script.id = 'jsonpScriptFetcher';
 			script.src = `${API_URL}?callback=handleScriptResponse&_ts=${new Date().getTime()}`;
+
 			script.onerror = function () {
 				document.getElementById('invoiceTableBody').innerHTML = `<tr><td colspan="8" class="text-center text-danger">Network API script handshaking failed.</td></tr>`;
 				document.getElementById('syncSpinner').classList.add('d-none');
 			};
+
 			document.body.appendChild(script);
 		}
 
 		function handleScriptResponse(responseDataset) {
 			document.getElementById('syncSpinner').classList.add('d-none');
 			document.getElementById('filterBtnSpinner').classList.add('d-none');
+
 			allInvoices = responseDataset || [];
 			allInvoices.reverse();
 			executeFilterLogicOnly();
 		}
 
+		// FILTER INTERFACE DRIVERS CONTROL LOGIC
 		function executeFilterWorkflow() {
 			document.getElementById('filterBtnSpinner').classList.remove('d-none');
 			setTimeout(() => { currentPage = 1; executeFilterLogicOnly(); }, 300);
@@ -505,6 +471,7 @@
 		function renderPaginatedTable() {
 			const tbody = document.getElementById('invoiceTableBody');
 			tbody.innerHTML = "";
+
 			const totalRecords = filteredInvoices.length;
 			const totalPages = Math.ceil(totalRecords / recordsPerPage) || 1;
 			const startIndex = (currentPage - 1) * recordsPerPage;
@@ -520,11 +487,17 @@
 			paginatedItems.forEach(item => {
 				const isCancelled = item.status === "Cancelled";
 				const rowClass = isCancelled ? "bg-cancelled" : "";
-				let fInvDate = item.invoiceDate ? new Date(item.invoiceDate).toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '-';
+
+				let fInvDate = "-";
+				if (item.invoiceDate) {
+					fInvDate = new Date(item.invoiceDate).toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+				}
 
 				const diffValue = parseFloat(item.variance || 0);
 				let diffBadging = `<span class="fw-bold text-danger">₹${diffValue.toFixed(2)}</span>`;
-				if (diffValue <= 0 && !isCancelled) diffBadging = `<span class="badge bg-success">Fully Cleared (₹0)</span>`;
+				if (diffValue <= 0 && !isCancelled) {
+					diffBadging = `<span class="badge bg-success">Fully Cleared (₹0)</span>`;
+				}
 
 				let updateSection = "";
 				if (isCancelled) {
@@ -533,39 +506,53 @@
 					updateSection = `
 							<div class="small">
 								<b class="text-success">✔ Cleared:</b> ₹${parseFloat(item.receivedAmount).toFixed(2)}<br>
-								<b class="text-secondary">TDS (2%):</b> ₹${parseFloat(item.tdsAmount).toFixed(2)}<br>
+								<b class="text-secondary">TDS Ded (2%):</b> ₹${parseFloat(item.tdsAmount).toFixed(2)}<br>
 								<small class="text-muted">On: ${new Date(item.amountReceivedDate).toLocaleDateString('en-IN')}</small>
 							</div>`;
 				} else {
 					updateSection = `
 							<div class="p-2 border rounded bg-white shadow-sm no-strike">
-								<div class="mb-1"><input type="date" id="col-date-${item.invoiceNo}" class="form-control form-control-sm" style="font-size:0.8rem;"></div>
+								<div class="mb-1">
+									<input type="date" id="col-date-${item.invoiceNo}" class="form-control form-control-sm" style="font-size:0.8rem;">
+								</div>
 								<div class="input-group input-group-sm mb-1">
 									<input type="number" id="col-rec-${item.invoiceNo}" class="form-control" placeholder="Recamt" style="font-size:0.8rem;" oninput="runAutoTdsCalculation('${item.invoiceNo}', ${item.totalAmount})">
-									<input type="number" id="col-tds-${item.invoiceNo}" class="form-control" placeholder="TDS" style="font-size:0.8rem;">
+									<input type="number" id="col-tds-${item.invoiceNo}" class="form-control" placeholder="TDS (2%)" style="font-size:0.8rem;">
 								</div>
 								<button class="btn btn-primary btn-sm w-100 fw-bold py-1" style="font-size:0.75rem;" onclick="saveCollectionEntry('${item.invoiceNo}', ${item.totalAmount})">Update Payment</button>
 							</div>`;
 				}
 
-				let actionControls = isCancelled ? `
-						<div class="no-strike d-flex flex-column gap-1">
-							<button class="btn btn-xs btn-warning btn-sm fw-bold px-2 py-0" style="font-size:0.75rem;" onclick="alterInvoiceState('${item.invoiceNo}', 'Active')">🔄 Re-Activate</button>
-							<button class="btn btn-xs btn-danger btn-sm fw-bold px-2 py-0" style="font-size:0.75rem;" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete</button>
-						</div>` : `
-						<div class="no-strike d-flex flex-column gap-1">
-							<div class="d-flex gap-1">
-								<button class="btn btn-xs btn-outline-secondary btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="enterEditMode('${item.invoiceNo}')">✏ Edit</button>
-								<button class="btn btn-xs btn-outline-danger btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="alterInvoiceState('${item.invoiceNo}', 'Cancelled')">🚫 Cancel</button>
-							</div>
-							<button class="btn btn-xs btn-primary btn-sm fw-bold py-0" style="font-size:0.75rem;" onclick="launchReferenceCompliantPdfPrint('${item.invoiceNo}')">📄 Print / PDF</button>
-							<button class="btn btn-xs btn-danger btn-sm fw-bold py-0" style="font-size:0.72rem; opacity:0.5;" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete Row</button>
-						</div>`;
+				// CONTROL DEDICATED CALL SCHEDULERS INCLUDING PRINT ACTION
+				let actionControls = "";
+				if (isCancelled) {
+					actionControls = `
+							<div class="no-strike d-flex flex-column gap-1">
+								<button class="btn btn-xs btn-warning btn-sm fw-bold px-2 py-0" style="font-size:0.75rem;" onclick="alterInvoiceState('${item.invoiceNo}', 'Active')">🔄 Re-Activate</button>
+								<button class="btn btn-xs btn-danger btn-sm fw-bold px-2 py-0" style="font-size:0.75rem;" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete</button>
+							</div>`;
+				} else {
+					actionControls = `
+							<div class="no-strike d-flex flex-column gap-1">
+								<div class="d-flex gap-1">
+									<button class="btn btn-xs btn-outline-secondary btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="enterEditMode('${item.invoiceNo}')">✏ Edit</button>
+									<button class="btn btn-xs btn-outline-danger btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="alterInvoiceState('${item.invoiceNo}', 'Cancelled')">🚫 Cancel</button>
+								</div>
+								<!-- HIGH RIGOR TARGET ELEMENT PRINT PDF INSTRUCTION CALLOUT -->
+								<button class="btn btn-xs btn-primary btn-sm fw-bold py-0" style="font-size:0.75rem;" onclick="launchPdfInvoicePrintWorkflow('${item.invoiceNo}')">📄 Print / PDF</button>
+								<button class="btn btn-xs btn-danger btn-sm fw-bold py-0" style="font-size:0.72rem; opacity:0.6;" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete Row</button>
+							</div>`;
+				}
 
-				// Rendering clean display block layers
 				const row = `<tr class="${rowClass}">
-						<td><b class="text-primary">${item.invoiceNo}</b><br><small class="text-muted">Date: ${fInvDate}</small></td>
-						<td><b>${item.receivedFrom.split('\n')[0]}</b><br><small class="text-secondary">Val: ₹${parseFloat(item.projectValue).toLocaleString('en-IN')} (${item.billPercentage})</small></td>
+						<td>
+							<b class="text-primary">${item.invoiceNo}</b><br>
+							<small class="text-muted">Date: ${fInvDate}</small>
+						</td>
+						<td>
+							<b>${item.receivedFrom}</b><br>
+							<small class="text-secondary">Value: ₹${parseFloat(item.projectValue).toLocaleString('en-IN')} (${item.billPercentage})</small>
+						</td>
 						<td>₹${parseFloat(item.amount).toFixed(2)}</td>
 						<td>₹${parseFloat(item.gstAmt).toFixed(2)}</td>
 						<td class="fw-bold text-dark">₹${parseFloat(item.totalAmount).toFixed(2)}</td>
@@ -575,85 +562,54 @@
 					</tr>`;
 				tbody.insertAdjacentHTML('beforeend', row);
 			});
+
 			updatePaginationControls(totalPages, totalRecords, startIndex + 1, endIndex);
 		}
 
-		/* ==================== HIGH RIGOR REFERENCE CONVERSION PDF PRINTER ENG ==================== */
-		function launchReferenceCompliantPdfPrint(invoiceNo) {
+		/* ==================== NEW: PROFESSIONAL PDF INVOICE RENDER MATRIX WORKFLOW ==================== */
+		function launchPdfInvoicePrintWorkflow(invoiceNo) {
 			const target = allInvoices.find(item => item.invoiceNo.toString() === invoiceNo.toString());
-			if (!target) return;
+			if (!target) { alert("Data target validation missing error."); return; }
 
-			// Formatting date vectors accurately[cite: 1]
-			const rawDate = target.invoiceDate ? new Date(target.invoiceDate) : new Date();
-			const indianFormattedDate = rawDate.toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
-			const alphaMonthDateStr = rawDate.toLocaleDateString('en-US', { day: '2-digit', month: 'LONG', year: 'numeric' }).toUpperCase();
+			// 1. Data Inject into Document Object DOM nodes elements
+			document.getElementById('pdfInvId').innerText = target.invoiceNo;
+			document.getElementById('pdfInvDate').innerText = target.invoiceDate ? new Date(target.invoiceDate).toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '-';
+			document.getElementById('pdfClientName').innerText = target.receivedFrom;
+			document.getElementById('pdfInvoiceDescriptionSubtext').innerText = target.description || "Frontend and business system modules milestone deployment tracking execution deliverables logs asset.";
 
+			// Extract and parse mathematical components strings
 			const rawPct = parseFloat(target.billPercentage) || 0;
+			const pValue = parseFloat(target.projectValue) || 0;
 			const bValue = parseFloat(target.amount) || 0;
 			const gValue = parseFloat(target.gstAmt) || 0;
 			const tValue = parseFloat(target.totalAmount) || 0;
 
-			// A. Inject values into Covering letter segments[cite: 1]
-			document.getElementById('letterDate').innerText = indianFormattedDate;
-			document.getElementById('letterRecipientBlock').innerText = target.receivedFrom;
-			document.getElementById('letterSubPercent').innerText = rawPct;
-			document.getElementById('letterBodyPercent').innerText = rawPct;
-			document.getElementById('letterSubjectBlock').innerText = target.description || "Project Milestone Framework System Node Asset Build Contract Deliverables";
+			document.getElementById('pdfProjValueCell').innerText = `₹${pValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+			document.getElementById('pdfMilestonePercentCell').innerText = `${rawPct}%`;
+			document.getElementById('pdfTaxableBaseValueCell').innerText = `₹${bValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+			document.getElementById('pdfSummarySubtotal').innerText = `₹${bValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
 
-			// B. Inject values into Invoice Sheet layers[cite: 1]
-			document.getElementById('pdfInvoiceToClientBlock').innerText = target.receivedFrom;
-			document.getElementById('pdfInvoiceIdDisplay').innerText = target.invoiceNo;
-			document.getElementById('pdfInvoiceDateDisplay').innerText = alphaMonthDateStr;
-			document.getElementById('pdfInvoiceStateLabel').innerText = target.status || "Active";
+			// Dynamic Extraction percentage label indices calculations
+			const computedGstRate = bValue > 0 ? Math.round((gValue / bValue) * 100) : 18;
+			document.getElementById('pdfGstRateLabel').innerText = computedGstRate;
+			document.getElementById('pdfSummaryGstAmt').innerText = `₹${gValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+			document.getElementById('pdfSummaryGrandTotal').innerText = `₹${tValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+			document.getElementById('pdfInvStatusBadge').innerText = target.status || "Active";
 
-			document.getElementById('pdfTablePercentage').innerText = rawPct;
-			document.getElementById('pdfTableDescriptionText').innerText = target.description || "Project Milestone Framework System Node Asset Build Contract Deliverables";
+			// 2. CHECKBOX TOGGLE OPTION FOR OPTIONAL EMBEDDED CORPORATE SEAL STAMPS
+			const includeStampToggle = document.getElementById('includeSealOptionToggle').checked;
+			const stampWrapperElement = document.getElementById('pdfAuthorizedSignatorySignatureStampWrapper');
 
-			document.getElementById('pdfTableBaseAmt').innerText = `${bValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
-			document.getElementById('pdfTableSubtotal').innerText = `${bValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
-
-			const gstComputedRate = bValue > 0 ? Math.round((gValue / bValue) * 100) : 18;
-			document.getElementById('pdfTableGstRate').innerText = gstComputedRate;
-			document.getElementById('pdfTableGstAmt').innerText = `${gValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
-			document.getElementById('pdfTableGrandTotal').innerText = `${tValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
-
-			// Compute absolute text representation words mapping
-			document.getElementById('pdfAmountInWordsBlock').innerText = convertAmountToIndianWords(tValue);
-
-			// C. Checkbox Visibility logic switches toggles
-			document.getElementById('pdfCoveringLetterBlock').style.display = document.getElementById('includeCoveringLetterToggle').checked ? "block" : "none";
-			document.getElementById('pdfStampBlockContainer').style.visibility = document.getElementById('includeSealOptionToggle').checked ? "visible" : "hidden";
-
-			// Launch Hardware pipeline layer
-			setTimeout(() => { window.print(); }, 350);
-		}
-
-		// Helper Indian currency word generation logic[cite: 1]
-		function convertAmountToIndianWords(amount) {
-			let price = Math.floor(amount);
-			if (price === 507000) return "Five Lakh Seven Thousand Rupees Only[cite: 1]"; // Direct template shortcut validation match[cite: 1]
-
-			// Fallback mathematical engine string builders
-			const sgl = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
-			const tns = ["", "", "With", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
-
-			if (price === 0) return "Zero Rupees Only";
-
-			function parseBelowThousand(n) {
-				let str = "";
-				if (n >= 100) { str += sgl[Math.floor(n / 100)] + " Hundred "; n %= 100; }
-				if (n >= 20) { str += tns[Math.floor(n / 10)] + " "; n %= 10; }
-				if (n > 0) { str += sgl[n] + " "; }
-				return str;
+			if (includeStampToggle) {
+				stampWrapperElement.style.display = "block";
+				stampWrapperElement.style.visibility = "visible";
+			} else {
+				stampWrapperElement.style.display = "none";
+				stampWrapperElement.style.visibility = "hidden";
 			}
 
-			let wordResult = "";
-			if (Math.floor(price / 10000000) > 0) { wordResult += parseBelowThousand(Math.floor(price / 10000000)) + "Crore "; price %= 10000000; }
-			if (Math.floor(price / 100000) > 0) { wordResult += parseBelowThousand(Math.floor(price / 100000)) + "Lakh "; price %= 100000; }
-			if (Math.floor(price / 1000) > 0) { wordResult += parseBelowThousand(Math.floor(price / 1000)) + "Thousand "; price %= 1000; }
-			if (price > 0) { wordResult += parseBelowThousand(price); }
-
-			return wordResult.trim() + " Rupees Only";
+			// 3. Fire Native Browser Hardware Printing Framework System Channels
+			setTimeout(() => { window.print(); }, 300);
 		}
 
 		async function triggerBackendPipeline(payload, customMessage) {
@@ -661,41 +617,57 @@
 			document.getElementById('syncSpinner').classList.remove('d-none');
 			try {
 				await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
-				alert(customMessage); fetchInvoices();
-			} catch (e) { alert("Pipeline error stream."); document.getElementById('syncSpinner').add('d-none'); }
-			finally { document.getElementById('syncSheetsBtn').disabled = false; }
+				alert(customMessage);
+				fetchInvoices();
+			} catch (e) {
+				alert("Error dispatching packet pipelines.");
+				document.getElementById('syncSpinner').classList.add('d-none');
+			} finally {
+				document.getElementById('syncSheetsBtn').disabled = false;
+			}
 		}
 
 		async function saveCollectionEntry(invoiceNo, totalBillAmount) {
 			const dateVal = document.getElementById(`col-date-${invoiceNo}`).value;
 			const receivedVal = parseFloat(document.getElementById(`col-rec-${invoiceNo}`).value) || 0;
 			const tdsVal = parseFloat(document.getElementById(`col-tds-${invoiceNo}`).value) || 0;
-			if (!dateVal || receivedVal <= 0) { alert("Fields required!"); return; }
+
+			if (!dateVal || receivedVal <= 0) { alert("Machi! Date and Received amount fields mandatory!"); return; }
 			const varianceVal = totalBillAmount - (receivedVal + tdsVal);
-			triggerBackendPipeline({ action: "updateCollection", invoiceNo, amountReceivedDate: dateVal, receivedAmount: receivedVal, tdsAmount: tdsVal, variance: varianceVal }, "Records updated successfully!");
+
+			const payload = { action: "updateCollection", invoiceNo: invoiceNo, amountReceivedDate: dateVal, receivedAmount: receivedVal, tdsAmount: tdsVal, variance: varianceVal };
+			triggerBackendPipeline(payload, `Payment and TDS records linked safely for ${invoiceNo}!`);
 		}
 
 		function alterInvoiceState(invoiceNo, targetStatus) {
-			if (!confirm(`Confirm change to ${targetStatus}?`)) return;
-			triggerBackendPipeline({ action: "changeStatus", invoiceNo, status: targetStatus }, `Status modified.`);
+			if (!confirm(`Machi, change status of ${invoiceNo} to "${targetStatus}"?`)) return;
+			triggerBackendPipeline({ action: "changeStatus", invoiceNo: invoiceNo, status: targetStatus }, `Invoice status set to ${targetStatus}!`);
 		}
 
 		function deleteInvoiceRecord(invoiceNo) {
-			if (!confirm(`🚨 Critical Action: Delete invoice row permanently?`)) return;
-			triggerBackendPipeline({ action: "deleteInvoice", invoiceNo }, `Entry cleared.`);
+			if (!confirm(`🚨 WARNING: Hard delete ${invoiceNo} from Sheet rows?`)) return;
+			triggerBackendPipeline({ action: "deleteInvoice", invoiceNo: invoiceNo }, `Invoice ${invoiceNo} deleted permanently from tracking logs.`);
 		}
 
 		function enterEditMode(invoiceNo) {
 			const target = allInvoices.find(item => item.invoiceNo.toString() === invoiceNo.toString());
 			if (!target) return;
+
 			document.getElementById('formPanelTitle').innerText = "✏ Edit Invoice Profile";
 			document.getElementById('mainSubmitBtn').innerText = "🔄 Update Invoice";
-			document.getElementById('invoiceNo').value = target.invoiceNo; document.getElementById('invoiceNo').readOnly = true;
-			if (target.invoiceDate) document.getElementById('invoiceDate').value = new Date(target.invoiceDate).toISOString().split('T')[0];
+			document.getElementById('invoiceNo').value = target.invoiceNo;
+			document.getElementById('invoiceNo').readOnly = true;
+
+			if (target.invoiceDate) {
+				document.getElementById('invoiceDate').value = new Date(target.invoiceDate).toISOString().split('T')[0];
+			}
 			document.getElementById('receivedFrom').value = target.receivedFrom;
 			document.getElementById('projectValue').value = target.projectValue;
 			document.getElementById('description').value = target.description;
-			document.getElementById('billPercentage').value = parseFloat(target.billPercentage) || 0;
+
+			const rawPct = parseFloat(target.billPercentage) || 0;
+			document.getElementById('billPercentage').value = rawPct;
+
 			calculateMilestoneAmount();
 			document.getElementById('editModeFlag').value = "true";
 			document.getElementById('cancelEditBtn').classList.remove('d-none');
@@ -703,11 +675,15 @@
 		}
 
 		function exitEditMode() {
-			document.getElementById('formPanelTitle').innerText = "Generate Invoice"; document.getElementById('mainSubmitBtn').innerText = "💾 Save Invoice";
-			document.getElementById('invoiceForm').reset(); document.getElementById('invoiceNo').readOnly = false;
+			document.getElementById('formPanelTitle').innerText = "Generate Invoice";
+			document.getElementById('mainSubmitBtn').innerText = "💾 Save Invoice";
+			document.getElementById('invoiceForm').reset();
+			document.getElementById('invoiceNo').readOnly = false;
 			document.getElementById('invoiceDate').value = new Date().toISOString().split('T')[0];
-			document.getElementById('editModeFlag').value = "false"; document.getElementById('cancelEditBtn').classList.add('d-none');
-			document.getElementById('billPercentage').value = "30"; document.getElementById('gstPercentageField').value = "18";
+			document.getElementById('editModeFlag').value = "false";
+			document.getElementById('cancelEditBtn').classList.add('d-none');
+			document.getElementById('billPercentage').value = "25";
+			document.getElementById('gstPercentageField').value = "18";
 			calculateMilestoneAmount();
 		}
 
@@ -715,23 +691,36 @@
 			e.preventDefault();
 			const formData = {
 				action: document.getElementById('editModeFlag').value === "true" ? "editInvoice" : "newInvoice",
-				invoiceNo: document.getElementById('invoiceNo').value, invoiceDate: document.getElementById('invoiceDate').value,
-				receivedFrom: document.getElementById('receivedFrom').value, projectValue: document.getElementById('projectValue').value,
-				billPercentage: document.getElementById('billPercentage').value, amount: document.getElementById('amount').value,
-				gstAmt: document.getElementById('gstAmt').value, totalAmount: document.getElementById('totalAmount').value, description: document.getElementById('description').value
+				invoiceNo: document.getElementById('invoiceNo').value,
+				invoiceDate: document.getElementById('invoiceDate').value,
+				receivedFrom: document.getElementById('receivedFrom').value,
+				projectValue: document.getElementById('projectValue').value,
+				billPercentage: document.getElementById('billPercentage').value,
+				amount: document.getElementById('amount').value,
+				gstAmt: document.getElementById('gstAmt').value,
+				totalAmount: document.getElementById('totalAmount').value,
+				description: document.getElementById('description').value
 			};
-			const btn = document.getElementById('mainSubmitBtn'); btn.innerText = "Processing Sync..."; btn.disabled = true;
+
+			const btn = document.getElementById('mainSubmitBtn');
+			btn.innerText = "Processing Sync..."; btn.disabled = true;
+
 			try {
 				await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(formData) });
-				alert("Transaction logs updated safely!"); exitEditMode(); fetchInvoices();
-			} catch (err) { alert("Sync failed."); } finally { btn.disabled = false; }
+				alert(document.getElementById('editModeFlag').value === "true" ? "Invoice specifications adjusted successfully!" : "Invoice generated and recorded!");
+				exitEditMode();
+				fetchInvoices();
+			} catch (err) { alert("Network sync failed stream variables."); }
+			finally { btn.disabled = false; }
 		});
 
 		function updatePaginationControls(totalPages, totalRecords, start, end) {
 			document.getElementById('paginationInfo').innerText = `Showing ${start} to ${end} of ${totalRecords} entries`;
 			const controls = document.getElementById('paginationControls'); controls.innerHTML = "";
 			controls.insertAdjacentHTML('beforeend', `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}"><a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Prev</a></li>`);
-			for (let i = 1; i <= totalPages; i++) controls.insertAdjacentHTML('beforeend', `<li class="page-item ${currentPage === i ? 'active' : ''}"><a class="page-link" href="#" onclick="changePage(${i})">${i}</a></li>`);
+			for (let i = 1; i <= totalPages; i++) {
+				controls.insertAdjacentHTML('beforeend', `<li class="page-item ${currentPage === i ? 'active' : ''}"><a class="page-link" href="#" onclick="changePage(${i})">${i}</a></li>`);
+			}
 			controls.insertAdjacentHTML('beforeend', `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}"><a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Next</a></li>`);
 		}
 
@@ -741,17 +730,26 @@
 		}
 
 		function clearFilters() {
-			document.getElementById('textSearch').value = ""; document.getElementById('fromDate').value = ""; document.getElementById('toDate').value = "";
-			currentPage = 1; executeFilterLogicOnly();
+			document.getElementById('textSearch').value = "";
+			document.getElementById('fromDate').value = "";
+			document.getElementById('toDate').value = "";
+			currentPage = 1;
+			executeFilterLogicOnly();
 		}
 
 		function exportToExcel() {
 			if (filteredInvoices.length === 0) return;
 			let csvContent = "data:text/csv;charset=utf-8,Invoice Date,Invoice No,Client Name,Project Value,Bill Percent,Base Amount,GST Amount,Total Bill,Received Date,Received Amount,TDS Amount,Variance Balance,Status\n";
 			filteredInvoices.forEach(r => {
-				csvContent += [`"${r.invoiceDate || ''}"`, `"${r.invoiceNo || ''}"`, `"${r.receivedFrom.replace(/\n/g, ' ')}"`, `"${r.projectValue}"`, `"${r.billPercentage}"`, `"${r.amount}"`, `"${r.gstAmt}"`, `"${r.totalAmount}"`, `"${r.amountReceivedDate || 'Pending'}"`, `"${r.receivedAmount}"`, `"${r.tdsAmount}"`, `"${r.variance}"`, `"${r.status}"`].join(",") + "\n";
+				csvContent += [
+					`"${r.invoiceDate || ''}"`, `"${r.invoiceNo || ''}"`, `"${r.receivedFrom}"`,
+					`"${r.projectValue}"`, `"${r.billPercentage}"`, `"${r.amount}"`,
+					`"${r.gstAmt}"`, `"${r.totalAmount}"`, `"${r.amountReceivedDate || 'Pending'}"`,
+					`"${r.receivedAmount}"`, `"${r.tdsAmount}"`, `"${r.variance}"`, `"${r.status}"`
+				].join(",") + "\n";
 			});
-			const link = document.createElement("a"); link.setAttribute("href", encodeURI(csvContent)); link.setAttribute("download", `Machi_Premium_Ledger.csv`);
+			const link = document.createElement("a"); link.setAttribute("href", encodeURI(csvContent));
+			link.setAttribute("download", `Machi_Premium_Ledger_${new Date().toISOString().split('T')[0]}.csv`);
 			document.body.appendChild(link); link.click(); document.body.removeChild(link);
 		}
 	</script>
