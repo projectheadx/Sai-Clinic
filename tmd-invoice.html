@@ -247,13 +247,43 @@
 			document.body.appendChild(script);
 		}
 
+		// Replace your existing handleScriptResponse with this:
 		function handleScriptResponse(responseDataset) {
 			document.getElementById('syncSpinner').classList.add('d-none');
 			document.getElementById('filterBtnSpinner').classList.add('d-none');
 
+			// Fallback to empty array if nothing comes back
 			allInvoices = responseDataset || [];
-			allInvoices.reverse();
+
+			// Machi: Explicitly sorting by Invoice Date (Latest Date First)
+			allInvoices.sort((a, b) => {
+				const dateA = a.invoiceDate ? new Date(a.invoiceDate).getTime() : 0;
+				const dateB = b.invoiceDate ? new Date(b.invoiceDate).getTime() : 0;
+				return dateB - dateA; // Change to 'dateA - dateB' if you want oldest first
+			});
+
 			executeFilterLogicOnly();
+		}
+
+		// Replace your existing executeFilterLogicOnly with this to maintain date priority during searches:
+		function executeFilterLogicOnly() {
+			const searchText = document.getElementById('textSearch').value.toLowerCase().trim();
+			const fromDateStr = document.getElementById('fromDate').value;
+			const toDateStr = document.getElementById('toDate').value;
+
+			filteredInvoices = allInvoices.filter(item => {
+				const matchText = item.invoiceNo.toLowerCase().includes(searchText) || item.receivedFrom.toLowerCase().includes(searchText);
+				let matchDate = true;
+				if (item.invoiceDate) {
+					const itemDate = new Date(item.invoiceDate).setHours(0, 0, 0, 0);
+					if (fromDateStr) { if (itemDate < new Date(fromDateStr).setHours(0, 0, 0, 0)) matchDate = false; }
+					if (toDateStr) { if (itemDate > new Date(toDateStr).setHours(0, 0, 0, 0)) matchDate = false; }
+				}
+				return matchText && matchDate;
+			});
+
+			// Double-checking order stability for the table render step
+			renderPaginatedTable();
 		}
 
 		function executeFilterWorkflow() {
