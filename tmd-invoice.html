@@ -195,17 +195,37 @@
 		let currentPage = 1;
 		let recordsPerPage = 10;
 
+		// HELPER: Safely convert any Google Sheet date format into milliseconds for accurate sorting
+		function parseInvoiceDateToMs(dateInput) {
+			if (!dateInput) return 0;
+
+			let timestamp = Date.parse(dateInput);
+
+			// Fallback string split operation for strict "DD-MM-YYYY" formats
+			if (isNaN(timestamp)) {
+				const str = String(dateInput).trim();
+				const parts = str.split(/[-/]/);
+				if (parts.length === 3) {
+					if (parts[0].length <= 2 && parts[2].length === 4) {
+						const day = parseInt(parts[0], 10);
+						const month = parseInt(parts[1], 10) - 1;
+						const year = parseInt(parts[2], 10);
+						return new Date(year, month, day).getTime();
+					}
+				}
+			}
+			return isNaN(timestamp) ? 0 : timestamp;
+		}
+
 		// AUTOMATIC MILESTONE & FLEXIBLE GST METHOD MATHEMATICS
 		function calculateMilestoneAmount() {
 			const totalProjectVal = parseFloat(document.getElementById('projectValue').value) || 0;
 			const selectedPercent = parseFloat(document.getElementById('billPercentage').value) || 0;
 			const customGstPercent = parseFloat(document.getElementById('gstPercentageField').value) || 0;
 
-			// Compute base value dynamically
 			const calculatedBase = (totalProjectVal * selectedPercent) / 100;
 			document.getElementById('amount').value = calculatedBase.toFixed(2);
 
-			// Compute dynamic GST based on flexible user input rate
 			const gst = calculatedBase * (customGstPercent / 100);
 			document.getElementById('gstAmt').value = gst.toFixed(2);
 			document.getElementById('totalAmount').value = (calculatedBase + gst).toFixed(2);
@@ -247,43 +267,12 @@
 			document.body.appendChild(script);
 		}
 
-		// Replace your existing handleScriptResponse with this:
 		function handleScriptResponse(responseDataset) {
 			document.getElementById('syncSpinner').classList.add('d-none');
 			document.getElementById('filterBtnSpinner').classList.add('d-none');
 
-			// Fallback to empty array if nothing comes back
 			allInvoices = responseDataset || [];
-
-			// Machi: Explicitly sorting by Invoice Date (Latest Date First)
-			allInvoices.sort((a, b) => {
-				const dateA = a.invoiceDate ? new Date(a.invoiceDate).getTime() : 0;
-				const dateB = b.invoiceDate ? new Date(b.invoiceDate).getTime() : 0;
-				return dateB - dateA; // Change to 'dateA - dateB' if you want oldest first
-			});
-
 			executeFilterLogicOnly();
-		}
-
-		// Replace your existing executeFilterLogicOnly with this to maintain date priority during searches:
-		function executeFilterLogicOnly() {
-			const searchText = document.getElementById('textSearch').value.toLowerCase().trim();
-			const fromDateStr = document.getElementById('fromDate').value;
-			const toDateStr = document.getElementById('toDate').value;
-
-			filteredInvoices = allInvoices.filter(item => {
-				const matchText = item.invoiceNo.toLowerCase().includes(searchText) || item.receivedFrom.toLowerCase().includes(searchText);
-				let matchDate = true;
-				if (item.invoiceDate) {
-					const itemDate = new Date(item.invoiceDate).setHours(0, 0, 0, 0);
-					if (fromDateStr) { if (itemDate < new Date(fromDateStr).setHours(0, 0, 0, 0)) matchDate = false; }
-					if (toDateStr) { if (itemDate > new Date(toDateStr).setHours(0, 0, 0, 0)) matchDate = false; }
-				}
-				return matchText && matchDate;
-			});
-
-			// Double-checking order stability for the table render step
-			renderPaginatedTable();
 		}
 
 		function executeFilterWorkflow() {
@@ -300,16 +289,24 @@
 			const fromDateStr = document.getElementById('fromDate').value;
 			const toDateStr = document.getElementById('toDate').value;
 
-			filteredInvoices = allInvoices.filter(item => {
+			// 1. Filter out text matching and manual dates first
+			let result = allInvoices.filter(item => {
 				const matchText = item.invoiceNo.toLowerCase().includes(searchText) || item.receivedFrom.toLowerCase().includes(searchText);
 				let matchDate = true;
 				if (item.invoiceDate) {
-					const itemDate = new Date(item.invoiceDate).setHours(0, 0, 0, 0);
-					if (fromDateStr) { if (itemDate < new Date(fromDateStr).setHours(0, 0, 0, 0)) matchDate = false; }
-					if (toDateStr) { if (itemDate > new Date(toDateStr).setHours(0, 0, 0, 0)) matchDate = false; }
+					const itemTime = parseInvoiceDateToMs(item.invoiceDate);
+					if (fromDateStr) { if (itemTime < new Date(fromDateStr).setHours(0, 0, 0, 0)) matchDate = false; }
+					if (toDateStr) { if (itemTime > new Date(toDateStr).setHours(23, 59, 59, 999)) matchDate = false; }
 				}
 				return matchText && matchDate;
 			});
+
+			// 2. Machi: Sort strictly by Date (Latest Invoices right at the top)
+			result.sort((a, b) => {
+				return parseInvoiceDateToMs(b.invoiceDate) - parseInvoiceDateToMs(a.invoiceDate);
+			});
+
+			filteredInvoices = result;
 			renderPaginatedTable();
 		}
 
@@ -335,7 +332,7 @@
 
 				let fInvDate = "-";
 				if (item.invoiceDate) {
-					fInvDate = new Date(item.invoiceDate).toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+					fInvDate = new Date(parseInvoiceDateToMs(item.invoiceDate)).toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
 				}
 
 				const diffValue = parseFloat(item.variance || 0);
@@ -349,59 +346,59 @@
 					updateSection = `<span class="text-danger fw-bold no-strike">🚫 CANCELLED PROFILE</span>`;
 				} else if (item.amountReceivedDate && diffValue <= 0) {
 					updateSection = `
-							<div class="small">
-								<b class="text-success">✔ Cleared:</b> ₹${parseFloat(item.receivedAmount).toFixed(2)}<br>
-								<b class="text-secondary">TDS Ded (2%):</b> ₹${parseFloat(item.tdsAmount).toFixed(2)}<br>
-								<small class="text-muted">On: ${new Date(item.amountReceivedDate).toLocaleDateString('en-IN')}</small>
-							</div>`;
+								<div class="small">
+									<b class="text-success">✔ Cleared:</b> ₹${parseFloat(item.receivedAmount).toFixed(2)}<br>
+									<b class="text-secondary">TDS Ded (2%):</b> ₹${parseFloat(item.tdsAmount).toFixed(2)}<br>
+									<small class="text-muted">On: ${new Date(item.amountReceivedDate).toLocaleDateString('en-IN')}</small>
+								</div>`;
 				} else {
 					updateSection = `
-							<div class="p-2 border rounded bg-white shadow-sm no-strike">
-								<div class="mb-1">
-									<input type="date" id="col-date-${item.invoiceNo}" class="form-control form-control-sm" style="font-size:0.8rem;">
-								</div>
-								<div class="input-group input-group-sm mb-1">
-									<input type="number" id="col-rec-${item.invoiceNo}" class="form-control" placeholder="Recamt" style="font-size:0.8rem;" oninput="runAutoTdsCalculation('${item.invoiceNo}', ${item.totalAmount})">
-									<input type="number" id="col-tds-${item.invoiceNo}" class="form-control" placeholder="TDS (2%)" style="font-size:0.8rem;">
-								</div>
-								<button class="btn btn-primary btn-sm w-100 fw-bold py-1" style="font-size:0.75rem;" onclick="saveCollectionEntry('${item.invoiceNo}', ${item.totalAmount})">Update Payment</button>
-							</div>`;
+								<div class="p-2 border rounded bg-white shadow-sm no-strike">
+									<div class="mb-1">
+										<input type="date" id="col-date-${item.invoiceNo}" class="form-control form-control-sm" style="font-size:0.8rem;">
+									</div>
+									<div class="input-group input-group-sm mb-1">
+										<input type="number" id="col-rec-${item.invoiceNo}" class="form-control" placeholder="Recamt" style="font-size:0.8rem;" oninput="runAutoTdsCalculation('${item.invoiceNo}', ${item.totalAmount})">
+										<input type="number" id="col-tds-${item.invoiceNo}" class="form-control" placeholder="TDS (2%)" style="font-size:0.8rem;">
+									</div>
+									<button class="btn btn-primary btn-sm w-100 fw-bold py-1" style="font-size:0.75rem;" onclick="saveCollectionEntry('${item.invoiceNo}', ${item.totalAmount})">Update Payment</button>
+								</div>`;
 				}
 
 				let actionControls = "";
 				if (isCancelled) {
 					actionControls = `
-							<div class="no-strike d-flex flex-column gap-1">
-								<button class="btn btn-xs btn-warning btn-sm fw-bold px-2 py-0" onclick="alterInvoiceState('${item.invoiceNo}', 'Active')">🔄 Re-Activate</button>
-								<button class="btn btn-xs btn-danger btn-sm fw-bold px-2 py-0" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete</button>
-							</div>`;
+								<div class="no-strike d-flex flex-column gap-1">
+									<button class="btn btn-xs btn-warning btn-sm fw-bold px-2 py-0" onclick="alterInvoiceState('${item.invoiceNo}', 'Active')">🔄 Re-Activate</button>
+									<button class="btn btn-xs btn-danger btn-sm fw-bold px-2 py-0" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete</button>
+								</div>`;
 				} else {
 					actionControls = `
-							<div class="no-strike d-flex flex-column gap-1">
-								<div class="d-flex gap-1">
-									<button class="btn btn-xs btn-outline-secondary btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="enterEditMode('${item.invoiceNo}')">✏ Edit</button>
-									<button class="btn btn-xs btn-outline-danger btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="alterInvoiceState('${item.invoiceNo}', 'Cancelled')">🚫 Cancel</button>
-								</div>
-								<button class="btn btn-xs btn-danger btn-sm fw-bold py-0" style="font-size:0.75rem;" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete Row</button>
-							</div>`;
+								<div class="no-strike d-flex flex-column gap-1">
+									<div class="d-flex gap-1">
+										<button class="btn btn-xs btn-outline-secondary btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="enterEditMode('${item.invoiceNo}')">✏ Edit</button>
+										<button class="btn btn-xs btn-outline-danger btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="alterInvoiceState('${item.invoiceNo}', 'Cancelled')">🚫 Cancel</button>
+									</div>
+									<button class="btn btn-xs btn-danger btn-sm fw-bold py-0" style="font-size:0.75rem;" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete Row</button>
+								</div>`;
 				}
 
 				const row = `<tr class="${rowClass}">
-						<td>
-							<b class="text-primary">${item.invoiceNo}</b><br>
-							<small class="text-muted">Date: ${fInvDate}</small>
-						</td>
-						<td>
-							<b>${item.receivedFrom}</b><br>
-							<small class="text-secondary">Value: ₹${parseFloat(item.projectValue).toLocaleString('en-IN')} (${item.billPercentage})</small>
-						</td>
-						<td>₹${parseFloat(item.amount).toFixed(2)}</td>
-						<td>₹${parseFloat(item.gstAmt).toFixed(2)}</td>
-						<td class="fw-bold text-dark">₹${parseFloat(item.totalAmount).toFixed(2)}</td>
-						<td class="table-info align-top">${updateSection}</td>
-						<td>${diffBadging}</td>
-						<td class="text-center align-middle">${actionControls}</td>
-					</tr>`;
+							<td>
+								<b class="text-primary">${item.invoiceNo}</b><br>
+								<small class="text-muted">Date: ${fInvDate}</small>
+							</td>
+							<td>
+								<b>${item.receivedFrom}</b><br>
+								<small class="text-secondary">Value: ₹${parseFloat(item.projectValue).toLocaleString('en-IN')} (${item.billPercentage})</small>
+							</td>
+							<td>₹${parseFloat(item.amount).toFixed(2)}</td>
+							<td>₹${parseFloat(item.gstAmt).toFixed(2)}</td>
+							<td class="fw-bold text-dark">₹${parseFloat(item.totalAmount).toFixed(2)}</td>
+							<td class="table-info align-top">${updateSection}</td>
+							<td>${diffBadging}</td>
+							<td class="text-center align-middle">${actionControls}</td>
+						</tr>`;
 				tbody.insertAdjacentHTML('beforeend', row);
 			});
 
@@ -455,7 +452,7 @@
 			document.getElementById('invoiceNo').readOnly = true;
 
 			if (target.invoiceDate) {
-				document.getElementById('invoiceDate').value = new Date(target.invoiceDate).toISOString().split('T')[0];
+				document.getElementById('invoiceDate').value = new Date(parseInvoiceDateToMs(target.invoiceDate)).toISOString().split('T')[0];
 			}
 			document.getElementById('receivedFrom').value = target.receivedFrom;
 			document.getElementById('projectValue').value = target.projectValue;
@@ -479,7 +476,7 @@
 			document.getElementById('editModeFlag').value = "false";
 			document.getElementById('cancelEditBtn').classList.add('d-none');
 			document.getElementById('billPercentage').value = "25";
-			document.getElementById('gstPercentageField').value = "18"; // Back to standard 18% default
+			document.getElementById('gstPercentageField').value = "18";
 			calculateMilestoneAmount();
 		}
 
@@ -533,6 +530,7 @@
 			executeFilterLogicOnly();
 		}
 
+		// Keeps export array perfectly matched with current table display layout order
 		function exportToExcel() {
 			if (filteredInvoices.length === 0) return;
 			let csvContent = "data:text/csv;charset=utf-8,Invoice Date,Invoice No,Client Name,Project Value,Bill Percent,Base Amount,GST Amount,Total Bill,Received Date,Received Amount,TDS Amount,Variance Balance,Status\n";
