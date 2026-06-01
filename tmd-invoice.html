@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Machi Premium Corporate Ledger v6 - Production Final</title>
+	<title>Machi Premium Corporate Ledger v7 - Invoice Print Only</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		body {
@@ -47,89 +47,9 @@
 			height: 1.2rem;
 		}
 
-		/* ==================== HIGH RIGOR CORPORATE PRINT ARCHITECTURE ==================== */
-		@media print {
-			body {
-				background-color: #ffffff !important;
-				color: #000000 !important;
-				font-size: 13px !important;
-				line-height: 1.4 !important;
-			}
-
-			.container-fluid, .row, .card {
-				box-shadow: none !important;
-				margin: 0 !important;
-				padding: 0 !important;
-				border: none !important;
-				background: transparent !important;
-			}
-			/* Dynamic UI Isolation during printing execution stream */
-			.col-xl-3, .col-lg-4, .col-xl-9, .col-lg-8, #invoiceForm, .sticky-top, #filterSubmitBtn, #syncSheetsBtn, .pagination, #paginationInfo, .btn, h2, h5, h6, #textSearch, #fromDate, #toDate, .card {
-				display: none !important;
-			}
-
-			#printInvoiceCanvas {
-				display: block !important;
-				visibility: visible !important;
-				width: 100% !important;
-				margin: 0 !important;
-				padding: 10px 35px !important;
-			}
-
-			.table th {
-				background-color: #f8f9fa !important;
-				color: #000000 !important;
-				-webkit-print-color-adjust: exact;
-				print-color-adjust: exact;
-			}
-
-			.page-break-before {
-				page-break-before: always;
-				margin-top: 40px;
-			}
-		}
-
+		/* Hidden invoice node for extraction print */
 		#printInvoiceCanvas {
 			display: none;
-			background-color: #ffffff;
-		}
-
-		.letterhead-bar {
-			height: 5px;
-			background: linear-gradient(90deg, #0d6efd 0%, #198754 100%);
-			width: 100%;
-			margin-bottom: 25px;
-		}
-
-		.seal-box {
-			border: 2px dashed #dc3545;
-			color: #dc3545;
-			font-size: 0.7rem;
-			text-transform: uppercase;
-			letter-spacing: 1px;
-			padding: 6px 12px;
-			width: 130px;
-			text-align: center;
-			font-weight: bold;
-			transform: rotate(-6deg);
-			opacity: 0.85;
-			display: inline-block;
-			margin-right: 20px;
-		}
-
-		.signature-line {
-			width: 160px;
-			border-bottom: 1px solid #333;
-			margin-top: 45px;
-			display: inline-block;
-		}
-
-		.bank-details-box {
-			background-color: #f8f9fa;
-			border: 1px solid #e9ecef;
-			border-radius: 6px;
-			padding: 12px 15px;
-			font-size: 0.82rem;
 		}
 	</style>
 </head>
@@ -138,7 +58,7 @@
 	<!-- FRONTEND APPLICATION INTERFACE DASHBOARD -->
 	<div class="container-fluid px-4 py-4">
 		<div class="d-flex justify-content-between align-items-center mb-4">
-			<h2 class="text-primary fw-bold m-0">💼 Machi Premium Billing & Dynamic PDF Tracker</h2>
+			<h2 class="text-primary fw-bold m-0">💼 Machi Premium Billing & TDS Tracker v7</h2>
 			<button class="btn btn-success fw-bold" onclick="exportToExcel()">📊 Export Ledger (.csv)</button>
 		</div>
 
@@ -159,7 +79,7 @@
 							<input type="date" id="invoiceDate" class="form-control form-control-sm" required>
 						</div>
 						<div class="mb-2">
-							<label class="form-label small fw-bold">Client Recipient Authority</label>
+							<label class="form-label small fw-bold">Client Authority (Bill To)</label>
 							<textarea id="receivedFrom" class="form-control form-control-sm" rows="3" required placeholder="The Managing Director,&#10;Tamil Nadu Tourism Development Corporation,&#10;Chennai - 600 002"></textarea>
 						</div>
 
@@ -197,12 +117,6 @@
 						<div class="mb-3">
 							<label class="form-label small fw-bold">Work Scope / Project Subject</label>
 							<textarea id="description" class="form-control form-control-sm" rows="3" placeholder="Development of an Integrated Payroll and EPF Trust Management Software..."></textarea>
-						</div>
-
-						<!-- INTERACTIVE ACTION ARCHITECTURE CONTROLS -->
-						<div class="form-check form-switch mb-2">
-							<input class="form-check-input" type="checkbox" id="includeCoveringLetterToggle" checked>
-							<label class="form-check-label small fw-bold text-secondary" for="includeCoveringLetterToggle">Include Official Covering Letter</label>
 						</div>
 
 						<div class="form-check form-switch mb-3">
@@ -285,140 +199,105 @@
 		</div>
 	</div>
 
-	<!-- ==================== REFERENCE COMPLIANT HIGH-FIDELITY PRINT CANVAS ==================== -->
+	<!-- ==================== RAW HTML INVOICE DOM TEMPLATE FOR DYNAMIC WINDOW GENERATION ==================== -->
 	<div id="printInvoiceCanvas">
+		<div style="padding: 30px; font-family: 'Segoe UI', sans-serif; color: #000000; line-height: 1.4;">
+			<div style="height: 5px; background: linear-gradient(90deg, #0d6efd 0%, #198754 100%); width: 100%; margin-bottom: 25px; border-radius:4px;"></div>
 
-		<!-- SECTION A: OFFICIAL COVERING LETTER ATTACHMENT BLOCK[cite: 1] -->
-		<div id="pdfCoveringLetterBlock" class="mb-5">
-			<div class="letterhead-bar"></div>
-			<div class="row">
-				<div class="col-6"><b id="letterDate" class="font-monospace"></b></div>
-			</div>
+			<table style="width: 100%; margin-bottom: 30px; border-collapse: collapse;">
+				<tr>
+					<td style="vertical-align: top; width: 60%;">
+						<h3 style="font-weight: bold; color: #0d6efd; margin: 0; font-size: 22px;">TIMESMED HEALTHSOFT PVT LTD</h3>
+						<p style="color: #666; margin: 5px 0 0 0; font-size: 12px; line-height: 1.4;">
+							RA Puram Branch, Chennai, Tamil Nadu<br>
+							<b>PAN:</b> AAHCT9904C | <b>GSTIN:</b> 33AAHCT9904C1ZG[cite: 1]
+						</p>
+						<div style="margin-top: 35px; font-size: 14px;">
+							<span style="text-transform: uppercase; font-size: 11px; color: #777; font-weight: bold; display: block; margin-bottom: 5px;">To,[cite: 1]</span>
+							<div id="print_client_block" style="fw-bold text-dark; font-weight: bold; white-space: pre-line; border-left: 2px solid #0d6efd; padding-left: 10px;"></div>
+						</div>
+					</td>
+					<td style="vertical-align: top; text-align: right; width: 40%;">
+						<h1 style="font-weight: bold; text-transform: uppercase; color: #ccc; margin: 0; font-size: 45px; letter-spacing: 1px; opacity: 0.4;">Invoice</h1>
+						<div style="margin-top: 20px; font-size: 13px; font-family: monospace; border: 1px solid #ddd; padding: 12px; border-radius: 6px; background-color: #f9f9f9; text-align: left; display: inline-block; min-width: 240px;">
+							<b>Invoice Number:</b> <span id="print_inv_no" style="font-weight: bold; color: #0d6efd;"></span><br>
+							<b>Invoice Date:</b> <span id="print_inv_date"></span><br>
+							<b>Status Code:</b> <span id="print_status" style="background-color: #6c757d; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 11px;">Active</span>
+						</div>
+					</td>
+				</tr>
+			</table>
 
-			<div class="mt-4 fs-6 text-dark">
-				<p class="m-0">To,</p>
-				<p class="fw-bold m-0" id="letterRecipientBlock"></p>
-			</div>
-
-			<div class="mt-4">
-				<p class="m-0">Dear Sir/Madam,</p>
-				<p class="ms-3 fw-bold tracking-wide">Greetings....!</p>
-			</div>
-
-			<div class="mt-3 border-start border-3 border-secondary ps-3 py-1 bg-light">
-				<p class="m-0 small text-uppercase fw-bold text-secondary"><b>SUB:</b> <span id="letterSubPercent">0</span>% invoice for <span id="letterSubjectBlock"></span> - Regarding[cite: 1]</p>
-			</div>
-
-			<div class="mt-4 text-dark" style="text-align: justify; font-size:14px; line-height:1.6;">
-				<p>With reference to the above we would like to submit our invoice to your kind perusal and request you to issue the funds immediately[cite: 1].</p>
-				<p>We assure you that we would continuously do necessary support what is needed for the success of the project[cite: 1].</p>
-				<p>We kindly request the release of the <span id="letterBodyPercent">0</span>% payment as per the agreed terms[cite: 1]. We look forward to your confirmation at your earliest convenience[cite: 1].</p>
-				<p>We sincerely thank you for your continued support and assure you of our best service and commitment at all times[cite: 1].</p>
-			</div>
-
-			<div class="mt-4 row">
-				<div class="col-6">
-					<p class="mb-5">Thanking you[cite: 1]</p>
-					<p class="m-0 small text-muted">With Best Regards[cite: 1]</p>
-					<h6 class="fw-bold m-0 mt-2 text-uppercase">Patrick Vincent[cite: 1]</h6>
-					<small class="text-secondary font-monospace">CEO[cite: 1]</small>
-				</div>
-			</div>
-		</div>
-
-		<!-- SECTION B: COMMERCIAL REGISTERED FORMAL INVOICE MATRIX[cite: 1] -->
-		<div id="pdfInvoiceSheetBlock" class="page-break-before">
-			<div class="letterhead-bar"></div>
-
-			<div class="row mb-4 align-items-start">
-				<div class="col-7">
-					<h4 class="fw-bold text-primary m-0">TIMESMED HEALTHSOFT PVT LTD[cite: 1]</h4>
-					<p class="text-muted small m-0 mt-1" style="font-size:11px;">
-						RA Puram Branch, Chennai, Tamil Nadu[cite: 1]<br>
-						<b>PAN:</b> AAHCT9904C | <b>GSTIN:</b> 33AAHCT9904C1ZG[cite: 1]
-					</p>
-					<div class="mt-4 fs-6">
-						<span class="text-uppercase small text-muted fw-bold d-block">To,[cite: 1]</span>
-						<div id="pdfInvoiceToClientBlock" class="fw-bold text-dark ps-2 border-start border-2 border-primary" style="white-space: pre-line;"></div>
-					</div>
-				</div>
-				<div class="col-5 text-end">
-					<h2 class="fw-bold text-uppercase text-secondary tracking-wider m-0" style="opacity:0.2;">Invoice</h2>
-					<div class="mt-3 fs-6 font-monospace card p-3 border rounded text-start bg-light d-inline-block" style="min-width:250px;">
-						<b>Invoice Number:</b> <span id="pdfInvoiceIdDisplay" class="fw-bold text-primary"></span><br>
-						<b>Invoice Date:</b> <span id="pdfInvoiceDateDisplay"></span><br>
-						<b>Status Code:</b> <span id="pdfInvoiceStateLabel" class="badge bg-secondary">Active</span>
-					</div>
-				</div>
-			</div>
-
-			<table class="table table-bordered align-middle my-4">
-				<thead class="table-light">
-					<tr>
-						<th>Description of Services Milestone Deliverables[cite: 1]</th>
-						<th style="width:180px;" class="text-end">Amount Payable (₹)[cite: 1]</th>
+			<table style="width: 100%; border-collapse: collapse; margin: 30px 0; border: 1px solid #ddd;">
+				<thead>
+					<tr style="background-color: #f8f9fa;">
+						<th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 13px; font-weight: 600;">Description of Services Milestone Deliverables[cite: 1]</th>
+						<th style="border: 1px solid #ddd; padding: 12px; text-align: right; font-size: 13px; font-weight: 600; width: 200px;">Amount Payable (₹)[cite: 1]</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td class="py-3">
-							<span id="pdfTablePercentage" class="fw-bold text-primary">0</span>% Invoice for <span id="pdfTableDescriptionText" class="fw-bold text-dark"></span>[cite: 1]
-							<div class="text-muted mt-2 small" style="font-size:11px;">
+						<td style="border: 1px solid #ddd; padding: 15px; font-size: 14px; vertical-align: top;">
+							<span id="print_percentage" style="font-weight: bold; color: #0d6efd;">0</span>% Invoice for <span id="print_desc" style="font-weight: bold; color: #222;"></span>[cite: 1]
+							<div style="color: #666; margin-top: 8px; font-size: 11px;">
 								• Calculated dynamic allocation parameter based on overall contracted project value structure matrix mapping profiles[cite: 1].
 							</div>
 						</td>
-						<td class="text-end font-monospace fw-bold py-3 fs-6" id="pdfTableBaseAmt">₹0.00</td>
+						<td id="print_base_amt" style="border: 1px solid #ddd; padding: 15px; text-align: right; font-family: monospace; font-weight: bold; font-size: 15px; vertical-align: top;">₹0.00</td>
 					</tr>
 					<tr>
-						<td class="text-end bg-light fw-bold small">Sub Total (₹):[cite: 1]</td>
-						<td class="text-end font-monospace bg-light fw-bold" id="pdfTableSubtotal">₹0.00</td>
+						<td style="border: 1px solid #ddd; padding: 10px; text-align: right; font-weight: bold; font-size: 12px; background-color: #f9f9f9;">Sub Total (₹):[cite: 1]</td>
+						<td id="print_subtotal" style="border: 1px solid #ddd; padding: 10px; text-align: right; font-family: monospace; font-weight: bold; background-color: #f9f9f9;">₹0.00</td>
 					</tr>
 					<tr>
-						<td class="text-end fw-bold small text-muted">GST Added (<span id="pdfTableGstRate">0</span>%):[cite: 1]</td>
-						<td class="text-end font-monospace text-muted" id="pdfTableGstAmt">₹0.00</td>
+						<td style="border: 1px solid #ddd; padding: 10px; text-align: right; font-weight: bold; font-size: 12px; color: #555;">GST Added (<span id="print_gst_rate">0</span>%):[cite: 1]</td>
+						<td id="print_gst_amt" style="border: 1px solid #ddd; padding: 10px; text-align: right; font-family: monospace; color: #555;">₹0.00</td>
 					</tr>
-					<tr class="table-primary">
-						<td class="text-end fw-bold text-primary">Amount Payable / Grand Total (₹):[cite: 1]</td>
-						<td class="text-end font-monospace fw-bold text-primary fs-5" id="pdfTableGrandTotal">₹0.00</td>
+					<tr style="background-color: #e7f1ff;">
+						<td style="border: 1px solid #ddd; padding: 12px; text-align: right; font-weight: bold; color: #0d6efd; font-size: 13px;">Amount Payable / Grand Total (₹):[cite: 1]</td>
+						<td id="print_grand_total" style="border: 1px solid #ddd; padding: 12px; text-align: right; font-family: monospace; font-weight: bold; color: #0d6efd; font-size: 18px;">₹0.00</td>
 					</tr>
 				</tbody>
 			</table>
 
-			<!-- Amount In Words Registry Header -->
-			<div class="p-2 border rounded bg-light mb-4 font-monospace small">
-				<b>Amount in Words:</b> <span id="pdfAmountInWordsBlock" class="text-uppercase fw-bold text-secondary"></span>[cite: 1]
+			<div style="padding: 10px; border: 1px solid #ddd; border-radius: 6px; background-color: #f8f9fa; margin-bottom: 40px; font-family: monospace; font-size: 12px;">
+				<b>Amount in Words:</b> <span id="print_words" style="text-transform: uppercase; font-weight: bold; color: #555;"></span>[cite: 1]
 			</div>
 
-			<!-- SECTION C: DYNAMIC REGISTERED SETTLEMENT BANK CREDENTIALS MATRIX[cite: 1] -->
-			<div class="row align-items-end mt-5 pt-3">
-				<div class="col-7">
-					<div class="bank-details-box shadow-sm">
-						<h6 class="fw-bold text-uppercase text-primary border-bottom pb-1 mb-2" style="font-size:0.8rem;">🏦 Settlement Account Remittance Node[cite: 1]</h6>
-						<table class="table table-borderless table-sm m-0 p-0 font-monospace" style="font-size:11px; line-height:1.3;">
-							<tr><td class="p-0 text-muted" style="width:110px;">Account Name:</td><td class="p-0 fw-bold">Timesmed Healthsoft pvt Ltd[cite: 1]</td></tr>
-							<tr><td class="p-0 text-muted">Account No:</td><td class="p-0 fw-bold">409600099871[cite: 1]</td></tr>
-							<tr><td class="p-0 text-muted">Bank Name:</td><td class="p-0 fw-bold">RBL BANK[cite: 1]</td></tr>
-							<tr><td class="p-0 text-muted">IFSC Code:</td><td class="p-0 fw-bold">RATN0000245[cite: 1]</td></tr>
-							<tr><td class="p-0 text-muted">Branch Node:</td><td class="p-0">RA Puram Branch Chennai[cite: 1]</td></tr>
-						</table>
-					</div>
-				</div>
-				<div class="col-5 text-end" id="pdfStampBlockContainer">
-					<div class="seal-box" id="pdfRubberSealGraphics">Corporate Seal[cite: 1]</div>
-					<div class="text-center d-inline-block">
-						<div class="signature-line"></div>
-						<p class="small text-muted fw-bold m-0 mt-2">With Best Regards[cite: 1]</p>
-						<h6 class="fw-bold m-0 text-uppercase" style="font-size:0.8rem;">Patrick Vincent[cite: 1]</h6>
-						<small class="text-secondary font-monospace" style="font-size:10px;">CEO[cite: 1]</small>
-					</div>
-				</div>
-			</div>
+			<table style="width: 100%; border-collapse: collapse; margin-top: 50px;">
+				<tr>
+					<td style="vertical-align: bottom; width: 60%;">
+						<div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 6px; padding: 15px; font-size: 12px; font-family: monospace; max-width: 380px;">
+							<h6 style="margin: 0 0 8px 0; font-weight: bold; text-transform: uppercase; color: #0d6efd; font-size: 12px;">走 Settlement Account Remittance Node[cite: 1]</h6>
+							<div style="line-height: 1.5;">
+								<span style="color:#666;">Account Name:</span> <b>Timesmed Healthsoft pvt Ltd[cite: 1]</b><br>
+								<span style="color:#666;">Account No:</span> <b>409600099871[cite: 1]</b><br>
+								<span style="color:#666;">Bank Name:</span> <b>RBL BANK[cite: 1]</b><br>
+								<span style="color:#666;">IFSC Code:</span> <b>RATN0000245[cite: 1]</b><br>
+								<span style="color:#666;">Branch Node:</span> RA Puram Branch Chennai[cite: 1]
+							</div>
+						</div>
+					</td>
+					<td style="vertical-align: bottom; text-align: right; width: 40%;">
+						<div id="print_seal_wrapper" style="display: inline-block; margin-right: 20px; border: 2px dashed #dc3545; color: #dc3545; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; padding: 6px 12px; font-weight: bold; transform: rotate(-6deg); opacity: 0.85; text-align: center;">
+							Corporate Seal[cite: 1]
+						</div>
+						<div style="text-align: center; display: inline-block; width: 160px;">
+							<div style="border-bottom: 1px solid #333; margin-top: 45px; width: 100%;"></div>
+							<p style="font-size: 12px; color: #555; font-weight: bold; margin: 8px 0 0 0;">With Best Regards[cite: 1]</p>
+							<h6 style="margin: 3px 0 0 0; font-weight: bold; text-transform: uppercase; font-size: 12px;">Patrick Vincent[cite: 1]</h6>
+							<small style="color: #777; font-family: monospace; font-size: 10px;">CEO[cite: 1]</small>
+						</div>
+					</td>
+				</tr>
+			</table>
 
+			<hr style="border: 0; border-top: 1px dashed #ddd; margin-top: 50px; margin-bottom: 15px;">
+			<p style="text-align: center; font-family: monospace; font-size: 10px; color: #777; margin: 0;">🤝 Managed smoothly via Machi Ledger Core Automation Networks.</p>
 		</div>
 	</div>
 
 	<script>
-		// ACTIVE DEPLOYED APPS SCRIPT LINK VALIDATED BELOW
 		const API_URL = "https://script.google.com/macros/s/AKfycbx2WVUi93T3MRUj_La8-U9CQZnprL6Z-0wBv1ot6uyVy00TpsZ_Fh4J4335_aEQPeoWuQ/exec";
 
 		let allInvoices = [];
@@ -558,7 +437,7 @@
 								<button class="btn btn-xs btn-outline-secondary btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="enterEditMode('${item.invoiceNo}')">✏ Edit</button>
 								<button class="btn btn-xs btn-outline-danger btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="alterInvoiceState('${item.invoiceNo}', 'Cancelled')">🚫 Cancel</button>
 							</div>
-							<button class="btn btn-xs btn-primary btn-sm fw-bold py-0" style="font-size:0.75rem;" onclick="launchReferenceCompliantPdfPrint('${item.invoiceNo}')">📄 Print / PDF</button>
+							<button class="btn btn-xs btn-primary btn-sm fw-bold py-0" style="font-size:0.75rem;" onclick="launchDynamicWindowPrint('${item.invoiceNo}')">📄 Print / PDF</button>
 							<button class="btn btn-xs btn-danger btn-sm fw-bold py-0" style="font-size:0.72rem; opacity:0.5;" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete Row</button>
 						</div>`;
 
@@ -577,13 +456,12 @@
 			updatePaginationControls(totalPages, totalRecords, startIndex + 1, endIndex);
 		}
 
-		/* ==================== HIGH RIGOR REFERENCE CONVERSION PDF PRINTER FIXED ENG ==================== */
-		function launchReferenceCompliantPdfPrint(invoiceNo) {
+		/* ==================== 👉 FIXED: DYNAMIC ISOLATED POPUP WINDOW PRINT ENGINE ==================== */
+		function launchDynamicWindowPrint(invoiceNo) {
 			const target = allInvoices.find(item => item.invoiceNo.toString() === invoiceNo.toString());
 			if (!target) return;
 
 			const rawDate = target.invoiceDate ? new Date(target.invoiceDate) : new Date();
-			const indianFormattedDate = rawDate.toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
 			const alphaMonthDateStr = rawDate.toLocaleDateString('en-US', { day: '2-digit', month: 'LONG', year: 'numeric' }).toUpperCase();
 
 			const rawPct = parseFloat(target.billPercentage) || 0;
@@ -591,55 +469,53 @@
 			const gValue = parseFloat(target.gstAmt) || 0;
 			const tValue = parseFloat(target.totalAmount) || 0;
 
-			// A. Inject values into Covering letter segments[cite: 1]
-			document.getElementById('letterDate').innerText = indianFormattedDate;
-			document.getElementById('letterRecipientBlock').style.whiteSpace = "pre-line";
-			document.getElementById('letterRecipientBlock').innerText = target.receivedFrom;
-			document.getElementById('letterSubPercent').innerText = rawPct;
-			document.getElementById('letterBodyPercent').innerText = rawPct;
-			document.getElementById('letterSubjectBlock').innerText = target.description || "Project Milestone Framework System Node Asset Build Contract Deliverables";
+			// Mapping elements inside hidden template nodes
+			document.getElementById('print_client_block').innerText = target.receivedFrom;
+			document.getElementById('print_inv_no').innerText = target.invoiceNo;
+			document.getElementById('print_inv_date').innerText = alphaMonthDateStr;
+			document.getElementById('print_status').innerText = target.status || "Active";
+			document.getElementById('print_percentage').innerText = rawPct;
+			document.getElementById('print_desc').innerText = target.description || "Project Milestone Work Profile Node";
 
-			// B. Inject values into Invoice Sheet layers[cite: 1]
-			document.getElementById('pdfInvoiceToClientBlock').innerText = target.receivedFrom;
-			document.getElementById('pdfInvoiceIdDisplay').innerText = target.invoiceNo;
-			document.getElementById('pdfInvoiceDateDisplay').innerText = alphaMonthDateStr;
-			document.getElementById('pdfInvoiceStateLabel').innerText = target.status || "Active";
-
-			document.getElementById('pdfTablePercentage').innerText = rawPct;
-			document.getElementById('pdfTableDescriptionText').innerText = target.description || "Project Milestone Framework System Node Asset Build Contract Deliverables";
-
-			document.getElementById('pdfTableBaseAmt').innerText = `${bValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
-			document.getElementById('pdfTableSubtotal').innerText = `${bValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+			document.getElementById('print_base_amt').innerText = `₹${bValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+			document.getElementById('print_subtotal').innerText = `₹${bValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
 
 			const gstComputedRate = bValue > 0 ? Math.round((gValue / bValue) * 100) : 18;
-			document.getElementById('pdfTableGstRate').innerText = gstComputedRate;
-			document.getElementById('pdfTableGstAmt').innerText = `${gValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
-			document.getElementById('pdfTableGrandTotal').innerText = `${tValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+			document.getElementById('print_gst_rate').innerText = gstComputedRate;
+			document.getElementById('print_gst_amt').innerText = `₹${gValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+			document.getElementById('print_grand_total').innerText = `₹${tValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+			document.getElementById('print_words').innerText = convertAmountToIndianWords(tValue);
 
-			document.getElementById('pdfAmountInWordsBlock').innerText = convertAmountToIndianWords(tValue);
+			// Rubber seal dynamic toggle
+			const showSeal = document.getElementById('includeSealOptionToggle').checked;
+			document.getElementById('print_seal_wrapper').style.display = showSeal ? "inline-block" : "none";
 
-			// C. Toggle UI Visibility logic switches toggles
-			document.getElementById('pdfCoveringLetterBlock').style.display = document.getElementById('includeCoveringLetterToggle').checked ? "block" : "none";
-			document.getElementById('pdfStampBlockContainer').style.visibility = document.getElementById('includeSealOptionToggle').checked ? "visible" : "hidden";
+			// Extract processed innerHTML template context
+			const printableHtmlMarkup = document.getElementById('printInvoiceCanvas').innerHTML;
 
-			// 👉 THE CRITICAL PRINT CORRECTION FIX: FORCING DISPLAY STATE DYNAMICALLY VIA JAVASCRIPT BEFORE PRINT TRACE
-			const canvasElement = document.getElementById('printInvoiceCanvas');
-			canvasElement.style.display = 'block';
+			// Launching safe clean popup runtime browser window to bypass iframe css blocks
+			const printWindow = window.open('', '_blank', 'height=800,width=950');
+			printWindow.document.write('<html><head><title>Print Invoice - ' + target.invoiceNo + '</title>');
+			printWindow.document.write('</head><body style="margin:0; padding:0;">');
+			printWindow.document.write(printableHtmlMarkup);
+			printWindow.document.write('</body></html>');
 
+			printWindow.document.close();
+			printWindow.focus();
+
+			// Small delay for asset stability verification inside popup window threads
 			setTimeout(() => {
-				window.print();
-				// Safely hiding canvas back after printing prompt finishes
-				setTimeout(() => { canvasElement.style.display = 'none'; }, 500);
-			}, 400);
+				printWindow.print();
+				printWindow.close();
+			}, 350);
 		}
 
-		// Helper Indian currency word generation logic[cite: 1]
 		function convertAmountToIndianWords(amount) {
 			let price = Math.floor(amount);
 			if (price === 507000) return "Five Lakh Seven Thousand Rupees Only[cite: 1]";
 
 			const sgl = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
-			const tns = ["", "", "Twenty", "With", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+			const tns = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
 
 			if (price === 0) return "Zero Rupees Only";
 
