@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Machi Premium Corporate Ledger v7 - Invoice Print Only</title>
+	<title>Machi Premium Corporate Ledger v8 - Bulletproof Print</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		body {
@@ -47,159 +47,183 @@
 			height: 1.2rem;
 		}
 
-		/* Hidden invoice node for extraction print */
+		/* ==================== BULLETPROOF NO-CORS PRINT STYLE LAYER ==================== */
+		/* Screening out the interactive app blocks entirely when browser print routine fires */
+		@media print {
+			#appDashboardWorkspaceSection {
+				display: none !important;
+			}
+
+			#printInvoiceCanvas {
+				display: block !important;
+				visibility: visible !important;
+				width: 100% !important;
+				margin: 0 !important;
+				padding: 10px 20px !important;
+			}
+
+			body {
+				background-color: #ffffff !important;
+				color: #000000 !important;
+			}
+		}
+
+		/* Standard interface view settings */
 		#printInvoiceCanvas {
 			display: none;
+			background-color: #ffffff;
 		}
 	</style>
 </head>
 <body>
 
-	<!-- FRONTEND APPLICATION INTERFACE DASHBOARD -->
-	<div class="container-fluid px-4 py-4">
-		<div class="d-flex justify-content-between align-items-center mb-4">
-			<h2 class="text-primary fw-bold m-0">💼 Machi Premium Billing & TDS Tracker v7</h2>
-			<button class="btn btn-success fw-bold" onclick="exportToExcel()">📊 Export Ledger (.csv)</button>
-		</div>
-
-		<div class="row g-4">
-			<!-- CONTROL MATRIX PANEL FORM -->
-			<div class="col-xl-3 col-lg-4">
-				<div class="card p-4 sticky-top" style="top: 20px; z-index: 5;">
-					<h5 id="formPanelTitle" class="mb-3 text-secondary border-bottom pb-2">Generate Invoice</h5>
-					<form id="invoiceForm">
-						<input type="hidden" id="editModeFlag" value="false">
-
-						<div class="mb-2">
-							<label class="form-label small fw-bold">Invoice No</label>
-							<input type="text" id="invoiceNo" class="form-control form-control-sm" required placeholder="00110 APR2026">
-						</div>
-						<div class="mb-2">
-							<label class="form-label small fw-bold">Invoice Date</label>
-							<input type="date" id="invoiceDate" class="form-control form-control-sm" required>
-						</div>
-						<div class="mb-2">
-							<label class="form-label small fw-bold">Client Authority (Bill To)</label>
-							<textarea id="receivedFrom" class="form-control form-control-sm" rows="3" required placeholder="The Managing Director,&#10;Tamil Nadu Tourism Development Corporation,&#10;Chennai - 600 002"></textarea>
-						</div>
-
-						<div class="row g-2 mb-2">
-							<div class="col-7">
-								<label class="form-label small fw-bold text-dark">Total Project Val (₹)</label>
-								<input type="number" id="projectValue" class="form-control form-control-sm" required placeholder="1690000" oninput="calculateMilestoneAmount()">
-							</div>
-							<div class="col-5">
-								<label class="form-label small fw-bold text-dark">Bill % Value</label>
-								<input type="number" step="any" id="billPercentage" class="form-control form-control-sm" required placeholder="30" value="30" oninput="calculateMilestoneAmount()">
-							</div>
-						</div>
-
-						<div class="mb-2">
-							<label class="form-label small text-muted">Calculated Base Amount (₹)</label>
-							<input type="number" id="amount" class="form-control form-control-sm bg-light" readonly>
-						</div>
-
-						<div class="row mb-3 g-2">
-							<div class="col-4">
-								<label class="form-label small fw-bold text-dark">GST %</label>
-								<input type="number" step="any" id="gstPercentageField" class="form-control form-control-sm" required placeholder="18" value="18" oninput="calculateMilestoneAmount()">
-							</div>
-							<div class="col-4">
-								<label class="form-label small text-muted">GST Amt (₹)</label>
-								<input type="number" id="gstAmt" class="form-control form-control-sm bg-light" readonly>
-							</div>
-							<div class="col-4">
-								<label class="form-label small fw-bold text-success">Total Bill (₹)</label>
-								<input type="number" id="totalAmount" class="form-control form-control-sm bg-light fw-bold text-success" readonly>
-							</div>
-						</div>
-
-						<div class="mb-3">
-							<label class="form-label small fw-bold">Work Scope / Project Subject</label>
-							<textarea id="description" class="form-control form-control-sm" rows="3" placeholder="Development of an Integrated Payroll and EPF Trust Management Software..."></textarea>
-						</div>
-
-						<div class="form-check form-switch mb-3">
-							<input class="form-check-input" type="checkbox" id="includeSealOptionToggle" checked>
-							<label class="form-check-label small fw-bold text-secondary" for="includeSealOptionToggle">Include Rubber Stamp & Seal</label>
-						</div>
-
-						<div class="d-flex gap-2">
-							<button type="submit" id="mainSubmitBtn" class="btn btn-primary flex-grow-1 fw-bold">💾 Save Invoice</button>
-							<button type="button" id="cancelEditBtn" class="btn btn-secondary fw-bold d-none" onclick="exitEditMode()">Cancel</button>
-						</div>
-					</form>
-				</div>
+	<!-- 👉 WRAPPED INNER BODY SEGMENT A: APP DASHBOARD SCREEN -->
+	<div id="appDashboardWorkspaceSection">
+		<div class="container-fluid px-4 py-4">
+			<div class="d-flex justify-content-between align-items-center mb-4">
+				<h2 class="text-primary fw-bold m-0">💼 Machi Premium Billing & TDS Tracker v8</h2>
+				<button class="btn btn-success fw-bold" onclick="exportToExcel()">📊 Export Ledger (.csv)</button>
 			</div>
 
-			<!-- LEDGER MATRIX BOARD INTERFACE -->
-			<div class="col-xl-9 col-lg-8">
-				<div class="card p-4 mb-4">
-					<h6 class="text-secondary fw-bold mb-3">🔎 Dedicated Filtering System</h6>
-					<div class="row g-2 align-items-end">
-						<div class="col-md-3">
-							<label class="form-label small text-muted m-0">Text / Inv No Search</label>
-							<input type="text" id="textSearch" class="form-control form-control-sm" placeholder="Client Name or Inv No...">
-						</div>
-						<div class="col-md-3">
-							<label class="form-label small text-muted m-0">Invoice From Date</label>
-							<input type="date" id="fromDate" class="form-control form-control-sm">
-						</div>
-						<div class="col-md-3">
-							<label class="form-label small text-muted m-0">Invoice To Date</label>
-							<input type="date" id="toDate" class="form-control form-control-sm">
-						</div>
-						<div class="col-md-3 d-flex gap-2">
-							<button class="btn btn-sm btn-primary flex-grow-1 fw-bold" id="filterSubmitBtn" onclick="executeFilterWorkflow()">
-								<span id="filterBtnSpinner" class="spinner-border spinner-border-sm spinner-size d-none me-1"></span>
-								🔍 Filter Rows
-							</button>
-							<button class="btn btn-sm btn-outline-secondary" onclick="clearFilters()">Clear</button>
-						</div>
+			<div class="row g-4">
+				<!-- CONTROL MATRIX PANEL FORM -->
+				<div class="col-xl-3 col-lg-4">
+					<div class="card p-4 sticky-top" style="top: 20px; z-index: 5;">
+						<h5 id="formPanelTitle" class="mb-3 text-secondary border-bottom pb-2">Generate Invoice</h5>
+						<form id="invoiceForm">
+							<input type="hidden" id="editModeFlag" value="false">
+
+							<div class="mb-2">
+								<label class="form-label small fw-bold">Invoice No</label>
+								<input type="text" id="invoiceNo" class="form-control form-control-sm" required placeholder="00110 APR2026">
+							</div>
+							<div class="mb-2">
+								<label class="form-label small fw-bold">Invoice Date</label>
+								<input type="date" id="invoiceDate" class="form-control form-control-sm" required>
+							</div>
+							<div class="mb-2">
+								<label class="form-label small fw-bold">Client Authority (Bill To)</label>
+								<textarea id="receivedFrom" class="form-control form-control-sm" rows="3" required placeholder="The Managing Director,&#10;Tamil Nadu Tourism Development Corporation,&#10;Chennai - 600 002"></textarea>
+							</div>
+
+							<div class="row g-2 mb-2">
+								<div class="col-7">
+									<label class="form-label small fw-bold text-dark">Total Project Val (₹)</label>
+									<input type="number" id="projectValue" class="form-control form-control-sm" required placeholder="1690000" oninput="calculateMilestoneAmount()">
+								</div>
+								<div class="col-5">
+									<label class="form-label small fw-bold text-dark">Bill % Value</label>
+									<input type="number" step="any" id="billPercentage" class="form-control form-control-sm" required placeholder="30" value="30" oninput="calculateMilestoneAmount()">
+								</div>
+							</div>
+
+							<div class="mb-2">
+								<label class="form-label small text-muted">Calculated Base Amount (₹)</label>
+								<input type="number" id="amount" class="form-control form-control-sm bg-light" readonly>
+							</div>
+
+							<div class="row mb-3 g-2">
+								<div class="col-4">
+									<label class="form-label small fw-bold text-dark">GST %</label>
+									<input type="number" step="any" id="gstPercentageField" class="form-control form-control-sm" required placeholder="18" value="18" oninput="calculateMilestoneAmount()">
+								</div>
+								<div class="col-4">
+									<label class="form-label small text-muted">GST Amt (₹)</label>
+									<input type="number" id="gstAmt" class="form-control form-control-sm bg-light" readonly>
+								</div>
+								<div class="col-4">
+									<label class="form-label small fw-bold text-success">Total Bill (₹)</label>
+									<input type="number" id="totalAmount" class="form-control form-control-sm bg-light fw-bold text-success" readonly>
+								</div>
+							</div>
+
+							<div class="mb-3">
+								<label class="form-label small fw-bold">Work Scope / Project Subject</label>
+								<textarea id="description" class="form-control form-control-sm" rows="3" placeholder="Development of an Integrated Payroll and EPF Trust Management Software..."></textarea>
+							</div>
+
+							<div class="form-check form-switch mb-3">
+								<input class="form-check-input" type="checkbox" id="includeSealOptionToggle" checked>
+								<label class="form-check-label small fw-bold text-secondary" for="includeSealOptionToggle">Include Rubber Stamp & Seal</label>
+							</div>
+
+							<div class="d-flex gap-2">
+								<button type="submit" id="mainSubmitBtn" class="btn btn-primary flex-grow-1 fw-bold">💾 Save Invoice</button>
+								<button type="button" id="cancelEditBtn" class="btn btn-secondary fw-bold d-none" onclick="exitEditMode()">Cancel</button>
+							</div>
+						</form>
 					</div>
 				</div>
 
-				<div class="card p-4">
-					<div class="d-flex justify-content-between align-items-center mb-3">
-						<h5 class="m-0 text-secondary fw-bold">Live Billing Execution Panel</h5>
-						<button class="btn btn-sm btn-outline-primary" id="syncSheetsBtn" onclick="fetchInvoices()">
-							<span id="syncSpinner" class="spinner-border spinner-border-sm spinner-size d-none me-1"></span>
-							🔄 Reload Sheets
-						</button>
+				<!-- LEDGER MATRIX BOARD INTERFACE -->
+				<div class="col-xl-9 col-lg-8">
+					<div class="card p-4 mb-4">
+						<h6 class="text-secondary fw-bold mb-3">🔎 Dedicated Filtering System</h6>
+						<div class="row g-2 align-items-end">
+							<div class="col-md-3">
+								<label class="form-label small text-muted m-0">Text / Inv No Search</label>
+								<input type="text" id="textSearch" class="form-control form-control-sm" placeholder="Client Name or Inv No...">
+							</div>
+							<div class="col-md-3">
+								<label class="form-label small text-muted m-0">Invoice From Date</label>
+								<input type="date" id="fromDate" class="form-control form-control-sm">
+							</div>
+							<div class="col-md-3">
+								<label class="form-label small text-muted m-0">Invoice To Date</label>
+								<input type="date" id="toDate" class="form-control form-control-sm">
+							</div>
+							<div class="col-md-3 d-flex gap-2">
+								<button class="btn btn-sm btn-primary flex-grow-1 fw-bold" id="filterSubmitBtn" onclick="executeFilterWorkflow()">
+									<span id="filterBtnSpinner" class="spinner-border spinner-border-sm spinner-size d-none me-1"></span>
+									🔍 Filter Rows
+								</button>
+								<button class="btn btn-sm btn-outline-secondary" onclick="clearFilters()">Clear</button>
+							</div>
+						</div>
 					</div>
 
-					<div class="table-responsive">
-						<table class="table align-middle table-hover table-bordered m-0">
-							<thead>
-								<tr>
-									<th>Invoice Details</th>
-									<th>Client Metric</th>
-									<th>Base Amt</th>
-									<th>GST Amount</th>
-									<th>Total Bill</th>
-									<th class="table-info text-center" style="width: 260px;">Received & TDS Update Workspace</th>
-									<th class="text-danger">Difference / Bal</th>
-									<th class="text-center" style="width: 220px;">Control Actions</th>
-								</tr>
-							</thead>
-							<tbody id="invoiceTableBody">
-								<tr>
-									<td colspan="8" class="text-center text-muted py-4">Waiting connection setup variables...</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+					<div class="card p-4">
+						<div class="d-flex justify-content-between align-items-center mb-3">
+							<h5 class="m-0 text-secondary fw-bold">Live Billing Execution Panel</h5>
+							<button class="btn btn-sm btn-outline-primary" id="syncSheetsBtn" onclick="fetchInvoices()">
+								<span id="syncSpinner" class="spinner-border spinner-border-sm spinner-size d-none me-1"></span>
+								🔄 Reload Sheets
+							</button>
+						</div>
 
-					<div class="d-flex justify-content-between align-items-center mt-3">
-						<div id="paginationInfo" class="text-muted small">Showing 0 of 0 logs</div>
-						<nav><ul class="pagination pagination-sm m-0" id="paginationControls"></ul></nav>
+						<div class="table-responsive">
+							<table class="table align-middle table-hover table-bordered m-0">
+								<thead>
+									<tr>
+										<th>Invoice Details</th>
+										<th>Client Metric</th>
+										<th>Base Amt</th>
+										<th>GST Amount</th>
+										<th>Total Bill</th>
+										<th class="table-info text-center" style="width: 260px;">Received & TDS Update Workspace</th>
+										<th class="text-danger">Difference / Bal</th>
+										<th class="text-center" style="width: 220px;">Control Actions</th>
+									</tr>
+								</thead>
+								<tbody id="invoiceTableBody">
+									<tr>
+										<td colspan="8" class="text-center text-muted py-4">Waiting connection setup variables...</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="d-flex justify-content-between align-items-center mt-3">
+							<div id="paginationInfo" class="text-muted small">Showing 0 of 0 logs</div>
+							<nav><ul class="pagination pagination-sm m-0" id="paginationControls"></ul></nav>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- ==================== RAW HTML INVOICE DOM TEMPLATE FOR DYNAMIC WINDOW GENERATION ==================== -->
+	<!-- 👉 WRAPPED INNER BODY SEGMENT B: CORPORATE INVOICE TEMPLATE BLOCK FOR IN-PLACE PRINTING -->
 	<div id="printInvoiceCanvas">
 		<div style="padding: 30px; font-family: 'Segoe UI', sans-serif; color: #000000; line-height: 1.4;">
 			<div style="height: 5px; background: linear-gradient(90deg, #0d6efd 0%, #198754 100%); width: 100%; margin-bottom: 25px; border-radius:4px;"></div>
@@ -207,14 +231,14 @@
 			<table style="width: 100%; margin-bottom: 30px; border-collapse: collapse;">
 				<tr>
 					<td style="vertical-align: top; width: 60%;">
-						<h3 style="font-weight: bold; color: #0d6efd; margin: 0; font-size: 22px;">TIMESMED HEALTHSOFT PVT LTD</h3>
+						<h3 style="font-weight: bold; color: #0d6efd; margin: 0; font-size: 22px;">TIMESMED HEALTHSOFT PVT LTD[cite: 1]</h3>
 						<p style="color: #666; margin: 5px 0 0 0; font-size: 12px; line-height: 1.4;">
-							RA Puram Branch, Chennai, Tamil Nadu<br>
+							RA Puram Branch, Chennai, Tamil Nadu[cite: 1]<br>
 							<b>PAN:</b> AAHCT9904C | <b>GSTIN:</b> 33AAHCT9904C1ZG[cite: 1]
 						</p>
 						<div style="margin-top: 35px; font-size: 14px;">
 							<span style="text-transform: uppercase; font-size: 11px; color: #777; font-weight: bold; display: block; margin-bottom: 5px;">To,[cite: 1]</span>
-							<div id="print_client_block" style="fw-bold text-dark; font-weight: bold; white-space: pre-line; border-left: 2px solid #0d6efd; padding-left: 10px;"></div>
+							<div id="print_client_block" style="font-weight: bold; white-space: pre-line; border-left: 2px solid #0d6efd; padding-left: 10px;"></div>
 						</div>
 					</td>
 					<td style="vertical-align: top; text-align: right; width: 40%;">
@@ -268,7 +292,7 @@
 				<tr>
 					<td style="vertical-align: bottom; width: 60%;">
 						<div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 6px; padding: 15px; font-size: 12px; font-family: monospace; max-width: 380px;">
-							<h6 style="margin: 0 0 8px 0; font-weight: bold; text-transform: uppercase; color: #0d6efd; font-size: 12px;">走 Settlement Account Remittance Node[cite: 1]</h6>
+							<h6 style="margin: 0 0 8px 0; font-weight: bold; text-transform: uppercase; color: #0d6efd; font-size: 12px;">🏦 Settlement Account Remittance Node[cite: 1]</h6>
 							<div style="line-height: 1.5;">
 								<span style="color:#666;">Account Name:</span> <b>Timesmed Healthsoft pvt Ltd[cite: 1]</b><br>
 								<span style="color:#666;">Account No:</span> <b>409600099871[cite: 1]</b><br>
@@ -298,6 +322,7 @@
 	</div>
 
 	<script>
+		// Google Apps Script API endpoint string
 		const API_URL = "https://script.google.com/macros/s/AKfycbx2WVUi93T3MRUj_La8-U9CQZnprL6Z-0wBv1ot6uyVy00TpsZ_Fh4J4335_aEQPeoWuQ/exec";
 
 		let allInvoices = [];
@@ -456,8 +481,7 @@
 			updatePaginationControls(totalPages, totalRecords, startIndex + 1, endIndex);
 		}
 
-		/* ==================== 👉 FIXED: DYNAMIC ISOLATED POPUP WINDOW PRINT ENGINE ==================== */
-		/* ==================== 👉 THE ULTIMATE POP-UP BYPASS PRINT ENGINE ==================== */
+		/* ==================== 👉 NEW FIX: IN-PLACE PAGE-HIDE PRINTING SYSTEM (NO POP-UPS / NO BLOCKING) ==================== */
 		function launchDynamicWindowPrint(invoiceNo) {
 			const target = allInvoices.find(item => item.invoiceNo.toString() === invoiceNo.toString());
 			if (!target) return;
@@ -470,7 +494,7 @@
 			const gValue = parseFloat(target.gstAmt) || 0;
 			const tValue = parseFloat(target.totalAmount) || 0;
 
-			// Mapping elements inside hidden template nodes
+			// Injecting data into hidden template block rows
 			document.getElementById('print_client_block').innerText = target.receivedFrom;
 			document.getElementById('print_inv_no').innerText = target.invoiceNo;
 			document.getElementById('print_inv_date').innerText = alphaMonthDateStr;
@@ -487,36 +511,17 @@
 			document.getElementById('print_grand_total').innerText = `₹${tValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
 			document.getElementById('print_words').innerText = convertAmountToIndianWords(tValue);
 
-			// Rubber seal dynamic toggle
 			const showSeal = document.getElementById('includeSealOptionToggle').checked;
 			document.getElementById('print_seal_wrapper').style.display = showSeal ? "inline-block" : "none";
 
-			// 👉 FIX: CREATING AN ISOLATED INVISIBLE IFRAME TO BYPASS POP-UP BLOCKERS Completely
-			let iframe = document.getElementById('machiPrintIframe');
-			if (!iframe) {
-				iframe = document.createElement('iframe');
-				iframe.id = 'machiPrintIframe';
-				iframe.style.position = 'absolute';
-				iframe.style.width = '0px';
-				iframe.style.height = '0px';
-				iframe.style.border = 'none';
-				document.body.appendChild(iframe);
-			}
+			// 👉 THE LOGIC: Display invoice canvas on current page, hide everything else via @media print stylesheet, then print natively.
+			const canvasElement = document.getElementById('printInvoiceCanvas');
+			canvasElement.style.display = 'block';
 
-			const printableHtmlMarkup = document.getElementById('printInvoiceCanvas').innerHTML;
-
-			// Injecting markup directly into the safe iframe channel
-			const doc = iframe.contentWindow.document;
-			doc.open();
-			doc.write('<html><head><title>Print Invoice</title></head><body style="margin:0; padding:20px;">');
-			doc.write(printableHtmlMarkup);
-			doc.write('</body></html>');
-			doc.close();
-
-			// Small buffer for iframe styling and dom element loading stability
 			setTimeout(() => {
-				iframe.contentWindow.focus();
-				iframe.contentWindow.print();
+				window.print();
+				// Immediately reset state back smoothly for app interaction
+				canvasElement.style.display = 'none';
 			}, 300);
 		}
 
