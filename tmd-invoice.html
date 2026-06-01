@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Machi Premium Corporate Ledger v2</title>
+	<title>Machi Premium Corporate Ledger v3</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		body {
@@ -18,10 +18,19 @@
 		}
 
 		.bg-cancelled {
-			background-color: #f8d7da !important;
-			opacity: 0.6;
-			text-decoration: line-through;
+			background-color: #fce8e6 !important;
+			opacity: 0.75;
 		}
+
+			.bg-cancelled td {
+				text-decoration: line-through;
+				color: #a94442;
+			}
+
+			.bg-cancelled .no-strike {
+				text-decoration: none !important;
+				display: inline-block;
+			}
 
 		.table th {
 			background-color: #f1f4f9;
@@ -32,21 +41,28 @@
 		.table td {
 			font-size: 0.9rem;
 		}
+
+		.spinner-size {
+			width: 1.2rem;
+			height: 1.2rem;
+		}
 	</style>
 </head>
 <body>
 
 	<div class="container-fluid px-4 py-4">
 		<div class="d-flex justify-content-between align-items-center mb-4">
-			<h2 class="text-primary fw-bold m-0">💼 Machi Premium Billing & TDS Tracker</h2>
+			<h2 class="text-primary fw-bold m-0">💼 Machi Premium Billing & TDS Tracker v3</h2>
 			<button class="btn btn-success fw-bold" onclick="exportToExcel()">📊 Export Ledger (.csv)</button>
 		</div>
 
 		<div class="row g-4">
 			<div class="col-xl-3 col-lg-4">
-				<div class="card p-4 sticky-top" style="top: 20px;">
-					<h5 class="mb-3 text-secondary border-bottom pb-2">Generate Invoice</h5>
+				<div class="card p-4 sticky-top" style="top: 20px; z-index: 5;">
+					<h5 id="formPanelTitle" class="mb-3 text-secondary border-bottom pb-2">Generate Invoice</h5>
 					<form id="invoiceForm">
+						<input type="hidden" id="editModeFlag" value="false">
+
 						<div class="mb-2">
 							<label class="form-label small fw-bold">Invoice No</label>
 							<input type="text" id="invoiceNo" class="form-control form-control-sm" required placeholder="INV/26-27/01">
@@ -99,28 +115,36 @@
 							<textarea id="description" class="form-control form-control-sm" rows="2" placeholder="Milestone notes..."></textarea>
 						</div>
 
-						<button type="submit" class="btn btn-primary w-100 fw-bold">💾 Save Invoice</button>
+						<div class="d-flex gap-2">
+							<button type="submit" id="mainSubmitBtn" class="btn btn-primary flex-grow-1 fw-bold">💾 Save Invoice</button>
+							<button type="button" id="cancelEditBtn" class="btn btn-secondary fw-bold d-none" onclick="exitEditMode()">Cancel</button>
+						</div>
 					</form>
 				</div>
 			</div>
 
 			<div class="col-xl-9 col-lg-8">
 				<div class="card p-4 mb-4">
-					<div class="row g-2">
-						<div class="col-md-4">
-							<input type="text" id="textSearch" class="form-control form-control-sm" placeholder="Search Client / Inv No..." oninput="filterAndResetPage()">
+					<h6 class="text-secondary fw-bold mb-3">🔎 Dedicated Filtering System</h6>
+					<div class="row g-2 align-items-end">
+						<div class="col-md-3">
+							<label class="form-label small text-muted m-0">Text / Inv No Search</label>
+							<input type="text" id="textSearch" class="form-control form-control-sm" placeholder="Client Name or Inv No...">
 						</div>
-						<div class="col-md-4">
-							<div class="input-group input-group-sm">
-								<span class="input-group-text">From</span>
-								<input type="date" id="fromDate" class="form-control" onchange="filterAndResetPage()">
-							</div>
+						<div class="col-md-3">
+							<label class="form-label small text-muted m-0">Invoice From Date</label>
+							<input type="date" id="fromDate" class="form-control form-control-sm">
 						</div>
-						<div class="col-md-4">
-							<div class="input-group input-group-sm">
-								<span class="input-group-text">To</span>
-								<input type="date" id="toDate" class="form-control" onchange="filterAndResetPage()">
-							</div>
+						<div class="col-md-3">
+							<label class="form-label small text-muted m-0">Invoice To Date</label>
+							<input type="date" id="toDate" class="form-control form-control-sm">
+						</div>
+						<div class="col-md-3 d-flex gap-2">
+							<button class="btn btn-sm btn-primary flex-grow-1 fw-bold" id="filterSubmitBtn" onclick="executeFilterWorkflow()">
+								<span id="filterBtnSpinner" class="spinner-border spinner-border-sm spinner-size d-none me-1"></span>
+								🔍 Filter Rows
+							</button>
+							<button class="btn btn-sm btn-outline-secondary" onclick="clearFilters()">Clear</button>
 						</div>
 					</div>
 				</div>
@@ -128,11 +152,14 @@
 				<div class="card p-4">
 					<div class="d-flex justify-content-between align-items-center mb-3">
 						<h5 class="m-0 text-secondary fw-bold">Live Billing Execution Panel</h5>
-						<button class="btn btn-sm btn-outline-primary" onclick="fetchInvoices()">🔄 Reload Sheets</button>
+						<button class="btn btn-sm btn-outline-primary" id="syncSheetsBtn" onclick="fetchInvoices()">
+							<span id="syncSpinner" class="spinner-border spinner-border-sm spinner-size d-none me-1"></span>
+							🔄 Reload Sheets
+						</button>
 					</div>
 
 					<div class="table-responsive">
-						<table class="table align-middle table-hover table-bordered">
+						<table class="table align-middle table-hover table-bordered m-0">
 							<thead>
 								<tr>
 									<th>Invoice Details</th>
@@ -140,9 +167,9 @@
 									<th>Base Amt</th>
 									<th>GST (18%)</th>
 									<th>Total Bill</th>
-									<th class="table-info text-center" style="width: 250px;">Received & TDS Update Workspace</th>
+									<th class="table-info text-center" style="width: 260px;">Received & TDS Update Workspace</th>
 									<th class="text-danger">Difference / Bal</th>
-									<th class="text-center">Action</th>
+									<th class="text-center" style="width: 160px;">Control Actions</th>
 								</tr>
 							</thead>
 							<tbody id="invoiceTableBody">
@@ -163,7 +190,7 @@
 	</div>
 
 	<script>
-		// ⚠️ REPLACE THIS VARIABLE EXCLUSIVELY WITH YOUR WEB APP LINK
+		// ⚠️ REPLACE THIS EXCLUSIVELY WITH YOUR DEPLOYED WEB APP LINK FROM APPS SCRIPT
 		const API_URL = "https://script.google.com/macros/s/AKfycbx2WVUi93T3MRUj_La8-U9CQZnprL6Z-0wBv1ot6uyVy00TpsZ_Fh4J4335_aEQPeoWuQ/exec";
 
 		let allInvoices = [];
@@ -182,42 +209,67 @@
 			document.getElementById('totalAmount').value = (calculatedBase + gst).toFixed(2);
 		}
 
+		// AUTOMATIC 2% TDS LOGIC ENGINE ON INPUT
+		function runAutoTdsCalculation(invoiceNo, totalBill) {
+			const recInput = parseFloat(document.getElementById(`col-rec-${invoiceNo}`).value) || 0;
+			if (recInput > 0) {
+				// Standard 2% corporate TDS computation
+				const calculatedTds = recInput * 0.02;
+				document.getElementById(`col-tds-${invoiceNo}`).value = calculatedTds.toFixed(2);
+			} else {
+				document.getElementById(`col-tds-${invoiceNo}`).value = "";
+			}
+		}
+
 		window.onload = function () {
 			document.getElementById('invoiceDate').value = new Date().toISOString().split('T')[0];
 			fetchInvoices();
 		};
 
-		// 👉 FIXED: JSONP NETWORK BYPASS FOR HIGH SPEED SYNC WITHOUT CORS ERROR
+		// JSONP NETWORK CHANNEL RE-LOAD ENGINE
 		function fetchInvoices() {
 			if (API_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL" || API_URL.trim() === "") return;
 
-			// Remove older script instances to clear DOM trash memory heap
+			// Start sync spin animation
+			document.getElementById('syncSpinner').classList.remove('none', 'd-none');
+
 			const oldScript = document.getElementById('jsonpScriptFetcher');
 			if (oldScript) oldScript.remove();
 
 			const script = document.createElement('script');
 			script.id = 'jsonpScriptFetcher';
-			// Attaching dynamic callback mapping flag
-			script.src = `${API_URL}?callback=handleScriptResponse`;
+			script.src = `${API_URL}?callback=handleScriptResponse&_ts=${new Date().getTime()}`;
 
 			script.onerror = function () {
 				document.getElementById('invoiceTableBody').innerHTML = `<tr><td colspan="8" class="text-center text-danger">Network API script handshaking failed.</td></tr>`;
+				document.getElementById('syncSpinner').classList.add('d-none');
 			};
 
 			document.body.appendChild(script);
 		}
 
-		// This receiver executes when backend replies back safely via wrapper channel
 		function handleScriptResponse(responseDataset) {
+			// Stopping dynamic loaders
+			document.getElementById('syncSpinner').classList.add('d-none');
+			document.getElementById('filterBtnSpinner').classList.add('d-none');
+
 			allInvoices = responseDataset || [];
-			allInvoices.reverse(); // Latest transaction up front
-			filterData();
+			allInvoices.reverse();
+			executeFilterLogicOnly();
 		}
 
-		function filterAndResetPage() { currentPage = 1; filterData(); }
+		// FILTER WORKING PIPELINES WITH LOADING SIMULATORS
+		function executeFilterWorkflow() {
+			document.getElementById('filterBtnSpinner').classList.remove('d-none');
+			setTimeout(() => {
+				currentPage = 1;
+				executeFilterLogicOnly();
+				document.getElementById('filterBtnSpinner').classList.add('d-none');
+			}, 400); // UI visual transition buffer
+		}
 
-		function filterData() {
-			const searchText = document.getElementById('textSearch').value.toLowerCase();
+		function executeFilterLogicOnly() {
+			const searchText = document.getElementById('textSearch').value.toLowerCase().trim();
 			const fromDateStr = document.getElementById('fromDate').value;
 			const toDateStr = document.getElementById('toDate').value;
 
@@ -245,7 +297,7 @@
 			const paginatedItems = filteredInvoices.slice(startIndex, startIndex + recordsPerPage);
 
 			if (paginatedItems.length === 0) {
-				tbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted">No configuration profiles tracked.</td></tr>`;
+				tbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted py-4">No logged profiles match your search criteria.</td></tr>`;
 				updatePaginationControls(totalPages, 0, 0, 0);
 				return;
 			}
@@ -253,7 +305,12 @@
 			paginatedItems.forEach(item => {
 				const isCancelled = item.status === "Cancelled";
 				const rowClass = isCancelled ? "bg-cancelled" : "";
-				const fInvDate = item.invoiceDate ? new Date(item.invoiceDate).toLocaleDateString('en-IN') : '-';
+
+				// Standard formatting for display
+				let fInvDate = "-";
+				if (item.invoiceDate) {
+					fInvDate = new Date(item.invoiceDate).toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+				}
 
 				const diffValue = parseFloat(item.variance || 0);
 				let diffBadging = `<span class="fw-bold text-danger">₹${diffValue.toFixed(2)}</span>`;
@@ -261,52 +318,86 @@
 					diffBadging = `<span class="badge bg-success">Fully Cleared (₹0)</span>`;
 				}
 
+				// Received columns dynamic layouts
 				let updateSection = "";
 				if (isCancelled) {
-					updateSection = `<span class="text-danger fw-bold">CANCELLED PROFILE</span>`;
+					updateSection = `<span class="text-danger fw-bold no-strike">🚫 CANCELLED PROFILE</span>`;
 				} else if (item.amountReceivedDate && diffValue <= 0) {
 					updateSection = `
-						<div class="small">
-							<b class="text-success">✔ Cleared:</b> ₹${parseFloat(item.receivedAmount).toFixed(2)}<br>
-							<b class="text-secondary">TDS Ded:</b> ₹${parseFloat(item.tdsAmount).toFixed(2)}<br>
-							<small class="text-muted">On: ${new Date(item.amountReceivedDate).toLocaleDateString('en-IN')}</small>
-						</div>`;
+							<div class="small">
+								<b class="text-success">✔ Cleared:</b> ₹${parseFloat(item.receivedAmount).toFixed(2)}<br>
+								<b class="text-secondary">TDS Ded (2%):</b> ₹${parseFloat(item.tdsAmount).toFixed(2)}<br>
+								<small class="text-muted">On: ${new Date(item.amountReceivedDate).toLocaleDateString('en-IN')}</small>
+							</div>`;
 				} else {
 					updateSection = `
-						<div class="p-2 border rounded bg-light shadow-sm">
-							<div class="mb-1">
-								<input type="date" id="col-date-${item.invoiceNo}" class="form-control form-control-sm">
-							</div>
-							<div class="input-group input-group-sm mb-1">
-								<input type="number" id="col-rec-${item.invoiceNo}" class="form-control" placeholder="Received">
-								<input type="number" id="col-tds-${item.invoiceNo}" class="form-control" placeholder="TDS">
-							</div>
-							<button class="btn btn-primary btn-sm w-100 fw-bold py-0" style="font-size:0.75rem;" onclick="saveCollectionEntry('${item.invoiceNo}', ${item.totalAmount})">Update Payment</button>
-						</div>`;
+							<div class="p-2 border rounded bg-white shadow-sm no-strike">
+								<div class="mb-1">
+									<input type="date" id="col-date-${item.invoiceNo}" class="form-control form-control-sm" style="font-size:0.8rem;">
+								</div>
+								<div class="input-group input-group-sm mb-1">
+									<input type="number" id="col-rec-${item.invoiceNo}" class="form-control" placeholder="Recamt" style="font-size:0.8rem;" oninput="runAutoTdsCalculation('${item.invoiceNo}', ${item.totalAmount})">
+									<input type="number" id="col-tds-${item.invoiceNo}" class="form-control" placeholder="TDS (2%)" style="font-size:0.8rem;">
+								</div>
+								<button class="btn btn-primary btn-sm w-100 fw-bold py-1" style="font-size:0.75rem;" onclick="saveCollectionEntry('${item.invoiceNo}', ${item.totalAmount})">Update Payment</button>
+							</div>`;
 				}
 
-				let actionSection = !isCancelled ? `<button class="btn btn-outline-danger btn-sm" onclick="cancelInvoice('${item.invoiceNo}')">🚫 Cancel</button>` : `-`;
+				// CONTROL ACTIONS SWITCHER PANEL
+				let actionControls = "";
+				if (isCancelled) {
+					actionControls = `
+							<div class="no-strike d-flex flex-column gap-1">
+								<button class="btn btn-xs btn-warning btn-sm fw-bold px-2 py-0" onclick="alterInvoiceState('${item.invoiceNo}', 'Active')">🔄 Re-Activate</button>
+								<button class="btn btn-xs btn-danger btn-sm fw-bold px-2 py-0" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete</button>
+							</div>`;
+				} else {
+					actionControls = `
+							<div class="no-strike d-flex flex-column gap-1">
+								<div class="d-flex gap-1">
+									<button class="btn btn-xs btn-outline-secondary btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="enterEditMode('${item.invoiceNo}')">✏ Edit</button>
+									<button class="btn btn-xs btn-outline-danger btn-sm flex-grow-1 px-1 py-0 font-monospace" style="font-size:0.75rem;" onclick="alterInvoiceState('${item.invoiceNo}', 'Cancelled')">🚫 Cancel</button>
+								</div>
+								<button class="btn btn-xs btn-danger btn-sm fw-bold py-0" style="font-size:0.75rem;" onclick="deleteInvoiceRecord('${item.invoiceNo}')">🗑 Delete Row</button>
+							</div>`;
+				}
 
 				const row = `<tr class="${rowClass}">
-					<td>
-						<b class="text-primary">${item.invoiceNo}</b><br>
-						<small class="text-muted">Date: ${fInvDate}</small>
-					</td>
-					<td>
-						<b>${item.receivedFrom}</b><br>
-						<small class="text-secondary">Proj Val: ₹${item.projectValue} (${item.billPercentage})</small>
-					</td>
-					<td>₹${parseFloat(item.amount).toFixed(2)}</td>
-					<td>₹${parseFloat(item.gstAmt).toFixed(2)}</td>
-					<td class="fw-bold">₹${parseFloat(item.totalAmount).toFixed(2)}</td>
-					<td class="table-info">${updateSection}</td>
-					<td>${diffBadging}</td>
-					<td class="text-center">${actionSection}</td>
-				</tr>`;
+						<td>
+							<b class="text-primary">${item.invoiceNo}</b><br>
+							<small class="text-muted">Date: ${fInvDate}</small>
+						</td>
+						<td>
+							<b>${item.receivedFrom}</b><br>
+							<small class="text-secondary">Value: ₹${parseFloat(item.projectValue).toLocaleString('en-IN')} (${item.billPercentage})</small>
+						</td>
+						<td>₹${parseFloat(item.amount).toFixed(2)}</td>
+						<td>₹${parseFloat(item.gstAmt).toFixed(2)}</td>
+						<td class="fw-bold text-dark">₹${parseFloat(item.totalAmount).toFixed(2)}</td>
+						<td class="table-info align-top">${updateSection}</td>
+						<td>${diffBadging}</td>
+						<td class="text-center align-middle">${actionControls}</td>
+					</tr>`;
 				tbody.insertAdjacentHTML('beforeend', row);
 			});
 
 			updatePaginationControls(totalPages, totalRecords, startIndex + 1, endIndex);
+		}
+
+		// BACKEND CORE FETCH OPERATION ROUTERS
+		async function triggerBackendPipeline(payload, customMessage) {
+			document.getElementById('syncSheetsBtn').disabled = true;
+			document.getElementById('syncSpinner').classList.remove('d-none');
+			try {
+				await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
+				alert(customMessage);
+				fetchInvoices();
+			} catch (e) {
+				alert("Error dispatching packet registry array pipelines.");
+				document.getElementById('syncSpinner').classList.add('d-none');
+			} finally {
+				document.getElementById('syncSheetsBtn').disabled = false;
+			}
 		}
 
 		async function saveCollectionEntry(invoiceNo, totalBillAmount) {
@@ -314,38 +405,95 @@
 			const receivedVal = parseFloat(document.getElementById(`col-rec-${invoiceNo}`).value) || 0;
 			const tdsVal = parseFloat(document.getElementById(`col-tds-${invoiceNo}`).value) || 0;
 
-			if (!dateVal || receivedVal <= 0) { alert("Machi! Date and Received amount rendering metrics mandatory!"); return; }
+			if (!dateVal || receivedVal <= 0) { alert("Machi! Date and Received amount fields mandatory!"); return; }
 			const varianceVal = totalBillAmount - (receivedVal + tdsVal);
 
-			if (!confirm(`Update tracking index logic calculations row entry?`)) return;
-
-			try {
-				await fetch(API_URL, {
-					method: "POST",
-					mode: "no-cors",
-					body: JSON.stringify({
-						action: "updateCollection",
-						invoiceNo: invoiceNo,
-						amountReceivedDate: dateVal,
-						receivedAmount: receivedVal,
-						tdsAmount: tdsVal,
-						variance: varianceVal
-					})
-				});
-				alert("Payment log saved. Refreshing sync streams...");
-				fetchInvoices();
-			} catch (e) { alert("Posting error stream."); }
+			const payload = { action: "updateCollection", invoiceNo: invoiceNo, amountReceivedDate: dateVal, receivedAmount: receivedVal, tdsAmount: tdsVal, variance: varianceVal };
+			triggerBackendPipeline(payload, `Payment and TDS records linked successfully for ${invoiceNo}!`);
 		}
 
-		async function cancelInvoice(invoiceNo) {
-			if (!confirm(`Machi, confirm cancel profiles?`)) return;
-			try {
-				await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({ action: "cancelInvoice", invoiceNo: invoiceNo }) });
-				alert("Cancelled!");
-				fetchInvoices();
-			} catch (e) { alert("Error on script matrix sync."); }
+		function alterInvoiceState(invoiceNo, targetStatus) {
+			if (!confirm(`Machi, are you sure you want to change status of ${invoiceNo} to "${targetStatus}"?`)) return;
+			triggerBackendPipeline({ action: "changeStatus", invoiceNo: invoiceNo, status: targetStatus }, `Invoice status set to ${targetStatus}!`);
 		}
 
+		function deleteInvoiceRecord(invoiceNo) {
+			if (!confirm(`🚨 WARNING: Machi, are you sure? This will HARD DELETE ${invoiceNo} entirely from the Google Sheet rows! This cannot be undone.`)) return;
+			triggerBackendPipeline({ action: "deleteInvoice", invoiceNo: invoiceNo }, `Invoice ${invoiceNo} deleted permanently from tracking logs.`);
+		}
+
+		// DYNAMIC CLIENT SIDE EDIT LOGIC FRAMEWORKS
+		function enterEditMode(invoiceNo) {
+			const target = allInvoices.find(item => item.invoiceNo.toString() === invoiceNo.toString());
+			if (!target) return;
+
+			// UI configurations to edit state
+			document.getElementById('formPanelTitle').innerText = "✏ Edit Invoice Profile";
+			document.getElementById('mainSubmitBtn').innerText = "🔄 Update Invoice";
+			document.getElementById('invoiceNo').value = target.invoiceNo;
+			document.getElementById('invoiceNo').readOnly = true; // Protect composite primary key index
+
+			// Date transformation mapping
+			if (target.invoiceDate) {
+				document.getElementById('invoiceDate').value = new Date(target.invoiceDate).toISOString().split('T')[0];
+			}
+			document.getElementById('receivedFrom').value = target.receivedFrom;
+			document.getElementById('projectValue').value = target.projectValue;
+			document.getElementById('description').value = target.description;
+
+			// Parsing percentage index match profiles
+			const rawPct = parseInt(target.billPercentage);
+			document.getElementById('billPercentage').value = rawPct;
+
+			calculateMilestoneAmount();
+			document.getElementById('editModeFlag').value = "true";
+			document.getElementById('cancelEditBtn').classList.remove('d-none');
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		}
+
+		function exitEditMode() {
+			document.getElementById('formPanelTitle').innerText = "Generate Invoice";
+			document.getElementById('mainSubmitBtn').innerText = "💾 Save Invoice";
+			document.getElementById('invoiceForm').reset();
+			document.getElementById('invoiceNo').readOnly = false;
+			document.getElementById('invoiceDate').value = new Date().toISOString().split('T')[0];
+			document.getElementById('editModeFlag').value = "false";
+			document.getElementById('cancelEditBtn').classList.add('d-none');
+			calculateMilestoneAmount();
+		}
+
+		// FORMS EXECUTION AGENT LOGIC
+		document.getElementById('invoiceForm').addEventListener('submit', async function (e) {
+			e.preventDefault();
+			if (API_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL") { alert("Set API link config profiles first!"); return; }
+
+			const isEditMode = document.getElementById('editModeFlag').value === "true";
+			const formData = {
+				action: isEditMode ? "editInvoice" : "newInvoice",
+				invoiceNo: document.getElementById('invoiceNo').value,
+				invoiceDate: document.getElementById('invoiceDate').value,
+				receivedFrom: document.getElementById('receivedFrom').value,
+				projectValue: document.getElementById('projectValue').value,
+				billPercentage: document.getElementById('billPercentage').value,
+				amount: document.getElementById('amount').value,
+				gstAmt: document.getElementById('gstAmt').value,
+				totalAmount: document.getElementById('totalAmount').value,
+				description: document.getElementById('description').value
+			};
+
+			const btn = document.getElementById('mainSubmitBtn');
+			btn.innerText = "Processing Sync..."; btn.disabled = true;
+
+			try {
+				await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(formData) });
+				alert(isEditMode ? "Invoice specifications adjusted successfully!" : "Invoice generated and recorded!");
+				exitEditMode();
+				fetchInvoices();
+			} catch (err) { alert("Network sync failed stream variables."); }
+			finally { btn.disabled = false; }
+		});
+
+		// PAGINATION UTILS
 		function updatePaginationControls(totalPages, totalRecords, start, end) {
 			document.getElementById('paginationInfo').innerText = `Showing ${start} to ${end} of ${totalRecords} entries`;
 			const controls = document.getElementById('paginationControls'); controls.innerHTML = "";
@@ -359,6 +507,14 @@
 		function changePage(page) {
 			if (page < 1 || page > Math.ceil(filteredInvoices.length / recordsPerPage)) return;
 			currentPage = page; renderPaginatedTable();
+		}
+
+		function clearFilters() {
+			document.getElementById('textSearch').value = "";
+			document.getElementById('fromDate').value = "";
+			document.getElementById('toDate').value = "";
+			currentPage = 1;
+			executeFilterLogicOnly();
 		}
 
 		function exportToExcel() {
@@ -376,32 +532,6 @@
 			link.setAttribute("download", `Machi_Premium_Ledger_${new Date().toISOString().split('T')[0]}.csv`);
 			document.body.appendChild(link); link.click(); document.body.removeChild(link);
 		}
-
-		document.getElementById('invoiceForm').addEventListener('submit', async function (e) {
-			e.preventDefault();
-			const formData = {
-				action: "newInvoice",
-				invoiceNo: document.getElementById('invoiceNo').value,
-				invoiceDate: document.getElementById('invoiceDate').value,
-				receivedFrom: document.getElementById('receivedFrom').value,
-				projectValue: document.getElementById('projectValue').value,
-				billPercentage: document.getElementById('billPercentage').value,
-				amount: document.getElementById('amount').value,
-				gstAmt: document.getElementById('gstAmt').value,
-				totalAmount: document.getElementById('totalAmount').value,
-				description: document.getElementById('description').value
-			};
-			const submitBtn = e.target.querySelector('button[type="submit"]');
-			submitBtn.innerText = "Processing..."; submitBtn.disabled = true;
-			try {
-				await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(formData) });
-				alert("Invoice Logged successfully!");
-				document.getElementById('invoiceForm').reset();
-				calculateMilestoneAmount();
-				fetchInvoices();
-			} catch (error) { alert("Network sync failed."); }
-			finally { submitBtn.innerText = "💾 Save Invoice"; submitBtn.disabled = false; }
-		});
 	</script>
 </body>
 </html>
