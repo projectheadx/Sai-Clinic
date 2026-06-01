@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Machi Corporate Billing & TDS Ledger</title>
+	<title>Machi Premium Corporate Ledger v2</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		body {
@@ -163,23 +163,20 @@
 	</div>
 
 	<script>
-		// ⚠️ DEPLOYED WEB APP API URL PASTE HERE
-		const API_URL = "https://script.google.com/macros/s/AKfycbzisY99cBJJzVx41R9oMR3XM1wh5dqg6J0kqviSQh2AILrXT3od6RAH2BDuX_fbf5qgTg/exec";
+		// ⚠️ REPLACE THIS VARIABLE EXCLUSIVELY WITH YOUR WEB APP LINK
+		const API_URL = "https://script.google.com/macros/s/AKfycbx2WVUi93T3MRUj_La8-U9CQZnprL6Z-0wBv1ot6uyVy00TpsZ_Fh4J4335_aEQPeoWuQ/exec";
 
 		let allInvoices = [];
 		let filteredInvoices = [];
 		let currentPage = 1;
 		let recordsPerPage = 10;
 
-		// Automatic Milestone Calculation Engine
 		function calculateMilestoneAmount() {
 			const totalProjectVal = parseFloat(document.getElementById('projectValue').value) || 0;
 			const selectedPercent = parseFloat(document.getElementById('billPercentage').value) || 0;
-
-			// Base Amount = (Project Value * Percent) / 100
 			const calculatedBase = (totalProjectVal * selectedPercent) / 100;
-			document.getElementById('amount').value = calculatedBase.toFixed(2);
 
+			document.getElementById('amount').value = calculatedBase.toFixed(2);
 			const gst = calculatedBase * 0.18;
 			document.getElementById('gstAmt').value = gst.toFixed(2);
 			document.getElementById('totalAmount').value = (calculatedBase + gst).toFixed(2);
@@ -190,17 +187,31 @@
 			fetchInvoices();
 		};
 
-		async function fetchInvoices() {
-			if (API_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL") return;
-			try {
-				const response = await fetch(API_URL);
-				allInvoices = await response.json();
-				allInvoices.reverse();
-				filterData();
-			} catch (error) {
-				console.error(error);
-				document.getElementById('invoiceTableBody').innerHTML = `<tr><td colspan="8" class="text-center text-danger">API Link Validation Failed.</td></tr>`;
-			}
+		// 👉 FIXED: JSONP NETWORK BYPASS FOR HIGH SPEED SYNC WITHOUT CORS ERROR
+		function fetchInvoices() {
+			if (API_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL" || API_URL.trim() === "") return;
+
+			// Remove older script instances to clear DOM trash memory heap
+			const oldScript = document.getElementById('jsonpScriptFetcher');
+			if (oldScript) oldScript.remove();
+
+			const script = document.createElement('script');
+			script.id = 'jsonpScriptFetcher';
+			// Attaching dynamic callback mapping flag
+			script.src = `${API_URL}?callback=handleScriptResponse`;
+
+			script.onerror = function () {
+				document.getElementById('invoiceTableBody').innerHTML = `<tr><td colspan="8" class="text-center text-danger">Network API script handshaking failed.</td></tr>`;
+			};
+
+			document.body.appendChild(script);
+		}
+
+		// This receiver executes when backend replies back safely via wrapper channel
+		function handleScriptResponse(responseDataset) {
+			allInvoices = responseDataset || [];
+			allInvoices.reverse(); // Latest transaction up front
+			filterData();
 		}
 
 		function filterAndResetPage() { currentPage = 1; filterData(); }
@@ -234,7 +245,8 @@
 			const paginatedItems = filteredInvoices.slice(startIndex, startIndex + recordsPerPage);
 
 			if (paginatedItems.length === 0) {
-				tbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted">No configuration match profiles tracked.</td></tr>`;
+				tbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted">No configuration profiles tracked.</td></tr>`;
+				updatePaginationControls(totalPages, 0, 0, 0);
 				return;
 			}
 
@@ -243,14 +255,12 @@
 				const rowClass = isCancelled ? "bg-cancelled" : "";
 				const fInvDate = item.invoiceDate ? new Date(item.invoiceDate).toLocaleDateString('en-IN') : '-';
 
-				// Variance Dynamic formatting
 				const diffValue = parseFloat(item.variance || 0);
 				let diffBadging = `<span class="fw-bold text-danger">₹${diffValue.toFixed(2)}</span>`;
 				if (diffValue <= 0 && !isCancelled) {
 					diffBadging = `<span class="badge bg-success">Fully Cleared (₹0)</span>`;
 				}
 
-				// Calculation Entry Form Layout
 				let updateSection = "";
 				if (isCancelled) {
 					updateSection = `<span class="text-danger fw-bold">CANCELLED PROFILE</span>`;
@@ -262,15 +272,14 @@
 							<small class="text-muted">On: ${new Date(item.amountReceivedDate).toLocaleDateString('en-IN')}</small>
 						</div>`;
 				} else {
-					// If pending or partial payment, show update workspace inside the cell row
 					updateSection = `
 						<div class="p-2 border rounded bg-light shadow-sm">
 							<div class="mb-1">
-								<input type="date" id="col-date-${item.invoiceNo}" class="form-control form-control-sm" title="Received Date">
+								<input type="date" id="col-date-${item.invoiceNo}" class="form-control form-control-sm">
 							</div>
 							<div class="input-group input-group-sm mb-1">
-								<input type="number" id="col-rec-${item.invoiceNo}" class="form-control" placeholder="Received Amt" title="Received Amt">
-								<input type="number" id="col-tds-${item.invoiceNo}" class="form-control" placeholder="TDS Amt" title="TDS Amt">
+								<input type="number" id="col-rec-${item.invoiceNo}" class="form-control" placeholder="Received">
+								<input type="number" id="col-tds-${item.invoiceNo}" class="form-control" placeholder="TDS">
 							</div>
 							<button class="btn btn-primary btn-sm w-100 fw-bold py-0" style="font-size:0.75rem;" onclick="saveCollectionEntry('${item.invoiceNo}', ${item.totalAmount})">Update Payment</button>
 						</div>`;
@@ -300,19 +309,15 @@
 			updatePaginationControls(totalPages, totalRecords, startIndex + 1, endIndex);
 		}
 
-		// Dynamic Calculation updates client side
 		async function saveCollectionEntry(invoiceNo, totalBillAmount) {
 			const dateVal = document.getElementById(`col-date-${invoiceNo}`).value;
 			const receivedVal = parseFloat(document.getElementById(`col-rec-${invoiceNo}`).value) || 0;
 			const tdsVal = parseFloat(document.getElementById(`col-tds-${invoiceNo}`).value) || 0;
 
-			if (!dateVal) { alert("Machi, Payment Received Date rumba mukkiyam!"); return; }
-			if (receivedVal <= 0) { alert("Enter valid received collection amount!"); return; }
-
-			// Variance Equation: Total Bill - (Received Amount + TDS)
+			if (!dateVal || receivedVal <= 0) { alert("Machi! Date and Received amount rendering metrics mandatory!"); return; }
 			const varianceVal = totalBillAmount - (receivedVal + tdsVal);
 
-			if (!confirm(`Machi, confirm payment logging for invoice ${invoiceNo}?\nReceived: ₹${receivedVal}\nTDS: ₹${tdsVal}\nRemaining Variance: ₹${varianceVal.toFixed(2)}`)) return;
+			if (!confirm(`Update tracking index logic calculations row entry?`)) return;
 
 			try {
 				await fetch(API_URL, {
@@ -327,18 +332,18 @@
 						variance: varianceVal
 					})
 				});
-				alert("Payment and TDS log synced successfully with Google Sheet!");
+				alert("Payment log saved. Refreshing sync streams...");
 				fetchInvoices();
-			} catch (e) { alert("API writing failure stream encountered."); }
+			} catch (e) { alert("Posting error stream."); }
 		}
 
 		async function cancelInvoice(invoiceNo) {
-			if (!confirm(`Machi, are you sure you want to CANCEL ${invoiceNo}?`)) return;
+			if (!confirm(`Machi, confirm cancel profiles?`)) return;
 			try {
 				await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify({ action: "cancelInvoice", invoiceNo: invoiceNo }) });
-				alert("Invoice Status Updated to Cancelled.");
+				alert("Cancelled!");
 				fetchInvoices();
-			} catch (e) { alert("Error updating status payload registry."); }
+			} catch (e) { alert("Error on script matrix sync."); }
 		}
 
 		function updatePaginationControls(totalPages, totalRecords, start, end) {
