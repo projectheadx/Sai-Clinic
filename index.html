@@ -348,7 +348,7 @@
 				font-weight: 700;
 			}
 
-		/* Doctor cards */
+		/* Doctor cards - updated with image support */
 		.doctor-premium-grid {
 			display: grid;
 			grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -370,15 +370,32 @@
 				border-color: var(--sunset-orange);
 			}
 
-		.doc-avatar-pulse {
-			width: 70px;
-			height: 70px;
+		/* NEW: Doctor avatar with image */
+		.doc-avatar-image {
+			width: 80px;
+			height: 80px;
+			border-radius: 28px;
+			object-fit: cover;
+			box-shadow: 0 10px 20px -5px rgba(0,0,0,0.15);
+			border: 3px solid #FFD966;
+			background: #FFF4E6;
+			transition: transform 0.2s ease;
+		}
+
+		.doc-card-vibrant:hover .doc-avatar-image {
+			transform: scale(1.02);
+		}
+
+		/* fallback for any missing images: subtle icon bg */
+		.avatar-fallback-icon {
+			width: 80px;
+			height: 80px;
 			background: linear-gradient(145deg, #FFE8D6, #FFD9B5);
-			border-radius: 30px;
+			border-radius: 28px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			font-size: 1.8rem;
+			font-size: 2.2rem;
 			font-weight: 800;
 			color: var(--sunset-orange);
 		}
@@ -534,6 +551,14 @@
 			font-weight: 600;
 			outline: none;
 		}
+
+		/* responsive fix for images */
+		.flex-avatar-group {
+			display: flex;
+			gap: 1.2rem;
+			align-items: center;
+			flex-wrap: wrap;
+		}
 	</style>
 </head>
 <body>
@@ -546,7 +571,7 @@
 			<div><i class="fab fa-whatsapp"></i> WhatsApp Priority Booking Active</div>
 		</div>
 
-		<!-- ========== HERO BANNER (TEXT & ALIGNMENT FIXED) ========== -->
+		<!-- ========== HERO BANNER ========== -->
 		<div class="hero-banner-premium" data-aos="fade-down" data-aos-duration="800">
 			<div class="banner-flex">
 				<div class="banner-text">
@@ -598,7 +623,7 @@
 			</div>
 		</div>
 
-		<!-- Doctors section -->
+		<!-- Doctors section with REAL IMAGES (high-quality medical portraits) -->
 		<div data-aos="fade-up">
 			<div class="section-title"><i class="fas fa-user-md" style="color:#E67E22;"></i> 👨‍⚕️ Elite Specialists — Pick Date & Time → WhatsApp Confirm</div>
 		</div>
@@ -651,12 +676,49 @@
 	<script>
 		AOS.init({ duration: 700, once: true });
 
+		// ========== DOCTOR DATA WITH HIGH-QUALITY PROFESSIONAL IMAGES (Unsplash + Reliable medical style) ==========
+		// Using curated images that represent confident, friendly physicians in clinical environment
 		const doctorsElite = [
-			{ id: 101, name: "Dr. S. Sangami", initial: "SS", specialization: "Clinical Diabetology & Metabolic Health", qualification: "M.B.B.S., Dip. Diabetology, FICM", deptIcon: "fa-tint" },
-			{ id: 102, name: "Dr. M. Karthikeyan", initial: "MK", specialization: "Orthopedics & Joint Replacement", qualification: "M.S. (Ortho)", deptIcon: "fa-bone" },
-			{ id: 103, name: "Dr. M.R. Ramya", initial: "RR", specialization: "Gynaecology & Fertility Expert", qualification: "M.B.B.S., D.G.O., DRM, F.M.A.S.", deptIcon: "fa-female" },
-			{ id: 104, name: "Dr. N.H. Mallikarjun", initial: "NM", specialization: "General & Laparoscopic Surgery", qualification: "M.B.B.S., M.S. (Gen Surg)", deptIcon: "fa-scalpel" },
-			{ id: 105, name: "Dr. H. Sadhiqul Ameen", initial: "SA", specialization: "Dermatology & Venereology", qualification: "M.D. (DVL)", deptIcon: "fa-allergies" }
+			{
+				id: 101, name: "Dr. S. Sangami",
+				specialization: "Clinical Diabetology & Metabolic Health",
+				qualification: "M.B.B.S., Dip. Diabetology, FICM",
+				deptIcon: "fa-tint",
+				imageUrl: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&h=200&fit=crop",  // female doctor portrait
+				alt: "Dr Sangami"
+			},
+			{
+				id: 102, name: "Dr. M. Karthikeyan",
+				specialization: "Orthopedics & Joint Replacement",
+				qualification: "M.S. (Ortho)",
+				deptIcon: "fa-bone",
+				imageUrl: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=200&fit=crop",  // male ortho confident
+				alt: "Dr Karthikeyan"
+			},
+			{
+				id: 103, name: "Dr. M.R. Ramya",
+				specialization: "Gynaecology & Fertility Expert",
+				qualification: "M.B.B.S., D.G.O., DRM, F.M.A.S.",
+				deptIcon: "fa-female",
+				imageUrl: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=200&h=200&fit=crop", // female gynecologist
+				alt: "Dr Ramya"
+			},
+			{
+				id: 104, name: "Dr. N.H. Mallikarjun",
+				specialization: "General & Laparoscopic Surgery",
+				qualification: "M.B.B.S., M.S. (Gen Surg)",
+				deptIcon: "fa-scalpel",
+				imageUrl: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=200&h=200&fit=crop", // senior male surgeon
+				alt: "Dr Mallikarjun"
+			},
+			{
+				id: 105, name: "Dr. H. Sadhiqul Ameen",
+				specialization: "Dermatology & Venereology",
+				qualification: "M.D. (DVL)",
+				deptIcon: "fa-allergies",
+				imageUrl: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=200&h=200&fit=crop",  // dermatologist
+				alt: "Dr Ameen"
+			}
 		];
 
 		function getTodayDate() {
@@ -674,33 +736,38 @@
 			const grid = document.getElementById('doctorEliteGrid');
 			if (!grid) return;
 			const times = generateTimeSlots();
-			grid.innerHTML = doctorsElite.map(doc => `
-				<div class="doc-card-vibrant" data-docid="${doc.id}">
-					<div style="display:flex; gap:1.2rem; align-items:center;">
-						<div class="doc-avatar-pulse"><i class="fas ${doc.deptIcon}"></i></div>
-						<div>
-							<h3 style="font-weight:800;">${doc.name}</h3>
-							<span style="background:#FFE4CC; padding:0.2rem 0.7rem; border-radius:50px; font-size:0.7rem; font-weight:700;">${doc.specialization}</span>
-							<div style="font-size:0.75rem; color:#5A6E7A;">${doc.qualification}</div>
-						</div>
-					</div>
-					<div class="booking-interface">
-						<div class="date-slot">
-							<i class="far fa-calendar-alt" style="color:#E67E22;"></i>
-							<input type="date" id="date_${doc.id}" class="dynamic-date" value="${getTodayDate()}" min="${getTodayDate()}" style="width:115px;">
-						</div>
-						<div class="date-slot">
-							<i class="far fa-clock" style="color:#E67E22;"></i>
-							<select id="time_${doc.id}" class="dynamic-time">
-								${times.map(t => `<option value="${t}">${t}</option>`).join('')}
-							</select>
-						</div>
-						<button class="wa-btn-pro wa-doc-book" data-docname="${doc.name}" data-docid="${doc.id}"><i class="fab fa-whatsapp"></i> Book Now →</button>
-					</div>
-					<div style="margin-top: 12px; font-size:0.7rem; color:#1F7A6B;"><i class="fas fa-rupee-sign"></i> Consultation: ₹500 | Same-day slot avail.</div>
-				</div>
-			`).join('');
+			const todayVal = getTodayDate();
 
+			grid.innerHTML = doctorsElite.map(doc => `
+					<div class="doc-card-vibrant" data-docid="${doc.id}">
+						<div class="flex-avatar-group">
+							<!-- Using beautiful doctor images instead of placeholder icons -->
+							<img class="doc-avatar-image" src="${doc.imageUrl}" alt="${doc.name}" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML+= '<div class=\\'avatar-fallback-icon\\'><i class=\\'fas ${doc.deptIcon}\\'></i></div>'; this.style.display='none';">
+							<div>
+								<h3 style="font-weight:800;">${doc.name}</h3>
+								<span style="background:#FFE4CC; padding:0.2rem 0.7rem; border-radius:50px; font-size:0.7rem; font-weight:700;">${doc.specialization}</span>
+								<div style="font-size:0.75rem; color:#5A6E7A; margin-top:4px;">${doc.qualification}</div>
+							</div>
+						</div>
+						<div class="booking-interface">
+							<div class="date-slot">
+								<i class="far fa-calendar-alt" style="color:#E67E22;"></i>
+								<input type="date" id="date_${doc.id}" class="dynamic-date" value="${todayVal}" min="${todayVal}" style="width:115px;">
+							</div>
+							<div class="date-slot">
+								<i class="far fa-clock" style="color:#E67E22;"></i>
+								<select id="time_${doc.id}" class="dynamic-time">
+									${times.map(t => `<option value="${t}">${t}</option>`).join('')}
+								</select>
+							</div>
+							<button class="wa-btn-pro wa-doc-book" data-docname="${doc.name}" data-docid="${doc.id}"><i class="fab fa-whatsapp"></i> Book Now →</button>
+						</div>
+						<div style="margin-top: 12px; font-size:0.7rem; color:#1F7A6B;"><i class="fas fa-rupee-sign"></i> Consultation: ₹500 | Same-day slot avail.</div>
+					</div>
+				`).join('');
+
+			// fix for any images that might fail: they'll be replaced with fallback icon via inline error handler
+			// but also we need to ensure proper data binding for buttons
 			document.querySelectorAll('.wa-doc-book').forEach(btn => {
 				btn.addEventListener('click', (e) => {
 					const docName = btn.getAttribute('data-docname');
@@ -711,6 +778,8 @@
 					sendWhatsAppVibrant(docName, formattedDate, selectedTime);
 				});
 			});
+			// set min date for all date inputs after render
+			document.querySelectorAll('.dynamic-date').forEach(inp => { inp.setAttribute('min', getTodayDate()); });
 		}
 
 		function sendWhatsAppVibrant(doctorName, dateStr, timeStr) {
@@ -757,11 +826,8 @@
 		}
 
 		renderPremiumDoctors();
-		function updateMinDates() {
-			const today = getTodayDate();
-			document.querySelectorAll('.dynamic-date').forEach(inp => { if (!inp.getAttribute('min')) inp.setAttribute('min', today); });
-		}
-		updateMinDates();
+
+		// expose global functions
 		window.openRichMap = openRichMap;
 		window.scrollToDoctorsAndBook = scrollToDoctorsAndBook;
 	</script>
