@@ -37,28 +37,33 @@
 			background: var(--bg-gradient);
 			color: #1E2A3E;
 			overflow-x: hidden;
+			width: 100%;
 		}
 
+		/* FIX: ensure no horizontal overflow on mobile */
 		.container {
 			max-width: 1320px;
+			width: 100%;
 			margin: 0 auto;
-			padding: 1.8rem 2rem;
+			padding: 1.2rem 1rem;
+			overflow-x: hidden;
 		}
 
 		/* Animated Premium Top Bar */
 		.vibrant-ticker {
 			background: linear-gradient(95deg, #1A2F4F, #0F3B3A);
 			border-radius: 60px;
-			padding: 0.8rem 1.8rem;
+			padding: 0.7rem 1.2rem;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
 			flex-wrap: wrap;
-			gap: 0.8rem;
+			gap: 0.6rem;
 			margin-bottom: 1.5rem;
 			box-shadow: 0 15px 25px -12px rgba(0,0,0,0.2);
 			color: white;
 			font-weight: 500;
+			width: 100%;
 		}
 
 		.ticker-item i {
@@ -91,13 +96,14 @@
 		/* ========== HERO BANNER (FIXED ALIGNMENT & READABILITY) ========== */
 		.hero-banner-premium {
 			background: linear-gradient(125deg, #0B2B3B 0%, #1A4A3F 50%, #0F2F3A 100%);
-			border-radius: 32px;
-			padding: 2rem 2.5rem;
-			margin-bottom: 2.5rem;
+			border-radius: 28px;
+			padding: 1.5rem 1.5rem;
+			margin-bottom: 2rem;
 			position: relative;
 			overflow: hidden;
 			box-shadow: 0 20px 35px -12px rgba(0,0,0,0.25);
 			border: 1px solid rgba(255,215,0,0.2);
+			width: 100%;
 		}
 
 			.hero-banner-premium::before {
@@ -105,8 +111,8 @@
 				position: absolute;
 				top: -30%;
 				right: -10%;
-				width: 280px;
-				height: 280px;
+				width: 220px;
+				height: 220px;
 				background: radial-gradient(circle, rgba(230,126,34,0.15) 0%, rgba(230,126,34,0) 70%);
 				border-radius: 50%;
 				pointer-events: none;
@@ -117,18 +123,20 @@
 			justify-content: space-between;
 			align-items: center;
 			flex-wrap: wrap;
-			gap: 1.8rem;
+			gap: 1.5rem;
 			position: relative;
 			z-index: 2;
+			width: 100%;
 		}
 
 		.banner-text {
 			flex: 1.5;
+			min-width: 180px;
 		}
 
 			.banner-text h2 {
 				font-family: 'Space Grotesk', sans-serif;
-				font-size: 2.4rem;
+				font-size: 1.9rem;
 				font-weight: 800;
 				color: white;
 				letter-spacing: -0.02em;
@@ -137,10 +145,10 @@
 			}
 
 		.banner-tagline {
-			font-size: 1rem;
+			font-size: 0.85rem;
 			color: #FFD966;
 			font-weight: 600;
-			margin: 0.5rem 0 0.8rem;
+			margin: 0.5rem 0 0.6rem;
 			display: flex;
 			align-items: center;
 			gap: 0.5rem;
@@ -149,49 +157,51 @@
 
 		.banner-stats {
 			display: flex;
-			gap: 1rem;
-			margin: 0.8rem 0 1.2rem;
+			gap: 0.7rem;
+			margin: 0.6rem 0 1rem;
 			flex-wrap: wrap;
 		}
 
 		.banner-stat-chip {
 			background: rgba(255,255,255,0.12);
 			backdrop-filter: blur(4px);
-			padding: 0.4rem 1rem;
+			padding: 0.3rem 0.9rem;
 			border-radius: 40px;
-			font-size: 0.85rem;
+			font-size: 0.75rem;
 			font-weight: 600;
 			color: #FEF9E6;
+			white-space: nowrap;
 		}
 
 		.banner-buttons {
 			display: flex;
 			flex-wrap: wrap;
-			gap: 1rem;
+			gap: 0.8rem;
 			margin-top: 0.5rem;
 		}
 
 		.btn-banner-primary {
 			background: linear-gradient(95deg, #E67E22, #F39C12);
 			border: none;
-			padding: 0.85rem 1.8rem;
+			padding: 0.7rem 1.3rem;
 			border-radius: 50px;
 			color: white;
 			font-weight: 700;
-			font-size: 0.95rem;
+			font-size: 0.85rem;
 			cursor: pointer;
 			transition: all 0.25s;
 			box-shadow: 0 10px 18px -6px rgba(230,126,34,0.4);
 			display: inline-flex;
 			align-items: center;
-			gap: 0.6rem;
+			gap: 0.5rem;
+			white-space: nowrap;
 		}
 
 		.btn-banner-secondary {
 			background: rgba(255,255,255,0.12);
 			backdrop-filter: blur(8px);
 			border: 1px solid rgba(255,255,255,0.35);
-			padding: 0.85rem 1.8rem;
+			padding: 0.7rem 1.3rem;
 			border-radius: 50px;
 			color: white;
 			font-weight: 600;
@@ -199,7 +209,8 @@
 			transition: 0.2s;
 			display: inline-flex;
 			align-items: center;
-			gap: 0.6rem;
+			gap: 0.5rem;
+			white-space: nowrap;
 		}
 
 		.btn-banner-primary:hover {
@@ -216,11 +227,11 @@
 		.banner-contact-card {
 			background: rgba(255,255,245,0.12);
 			backdrop-filter: blur(12px);
-			border-radius: 28px;
-			padding: 1.2rem 1.8rem;
+			border-radius: 24px;
+			padding: 1rem 1.2rem;
 			text-align: center;
 			border: 1px solid rgba(255,215,0,0.35);
-			min-width: 220px;
+			min-width: 180px;
 		}
 
 			.banner-contact-card i {
@@ -229,28 +240,29 @@
 
 		.contact-label {
 			font-weight: 500;
-			margin: 8px 0 4px;
+			margin: 6px 0 2px;
 			color: #FFE0B5;
-			font-size: 0.85rem;
+			font-size: 0.75rem;
 			letter-spacing: 0.5px;
 		}
 
 		.phone-big {
-			font-size: 1.6rem;
+			font-size: 1.3rem;
 			font-weight: 800;
 			color: #FFD966;
 			letter-spacing: 1px;
-			margin: 6px 0;
+			margin: 5px 0;
+			word-break: keep-all;
 		}
 
 			.phone-big i {
-				margin-right: 6px;
-				font-size: 1.3rem;
+				margin-right: 4px;
+				font-size: 1.1rem;
 			}
 
 		.walkin-text {
-			font-size: 0.75rem;
-			margin-top: 8px;
+			font-size: 0.7rem;
+			margin-top: 6px;
 			color: #FFE0B5;
 			font-weight: 500;
 		}
@@ -262,15 +274,27 @@
 			}
 
 			.hero-banner-premium {
-				padding: 1.5rem;
+				padding: 1.2rem;
 			}
 
 			.banner-text h2 {
-				font-size: 1.8rem;
+				font-size: 1.7rem;
 			}
 
 			.banner-contact-card {
 				width: 100%;
+				max-width: 100%;
+			}
+
+			.btn-banner-primary, .btn-banner-secondary {
+				white-space: normal;
+				font-size: 0.8rem;
+				padding: 0.6rem 1rem;
+			}
+
+			.banner-stat-chip {
+				white-space: normal;
+				font-size: 0.7rem;
 			}
 		}
 
@@ -278,13 +302,14 @@
 		.hero-showcase {
 			display: grid;
 			grid-template-columns: 1.3fr 0.9fr;
-			gap: 2rem;
-			margin-bottom: 3rem;
+			gap: 1.5rem;
+			margin-bottom: 2.5rem;
+			width: 100%;
 		}
 
 		.hero-left h1 {
 			font-family: 'Space Grotesk', sans-serif;
-			font-size: 3rem;
+			font-size: 2.4rem;
 			font-weight: 800;
 			line-height: 1.1;
 			background: linear-gradient(120deg, #1E4A76, #1F7A6B, #E67E22);
@@ -294,10 +319,10 @@
 		}
 
 		.tamil-elegant {
-			font-size: 1.3rem;
+			font-size: 1rem;
 			font-weight: 600;
 			color: var(--deep-teal);
-			margin: 0.3rem 0 0.8rem;
+			margin: 0.3rem 0 0.6rem;
 			background: rgba(27,123,110,0.1);
 			display: inline-block;
 			padding: 0.2rem 1rem;
@@ -307,25 +332,26 @@
 		.spec-badge-group {
 			display: flex;
 			flex-wrap: wrap;
-			gap: 0.8rem;
-			margin: 1.5rem 0;
+			gap: 0.7rem;
+			margin: 1.2rem 0;
 		}
 
 		.spec-badge {
 			background: white;
 			border-radius: 50px;
-			padding: 0.6rem 1.4rem;
+			padding: 0.5rem 1rem;
 			font-weight: 600;
-			font-size: 0.85rem;
+			font-size: 0.8rem;
 			box-shadow: var(--shadow-md);
 			border-left: 4px solid var(--fresh-green);
+			white-space: nowrap;
 		}
 
 		.info-card-glow {
 			background: rgba(255,255,255,0.85);
 			backdrop-filter: blur(10px);
 			border-radius: var(--border-radius-xl);
-			padding: 1.8rem;
+			padding: 1.5rem;
 			box-shadow: var(--shadow-xl);
 			border: 1px solid rgba(255,255,255,0.5);
 		}
@@ -334,68 +360,57 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: 0.9rem 0;
+			padding: 0.7rem 0;
 			border-bottom: 1px solid rgba(0,0,0,0.05);
+			flex-wrap: wrap;
+			gap: 6px;
 		}
 
 			.metric-row span {
 				font-weight: 500;
 				color: #2c3e50;
+				font-size: 0.9rem;
 			}
 
 			.metric-row strong {
 				color: #E67E22;
 				font-weight: 700;
+				font-size: 0.9rem;
 			}
 
-		/* Doctor cards - updated with image support */
+		/* Doctor cards */
 		.doctor-premium-grid {
 			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-			gap: 2rem;
-			margin: 2rem 0;
+			grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+			gap: 1.5rem;
+			margin: 1.5rem 0;
+			width: 100%;
 		}
 
 		.doc-card-vibrant {
 			background: var(--card-white);
-			border-radius: 32px;
-			padding: 1.5rem;
+			border-radius: 28px;
+			padding: 1.3rem;
 			transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 			box-shadow: 0 15px 30px -12px rgba(0,0,0,0.1);
 			border: 1px solid rgba(230,126,34,0.2);
+			width: 100%;
 		}
 
 			.doc-card-vibrant:hover {
-				transform: translateY(-8px);
+				transform: translateY(-6px);
 				border-color: var(--sunset-orange);
 			}
 
-		/* NEW: Doctor avatar with image */
-		.doc-avatar-image {
-			width: 80px;
-			height: 80px;
-			border-radius: 28px;
-			object-fit: cover;
-			box-shadow: 0 10px 20px -5px rgba(0,0,0,0.15);
-			border: 3px solid #FFD966;
-			background: #FFF4E6;
-			transition: transform 0.2s ease;
-		}
-
-		.doc-card-vibrant:hover .doc-avatar-image {
-			transform: scale(1.02);
-		}
-
-		/* fallback for any missing images: subtle icon bg */
-		.avatar-fallback-icon {
-			width: 80px;
-			height: 80px;
+		.doc-avatar-pulse {
+			width: 60px;
+			height: 60px;
 			background: linear-gradient(145deg, #FFE8D6, #FFD9B5);
 			border-radius: 28px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			font-size: 2.2rem;
+			font-size: 1.5rem;
 			font-weight: 800;
 			color: var(--sunset-orange);
 		}
@@ -406,24 +421,26 @@
 			justify-content: space-between;
 			align-items: center;
 			margin-top: 1rem;
-			gap: 0.7rem;
+			gap: 0.6rem;
 		}
 
 		.date-slot {
 			background: #F8F9FC;
 			border-radius: 60px;
-			padding: 0.4rem 1rem;
+			padding: 0.4rem 0.8rem;
 			display: flex;
 			align-items: center;
-			gap: 0.4rem;
-			font-size: 0.8rem;
+			gap: 0.3rem;
+			font-size: 0.75rem;
 			border: 1px solid #E9ECF3;
+			flex: 1;
+			min-width: 110px;
 		}
 
 		.wa-btn-pro {
 			background: linear-gradient(95deg, #25D366, #128C7E);
 			border: none;
-			padding: 0.6rem 1.3rem;
+			padding: 0.5rem 1.2rem;
 			border-radius: 50px;
 			color: white;
 			font-weight: 700;
@@ -431,8 +448,10 @@
 			transition: 0.2s;
 			display: inline-flex;
 			align-items: center;
-			gap: 0.5rem;
+			gap: 0.4rem;
 			box-shadow: 0 5px 12px rgba(37,211,102,0.3);
+			font-size: 0.75rem;
+			white-space: nowrap;
 		}
 
 			.wa-btn-pro:hover {
@@ -442,58 +461,72 @@
 
 		.specialty-color-show {
 			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-			gap: 1.3rem;
-			margin: 1.8rem 0;
+			grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+			gap: 1rem;
+			margin: 1.5rem 0;
+			width: 100%;
 		}
 
 		.spec-card-clr {
 			background: white;
-			border-radius: 28px;
-			padding: 1.3rem 0.8rem;
+			border-radius: 24px;
+			padding: 1rem 0.5rem;
 			text-align: center;
 			border-bottom: 4px solid var(--fresh-green);
 		}
 
 			.spec-card-clr i {
-				font-size: 2rem;
+				font-size: 1.6rem;
 				color: #E67E22;
-				margin-bottom: 0.5rem;
+				margin-bottom: 0.4rem;
+			}
+
+			.spec-card-clr h4 {
+				font-size: 1rem;
+			}
+
+			.spec-card-clr span {
+				font-size: 0.7rem;
+				color: #5a6e7a;
 			}
 
 		.two-col-vibrant {
 			display: grid;
 			grid-template-columns: 1.2fr 0.9fr;
-			gap: 2rem;
-			margin: 2rem 0;
+			gap: 1.5rem;
+			margin: 1.5rem 0;
+			width: 100%;
 		}
 
 		.glass-info {
 			background: rgba(255,255,240,0.7);
 			backdrop-filter: blur(8px);
-			border-radius: 32px;
-			padding: 1.8rem;
+			border-radius: 28px;
+			padding: 1.4rem;
 			border: 1px solid rgba(230,126,34,0.2);
+			width: 100%;
 		}
 
 		.map-vibrant {
 			background: linear-gradient(115deg, #FFF3E0, #FFE9D4);
-			border-radius: 24px;
-			padding: 1rem 1.2rem;
+			border-radius: 20px;
+			padding: 0.9rem 1rem;
 			margin-top: 1rem;
 			cursor: pointer;
 			display: flex;
 			justify-content: space-between;
 			font-weight: 700;
+			font-size: 0.85rem;
 		}
 
 		footer {
-			margin-top: 3rem;
+			margin-top: 2.5rem;
 			background: #1E2A3E;
 			color: white;
-			border-radius: 40px;
-			padding: 2rem;
+			border-radius: 32px;
+			padding: 1.5rem;
 			text-align: center;
+			width: 100%;
 		}
 
 		@media (max-width: 800px) {
@@ -502,11 +535,62 @@
 			}
 
 			.container {
-				padding: 1rem;
+				padding: 0.8rem;
 			}
 
 			.hero-left h1 {
-				font-size: 2rem;
+				font-size: 1.9rem;
+			}
+
+			.spec-badge {
+				white-space: normal;
+				font-size: 0.7rem;
+				padding: 0.4rem 0.8rem;
+			}
+
+			.doctor-premium-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.specialty-color-show {
+				grid-template-columns: repeat(2, 1fr);
+			}
+
+			.booking-interface {
+				flex-direction: column;
+				align-items: stretch;
+			}
+
+			.date-slot {
+				width: 100%;
+				justify-content: space-between;
+			}
+
+			.wa-btn-pro {
+				justify-content: center;
+				white-space: normal;
+				padding: 0.6rem;
+			}
+
+			.metric-row {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+		}
+
+		@media (max-width: 480px) {
+			.vibrant-ticker {
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 0.4rem;
+			}
+
+			.banner-text h2 {
+				font-size: 1.5rem;
+			}
+
+			.phone-big {
+				font-size: 1.2rem;
 			}
 		}
 
@@ -516,11 +600,14 @@
 			right: 25px;
 			background: linear-gradient(135deg, #2C3E50, #E67E22);
 			color: white;
-			padding: 0.8rem 1.5rem;
+			padding: 0.7rem 1.3rem;
 			border-radius: 50px;
 			font-weight: 600;
 			z-index: 999;
 			animation: fadeUp 0.3s;
+			font-size: 0.85rem;
+			max-width: 85vw;
+			white-space: nowrap;
 		}
 
 		@keyframes fadeUp {
@@ -536,9 +623,9 @@
 		}
 
 		.section-title {
-			font-size: 1.8rem;
+			font-size: 1.5rem;
 			font-weight: 800;
-			margin: 1rem 0 1rem;
+			margin: 1rem 0 0.8rem;
 			background: linear-gradient(135deg, #1B4F72, #E67E22);
 			-webkit-background-clip: text;
 			background-clip: text;
@@ -550,14 +637,16 @@
 			border: none;
 			font-weight: 600;
 			outline: none;
+			font-size: 0.7rem;
+			width: auto;
 		}
 
-		/* responsive fix for images */
-		.flex-avatar-group {
-			display: flex;
-			gap: 1.2rem;
-			align-items: center;
-			flex-wrap: wrap;
+		.dynamic-date, .dynamic-time {
+			font-family: 'Inter', sans-serif;
+		}
+
+		a {
+			text-decoration: none;
 		}
 	</style>
 </head>
@@ -566,19 +655,19 @@
 	<div class="container">
 		<!-- top ticker -->
 		<div class="vibrant-ticker">
-			<div><i class="fas fa-location-dot"></i> No. 253A, Railway Station Road, Kavaraipettai, Chennai</div>
+			<div><i class="fas fa-location-dot"></i> No. 253A, Railway Station Road, Kavaraipettai</div>
 			<div><span class="pulse-dot"></span> Live Reception: +91 97879 60590</div>
 			<div><i class="fab fa-whatsapp"></i> WhatsApp Priority Booking Active</div>
 		</div>
 
-		<!-- ========== HERO BANNER ========== -->
+		<!-- ========== HERO BANNER (TEXT & ALIGNMENT FIXED) ========== -->
 		<div class="hero-banner-premium" data-aos="fade-down" data-aos-duration="800">
 			<div class="banner-flex">
 				<div class="banner-text">
 					<h2>Your Health, Our Priority <span style="color:#FFD966;">❤️</span></h2>
 					<div class="banner-tagline">
 						<i class="fas fa-shield-heart"></i> 15+ Years of Trusted Care
-						<i class="fas fa-star" style="margin-left: 8px; color:#FFD966;"></i>
+						<i class="fas fa-star" style="margin-left: 4px; color:#FFD966;"></i>
 						<i class="fas fa-star" style="color:#FFD966;"></i>
 						<i class="fas fa-star" style="color:#FFD966;"></i>
 						<i class="fas fa-star" style="color:#FFD966;"></i>
@@ -594,7 +683,7 @@
 					</div>
 				</div>
 				<div class="banner-contact-card">
-					<i class="fas fa-headset" style="font-size: 1.8rem;"></i>
+					<i class="fas fa-headset" style="font-size: 1.5rem;"></i>
 					<div class="contact-label">Emergency / Appointments</div>
 					<div class="phone-big"><i class="fas fa-phone-alt"></i> 97879 60590</div>
 					<div class="walkin-text"><i class="fas fa-clock"></i> Walk-in anytime 8AM–10PM</div>
@@ -605,10 +694,10 @@
 		<!-- Hero split -->
 		<div class="hero-showcase">
 			<div class="hero-left" data-aos="fade-right">
-				<div style="background:#FDEBD0; display:inline-block; padding:0.2rem 1.2rem; border-radius:40px; margin-bottom:1rem;"><i class="fas fa-award"></i> Multi-Awarded Clinic</div>
+				<div style="background:#FDEBD0; display:inline-block; padding:0.2rem 1rem; border-radius:40px; margin-bottom:0.8rem; font-size:0.8rem;"><i class="fas fa-award"></i> Multi-Awarded Clinic</div>
 				<h1>SAI CLINIC & DIAGNOSTICS</h1>
 				<div class="tamil-elegant">சாய் கிளினிக் — முழுமையான சுகாதார பராமரிப்பு</div>
-				<p style="color:#E67E22; font-weight:600; margin-top:0.5rem;"><i class="fas fa-flask"></i> Advanced Lab | Digital X-Ray | ECG Studio | In-house Pharmacy</p>
+				<p style="color:#E67E22; font-weight:600; margin-top:0.4rem; font-size:0.85rem;"><i class="fas fa-flask"></i> Advanced Lab | Digital X-Ray | ECG Studio | In-house Pharmacy</p>
 				<div class="spec-badge-group">
 					<div class="spec-badge"><i class="fas fa-vial"></i> 24/7 STAT Lab</div>
 					<div class="spec-badge"><i class="fas fa-bolt"></i> Emergency Ready</div>
@@ -623,7 +712,7 @@
 			</div>
 		</div>
 
-		<!-- Doctors section with REAL IMAGES (high-quality medical portraits) -->
+		<!-- Doctors section -->
 		<div data-aos="fade-up">
 			<div class="section-title"><i class="fas fa-user-md" style="color:#E67E22;"></i> 👨‍⚕️ Elite Specialists — Pick Date & Time → WhatsApp Confirm</div>
 		</div>
@@ -645,30 +734,30 @@
 		<!-- Two column -->
 		<div class="two-col-vibrant">
 			<div class="glass-info" data-aos="fade-right">
-				<h3><i class="fas fa-map-marked-alt" style="color:#E67E22;"></i> 📍 Clinic Hub & Smart Directions</h3>
-				<p style="margin: 0.5rem 0; font-weight:500;">No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206</p>
+				<h3 style="font-size:1.2rem;"><i class="fas fa-map-marked-alt" style="color:#E67E22;"></i> 📍 Clinic Hub & Smart Directions</h3>
+				<p style="margin: 0.5rem 0; font-weight:500; font-size:0.85rem;">No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206</p>
 				<div class="map-vibrant" onclick="openRichMap()">
 					<span><i class="fas fa-route"></i> Navigate via Google Maps</span>
 					<i class="fas fa-arrow-right"></i>
 				</div>
-				<div style="background:#EDF4F2; border-radius: 20px; padding: 1rem; margin-top: 1rem; display:flex; gap:1rem; align-items:center;">
-					<i class="fas fa-capsules" style="font-size:2rem; color:#27AE60;"></i>
-					<div><strong>🏥 SAI MEDICALS (In-House Pharmacy)</strong><br>Instant medicine dispensing & surgical items</div>
+				<div style="background:#EDF4F2; border-radius: 20px; padding: 0.9rem; margin-top: 1rem; display:flex; gap:0.8rem; align-items:center;">
+					<i class="fas fa-capsules" style="font-size:1.8rem; color:#27AE60;"></i>
+					<div><strong>🏥 SAI MEDICALS (In-House Pharmacy)</strong><br style="display:none;"> <span style="font-size:0.75rem;">Instant medicine dispensing & surgical items</span></div>
 				</div>
 			</div>
 			<div class="glass-info" data-aos="fade-left">
-				<h3><i class="fas fa-headset"></i> Centralized Concierge Desk</h3>
-				<p style="margin-top:0.8rem;">Call for instant appointment alignment or request callback</p>
-				<a href="tel:9787960590" style="text-decoration:none; font-size:1.7rem; font-weight:800; color:#E67E22; display:block; margin:0.5rem 0;"><i class="fas fa-phone-alt"></i> 97879 60590</a>
-				<button class="wa-btn-pro" id="globalWhatsappBtnVibrant" style="background:#075E54; width:100%; justify-content:center; margin-top:0.5rem;"><i class="fab fa-whatsapp"></i> Get Appointment via WhatsApp</button>
-				<p style="font-size:0.7rem; margin-top:1rem;">✔️ Insurance & Cashless | ✔️ Home Sample Collection</p>
+				<h3 style="font-size:1.2rem;"><i class="fas fa-headset"></i> Centralized Concierge Desk</h3>
+				<p style="margin-top:0.6rem; font-size:0.85rem;">Call for instant appointment alignment or request callback</p>
+				<a href="tel:9787960590" style="text-decoration:none; font-size:1.4rem; font-weight:800; color:#E67E22; display:block; margin:0.4rem 0;"><i class="fas fa-phone-alt"></i> 97879 60590</a>
+				<button class="wa-btn-pro" id="globalWhatsappBtnVibrant" style="background:#075E54; width:100%; justify-content:center; margin-top:0.6rem;"><i class="fab fa-whatsapp"></i> Get Appointment via WhatsApp</button>
+				<p style="font-size:0.65rem; margin-top:0.8rem;">✔️ Insurance & Cashless | ✔️ Home Sample Collection</p>
 			</div>
 		</div>
 
 		<footer>
-			<p style="font-weight:800; font-size:1.2rem;">SAI CLINIC & DIAGNOSTICS COMPLEX</p>
-			<p>No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206 | +91 97879 60590</p>
-			<p>© 2025 — Integrated Health Ecosystem</p>
+			<p style="font-weight:800; font-size:1rem;">SAI CLINIC & DIAGNOSTICS COMPLEX</p>
+			<p style="font-size:0.75rem;">No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206 | +91 97879 60590</p>
+			<p style="font-size:0.7rem;">© 2025 — Integrated Health Ecosystem</p>
 		</footer>
 	</div>
 
@@ -676,49 +765,12 @@
 	<script>
 		AOS.init({ duration: 700, once: true });
 
-		// ========== DOCTOR DATA WITH HIGH-QUALITY PROFESSIONAL IMAGES (Unsplash + Reliable medical style) ==========
-		// Using curated images that represent confident, friendly physicians in clinical environment
 		const doctorsElite = [
-			{
-				id: 101, name: "Dr. S. Sangami",
-				specialization: "Clinical Diabetology & Metabolic Health",
-				qualification: "M.B.B.S., Dip. Diabetology, FICM",
-				deptIcon: "fa-tint",
-				imageUrl: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&h=200&fit=crop",  // female doctor portrait
-				alt: "Dr Sangami"
-			},
-			{
-				id: 102, name: "Dr. M. Karthikeyan",
-				specialization: "Orthopedics & Joint Replacement",
-				qualification: "M.S. (Ortho)",
-				deptIcon: "fa-bone",
-				imageUrl: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=200&fit=crop",  // male ortho confident
-				alt: "Dr Karthikeyan"
-			},
-			{
-				id: 103, name: "Dr. M.R. Ramya",
-				specialization: "Gynaecology & Fertility Expert",
-				qualification: "M.B.B.S., D.G.O., DRM, F.M.A.S.",
-				deptIcon: "fa-female",
-				imageUrl: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=200&h=200&fit=crop", // female gynecologist
-				alt: "Dr Ramya"
-			},
-			{
-				id: 104, name: "Dr. N.H. Mallikarjun",
-				specialization: "General & Laparoscopic Surgery",
-				qualification: "M.B.B.S., M.S. (Gen Surg)",
-				deptIcon: "fa-scalpel",
-				imageUrl: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=200&h=200&fit=crop", // senior male surgeon
-				alt: "Dr Mallikarjun"
-			},
-			{
-				id: 105, name: "Dr. H. Sadhiqul Ameen",
-				specialization: "Dermatology & Venereology",
-				qualification: "M.D. (DVL)",
-				deptIcon: "fa-allergies",
-				imageUrl: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=200&h=200&fit=crop",  // dermatologist
-				alt: "Dr Ameen"
-			}
+			{ id: 101, name: "Dr. S. Sangami", initial: "SS", specialization: "Clinical Diabetology & Metabolic Health", qualification: "M.B.B.S., Dip. Diabetology, FICM", deptIcon: "fa-tint" },
+			{ id: 102, name: "Dr. M. Karthikeyan", initial: "MK", specialization: "Orthopedics & Joint Replacement", qualification: "M.S. (Ortho)", deptIcon: "fa-bone" },
+			{ id: 103, name: "Dr. M.R. Ramya", initial: "RR", specialization: "Gynaecology & Fertility Expert", qualification: "M.B.B.S., D.G.O., DRM, F.M.A.S.", deptIcon: "fa-female" },
+			{ id: 104, name: "Dr. N.H. Mallikarjun", initial: "NM", specialization: "General & Laparoscopic Surgery", qualification: "M.B.B.S., M.S. (Gen Surg)", deptIcon: "fa-scalpel" },
+			{ id: 105, name: "Dr. H. Sadhiqul Ameen", initial: "SA", specialization: "Dermatology & Venereology", qualification: "M.D. (DVL)", deptIcon: "fa-allergies" }
 		];
 
 		function getTodayDate() {
@@ -736,38 +788,33 @@
 			const grid = document.getElementById('doctorEliteGrid');
 			if (!grid) return;
 			const times = generateTimeSlots();
-			const todayVal = getTodayDate();
-
 			grid.innerHTML = doctorsElite.map(doc => `
-					<div class="doc-card-vibrant" data-docid="${doc.id}">
-						<div class="flex-avatar-group">
-							<!-- Using beautiful doctor images instead of placeholder icons -->
-							<img class="doc-avatar-image" src="${doc.imageUrl}" alt="${doc.name}" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML+= '<div class=\\'avatar-fallback-icon\\'><i class=\\'fas ${doc.deptIcon}\\'></i></div>'; this.style.display='none';">
-							<div>
-								<h3 style="font-weight:800;">${doc.name}</h3>
-								<span style="background:#FFE4CC; padding:0.2rem 0.7rem; border-radius:50px; font-size:0.7rem; font-weight:700;">${doc.specialization}</span>
-								<div style="font-size:0.75rem; color:#5A6E7A; margin-top:4px;">${doc.qualification}</div>
-							</div>
+				<div class="doc-card-vibrant" data-docid="${doc.id}">
+					<div style="display:flex; gap:1rem; align-items:center;">
+						<div class="doc-avatar-pulse"><i class="fas ${doc.deptIcon}"></i></div>
+						<div>
+							<h3 style="font-weight:800; font-size:1.1rem;">${doc.name}</h3>
+							<span style="background:#FFE4CC; padding:0.2rem 0.6rem; border-radius:50px; font-size:0.65rem; font-weight:700; display:inline-block;">${doc.specialization}</span>
+							<div style="font-size:0.7rem; color:#5A6E7A;">${doc.qualification}</div>
 						</div>
-						<div class="booking-interface">
-							<div class="date-slot">
-								<i class="far fa-calendar-alt" style="color:#E67E22;"></i>
-								<input type="date" id="date_${doc.id}" class="dynamic-date" value="${todayVal}" min="${todayVal}" style="width:115px;">
-							</div>
-							<div class="date-slot">
-								<i class="far fa-clock" style="color:#E67E22;"></i>
-								<select id="time_${doc.id}" class="dynamic-time">
-									${times.map(t => `<option value="${t}">${t}</option>`).join('')}
-								</select>
-							</div>
-							<button class="wa-btn-pro wa-doc-book" data-docname="${doc.name}" data-docid="${doc.id}"><i class="fab fa-whatsapp"></i> Book Now →</button>
-						</div>
-						<div style="margin-top: 12px; font-size:0.7rem; color:#1F7A6B;"><i class="fas fa-rupee-sign"></i> Consultation: ₹500 | Same-day slot avail.</div>
 					</div>
-				`).join('');
+					<div class="booking-interface">
+						<div class="date-slot">
+							<i class="far fa-calendar-alt" style="color:#E67E22;"></i>
+							<input type="date" id="date_${doc.id}" class="dynamic-date" value="${getTodayDate()}" min="${getTodayDate()}" style="width:115px;">
+						</div>
+						<div class="date-slot">
+							<i class="far fa-clock" style="color:#E67E22;"></i>
+							<select id="time_${doc.id}" class="dynamic-time">
+								${times.map(t => `<option value="${t}">${t}</option>`).join('')}
+							</select>
+						</div>
+						<button class="wa-btn-pro wa-doc-book" data-docname="${doc.name}" data-docid="${doc.id}"><i class="fab fa-whatsapp"></i> Book Now →</button>
+					</div>
+					<div style="margin-top: 10px; font-size:0.65rem; color:#1F7A6B;"><i class="fas fa-rupee-sign"></i> Consultation: ₹500 | Same-day slot avail.</div>
+				</div>
+			`).join('');
 
-			// fix for any images that might fail: they'll be replaced with fallback icon via inline error handler
-			// but also we need to ensure proper data binding for buttons
 			document.querySelectorAll('.wa-doc-book').forEach(btn => {
 				btn.addEventListener('click', (e) => {
 					const docName = btn.getAttribute('data-docname');
@@ -778,8 +825,6 @@
 					sendWhatsAppVibrant(docName, formattedDate, selectedTime);
 				});
 			});
-			// set min date for all date inputs after render
-			document.querySelectorAll('.dynamic-date').forEach(inp => { inp.setAttribute('min', getTodayDate()); });
 		}
 
 		function sendWhatsAppVibrant(doctorName, dateStr, timeStr) {
@@ -792,8 +837,7 @@
 			customMsg += `📍 *Location:* ${locationMsg}%0A`;
 			customMsg += `💊 *Pharmacy:* Attached Sai Medicals%0A`;
 			customMsg += `⚡ *Please confirm my slot* — Thank you!`;
-			const waLink = `https://wa.me/${phone}?text=${customMsg}`;
-			window.open(waLink, '_blank');
+			window.open(`https://wa.me/${phone}?text=${customMsg}`, '_blank');
 			showColorToast(`✨ Redirecting to WhatsApp for ${doctorName} ✨`);
 		}
 
@@ -826,8 +870,11 @@
 		}
 
 		renderPremiumDoctors();
-
-		// expose global functions
+		function updateMinDates() {
+			const today = getTodayDate();
+			document.querySelectorAll('.dynamic-date').forEach(inp => { if (!inp.getAttribute('min')) inp.setAttribute('min', today); });
+		}
+		updateMinDates();
 		window.openRichMap = openRichMap;
 		window.scrollToDoctorsAndBook = scrollToDoctorsAndBook;
 	</script>
