@@ -2,804 +2,1255 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Departments - Clinic Bootstrap Template</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Departments - SAI CLINIC</title>
+    <meta name="description" content="SAI CLINIC & SAI MEDICALS - Comprehensive healthcare services in Kavaraipettai, Chennai.">
+    <meta name="keywords" content="Sai Clinic, SAI MEDICALS, Kavaraipettai, Chennai, doctors, lab, X-ray, ECG">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
-    rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+          rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Clinic
-  * Template URL: https://bootstrapmade.com/clinic-bootstrap-template/
-  * Updated: Jul 23 2025 with Bootstrap v5.3.7
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <!-- SweetAlert2 for appointment -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        /* SAI CLINIC Custom Styles */
+        .topbar.dark-background {
+            background: #0d47a1 !important;
+        }
+
+        .topbar .contact-info i,
+        .topbar .contact-info a,
+        .topbar .social-links a {
+            color: #fff !important;
+        }
+
+        .branding .sitename {
+            color: #0d47a1 !important;
+            font-weight: 700;
+        }
+
+        .page-title .heading {
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+            padding: 80px 0 60px;
+        }
+
+        .page-title .heading-title {
+            color: #fff;
+        }
+
+        .page-title .heading p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .breadcrumbs {
+            background: #f0f4ff;
+            padding: 15px 0;
+        }
+
+            .breadcrumbs ol li a {
+                color: #0d47a1;
+            }
+
+            .breadcrumbs ol li.current {
+                color: #333;
+            }
+
+        /* Department Tabs */
+        .specialty-navigation .nav-pills .nav-link {
+            color: #555;
+            background: #f0f4ff;
+            margin: 0 5px;
+            border-radius: 50px;
+            padding: 12px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+            .specialty-navigation .nav-pills .nav-link:hover {
+                background: #e0e8f5;
+            }
+
+            .specialty-navigation .nav-pills .nav-link.active {
+                background: #0d47a1 !important;
+                color: #fff !important;
+            }
+
+        .department-content .department-title {
+            color: #0d47a1;
+            font-weight: 700;
+        }
+
+        .department-content .department-description {
+            color: #555;
+        }
+
+        .department-content .service-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+            .department-content .service-item:hover {
+                background: #f0f4ff;
+                transform: translateX(5px);
+            }
+
+        .department-content .service-icon {
+            font-size: 1.5rem;
+            color: #0d47a1;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .department-content .service-content h4 {
+            color: #0d47a1;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .department-content .service-content p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .department-image {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+            .department-image img {
+                width: 100%;
+                height: 250px;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+                .department-image img:hover {
+                    transform: scale(1.03);
+                }
+
+        /* Department Cards */
+        .department-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+        }
+
+            .department-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 12px 40px rgba(13, 71, 161, 0.12);
+            }
+
+            .department-card .department-icon {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: #0d47a1;
+                color: #fff;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                z-index: 2;
+                box-shadow: 0 4px 15px rgba(13, 71, 161, 0.3);
+            }
+
+            .department-card .department-image {
+                border-radius: 0;
+            }
+
+                .department-card .department-image img {
+                    height: 200px;
+                    width: 100%;
+                    object-fit: cover;
+                }
+
+            .department-card .department-content {
+                padding: 20px 25px 25px;
+            }
+
+                .department-card .department-content h3 {
+                    color: #0d47a1;
+                    font-weight: 700;
+                    font-size: 1.2rem;
+                    margin-bottom: 10px;
+                }
+
+                .department-card .department-content p {
+                    color: #555;
+                    font-size: 0.95rem;
+                    line-height: 1.6;
+                    margin-bottom: 15px;
+                }
+
+            .department-card .learn-more {
+                color: #0d47a1;
+                text-decoration: none;
+                font-weight: 600;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                transition: all 0.3s ease;
+            }
+
+                .department-card .learn-more:hover {
+                    color: #0a3a8a;
+                    gap: 12px;
+                }
+
+                .department-card .learn-more i {
+                    font-size: 0.8rem;
+                    transition: transform 0.3s ease;
+                }
+
+                .department-card .learn-more:hover i {
+                    transform: translateX(5px);
+                }
+
+        /* Footer Styles */
+        .footer-16 .sitename {
+            color: #0d47a1 !important;
+        }
+
+        .footer-16 .brand-description {
+            color: #555;
+        }
+
+        .footer-16 .contact-item i {
+            color: #0d47a1;
+        }
+
+        .footer-16 .footer-nav a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+            .footer-16 .footer-nav a:hover {
+                color: #0d47a1;
+            }
+
+        .footer-16 .nav-column h6 {
+            color: #0d47a1;
+            font-weight: 700;
+        }
+
+        .footer-bottom {
+            background: #f0f4ff;
+            padding: 20px 0;
+        }
+
+            .footer-bottom .legal-links a {
+                color: #555;
+                text-decoration: none;
+                margin: 0 10px;
+                transition: color 0.3s ease;
+            }
+
+                .footer-bottom .legal-links a:hover {
+                    color: #0d47a1;
+                }
+
+            .footer-bottom .credits {
+                color: #777;
+                font-size: 0.85rem;
+            }
+
+                .footer-bottom .credits a {
+                    color: #0d47a1;
+                    text-decoration: none;
+                }
+
+                    .footer-bottom .credits a:hover {
+                        text-decoration: underline;
+                    }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title .heading {
+                padding: 60px 0 40px;
+            }
+
+            .specialty-navigation .nav-pills .nav-link {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+                margin: 3px;
+            }
+
+            .department-content .service-item {
+                padding: 12px;
+            }
+
+            .department-card .department-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                top: 15px;
+                right: 15px;
+            }
+
+            .department-card .department-image img {
+                height: 160px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .specialty-navigation .nav-pills {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding: 5px 0;
+                gap: 5px;
+            }
+
+                .specialty-navigation .nav-pills .nav-link {
+                    white-space: nowrap;
+                    font-size: 0.75rem;
+                    padding: 6px 12px;
+                }
+        }
+
+        /* Appointment Button */
+        .book-appointment-btn {
+            cursor: pointer;
+        }
+
+        .btn-primary-clinic {
+            background: #0d47a1;
+            color: #fff;
+            padding: 10px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            display: inline-block;
+        }
+
+            .btn-primary-clinic:hover {
+                background: #0a3a8a;
+                color: #fff;
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(13, 71, 161, 0.3);
+            }
+    </style>
+
 </head>
 
 <body class="departments-page">
 
-  <header id="header" class="header fixed-top">
+    <header id="header" class="header fixed-top">
 
-    <div class="topbar d-flex align-items-center dark-background">
-      <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="contact-info d-flex align-items-center">
-          <i class="bi bi-envelope d-flex align-items-center"><a
-              href="mailto:contact@example.com">contact@example.com</a></i>
-          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
-        </div>
-        <div class="social-links d-none d-md-flex align-items-center">
-          <a href="#!" class="twitter"><i class="bi bi-twitter-x"></i></a>
-          <a href="#!" class="facebook"><i class="bi bi-facebook"></i></a>
-          <a href="#!" class="instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#!" class="linkedin"><i class="bi bi-linkedin"></i></a>
-        </div>
-      </div>
-    </div><!-- End Top Bar -->
-
-    <div class="branding d-flex align-items-cente">
-
-      <div class="container position-relative d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-          <!-- <img src="assets/img/logo.webp" alt=""> -->
-          <h1 class="sitename">Clinic</h1>
-        </a>
-
-        <nav id="navmenu" class="navmenu">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="departments.html" class="active">Departments</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="doctors.html">Doctors</a></li>
-            <li class="dropdown"><a href="#"><span>More Pages</span> <i
-                  class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="department-details.html">Department Details</a></li>
-                <li><a href="service-details.html">Service Details</a></li>
-                <li><a href="appointment.html">Appointment</a></li>
-                <li><a href="testimonials.html">Testimonials</a></li>
-                <li><a href="faq.html">Frequently Asked Questions</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="terms.html">Terms</a></li>
-                <li><a href="privacy.html">Privacy</a></li>
-                <li><a href="404.html">404</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#"><span>Dropdown</span> <i
-                  class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="#">Dropdown 1</a></li>
-                <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i
-                      class="bi bi-chevron-down toggle-dropdown"></i></a>
-                  <ul>
-                    <li><a href="#">Deep Dropdown 1</a></li>
-                    <li><a href="#">Deep Dropdown 2</a></li>
-                    <li><a href="#">Deep Dropdown 3</a></li>
-                    <li><a href="#">Deep Dropdown 4</a></li>
-                    <li><a href="#">Deep Dropdown 5</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Dropdown 2</a></li>
-                <li><a href="#">Dropdown 3</a></li>
-                <li><a href="#">Dropdown 4</a></li>
-              </ul>
-            </li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </nav>
-
-      </div>
-
-    </div>
-
-  </header>
-
-  <main class="main">
-
-    <!-- Page Title -->
-    <div class="page-title">
-      <div class="heading">
-        <div class="container">
-          <div class="row d-flex justify-content-center text-center">
-            <div class="col-lg-8">
-              <h1 class="heading-title">Departments</h1>
-              <p class="mb-0">
-                Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo
-                odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum
-                debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat
-                ipsum dolorem.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <nav class="breadcrumbs">
-        <div class="container">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Departments</li>
-          </ol>
-        </div>
-      </nav>
-    </div><!-- End Page Title -->
-
-    <!-- Departments Tabs Section -->
-    <section id="departments-tabs" class="departments-tabs section">
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="medical-specialties">
-          <div class="row">
-            <div class="col-12">
-              <div class="specialty-navigation">
-                <div class="nav nav-pills d-flex" id="specialty-tabs" role="tablist" data-aos="fade-up"
-                  data-aos-delay="400">
-                  <a class="nav-link department-tab active" id="neurology-tab" data-bs-toggle="pill"
-                    href="#departments-tabs-neurology" role="tab" aria-controls="departments-tabs-neurology"
-                    aria-selected="true" data-aos="fade-up" data-aos-delay="100">Neurology</a>
-                  <a class="nav-link department-tab" id="surgery-tab" data-bs-toggle="pill"
-                    href="#departments-tabs-surgery" role="tab" aria-controls="departments-tabs-surgery"
-                    aria-selected="false" data-aos="fade-up" data-aos-delay="150">Surgery</a>
-                  <a class="nav-link department-tab" id="dental-tab" data-bs-toggle="pill"
-                    href="#departments-tabs-dental" role="tab" aria-controls="departments-tabs-dental"
-                    aria-selected="false" data-aos="fade-up" data-aos-delay="200">Dental Care</a>
-                  <a class="nav-link department-tab" id="ophthalmology-tab" data-bs-toggle="pill"
-                    href="#departments-tabs-ophthalmology" role="tab" aria-controls="departments-tabs-ophthalmology"
-                    aria-selected="false" data-aos="fade-up" data-aos-delay="250">Ophthalmology</a>
-                  <a class="nav-link department-tab" id="cardiology-tab" data-bs-toggle="pill"
-                    href="#departments-tabs-cardiology" role="tab" aria-controls="departments-tabs-cardiology"
-                    aria-selected="false" data-aos="fade-up" data-aos-delay="300">Cardiology</a>
+        <div class="topbar d-flex align-items-center dark-background">
+            <div class="container d-flex justify-content-center justify-content-md-between">
+                <div class="contact-info d-flex align-items-center">
+                    <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:info@saigroupofclinic.com">info@saigroupofclinic.com</a></i>
+                    <i class="bi bi-phone d-flex align-items-center ms-4"><span>+91 97879 60590</span></i>
                 </div>
-              </div>
+                <div class="social-links d-none d-md-flex align-items-center">
+                    <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div><!-- End Top Bar -->
+
+        <div class="branding d-flex align-items-cente">
+
+            <div class="container position-relative d-flex align-items-center justify-content-between">
+                <a href="index.html" class="logo d-flex align-items-center">
+                    <h1 class="sitename">SAI CLINIC</h1>
+                </a>
+
+                <nav id="navmenu" class="navmenu">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="departments.html" class="active">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Doctors</a></li>
+                        <li class="dropdown">
+                            <a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                            <ul>
+                                <li><a href="department-details.html">Department Details</a></li>
+                                <li><a href="service-details.html">Service Details</a></li>
+                                <li><a href="appointment.html">Appointment</a></li>
+                                <li><a href="testimonials.html">Testimonials</a></li>
+                                <li><a href="faq.html">Frequently Asked Questions</a></li>
+                                <li><a href="gallery.html">Gallery</a></li>
+                                <li><a href="terms.html">Terms</a></li>
+                                <li><a href="privacy.html">Privacy</a></li>
+                                <li><a href="404.html">404</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                            <ul>
+                                <li><a href="#">Dropdown 1</a></li>
+                                <li class="dropdown">
+                                    <a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                    <ul>
+                                        <li><a href="#">Deep Dropdown 1</a></li>
+                                        <li><a href="#">Deep Dropdown 2</a></li>
+                                        <li><a href="#">Deep Dropdown 3</a></li>
+                                        <li><a href="#">Deep Dropdown 4</a></li>
+                                        <li><a href="#">Deep Dropdown 5</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Dropdown 2</a></li>
+                                <li><a href="#">Dropdown 3</a></li>
+                                <li><a href="#">Dropdown 4</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                </nav>
+
             </div>
 
-            <div class="col-12">
-              <div class="tab-content department-content" id="specialty-content" data-aos="fade-up"
-                data-aos-delay="500">
+        </div>
 
-                <div class="tab-pane fade show active" id="departments-tabs-neurology" role="tabpanel"
-                  aria-labelledby="neurology-tab">
-                  <div class="row department-layout">
-                    <div class="col-lg-4 order-lg-2">
-                      <div class="department-image">
-                        <img src="assets/img/health/neurology-3.webp" alt="Neurology Department" class="img-fluid">
-                      </div>
-                    </div>
-                    <div class="col-lg-8 order-lg-1">
-                      <div class="department-info">
-                        <h2 class="department-title">Neurological Sciences Department</h2>
-                        <p class="department-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                          do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                          nostrud exercitation ullamco.</p>
+    </header>
 
-                        <div class="row mt-4">
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-brain"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Brain Monitoring</h4>
-                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-wave-square"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>EEG Testing</h4>
-                                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-stethoscope"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Neurological Exam</h4>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-file-medical"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Treatment Plans</h4>
-                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis.</p>
-                              </div>
-                            </div>
-                          </div>
+    <main class="main">
+
+        <!-- Page Title -->
+        <div class="page-title">
+            <div class="heading">
+                <div class="container">
+                    <div class="row d-flex justify-content-center text-center">
+                        <div class="col-lg-8">
+                            <h1 class="heading-title">Our Departments</h1>
+                            <p class="mb-0">
+                                SAI CLINIC offers comprehensive medical services across multiple specialties.
+                                Our departments are equipped with modern technology and staffed by experienced professionals
+                                dedicated to providing exceptional healthcare in Kavaraipettai, Chennai.
+                            </p>
                         </div>
-                      </div>
                     </div>
-                  </div>
-                </div><!-- End Neurology Tab -->
+                </div>
+            </div>
+            <nav class="breadcrumbs">
+                <div class="container">
+                    <ol>
+                        <li><a href="index.html">Home</a></li>
+                        <li class="current">Departments</li>
+                    </ol>
+                </div>
+            </nav>
+        </div><!-- End Page Title -->
+        <!-- Departments Tabs Section -->
+        <section id="departments-tabs" class="departments-tabs section">
 
-                <div class="tab-pane fade" id="departments-tabs-surgery" role="tabpanel" aria-labelledby="surgery-tab">
-                  <div class="row department-layout">
-                    <div class="col-lg-4 order-lg-2">
-                      <div class="department-image">
-                        <img src="assets/img/health/surgery-2.webp" alt="Surgery Department" class="img-fluid">
-                      </div>
-                    </div>
-                    <div class="col-lg-8 order-lg-1">
-                      <div class="department-info">
-                        <h2 class="department-title">Surgical Services Department</h2>
-                        <p class="department-description">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                          odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-                        </p>
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-                        <div class="row mt-4">
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-cut"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Minimally Invasive</h4>
-                                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
-                              </div>
+                <div class="medical-specialties">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="specialty-navigation">
+                                <div class="nav nav-pills d-flex" id="specialty-tabs" role="tablist" data-aos="fade-up"
+                                     data-aos-delay="400">
+                                    <a class="nav-link department-tab active" id="general-tab" data-bs-toggle="pill"
+                                       href="#departments-tabs-general" role="tab" aria-controls="departments-tabs-general"
+                                       aria-selected="true" data-aos="fade-up" data-aos-delay="100">General Medicine</a>
+                                    <a class="nav-link department-tab" id="dental-tab" data-bs-toggle="pill"
+                                       href="#departments-tabs-dental" role="tab" aria-controls="departments-tabs-dental"
+                                       aria-selected="false" data-aos="fade-up" data-aos-delay="150">Dental Care</a>
+                                    <a class="nav-link department-tab" id="surgery-tab" data-bs-toggle="pill"
+                                       href="#departments-tabs-surgery" role="tab" aria-controls="departments-tabs-surgery"
+                                       aria-selected="false" data-aos="fade-up" data-aos-delay="200">General Surgery</a>
+                                    <a class="nav-link department-tab" id="diagnostic-tab" data-bs-toggle="pill"
+                                       href="#departments-tabs-diagnostic" role="tab" aria-controls="departments-tabs-diagnostic"
+                                       aria-selected="false" data-aos="fade-up" data-aos-delay="250">Diagnostic Services</a>
+                                    <a class="nav-link department-tab" id="maternal-tab" data-bs-toggle="pill"
+                                       href="#departments-tabs-maternal" role="tab" aria-controls="departments-tabs-maternal"
+                                       aria-selected="false" data-aos="fade-up" data-aos-delay="300">Maternal Care</a>
+                                </div>
                             </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-tools"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Advanced Procedures</h4>
-                                <p>Consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-shield-alt"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Safe Operations</h4>
-                                <p>Incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-clock"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Recovery Support</h4>
-                                <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis.</p>
-                              </div>
-                            </div>
-                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </div><!-- End Surgery Tab -->
 
-                <div class="tab-pane fade" id="departments-tabs-dental" role="tabpanel" aria-labelledby="dental-tab">
-                  <div class="row department-layout">
-                    <div class="col-lg-4 order-lg-2">
-                      <div class="department-image">
-                        <img src="assets/img/health/dermatology-1.webp" alt="Dental Care Department" class="img-fluid">
-                      </div>
-                    </div>
-                    <div class="col-lg-8 order-lg-1">
-                      <div class="department-info">
-                        <h2 class="department-title">Dental Care Department</h2>
-                        <p class="department-description">Suscipit laboriosam, nisi ut aliquid ex ea commodi
-                          consequatur. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil
-                          molestiae.</p>
+                        <div class="col-12">
+                            <div class="tab-content department-content" id="specialty-content" data-aos="fade-up"
+                                 data-aos-delay="500">
 
-                        <div class="row mt-4">
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="far fa-smile"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Oral Health</h4>
-                                <p>Consequatur aut perferendis doloribus asperiores repellat tempore.</p>
-                              </div>
+                                <!-- General Medicine Tab -->
+                                <div class="tab-pane fade show active" id="departments-tabs-general" role="tabpanel"
+                                     aria-labelledby="general-tab">
+                                    <div class="row department-layout">
+                                        <div class="col-lg-4 order-lg-2">
+                                            <div class="department-image">
+                                                <img src="assets/img/health/staff-10.webp" alt="General Medicine Department" class="img-fluid">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 order-lg-1">
+                                            <div class="department-info">
+                                                <h2 class="department-title">General Medicine Department</h2>
+                                                <p class="department-description">Our General Medicine department provides comprehensive primary care services for patients of all ages. From routine check-ups to chronic disease management, our experienced physicians are committed to your overall health and well-being.</p>
+
+                                                <div class="row mt-4">
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-stethoscope"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Health Check-ups</h4>
+                                                                <p>Comprehensive physical examinations and health screenings.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-heartbeat"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Chronic Disease Management</h4>
+                                                                <p>Expert care for diabetes, hypertension, and other chronic conditions.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-vaccine"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Vaccination Services</h4>
+                                                                <p>Complete immunization programs for all age groups.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-prescription"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Prescription Management</h4>
+                                                                <p>Medication management and prescription refills.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- End General Medicine Tab -->
+                                <!-- Dental Care Tab -->
+                                <div class="tab-pane fade" id="departments-tabs-dental" role="tabpanel" aria-labelledby="dental-tab">
+                                    <div class="row department-layout">
+                                        <div class="col-lg-4 order-lg-2">
+                                            <div class="department-image">
+                                                <img src="assets/img/health/staff-2.webp" alt="Dental Care Department" class="img-fluid">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 order-lg-1">
+                                            <div class="department-info">
+                                                <h2 class="department-title">Dental Care Department</h2>
+                                                <p class="department-description">Led by Dr. S. Rubagam, our Dental Care department offers comprehensive oral health services. From routine cleanings to advanced dental procedures, we ensure your smile stays healthy and bright.</p>
+
+                                                <div class="row mt-4">
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-tooth"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>General Dentistry</h4>
+                                                                <p>Routine check-ups, cleanings, and preventive care.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-star"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Cosmetic Dentistry</h4>
+                                                                <p>Teeth whitening, veneers, and smile makeovers.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-cog"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Orthodontics</h4>
+                                                                <p>Braces and aligners for perfect teeth alignment.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-syringe"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Root Canal Treatment</h4>
+                                                                <p>Expert root canal therapy with modern techniques.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- End Dental Tab -->
+                                <!-- General Surgery Tab -->
+                                <div class="tab-pane fade" id="departments-tabs-surgery" role="tabpanel" aria-labelledby="surgery-tab">
+                                    <div class="row department-layout">
+                                        <div class="col-lg-4 order-lg-2">
+                                            <div class="department-image">
+                                                <img src="assets/img/health/surgery-2.webp" alt="General Surgery Department" class="img-fluid">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 order-lg-1">
+                                            <div class="department-info">
+                                                <h2 class="department-title">General Surgery Department</h2>
+                                                <p class="department-description">Our General Surgery department, led by Dr. M. Karthikeyan, Dr. N. Ruba, and Dr. H. Rubagam, offers comprehensive surgical services. We are committed to providing safe, effective surgical care with a focus on patient comfort and recovery.</p>
+
+                                                <div class="row mt-4">
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-cut"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Minor Surgeries</h4>
+                                                                <p>Outpatient surgical procedures for various conditions.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-tools"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Major Surgeries</h4>
+                                                                <p>Comprehensive surgical care for complex conditions.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-shield-alt"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Pre & Post Operative Care</h4>
+                                                                <p>Complete care before and after surgery for best outcomes.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-clock"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Emergency Surgery</h4>
+                                                                <p>24/7 emergency surgical services available.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- End Surgery Tab -->
+                                <!-- Diagnostic Services Tab -->
+                                <div class="tab-pane fade" id="departments-tabs-diagnostic" role="tabpanel"
+                                     aria-labelledby="diagnostic-tab">
+                                    <div class="row department-layout">
+                                        <div class="col-lg-4 order-lg-2">
+                                            <div class="department-image">
+                                                <img src="assets/img/health/facilities-9.webp" alt="Diagnostic Services" class="img-fluid">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 order-lg-1">
+                                            <div class="department-info">
+                                                <h2 class="department-title">Diagnostic Services</h2>
+                                                <p class="department-description">Our Diagnostic Services department is equipped with state-of-the-art technology including digital X-Ray, ECG, and full laboratory services. We provide accurate and timely diagnostic results to support effective treatment decisions.</p>
+
+                                                <div class="row mt-4">
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-flask"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Lab Services</h4>
+                                                                <p>Full-service clinical laboratory for accurate diagnostic testing.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-x-ray"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Digital X-Ray</h4>
+                                                                <p>State-of-the-art digital X-Ray for precise imaging diagnostics.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-heartbeat"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>ECG Services</h4>
+                                                                <p>Electrocardiogram for accurate heart function assessment.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-file-medical"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Health Screenings</h4>
+                                                                <p>Comprehensive health screening packages available.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- End Diagnostic Tab -->
+                                <!-- Maternal Care Tab -->
+                                <div class="tab-pane fade" id="departments-tabs-maternal" role="tabpanel"
+                                     aria-labelledby="maternal-tab">
+                                    <div class="row department-layout">
+                                        <div class="col-lg-4 order-lg-2">
+                                            <div class="department-image">
+                                                <img src="assets/img/health/maternal-2.webp" alt="Maternal Care Department" class="img-fluid">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 order-lg-1">
+                                            <div class="department-info">
+                                                <h2 class="department-title">Maternal Care Department</h2>
+                                                <p class="department-description">Our Maternal Care department provides comprehensive support for women throughout their pregnancy journey and beyond. We are dedicated to ensuring the health and well-being of both mother and baby with compassionate, expert care.</p>
+
+                                                <div class="row mt-4">
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-baby"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Prenatal Care</h4>
+                                                                <p>Comprehensive care throughout your pregnancy journey.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-ambulance"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Delivery Support</h4>
+                                                                <p>Expert support for safe delivery and postpartum care.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-child"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Newborn Care</h4>
+                                                                <p>Specialized care for your newborn's health and development.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="service-item">
+                                                            <div class="service-icon">
+                                                                <i class="fas fa-heart"></i>
+                                                            </div>
+                                                            <div class="service-content">
+                                                                <h4>Maternal Wellness</h4>
+                                                                <p>Support for maternal mental and physical well-being.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- End Maternal Tab -->
+
                             </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-tooth"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Teeth Cleaning</h4>
-                                <p>Et harum quidem rerum facilis est et expedita distinctio nam libero.</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-star"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Cosmetic Dentistry</h4>
-                                <p>Tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-cog"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Orthodontics</h4>
-                                <p>Id quod maxime placeat facere possimus, omnis voluptas assumenda est.</p>
-                              </div>
-                            </div>
-                          </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
-                </div><!-- End Dental Tab -->
+                </div>
 
-                <div class="tab-pane fade" id="departments-tabs-ophthalmology" role="tabpanel"
-                  aria-labelledby="ophthalmology-tab">
-                  <div class="row department-layout">
-                    <div class="col-lg-4 order-lg-2">
-                      <div class="department-image">
-                        <img src="assets/img/health/pediatrics-4.webp" alt="Ophthalmology Department" class="img-fluid">
-                      </div>
-                    </div>
-                    <div class="col-lg-8 order-lg-1">
-                      <div class="department-info">
-                        <h2 class="department-title">Ophthalmology Department</h2>
-                        <p class="department-description">Omnis dolor repellendus temporibus autem quibusdam et aut
-                          officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae.</p>
+            </div>
 
-                        <div class="row mt-4">
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-eye"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Vision Testing</h4>
-                                <p>Sint et voluptatum sint quia dolor sit amet consectetur adipiscing elit.</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-camera"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Retinal Imaging</h4>
-                                <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut.</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-bolt"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Laser Surgery</h4>
-                                <p>Enim ad minim veniam quis nostrud exercitation ullamco laboris nisi.</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-prescription-bottle"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Eye Care Plans</h4>
-                                <p>Ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit.</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div><!-- End Ophthalmology Tab -->
+        </section><!-- /Departments Tabs Section -->
+        <!-- Departments Cards Section -->
+        <section id="departments" class="departments section">
 
-                <div class="tab-pane fade" id="departments-tabs-cardiology" role="tabpanel"
-                  aria-labelledby="cardiology-tab">
-                  <div class="row department-layout">
-                    <div class="col-lg-4 order-lg-2">
-                      <div class="department-image">
-                        <img src="assets/img/health/cardiology-3.webp" alt="Cardiology Department" class="img-fluid">
-                      </div>
-                    </div>
-                    <div class="col-lg-8 order-lg-1">
-                      <div class="department-info">
-                        <h2 class="department-title">Cardiology Department</h2>
-                        <p class="department-description">In voluptate velit esse cillum dolore eu fugiat nulla pariatur
-                          excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt.</p>
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-                        <div class="row mt-4">
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
+                <div class="row g-5">
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="department-card">
+                            <div class="department-icon">
                                 <i class="fas fa-heartbeat"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Heart Monitoring</h4>
-                                <p>Mollit anim id est laborum sed ut perspiciatis unde omnis iste natus error.</p>
-                              </div>
                             </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-chart-line"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>ECG Analysis</h4>
-                                <p>Sit voluptatem accusantium doloremque laudantium totam rem aperiam.</p>
-                              </div>
+                            <div class="department-image">
+                                <img src="assets/img/health/cardiology-3.webp" alt="General Medicine" class="img-fluid">
                             </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-tint"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Blood Tests</h4>
-                                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae.</p>
-                              </div>
+                            <div class="department-content">
+                                <h3>General Medicine</h3>
+                                <p>Comprehensive primary care services including routine check-ups, chronic disease management, and vaccination programs for all ages.</p>
+                                <a href="#" class="learn-more book-appointment-btn">
+                                    <span>Book Appointment</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
                             </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="service-item">
-                              <div class="service-icon">
-                                <i class="fas fa-shield-heart"></i>
-                              </div>
-                              <div class="service-content">
-                                <h4>Preventive Care</h4>
-                                <p>Vitae dicta sunt explicabo nemo enim ipsam voluptatem quia voluptas sit.</p>
-                              </div>
-                            </div>
-                          </div>
                         </div>
-                      </div>
+                    </div><!-- End Department Card -->
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="department-card">
+                            <div class="department-icon">
+                                <i class="fas fa-tooth"></i>
+                            </div>
+                            <div class="department-image">
+                                <img src="assets/img/health/staff-2.webp" alt="Dental Care" class="img-fluid">
+                            </div>
+                            <div class="department-content">
+                                <h3>Dental Care</h3>
+                                <p>Expert dental services including general dentistry, cosmetic procedures, orthodontics, and root canal treatments for optimal oral health.</p>
+                                <a href="#" class="learn-more book-appointment-btn">
+                                    <span>Book Appointment</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div><!-- End Department Card -->
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="department-card">
+                            <div class="department-icon">
+                                <i class="fas fa-cut"></i>
+                            </div>
+                            <div class="department-image">
+                                <img src="assets/img/health/surgery-2.webp" alt="General Surgery" class="img-fluid">
+                            </div>
+                            <div class="department-content">
+                                <h3>General Surgery</h3>
+                                <p>Comprehensive surgical services including minor and major surgeries with expert pre and post-operative care for best outcomes.</p>
+                                <a href="#" class="learn-more book-appointment-btn">
+                                    <span>Book Appointment</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div><!-- End Department Card -->
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="department-card">
+                            <div class="department-icon">
+                                <i class="fas fa-flask"></i>
+                            </div>
+                            <div class="department-image">
+                                <img src="assets/img/health/facilities-9.webp" alt="Diagnostic Services" class="img-fluid">
+                            </div>
+                            <div class="department-content">
+                                <h3>Diagnostic Services</h3>
+                                <p>State-of-the-art diagnostic facilities including Lab, digital X-Ray, ECG, and comprehensive health screenings for accurate diagnosis.</p>
+                                <a href="#" class="learn-more book-appointment-btn">
+                                    <span>Book Appointment</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div><!-- End Department Card -->
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="department-card">
+                            <div class="department-icon">
+                                <i class="fas fa-baby"></i>
+                            </div>
+                            <div class="department-image">
+                                <img src="assets/img/health/maternal-2.webp" alt="Maternal Care" class="img-fluid">
+                            </div>
+                            <div class="department-content">
+                                <h3>Maternal Care</h3>
+                                <p>Comprehensive pregnancy and postnatal care including prenatal support, delivery assistance, newborn care, and maternal wellness programs.</p>
+                                <a href="#" class="learn-more book-appointment-btn">
+                                    <span>Book Appointment</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div><!-- End Department Card -->
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="department-card">
+                            <div class="department-icon">
+                                <i class="fas fa-shield-virus"></i>
+                            </div>
+                            <div class="department-image">
+                                <img src="assets/img/health/vaccination-3.webp" alt="Vaccination" class="img-fluid">
+                            </div>
+                            <div class="department-content">
+                                <h3>Vaccination Center</h3>
+                                <p>Complete immunization programs for all age groups with safe and effective vaccines administered by trained healthcare professionals.</p>
+                                <a href="#" class="learn-more book-appointment-btn">
+                                    <span>Book Appointment</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div><!-- End Department Card -->
+
+                </div>
+
+            </div>
+
+        </section><!-- /Departments Section -->
+        <!-- SAI MEDICALS Info -->
+        <section class="section" style="padding: 40px 0; background: #f8f9fa;">
+            <div class="container">
+                <div class="row align-items-center" style="background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%); padding: 40px; border-radius: 20px;">
+                    <div class="col-lg-8">
+                        <h3 style="color: #0d47a1; font-weight: 700;">SAI MEDICALS</h3>
+                        <p style="font-size: 1.1rem; color: #333;">Your trusted pharmacy partner located within SAI CLINIC premises.</p>
+                        <p style="color: #555;">Quality medicines and healthcare products available at competitive prices. Our pharmacy is fully stocked with genuine medications and healthcare essentials.</p>
+                        <div class="contact-info mt-3">
+                            <i class="bi bi-telephone" style="color: #0d47a1;"></i> <strong style="color: #0d47a1;">+91 97879 60590</strong>
+                            <span style="margin-left: 1.5rem;"><i class="bi bi-clock" style="color: #0d47a1;"></i> 08:00 AM - 10:00 PM</span>
+                        </div>
                     </div>
-                  </div>
-                </div><!-- End Cardiology Tab -->
-
-              </div>
+                    <div class="col-lg-4 text-center">
+                        <div style="background: #0d47a1; color: #fff; padding: 15px 30px; border-radius: 50px; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            <i class="bi bi-shop"></i> Visit SAI MEDICALS
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
+        </section>
 
-      </div>
+    </main>
 
-    </section><!-- /Departments Tabs Section -->
+    <footer id="footer" class="footer-16 footer position-relative">
 
-    <!-- Departments Section -->
-    <section id="departments" class="departments section">
+        <div class="container">
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="footer-main" data-aos="fade-up" data-aos-delay="100">
+                <div class="row align-items-start">
 
-        <div class="row g-5">
+                    <div class="col-lg-5">
+                        <div class="brand-section">
+                            <a href="index.html" class="logo d-flex align-items-center mb-4">
+                                <span class="sitename">SAI CLINIC</span>
+                            </a>
+                            <p class="brand-description">Caring for your health with expertise and compassion. SAI CLINIC & SAI MEDICALS - Your trusted healthcare partner in Kavaraipettai.</p>
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="department-card">
-              <div class="department-icon">
-                <i class="fas fa-heartbeat"></i>
-              </div>
-              <div class="department-image">
-                <img src="assets/img/health/cardiology-3.webp" alt="Cardiology Department" class="img-fluid">
-              </div>
-              <div class="department-content">
-                <h3>Cardiology</h3>
-                <p>Comprehensive heart care with advanced diagnostic tools and expert cardiologists dedicated to your
-                  cardiovascular health.</p>
-                <a href="#!" class="learn-more">
-                  <span>Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
+                            <div class="contact-info mt-5">
+                                <div class="contact-item">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <span>No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="bi bi-telephone"></i>
+                                    <span>+91 97879 60590</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="bi bi-envelope"></i>
+                                    <span>info@saigroupofclinic.com</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="footer-nav-wrapper">
+                            <div class="row">
+
+                                <div class="col-6 col-lg-3">
+                                    <div class="nav-column">
+                                        <h6>Clinic</h6>
+                                        <nav class="footer-nav">
+                                            <a href="about.html">About Us</a>
+                                            <a href="doctors.html">Our Doctors</a>
+                                            <a href="services.html">Services</a>
+                                            <a href="#">Facilities</a>
+                                            <a href="contact.html">Contact</a>
+                                        </nav>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-lg-3">
+                                    <div class="nav-column">
+                                        <h6>Services</h6>
+                                        <nav class="footer-nav">
+                                            <a href="services.html">Lab Services</a>
+                                            <a href="services.html">X-Ray</a>
+                                            <a href="services.html">ECG</a>
+                                            <a href="services.html">Vaccination</a>
+                                            <a href="services.html">Maternal Care</a>
+                                        </nav>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-lg-3">
+                                    <div class="nav-column">
+                                        <h6>Resources</h6>
+                                        <nav class="footer-nav">
+                                            <a href="#">Health Blog</a>
+                                            <a href="#">Patient Guide</a>
+                                            <a href="faq.html">FAQs</a>
+                                            <a href="testimonials.html">Testimonials</a>
+                                            <a href="gallery.html">Gallery</a>
+                                        </nav>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-lg-3">
+                                    <div class="nav-column">
+                                        <h6>Connect</h6>
+                                        <nav class="footer-nav">
+                                            <a href="#" class="book-appointment-btn">Book Appointment</a>
+                                            <a href="tel:+919787960590">Emergency</a>
+                                            <a href="contact.html">Feedback</a>
+                                            <a href="#">Careers</a>
+                                            <a href="#">Partnership</a>
+                                        </nav>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-          </div><!-- End Department Card -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="department-card">
-              <div class="department-icon">
-                <i class="fas fa-brain"></i>
-              </div>
-              <div class="department-image">
-                <img src="assets/img/health/neurology-2.webp" alt="Neurology Department" class="img-fluid">
-              </div>
-              <div class="department-content">
-                <h3>Neurology</h3>
-                <p>Advanced treatment for neurological disorders with cutting-edge technology and specialized
-                  neurological care teams.</p>
-                <a href="#!" class="learn-more">
-                  <span>Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </div><!-- End Department Card -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="department-card">
-              <div class="department-icon">
-                <i class="fas fa-bone"></i>
-              </div>
-              <div class="department-image">
-                <img src="assets/img/health/orthopedics-4.webp" alt="Orthopedics Department" class="img-fluid">
-              </div>
-              <div class="department-content">
-                <h3>Orthopedics</h3>
-                <p>Expert bone and joint care offering comprehensive treatment from sports injuries to complex
-                  reconstructive surgery.</p>
-                <a href="#!" class="learn-more">
-                  <span>Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </div><!-- End Department Card -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="department-card">
-              <div class="department-icon">
-                <i class="fas fa-child"></i>
-              </div>
-              <div class="department-image">
-                <img src="assets/img/health/pediatrics-3.webp" alt="Pediatrics Department" class="img-fluid">
-              </div>
-              <div class="department-content">
-                <h3>Pediatrics</h3>
-                <p>Specialized medical care for infants, children, and adolescents with compassionate pediatric
-                  specialists.</p>
-                <a href="#!" class="learn-more">
-                  <span>Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </div><!-- End Department Card -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="department-card">
-              <div class="department-icon">
-                <i class="fas fa-hand-holding-medical"></i>
-              </div>
-              <div class="department-image">
-                <img src="assets/img/health/dermatology-4.webp" alt="Dermatology Department" class="img-fluid">
-              </div>
-              <div class="department-content">
-                <h3>Dermatology</h3>
-                <p>Complete skin care services from medical dermatology to cosmetic procedures for healthy, beautiful
-                  skin.</p>
-                <a href="#!" class="learn-more">
-                  <span>Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </div><!-- End Department Card -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="department-card">
-              <div class="department-icon">
-                <i class="fas fa-ribbon"></i>
-              </div>
-              <div class="department-image">
-                <img src="assets/img/health/oncology-2.webp" alt="Oncology Department" class="img-fluid">
-              </div>
-              <div class="department-content">
-                <h3>Oncology</h3>
-                <p>Comprehensive cancer care with multidisciplinary approach and latest treatment options for all cancer
-                  types.</p>
-                <a href="#!" class="learn-more">
-                  <span>Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </div><!-- End Department Card -->
 
         </div>
 
-      </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
+                    <div class="row align-items-center">
 
-    </section><!-- /Departments Section -->
+                        <div class="col-lg-6">
+                            <div class="copyright">
+                                <p>© <span class="sitename">SAI CLINIC</span>. All rights reserved.</p>
+                            </div>
+                        </div>
 
-  </main>
+                        <div class="col-lg-6">
+                            <div class="legal-links">
+                                <a href="privacy.html">Privacy Policy</a>
+                                <a href="terms.html">Terms of Service</a>
+                                <a href="#">Cookie Policy</a>
+                                <div class="credits">
+                                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>. Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                                </div>
+                            </div>
+                        </div>
 
-  <footer id="footer" class="footer-16 footer position-relative">
-
-    <div class="container">
-
-      <div class="footer-main" data-aos="fade-up" data-aos-delay="100">
-        <div class="row align-items-start">
-
-          <div class="col-lg-5">
-            <div class="brand-section">
-              <a href="index.html" class="logo d-flex align-items-center mb-4">
-                <span class="sitename">Clinic</span>
-              </a>
-              <p class="brand-description">Crafting exceptional digital experiences through thoughtful design and
-                innovative solutions that elevate your brand presence.</p>
-
-              <div class="contact-info mt-5">
-                <div class="contact-item">
-                  <i class="bi bi-geo-alt"></i>
-                  <span>123 Creative Boulevard, Design District, NY 10012</span>
+                    </div>
                 </div>
-                <div class="contact-item">
-                  <i class="bi bi-telephone"></i>
-                  <span>+1 (555) 987-6543</span>
-                </div>
-                <div class="contact-item">
-                  <i class="bi bi-envelope"></i>
-                  <span>hello@designstudio.com</span>
-                </div>
-              </div>
             </div>
-          </div>
-
-          <div class="col-lg-7">
-            <div class="footer-nav-wrapper">
-              <div class="row">
-
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Studio</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Our Story</a>
-                      <a href="#!">Design Process</a>
-                      <a href="#!">Portfolio</a>
-                      <a href="#!">Case Studies</a>
-                      <a href="#!">Awards</a>
-                    </nav>
-                  </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Services</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Brand Identity</a>
-                      <a href="#!">Web Design</a>
-                      <a href="#!">Mobile Apps</a>
-                      <a href="#!">Digital Strategy</a>
-                      <a href="#!">Consultation</a>
-                    </nav>
-                  </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Resources</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Design Blog</a>
-                      <a href="#!">Style Guide</a>
-                      <a href="#!">Free Assets</a>
-                      <a href="#!">Tutorials</a>
-                      <a href="#!">Inspiration</a>
-                    </nav>
-                  </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Connect</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Start Project</a>
-                      <a href="#!">Schedule Call</a>
-                      <a href="#!">Join Newsletter</a>
-                      <a href="#!">Follow Updates</a>
-                      <a href="#!">Partnership</a>
-                    </nav>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
         </div>
-      </div>
 
-    </div>
+    </footer>
 
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
-          <div class="row align-items-center">
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-            <div class="col-lg-6">
-              <div class="copyright">
-                <p>© <span class="sitename">Clinic</span>. All rights reserved.</p>
-              </div>
-            </div>
+    <!-- Preloader -->
+    <div id="preloader"></div>
 
-            <div class="col-lg-6">
-              <div class="legal-links">
-                <a href="#!">Privacy Policy</a>
-                <a href="#!">Terms of Service</a>
-                <a href="#!">Cookie Policy</a>
-                <div class="credits">
-                  <!-- All the links in the footer should remain intact. -->
-                  <!-- You can delete the links only if you've purchased the pro version. -->
-                  <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                  <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                  Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>. Distributed by <a
-                    href="https://themewagon.com" target="_blank">ThemeWagon</a>
-                </div>
-              </div>
-            </div>
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
 
-  </footer>
+    <!-- Appointment Booking Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get all appointment buttons
+      const bookButtons = document.querySelectorAll('.book-appointment-btn');
 
-  <!-- Scroll Top -->
-  <a href="#!" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+      // Add click event to each button
+      bookButtons.forEach(function(button) {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
 
-  <!-- Preloader -->
-  <div id="preloader"></div>
+          // Get current date and time
+          const now = new Date();
+          const dateStr = now.toISOString().split('T')[0];
+          const timeStr = now.toTimeString().slice(0, 5);
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+          // Show SweetAlert2 appointment form
+          Swal.fire({
+            title: 'Book an Appointment',
+            html: `
+                <form id="appointmentForm" style="text-align: left;">
+                    <div class="mb-3">
+                        <label for="fullName" style="font-weight: 600; display: block; margin-bottom: 5px;">Full Name *</label>
+                        <input type="text" id="fullName" class="swal2-input" placeholder="Your full name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phoneNumber" style="font-weight: 600; display: block; margin-bottom: 5px;">Phone Number *</label>
+                        <input type="tel" id="phoneNumber" class="swal2-input" placeholder="+91 98765 43210" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailAddress" style="font-weight: 600; display: block; margin-bottom: 5px;">Email Address</label>
+                        <input type="email" id="emailAddress" class="swal2-input" placeholder="your@email.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="appointmentDate" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Date *</label>
+                        <input type="date" id="appointmentDate" class="swal2-input" value="${dateStr}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="appointmentTime" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Time *</label>
+                        <input type="time" id="appointmentTime" class="swal2-input" value="${timeStr}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="doctorSelect" style="font-weight: 600; display: block; margin-bottom: 5px;">Select Doctor</label>
+                        <select id="doctorSelect" class="swal2-input">
+                            <option value="">Any Available Doctor</option>
+                            <option value="Dr. S. Rubagam">Dr. S. Rubagam (Dentistry)</option>
+                            <option value="Dr. M. Karthikeyan">Dr. M. Karthikeyan (General Surgery)</option>
+                            <option value="Dr. N. Ruba">Dr. N. Ruba (General Surgery)</option>
+                            <option value="Dr. H. Rubagam">Dr. H. Rubagam (General Surgery)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" style="font-weight: 600; display: block; margin-bottom: 5px;">Additional Notes</label>
+                        <textarea id="message" class="swal2-textarea" placeholder="Any specific concerns or symptoms..." rows="2"></textarea>
+                    </div>
+                    <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">* Required fields</p>
+                </form>
+            `,
+            confirmButtonText: 'Confirm Appointment',
+            cancelButtonText: 'Cancel',
+            showCancelButton: true,
+            focusConfirm: false,
+            preConfirm: () => {
+              const name = document.getElementById('fullName').value;
+              const phone = document.getElementById('phoneNumber').value;
+              const date = document.getElementById('appointmentDate').value;
+              const time = document.getElementById('appointmentTime').value;
+              const doctor = document.getElementById('doctorSelect').value;
+              const email = document.getElementById('emailAddress').value;
+              const message = document.getElementById('message').value;
 
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+              if (!name || !phone || !date || !time) {
+                Swal.showValidationMessage('Please fill in all required fields');
+                return false;
+              }
+
+              if (phone.length < 10) {
+                Swal.showValidationMessage('Please enter a valid phone number');
+                return false;
+              }
+
+              return { name, phone, email, date, time, doctor, message };
+            }
+          }).then((result) => {
+            if (result.isConfirmed) {
+              const data = result.value;
+              const doctorDisplay = data.doctor || 'Any Available Doctor';
+
+              Swal.fire({
+                title: 'Appointment Confirmed! ✅',
+                html: `
+                        <div style="text-align: left;">
+                            <p><strong>Patient:</strong> ${data.name}</p>
+                            <p><strong>Doctor:</strong> ${doctorDisplay}</p>
+                            <p><strong>Date:</strong> ${data.date} at ${data.time}</p>
+                            <p><strong>Phone:</strong> ${data.phone}</p>
+                            ${data.email ? `<p><strong>Email:</strong> ${data.email}</p>` : ''}
+                            <hr>
+                            <p style="color: #0d47a1; font-size: 0.9rem;">
+                                <i class="bi bi-info-circle"></i>
+                                You will receive a confirmation call shortly.
+                            </p>
+                            <p style="font-size: 0.8rem; color: #666;">
+                                SAI CLINIC<br>
+                                No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206
+                            </p>
+                        </div>
+                    `,
+                icon: 'success',
+                confirmButtonColor: '#0d47a1',
+                confirmButtonText: 'OK'
+              });
+
+              console.log('Appointment Data:', data);
+            }
+          });
+        });
+      });
+
+      console.log('SAI CLINIC - Departments page ready!');
+      console.log('Email: info@saigroupofclinic.com | Phone: +91 97879 60590');
+    });
+    </script>
 
 </body>
 
