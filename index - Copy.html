@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+	<title>Sai Clinic | Premium Multi-Speciality Care - Doctor Images</title>
+	<!-- Google Fonts & Icons -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<!-- AOS Library -->
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		:root {
+			--vibrant-blue: #2A5C9A;
+			--deep-teal: #1B7B6E;
+			--sunset-orange: #E67E22;
+			--coral-pink: #E67E8F;
+			--amber-glow: #F39C12;
+			--fresh-green: #27AE60;
+			--plum-purple: #8E44AD;
+			--bg-gradient: linear-gradient(135deg, #FFF9F0 0%, #F0F7FF 100%);
+			--card-white: #FFFFFF;
+			--shadow-xl: 0 25px 45px -12px rgba(0, 0, 0, 0.2);
+			--shadow-md: 0 12px 28px -8px rgba(0, 0, 0, 0.08);
+			--border-radius-xl: 32px;
+			--border-radius-lg: 24px;
+		}
+
+		body {
+			font-family: 'Inter', sans-serif;
+			background: var(--bg-gradient);
+			color: #1E2A3E;
+			overflow-x: hidden;
+			width: 100%;
+		}
+
+		.container {
+			max-width: 1300px;
+			width: 100%;
+			margin: 0 auto;
+			padding: 1.5rem 1.8rem;
+			overflow-x: hidden;
+		}
+
+		/* Animated Premium Top Bar */
+		.vibrant-ticker {
+			background: linear-gradient(95deg, #1A2F4F, #0F3B3A);
+			border-radius: 60px;
+			padding: 0.8rem 2rem;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 0.8rem;
+			margin-bottom: 2rem;
+			box-shadow: 0 15px 25px -12px rgba(0,0,0,0.2);
+			color: white;
+			font-weight: 500;
+			width: 100%;
+		}
+
+		.pulse-dot {
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			background: #2ecc71;
+			border-radius: 50%;
+			margin-right: 0.5rem;
+			animation: pulse 1.5s infinite;
+		}
+
+		@keyframes pulse {
+			0% {
+				opacity: 0.4;
+				transform: scale(0.8);
+			}
+
+			100% {
+				opacity: 1;
+				transform: scale(1.2);
+			}
+		}
+
+		/* HERO BANNER */
+		.hero-banner-premium {
+			background: linear-gradient(125deg, #0B2B3B 0%, #1A4A3F 50%, #0F2F3A 100%);
+			border-radius: 36px;
+			padding: 2rem 2.5rem;
+			margin-bottom: 2.5rem;
+			position: relative;
+			overflow: hidden;
+			box-shadow: 0 25px 40px -14px rgba(0,0,0,0.3);
+			border: 1px solid rgba(255,215,0,0.2);
+			width: 100%;
+		}
+
+			.hero-banner-premium::before {
+				content: "";
+				position: absolute;
+				top: -20%;
+				right: -5%;
+				width: 280px;
+				height: 280px;
+				background: radial-gradient(circle, rgba(230,126,34,0.2) 0%, rgba(230,126,34,0) 70%);
+				border-radius: 50%;
+				pointer-events: none;
+			}
+
+		.banner-flex {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 2rem;
+			position: relative;
+			z-index: 2;
+			width: 100%;
+		}
+
+		.banner-text {
+			flex: 1.5;
+			text-align: left;
+		}
+
+			.banner-text h2 {
+				font-family: 'Space Grotesk', sans-serif;
+				font-size: 2.6rem;
+				font-weight: 800;
+				color: white;
+				letter-spacing: -0.02em;
+				line-height: 1.2;
+				margin-bottom: 0.8rem;
+			}
+
+		.banner-tagline {
+			font-size: 1rem;
+			color: #FFD966;
+			font-weight: 600;
+			margin: 0.5rem 0 0.8rem;
+			display: flex;
+			align-items: center;
+			gap: 0.6rem;
+			flex-wrap: wrap;
+		}
+
+		.banner-stats {
+			display: flex;
+			gap: 1rem;
+			margin: 1rem 0 1.4rem;
+			flex-wrap: wrap;
+		}
+
+		.banner-stat-chip {
+			background: rgba(255,255,255,0.14);
+			backdrop-filter: blur(5px);
+			padding: 0.4rem 1.1rem;
+			border-radius: 40px;
+			font-size: 0.85rem;
+			font-weight: 600;
+			color: #FEF9E6;
+		}
+
+		.banner-buttons {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 1rem;
+			margin-top: 0.8rem;
+		}
+
+		.btn-banner-primary {
+			background: linear-gradient(95deg, #E67E22, #F39C12);
+			border: none;
+			padding: 0.85rem 1.9rem;
+			border-radius: 50px;
+			color: white;
+			font-weight: 700;
+			font-size: 0.95rem;
+			cursor: pointer;
+			transition: all 0.25s;
+			box-shadow: 0 12px 20px -10px rgba(230,126,34,0.5);
+			display: inline-flex;
+			align-items: center;
+			gap: 0.7rem;
+		}
+
+		.btn-banner-secondary {
+			background: rgba(255,255,255,0.12);
+			backdrop-filter: blur(8px);
+			border: 1px solid rgba(255,255,255,0.4);
+			padding: 0.85rem 1.9rem;
+			border-radius: 50px;
+			color: white;
+			font-weight: 600;
+			cursor: pointer;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.7rem;
+		}
+
+		.btn-banner-primary:hover {
+			transform: translateY(-3px);
+			background: #D35400;
+		}
+
+		.btn-banner-secondary:hover {
+			background: rgba(255,255,255,0.25);
+			transform: translateY(-2px);
+		}
+
+		.banner-contact-card {
+			background: rgba(255,255,245,0.13);
+			backdrop-filter: blur(12px);
+			border-radius: 32px;
+			padding: 1.2rem 1.8rem;
+			text-align: center;
+			border: 1px solid rgba(255,215,0,0.4);
+			min-width: 240px;
+		}
+
+			.banner-contact-card i {
+				color: #FFD966;
+			}
+
+		.contact-label {
+			font-weight: 500;
+			margin: 8px 0 4px;
+			color: #FFE0B5;
+			font-size: 0.85rem;
+		}
+
+		.phone-big {
+			font-size: 1.7rem;
+			font-weight: 800;
+			color: #FFD966;
+			margin: 8px 0;
+		}
+
+		.walkin-text {
+			font-size: 0.8rem;
+			margin-top: 6px;
+			color: #FFE0B5;
+		}
+
+		/* Hero split */
+		.hero-showcase {
+			display: grid;
+			grid-template-columns: 1.3fr 0.9fr;
+			gap: 2rem;
+			margin-bottom: 3rem;
+			align-items: stretch;
+		}
+
+		.hero-left h1 {
+			font-family: 'Space Grotesk', sans-serif;
+			font-size: 2.8rem;
+			font-weight: 800;
+			line-height: 1.1;
+			background: linear-gradient(120deg, #1E4A76, #1F7A6B, #E67E22);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+		}
+
+		.tamil-elegant {
+			font-size: 1.2rem;
+			font-weight: 600;
+			color: var(--deep-teal);
+			margin: 0.4rem 0 0.8rem;
+			background: rgba(27,123,110,0.1);
+			display: inline-block;
+			padding: 0.2rem 1.2rem;
+			border-radius: 40px;
+		}
+
+		.spec-badge-group {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.9rem;
+			margin: 1.5rem 0;
+		}
+
+		.spec-badge {
+			background: white;
+			border-radius: 50px;
+			padding: 0.6rem 1.4rem;
+			font-weight: 600;
+			font-size: 0.85rem;
+			box-shadow: var(--shadow-md);
+			border-left: 4px solid var(--fresh-green);
+		}
+
+		.info-card-glow {
+			background: rgba(255,255,255,0.85);
+			backdrop-filter: blur(10px);
+			border-radius: var(--border-radius-xl);
+			padding: 1.6rem;
+			box-shadow: var(--shadow-xl);
+			border: 1px solid rgba(255,255,255,0.5);
+		}
+
+		.metric-row {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0.8rem 0;
+			border-bottom: 1px solid rgba(0,0,0,0.05);
+			flex-wrap: wrap;
+		}
+
+		/* Doctor cards with actual image placeholders (professional avatar images) */
+		.doctor-premium-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+			gap: 1.8rem;
+			margin: 2rem 0;
+		}
+
+		.doc-card-vibrant {
+			background: var(--card-white);
+			border-radius: 32px;
+			padding: 1.5rem;
+			transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+			box-shadow: 0 15px 30px -12px rgba(0,0,0,0.1);
+			border: 1px solid rgba(230,126,34,0.2);
+		}
+
+			.doc-card-vibrant:hover {
+				transform: translateY(-6px);
+				border-color: var(--sunset-orange);
+			}
+		/* Doctor image style - circular professional photos */
+		.doc-image {
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+			object-fit: cover;
+			border: 3px solid #E67E22;
+			box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+			background: #f8f3e8;
+		}
+
+		.doc-avatar-placeholder {
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+			background: linear-gradient(145deg, #FFE8D6, #FFD9B5);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 2.2rem;
+			font-weight: 800;
+			color: var(--sunset-orange);
+			border: 3px solid #E67E22;
+		}
+
+		.booking-interface {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 1.2rem;
+			gap: 0.7rem;
+		}
+
+		.date-slot {
+			background: #F8F9FC;
+			border-radius: 60px;
+			padding: 0.5rem 1rem;
+			display: flex;
+			align-items: center;
+			gap: 0.4rem;
+			font-size: 0.8rem;
+			border: 1px solid #E9ECF3;
+			flex: 1;
+		}
+
+		.wa-btn-pro {
+			background: linear-gradient(95deg, #25D366, #128C7E);
+			border: none;
+			padding: 0.65rem 1.3rem;
+			border-radius: 50px;
+			color: white;
+			font-weight: 700;
+			cursor: pointer;
+			transition: 0.2s;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+			font-size: 0.8rem;
+		}
+
+		.specialty-color-show {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+			gap: 1.4rem;
+			margin: 1.8rem 0;
+		}
+
+		.spec-card-clr {
+			background: white;
+			border-radius: 28px;
+			padding: 1.2rem 0.5rem;
+			text-align: center;
+			border-bottom: 4px solid var(--fresh-green);
+		}
+
+			.spec-card-clr i {
+				font-size: 2rem;
+				color: #E67E22;
+				margin-bottom: 0.6rem;
+			}
+
+		.two-col-vibrant {
+			display: grid;
+			grid-template-columns: 1.2fr 0.9fr;
+			gap: 2rem;
+			margin: 2rem 0;
+		}
+
+		.glass-info {
+			background: rgba(255,255,240,0.75);
+			backdrop-filter: blur(8px);
+			border-radius: 32px;
+			padding: 1.8rem;
+			border: 1px solid rgba(230,126,34,0.2);
+		}
+
+		.map-vibrant {
+			background: linear-gradient(115deg, #FFF3E0, #FFE9D4);
+			border-radius: 24px;
+			padding: 1rem 1.2rem;
+			margin-top: 1rem;
+			cursor: pointer;
+			display: flex;
+			justify-content: space-between;
+			font-weight: 700;
+		}
+
+		footer {
+			margin-top: 3rem;
+			background: #1E2A3E;
+			color: white;
+			border-radius: 40px;
+			padding: 2rem;
+			text-align: center;
+			width: 100%;
+		}
+
+		.section-title {
+			font-size: 1.8rem;
+			font-weight: 800;
+			margin: 1rem 0 1rem 0;
+			background: linear-gradient(135deg, #1B4F72, #E67E22);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+		}
+
+		input, select {
+			background: transparent;
+			border: none;
+			font-weight: 600;
+			outline: none;
+			font-size: 0.8rem;
+		}
+
+		.toast-sm {
+			position: fixed;
+			bottom: 25px;
+			right: 25px;
+			background: linear-gradient(135deg, #2C3E50, #E67E22);
+			color: white;
+			padding: 0.8rem 1.6rem;
+			border-radius: 50px;
+			font-weight: 600;
+			z-index: 999;
+			animation: fadeUp 0.3s;
+		}
+
+		@keyframes fadeUp {
+			from {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@media (max-width: 1024px) {
+			.container {
+				padding: 1.2rem;
+			}
+
+			.hero-banner-premium {
+				padding: 1.8rem;
+			}
+
+			.banner-text h2 {
+				font-size: 2.2rem;
+			}
+		}
+
+		@media (max-width: 780px) {
+			.banner-flex {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+
+			.hero-showcase, .two-col-vibrant {
+				grid-template-columns: 1fr;
+			}
+
+			.banner-text h2 {
+				font-size: 1.9rem;
+			}
+
+			.banner-contact-card {
+				width: 100%;
+			}
+
+			.doctor-premium-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.specialty-color-show {
+				grid-template-columns: repeat(2, 1fr);
+			}
+		}
+
+		@media (max-width: 520px) {
+			.vibrant-ticker {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+
+			.hero-left h1 {
+				font-size: 1.8rem;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<!-- Top Bar -->
+		<div class="vibrant-ticker">
+			<div><i class="fas fa-location-dot"></i> No. 253A, Railway Station Road, Kavaraipettai, Chennai</div>
+			<div><span class="pulse-dot"></span> Live Reception: +91 97879 60590</div>
+			<div><i class="fab fa-whatsapp"></i> WhatsApp Priority Booking Active</div>
+		</div>
+
+		<!-- Hero Banner -->
+		<div class="hero-banner-premium" data-aos="fade-down" data-aos-duration="800">
+			<div class="banner-flex">
+				<div class="banner-text">
+					<h2>Your Health, Our Priority <span style="color:#FFD966;">❤️</span></h2>
+					<div class="banner-tagline">
+						<i class="fas fa-shield-heart"></i> 15+ Years of Trusted Care
+						<i class="fas fa-star" style="margin-left: 6px; color:#FFD966;"></i>
+						<i class="fas fa-star" style="color:#FFD966;"></i>
+						<i class="fas fa-star" style="color:#FFD966;"></i>
+						<i class="fas fa-star" style="color:#FFD966;"></i>
+					</div>
+					<div class="banner-stats">
+						<span class="banner-stat-chip"><i class="fas fa-user-md"></i> 6+ Specialists</span>
+						<span class="banner-stat-chip"><i class="fas fa-flask"></i> Advanced Diagnostics</span>
+						<span class="banner-stat-chip"><i class="fas fa-truck-medical"></i> 24/7 Pharmacy</span>
+					</div>
+					<div class="banner-buttons">
+						<button class="btn-banner-primary" onclick="scrollToDoctorsAndBook()"><i class="fab fa-whatsapp"></i> Instant WhatsApp Booking</button>
+						<button class="btn-banner-secondary" onclick="openRichMap()"><i class="fas fa-map-pin"></i> Get Directions</button>
+					</div>
+				</div>
+				<div class="banner-contact-card">
+					<i class="fas fa-headset" style="font-size: 1.9rem;"></i>
+					<div class="contact-label">Emergency / Appointments</div>
+					<div class="phone-big"><i class="fas fa-phone-alt"></i> 97879 60590</div>
+					<div class="walkin-text"><i class="fas fa-clock"></i> Walk-in anytime 8AM–10PM</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Hero Split -->
+		<div class="hero-showcase">
+			<div class="hero-left" data-aos="fade-right">
+				<div style="background:#FDEBD0; display:inline-block; padding:0.3rem 1.3rem; border-radius:40px; margin-bottom:1rem; font-weight:600;"><i class="fas fa-award"></i> Multi-Awarded Clinic</div>
+				<h1>SAI CLINIC & DIAGNOSTICS</h1>
+				<div class="tamil-elegant">சாய் கிளினிக் — முழுமையான சுகாதார பராமரிப்பு</div>
+				<p style="color:#E67E22; font-weight:600; margin-top:0.6rem;"><i class="fas fa-flask"></i> Advanced Lab | Digital X-Ray | ECG Studio | In-house Pharmacy</p>
+				<div class="spec-badge-group">
+					<div class="spec-badge"><i class="fas fa-vial"></i> 24/7 STAT Lab</div>
+					<div class="spec-badge"><i class="fas fa-bolt"></i> Emergency Ready</div>
+					<div class="spec-badge"><i class="fas fa-wifi"></i> Digital Health Record</div>
+				</div>
+			</div>
+			<div class="info-card-glow" data-aos="fade-left">
+				<div class="metric-row"><span><i class="fas fa-calendar-alt"></i> OPD Schedule</span><strong>8:00 AM – 10:00 PM (All Days)</strong></div>
+				<div class="metric-row"><span><i class="fas fa-user-md"></i> Specialists Onboard</span><strong>6+ Expert Doctors</strong></div>
+				<div class="metric-row"><span><i class="fas fa-chart-line"></i> Instant Reports</span><strong>Within 2 Hours*</strong></div>
+				<div class="metric-row"><span><i class="fab fa-whatsapp"></i> Direct Connect</span><strong>+91 97879 60590</strong></div>
+			</div>
+		</div>
+
+		<!-- Doctors section with professional doctor images -->
+		<div data-aos="fade-up">
+			<div class="section-title"><i class="fas fa-user-md" style="color:#E67E22;"></i> 👨‍⚕️ Elite Specialists — Pick Date & Time → WhatsApp Confirm</div>
+		</div>
+		<div class="doctor-premium-grid" id="doctorEliteGrid"></div>
+
+		<!-- Specialties -->
+		<div data-aos="zoom-in">
+			<div class="section-title"><i class="fas fa-cubes"></i> Advanced Medical Departments</div>
+			<div class="specialty-color-show">
+				<div class="spec-card-clr"><i class="fas fa-heartbeat"></i><h4>General Medicine</h4><span>பொது மருத்துவம்</span></div>
+				<div class="spec-card-clr"><i class="fas fa-bone"></i><h4>Orthopedics</h4><span>எலும்பு மருத்துவம்</span></div>
+				<div class="spec-card-clr"><i class="fas fa-female"></i><h4>Gynaecology</h4><span>மகளிர் நலம்</span></div>
+				<div class="spec-card-clr"><i class="fas fa-child"></i><h4>Pediatrics</h4><span>குழந்தைகள்</span></div>
+				<div class="spec-card-clr"><i class="fas fa-allergies"></i><h4>Dermatology</h4><span>தோல் மருத்துவம்</span></div>
+				<div class="spec-card-clr"><i class="fas fa-tint"></i><h4>Diabetology</h4><span>சர்க்கரை நோய்</span></div>
+			</div>
+		</div>
+
+		<!-- Two Column -->
+		<div class="two-col-vibrant">
+			<div class="glass-info" data-aos="fade-right">
+				<h3><i class="fas fa-map-marked-alt" style="color:#E67E22;"></i> 📍 Clinic Hub & Smart Directions</h3>
+				<p style="margin: 0.6rem 0; font-weight:500;">No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206</p>
+				<div class="map-vibrant" onclick="openRichMap()">
+					<span><i class="fas fa-route"></i> Navigate via Google Maps</span>
+					<i class="fas fa-arrow-right"></i>
+				</div>
+				<div style="background:#EDF4F2; border-radius: 24px; padding: 1rem; margin-top: 1rem; display:flex; gap:1rem; align-items:center;">
+					<i class="fas fa-capsules" style="font-size:2rem; color:#27AE60;"></i>
+					<div><strong>🏥 SAI MEDICALS (In-House Pharmacy)</strong><br><span style="font-size:0.75rem;">Instant medicine dispensing & surgical items</span></div>
+				</div>
+			</div>
+			<div class="glass-info" data-aos="fade-left">
+				<h3><i class="fas fa-headset"></i> Centralized Concierge Desk</h3>
+				<p style="margin-top:0.8rem;">Call for instant appointment alignment or request callback</p>
+				<a href="tel:9787960590" style="text-decoration:none; font-size:1.8rem; font-weight:800; color:#E67E22; display:block; margin:0.4rem 0;"><i class="fas fa-phone-alt"></i> 97879 60590</a>
+				<button class="wa-btn-pro" id="globalWhatsappBtnVibrant" style="background:#075E54; width:100%; justify-content:center; margin-top:0.6rem;"><i class="fab fa-whatsapp"></i> Get Appointment via WhatsApp</button>
+				<p style="font-size:0.7rem; margin-top:1rem;">✔️ Insurance & Cashless | ✔️ Home Sample Collection</p>
+			</div>
+		</div>
+
+		<footer>
+			<p style="font-weight:800; font-size:1.2rem;">SAI CLINIC & DIAGNOSTICS COMPLEX</p>
+			<p>No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206 | +91 97879 60590</p>
+			<p>© 2025 — Integrated Health Ecosystem</p>
+		</footer>
+	</div>
+
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	<script>
+		AOS.init({ duration: 700, once: true });
+
+		// Doctor data with high-quality professional avatar images (using reliable UI Faces / medical stock style via randomuser, but we use beautiful placeholder images from a medical avatar API to give authentic feel)
+		// Using free stock doctor images from a reliable CDN (placeholder images with medical theme)
+		const doctorsElite = [
+			{ id: 101, name: "Dr. S. Sangami", specialization: "Clinical Diabetology & Metabolic Health", qualification: "M.B.B.S., Dip. Diabetology, FICM", deptIcon: "fa-tint", img: "https://randomuser.me/api/portraits/women/68.jpg" },
+			{ id: 102, name: "Dr. M. Karthikeyan", specialization: "Orthopedics & Joint Replacement", qualification: "M.S. (Ortho)", deptIcon: "fa-bone", img: "https://randomuser.me/api/portraits/men/32.jpg" },
+			{ id: 103, name: "Dr. M.R. Ramya", specialization: "Gynaecology & Fertility Expert", qualification: "M.B.B.S., D.G.O., DRM, F.M.A.S.", deptIcon: "fa-female", img: "https://randomuser.me/api/portraits/women/45.jpg" },
+			{ id: 104, name: "Dr. N.H. Mallikarjun", specialization: "General & Laparoscopic Surgery", qualification: "M.B.B.S., M.S. (Gen Surg)", deptIcon: "fa-scalpel", img: "https://randomuser.me/api/portraits/men/52.jpg" },
+			{ id: 105, name: "Dr. H. Sadhiqul Ameen", specialization: "Dermatology & Venereology", qualification: "M.D. (DVL)", deptIcon: "fa-allergies", img: "https://randomuser.me/api/portraits/men/91.jpg" }
+		];
+
+		function getTodayDate() {
+			let d = new Date();
+			let month = (d.getMonth() + 1).toString().padStart(2, '0');
+			let day = d.getDate().toString().padStart(2, '0');
+			return `${d.getFullYear()}-${month}-${day}`;
+		}
+		function generateTimeSlots() {
+			return ["09:00 AM", "10:30 AM", "12:00 PM", "02:15 PM", "04:00 PM", "06:30 PM", "08:00 PM"];
+		}
+
+		function renderPremiumDoctors() {
+			const grid = document.getElementById('doctorEliteGrid');
+			if (!grid) return;
+			const times = generateTimeSlots();
+			grid.innerHTML = doctorsElite.map(doc => `
+				<div class="doc-card-vibrant" data-docid="${doc.id}">
+					<div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+						<div>
+							<img src="${doc.img}" alt="${doc.name}" class="doc-image" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?background=E67E22&color=fff&name=${doc.name.split(' ').pop()}'">
+						</div>
+						<div style="flex:1;">
+							<h3 style="font-weight:800; font-size:1.2rem;">${doc.name}</h3>
+							<span style="background:#FFE4CC; padding:0.2rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:700; display:inline-block; margin-bottom:5px;">${doc.specialization}</span>
+							<div style="font-size:0.75rem; color:#5A6E7A; margin-top:4px;">${doc.qualification}</div>
+						</div>
+					</div>
+					<div class="booking-interface">
+						<div class="date-slot">
+							<i class="far fa-calendar-alt" style="color:#E67E22;"></i>
+							<input type="date" id="date_${doc.id}" class="dynamic-date" value="${getTodayDate()}" min="${getTodayDate()}" style="width:115px;">
+						</div>
+						<div class="date-slot">
+							<i class="far fa-clock" style="color:#E67E22;"></i>
+							<select id="time_${doc.id}" class="dynamic-time">
+								${times.map(t => `<option value="${t}">${t}</option>`).join('')}
+							</select>
+						</div>
+						<button class="wa-btn-pro wa-doc-book" data-docname="${doc.name}" data-docid="${doc.id}"><i class="fab fa-whatsapp"></i> Book Now →</button>
+					</div>
+					<div style="margin-top: 12px; font-size:0.7rem; color:#1F7A6B;"><i class="fas fa-rupee-sign"></i> Consultation: ₹500 | Same-day slot avail.</div>
+				</div>
+			`).join('');
+
+			// attach event listeners
+			document.querySelectorAll('.wa-doc-book').forEach(btn => {
+				btn.addEventListener('click', (e) => {
+					const docName = btn.getAttribute('data-docname');
+					const docId = btn.getAttribute('data-docid');
+					const selectedDate = document.getElementById(`date_${docId}`)?.value || getTodayDate();
+					const selectedTime = document.getElementById(`time_${docId}`)?.value || "10:30 AM";
+					const formattedDate = selectedDate ? new Date(selectedDate).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }) : "Today";
+					sendWhatsAppVibrant(docName, formattedDate, selectedTime);
+				});
+			});
+		}
+
+		function sendWhatsAppVibrant(doctorName, dateStr, timeStr) {
+			const phone = "917987960590";
+			const locationMsg = "Sai Clinic, No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206";
+			let customMsg = `🟢 *SAI CLINIC · ADVANCED BOOKING* 🟢%0A%0A`;
+			customMsg += `👨‍⚕️ *Doctor:* ${doctorName}%0A`;
+			customMsg += `📅 *Preferred Date:* ${dateStr}%0A`;
+			customMsg += `⏰ *Preferred Time:* ${timeStr}%0A`;
+			customMsg += `📍 *Location:* ${locationMsg}%0A`;
+			customMsg += `💊 *Pharmacy:* Attached Sai Medicals%0A`;
+			customMsg += `⚡ *Please confirm my slot* — Thank you!`;
+			window.open(`https://wa.me/${phone}?text=${customMsg}`, '_blank');
+			showColorToast(`✨ Redirecting to WhatsApp for ${doctorName} ✨`);
+		}
+
+		function showColorToast(msg) {
+			let existing = document.querySelector('.toast-sm');
+			if (existing) existing.remove();
+			let toast = document.createElement('div');
+			toast.className = 'toast-sm';
+			toast.innerHTML = `<i class="fab fa-whatsapp"></i> ${msg}`;
+			document.body.appendChild(toast);
+			setTimeout(() => toast.remove(), 2800);
+		}
+
+		const globalBtn = document.getElementById('globalWhatsappBtnVibrant');
+		if (globalBtn) {
+			globalBtn.addEventListener('click', () => {
+				const phone = "917987960590";
+				const msg = `Hello Sai Clinic, I want to book a consultation. Please assist me with doctor availability. Thank you!`;
+				window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+			});
+		}
+
+		function openRichMap() {
+			const address = "Sai Clinic, No. 253A, Railway Station Road, Kavaraipettai, Chennai, Tamil Nadu 601206";
+			window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`, '_blank');
+		}
+
+		function scrollToDoctorsAndBook() {
+			document.querySelector('.doctor-premium-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}
+
+		renderPremiumDoctors();
+		function updateMinDates() {
+			const today = getTodayDate();
+			document.querySelectorAll('.dynamic-date').forEach(inp => { if (!inp.getAttribute('min')) inp.setAttribute('min', today); });
+		}
+		updateMinDates();
+		window.openRichMap = openRichMap;
+		window.scrollToDoctorsAndBook = scrollToDoctorsAndBook;
+	</script>
+</body>
+</html>
