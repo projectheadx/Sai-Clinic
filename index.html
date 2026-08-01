@@ -1,987 +1,861 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes" />
-	<title>Sai Clinic | Premium Multi-Speciality Care</title>
 
-	<!-- Bootstrap 5 + Icons + Google Fonts -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-	<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>SAI CLINIC - Excellence in Healthcare</title>
+	<meta name="description" content="SAI CLINIC & SAI MEDICALS - Comprehensive healthcare services in Kavaraipettai, Chennai.">
+	<meta name="keywords" content="Sai Clinic, SAI MEDICALS, Kavaraipettai, Chennai, doctors, lab, X-ray, ECG">
+
+	<!-- Favicons -->
+	<link href="assets/img/favicon.png" rel="icon">
+	<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com" rel="preconnect">
+	<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+		  rel="stylesheet">
+
+	<!-- Vendor CSS Files -->
+	<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+	<link href="assets/vendor/aos/aos.css" rel="stylesheet">
+	<link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+	<link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+	<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+	<!-- Main CSS File -->
+	<link href="assets/css/main.css" rel="stylesheet">
 
 	<style>
-		:root {
-			--primary-orange: #E67E22;
-			--primary-dark: #1E4A76;
-			--teal: #1B7B6E;
-			--light-bg: #FFF9F0;
+		/* Fix spacing for services section - remove Home Sample Collection */
+		.specialties-grid .row {
+			justify-content: center;
 		}
 
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
-
-		body {
-			font-family: 'Inter', sans-serif;
-			background: var(--light-bg);
-			color: #1E2A3E;
-			overflow-x: hidden;
-		}
-
-		/* ===== NAVBAR ===== */
-		.navbar-custom {
-			background: rgba(255, 255, 255, 0.95);
-			backdrop-filter: blur(12px);
-			padding: 0.6rem 2rem;
-			box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
-			border-bottom: 1px solid rgba(230, 126, 34, 0.15);
-			position: sticky;
-			top: 0;
-			z-index: 1050;
-		}
-
-			.navbar-custom .navbar-brand {
-				font-family: 'Space Grotesk', sans-serif;
-				font-weight: 800;
-				font-size: 1.4rem;
-				color: var(--primary-dark);
-			}
-
-				.navbar-custom .navbar-brand i {
-					color: var(--primary-orange);
-				}
-
-			.navbar-custom .nav-link {
-				font-weight: 600;
-				font-size: 0.9rem;
-				padding: 0.6rem 1rem !important;
-				border-radius: 50px;
-				transition: 0.25s;
-				color: #1E2A3E;
-			}
-
-				.navbar-custom .nav-link:hover,
-				.navbar-custom .nav-link.active {
-					background: var(--primary-orange);
-					color: #fff !important;
-					box-shadow: 0 6px 16px rgba(230, 126, 34, 0.25);
-				}
-
-				.navbar-custom .nav-link i {
-					margin-right: 4px;
-				}
-
-			.navbar-custom .btn-outline-orange {
-				border-color: var(--primary-orange);
-				color: var(--primary-orange);
-				border-radius: 50px;
-				font-weight: 600;
-				padding: 0.4rem 1.2rem;
-			}
-
-				.navbar-custom .btn-outline-orange:hover {
-					background: var(--primary-orange);
-					color: #fff;
-				}
-
-		/* ===== PAGE SECTIONS ===== */
-		.page-section {
-			display: none;
-			animation: fadeUp 0.5s ease;
-			padding: 1.5rem 0;
-		}
-
-			.page-section.active {
-				display: block;
-			}
-
-		@keyframes fadeUp {
-			0% {
-				opacity: 0;
-				transform: translateY(24px);
-			}
-
-			100% {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		}
-
-		/* ===== HERO SLIDER ===== */
-		.hero-slider-wrapper {
-			border-radius: 28px;
-			overflow: hidden;
-			box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
-			position: relative;
-			height: 500px;
-		}
-
-		.hero-slides {
-			display: flex;
-			height: 100%;
-			transition: transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1);
-		}
-
-		.hero-slide {
-			min-width: 100%;
-			height: 100%;
-			position: relative;
-			display: flex;
-			align-items: center;
-			padding: 3rem 4rem;
-			color: #fff;
-		}
-
-			.hero-slide .slide-bg {
-				position: absolute;
-				inset: 0;
-				background-size: cover;
-				background-position: center;
-				filter: brightness(0.55) saturate(1.1);
-				z-index: 0;
-			}
-
-			.hero-slide .slide-overlay {
-				position: absolute;
-				inset: 0;
-				background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 100%);
-				z-index: 1;
-			}
-
-		.hero-slide-content {
-			position: relative;
-			z-index: 2;
-		}
-
-			.hero-slide-content h2 {
-				font-family: 'Space Grotesk', sans-serif;
-				font-size: 3.2rem;
-				font-weight: 800;
-				letter-spacing: -0.02em;
-				line-height: 1.15;
-				text-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-			}
-
-			.hero-slide-content .sub {
-				font-size: 1.1rem;
-				color: #FFD966;
-				font-weight: 600;
-				text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-			}
-
-			.hero-slide-content p {
-				font-size: 1.05rem;
-				opacity: 0.92;
-				max-width: 520px;
-				text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-			}
-
-		.hero-slide-badge {
-			position: relative;
-			z-index: 2;
-			background: rgba(255, 255, 255, 0.1);
-			backdrop-filter: blur(10px);
-			border-radius: 60px;
-			padding: 1rem 2rem;
-			text-align: center;
-			border: 1px solid rgba(255, 215, 0, 0.25);
-			min-width: 200px;
-		}
-
-			.hero-slide-badge .phone-big {
-				font-size: 1.6rem;
-				font-weight: 800;
-				color: #FFD966;
-			}
-
-		.slider-dots {
-			position: absolute;
-			bottom: 20px;
-			left: 50%;
-			transform: translateX(-50%);
-			display: flex;
-			gap: 14px;
-			z-index: 10;
-		}
-
-			.slider-dots span {
-				width: 14px;
-				height: 14px;
-				background: rgba(255, 255, 255, 0.3);
-				border-radius: 50%;
-				cursor: pointer;
-				transition: 0.3s;
-				border: 2px solid rgba(255, 255, 255, 0.15);
-			}
-
-				.slider-dots span.active {
-					background: #FFD966;
-					transform: scale(1.2);
-					box-shadow: 0 0 20px #FFD966;
-					border-color: #FFD966;
-				}
-
-		/* ===== BUTTONS ===== */
-		.btn-primary-orange {
-			background: linear-gradient(95deg, #E67E22, #F39C12);
-			border: none;
-			padding: 0.7rem 2rem;
-			border-radius: 50px;
-			color: #fff;
-			font-weight: 700;
-			transition: 0.25s;
-			box-shadow: 0 8px 20px -8px rgba(230, 126, 34, 0.4);
-		}
-
-			.btn-primary-orange:hover {
-				transform: translateY(-3px);
-				background: #D35400;
-				color: #fff;
-			}
-
-		.btn-outline-light-custom {
-			background: rgba(255, 255, 255, 0.12);
-			backdrop-filter: blur(8px);
-			border: 1px solid rgba(255, 255, 255, 0.35);
-			padding: 0.7rem 2rem;
-			border-radius: 50px;
-			color: #fff;
-			font-weight: 600;
-			transition: 0.2s;
-		}
-
-			.btn-outline-light-custom:hover {
-				background: rgba(255, 255, 255, 0.25);
-				color: #fff;
-			}
-
-		.btn-whatsapp {
-			background: linear-gradient(95deg, #25D366, #128C7E);
-			border: none;
-			padding: 0.6rem 1.5rem;
-			border-radius: 50px;
-			color: #fff;
-			font-weight: 700;
-			transition: 0.2s;
-		}
-
-			.btn-whatsapp:hover {
-				transform: scale(1.04);
-				color: #fff;
-			}
-
-		/* ===== CARDS ===== */
-		.card-premium {
-			border: none;
-			border-radius: 24px;
-			box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.08);
-			transition: 0.35s;
-			overflow: hidden;
-			background: #fff;
-		}
-
-			.card-premium:hover {
-				transform: translateY(-6px);
-				box-shadow: 0 20px 48px -14px rgba(0, 0, 0, 0.14);
-			}
-
-			.card-premium .card-body {
-				padding: 1.8rem;
-			}
-
-		.doc-img {
-			width: 80px;
-			height: 80px;
-			border-radius: 50%;
-			object-fit: cover;
-			border: 3px solid var(--primary-orange);
-		}
-
-		/* ===== GALLERY ===== */
-		.gallery-item {
-			border-radius: 20px;
-			overflow: hidden;
-			height: 220px;
-			background-size: cover;
-			background-position: center;
-			position: relative;
-			cursor: pointer;
-			transition: 0.3s;
-			box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.08);
-		}
-
-			.gallery-item:hover {
-				transform: scale(1.03);
-				box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.2);
-			}
-
-			.gallery-item .gallery-label {
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				right: 0;
-				background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-				color: #fff;
-				padding: 1.5rem 1rem 0.8rem;
-				font-weight: 600;
-			}
-
-		/* ===== VIDEO CARD ===== */
-		.video-card {
-			border-radius: 24px;
-			overflow: hidden;
-			background: #fff;
-			box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.08);
-			transition: 0.3s;
-		}
-
-			.video-card:hover {
-				transform: translateY(-5px);
-				box-shadow: 0 20px 48px -14px rgba(0, 0, 0, 0.14);
-			}
-
-			.video-card video {
-				width: 100%;
-				aspect-ratio: 16/9;
-				background: #1E2A3E;
-			}
-
-			.video-card .video-info {
-				padding: 1rem 1.2rem;
-			}
-
-		/* ===== MAP ===== */
-		.map-container {
-			border-radius: 24px;
-			overflow: hidden;
-			box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.08);
-			height: 100%;
-			min-height: 320px;
-		}
-
-			.map-container iframe {
-				width: 100%;
-				height: 100%;
-				min-height: 320px;
-				border: none;
-			}
-
-		/* ===== SECTION TITLES ===== */
-		.section-title {
-			font-family: 'Space Grotesk', sans-serif;
-			font-size: 2rem;
-			font-weight: 800;
-			background: linear-gradient(135deg, #1B4F72, #E67E22);
-			-webkit-background-clip: text;
-			background-clip: text;
-			color: transparent;
-			margin-bottom: 1.5rem;
-		}
-
-			.section-title i {
-				color: var(--primary-orange);
-			}
-
-		.badge-specialty {
-			background: #FFF3E0;
-			color: #E67E22;
-			padding: 0.4rem 1.2rem;
-			border-radius: 50px;
-			font-weight: 600;
-			font-size: 0.8rem;
-		}
-
-		/* ===== FOOTER ===== */
-		.footer-custom {
-			background: #1E2A3E;
-			color: #fff;
-			border-radius: 40px 40px 0 0;
-			padding: 2.5rem 2rem 1.5rem;
-			margin-top: 2.5rem;
-		}
-
-		/* ===== RESPONSIVE ===== */
-		@media (max-width: 992px) {
-			.hero-slider-wrapper {
-				height: 420px;
-			}
-
-			.hero-slide {
-				padding: 2rem;
-			}
-
-			.hero-slide-content h2 {
-				font-size: 2.2rem;
-			}
-
-			.hero-slide-badge {
-				min-width: 160px;
-				padding: 0.8rem 1.2rem;
-			}
+		.specialties-grid .col-lg-3 {
+			flex: 0 0 auto;
+			width: 25%;
 		}
 
 		@media (max-width: 768px) {
-			.hero-slider-wrapper {
-				height: 380px;
-			}
-
-			.hero-slide-content h2 {
-				font-size: 1.7rem;
-			}
-
-			.hero-slide-content p {
-				font-size: 0.9rem;
-			}
-
-			.hero-slide-badge {
-				min-width: 140px;
-				padding: 0.6rem 1rem;
-			}
-
-				.hero-slide-badge .phone-big {
-					font-size: 1.2rem;
-				}
-
-			.section-title {
-				font-size: 1.5rem;
-			}
-
-			.gallery-item {
-				height: 160px;
+			.specialties-grid .col-lg-3 {
+				width: 50%;
 			}
 		}
 
 		@media (max-width: 576px) {
-			.hero-slider-wrapper {
-				height: 340px;
-				border-radius: 20px;
-			}
-
-			.hero-slide {
-				padding: 1.2rem;
-			}
-
-			.hero-slide-content h2 {
-				font-size: 1.4rem;
-			}
-
-			.hero-slide-content .sub {
-				font-size: 0.85rem;
-			}
-
-			.hero-slide-content p {
-				font-size: 0.8rem;
-				max-width: 100%;
-			}
-
-			.hero-slide-badge {
-				min-width: 120px;
-				padding: 0.4rem 0.8rem;
-			}
-
-				.hero-slide-badge .phone-big {
-					font-size: 1rem;
-				}
-
-				.hero-slide-badge .label {
-					font-size: 0.6rem;
-				}
-
-			.btn-primary-orange,
-			.btn-outline-light-custom {
-				padding: 0.5rem 1.2rem;
-				font-size: 0.8rem;
+			.specialties-grid .col-lg-3 {
+				width: 100%;
 			}
 		}
+
+		/* Custom SAI Clinic Styles */
+		.doctor-details .specialty-tag {
+			background: #0d47a1;
+			color: #fff;
+			padding: 0.3rem 0.8rem;
+			border-radius: 20px;
+			font-size: 0.75rem;
+			display: inline-block;
+		}
+
+		.contact-info i {
+			color: #0d47a1;
+		}
+
+		.emergency-btn {
+			background: #c62828;
+			color: #fff;
+			padding: 0.8rem 1.5rem;
+			border-radius: 50px;
+			text-decoration: none;
+			font-weight: 600;
+		}
+
+			.emergency-btn:hover {
+				background: #b71c1c;
+				color: #fff;
+			}
+
+		.topbar .contact-info i, .topbar .contact-info a {
+			color: #fff;
+		}
+
+		.topbar .social-links a {
+			color: #fff;
+		}
+
+		.branding .sitename {
+			color: #0d47a1;
+			font-weight: 700;
+		}
+
+		.footer-16 .sitename {
+			color: #0d47a1;
+		}
+
+		.hero h1 .highlight {
+			color: #0d47a1;
+		}
+
+		.btn-primary {
+			background: #0d47a1;
+			border-color: #0d47a1;
+		}
+
+			.btn-primary:hover {
+				background: #0a3a8a;
+				border-color: #0a3a8a;
+			}
+
+		.btn-outline {
+			border: 2px solid #0d47a1;
+			color: #0d47a1;
+		}
+
+			.btn-outline:hover {
+				background: #0d47a1;
+				color: #fff;
+			}
+
+		.section-title h2 {
+			color: #0d47a1;
+		}
 	</style>
+
 </head>
-<body>
 
-	<!-- ===== NAVBAR ===== -->
-	<nav class="navbar navbar-expand-lg navbar-custom">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#"><i class="bi bi-heart-pulse"></i> SAI CLINIC</a>
-			<button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="mainNav">
-				<ul class="navbar-nav ms-auto align-items-lg-center gap-1">
-					<li class="nav-item"><a class="nav-link active" data-page="home" href="#"><i class="bi bi-house"></i> Home</a></li>
-					<li class="nav-item"><a class="nav-link" data-page="about" href="#"><i class="bi bi-info-circle"></i> About</a></li>
-					<li class="nav-item"><a class="nav-link" data-page="services" href="#"><i class="bi bi-clipboard2-pulse"></i> Services</a></li>
-					<li class="nav-item"><a class="nav-link" data-page="departments" href="#"><i class="bi bi-grid-3x3-gap"></i> Departments</a></li>
-					<li class="nav-item"><a class="nav-link" data-page="doctors" href="#"><i class="bi bi-person-badge"></i> Doctors</a></li>
-					<li class="nav-item"><a class="nav-link" data-page="gallery" href="#"><i class="bi bi-images"></i> Gallery</a></li>
-					<li class="nav-item"><a class="nav-link" data-page="videos" href="#"><i class="bi bi-play-circle"></i> Videos</a></li>
-					<li class="nav-item"><a class="nav-link" data-page="contact" href="#"><i class="bi bi-envelope"></i> Contact</a></li>
-				</ul>
-				<a href="tel:9787960590" class="btn btn-outline-orange ms-lg-2 mt-2 mt-lg-0">
-					<i class="bi bi-telephone-fill"></i> 97879 60590
+<body class="index-page">
+
+	<header id="header" class="header fixed-top">
+
+		<div class="topbar d-flex align-items-center dark-background" style="background: #0d47a1;">
+			<div class="container d-flex justify-content-center justify-content-md-between">
+				<div class="contact-info d-flex align-items-center">
+					<i class="bi bi-envelope d-flex align-items-center"><a href="mailto:info@saigroupofclinic.com" style="color:#fff;">info@saigroupofclinic.com</a></i>
+					<i class="bi bi-phone d-flex align-items-center ms-4"><span style="color:#fff;">+91 97879 60590</span></i>
+				</div>
+				<div class="social-links d-none d-md-flex align-items-center">
+					<a href="#!" class="twitter" style="color:#fff;"><i class="bi bi-twitter-x"></i></a>
+					<a href="#!" class="facebook" style="color:#fff;"><i class="bi bi-facebook"></i></a>
+					<a href="#!" class="instagram" style="color:#fff;"><i class="bi bi-instagram"></i></a>
+					<a href="#!" class="linkedin" style="color:#fff;"><i class="bi bi-linkedin"></i></a>
+				</div>
+			</div>
+		</div><!-- End Top Bar -->
+
+		<div class="branding d-flex align-items-cente">
+
+			<div class="container position-relative d-flex align-items-center justify-content-between">
+				<a href="index.html" class="logo d-flex align-items-center">
+					<h1 class="sitename">SAI CLINIC</h1>
 				</a>
+
+				<nav id="navmenu" class="navmenu">
+					<ul>
+						<li><a href="index.html" class="active">Home</a></li>
+						<li><a href="about.html">About</a></li>
+						<li><a href="departments.html">Departments</a></li>
+						<li><a href="services.html">Services</a></li>
+						<li><a href="doctors.html">Doctors</a></li>
+						<li class="dropdown">
+							<a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+							<ul>
+								<li><a href="department-details.html">Department Details</a></li>
+								<li><a href="service-details.html">Service Details</a></li>
+								<li><a href="appointment.html">Appointment</a></li>
+								<li><a href="testimonials.html">Testimonials</a></li>
+								<li><a href="faq.html">Frequently Asked Questions</a></li>
+								<li><a href="gallery.html">Gallery</a></li>
+								<li><a href="terms.html">Terms</a></li>
+								<li><a href="privacy.html">Privacy</a></li>
+								<li><a href="404.html">404</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+							<ul>
+								<li><a href="#">Dropdown 1</a></li>
+								<li class="dropdown">
+									<a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+									<ul>
+										<li><a href="#">Deep Dropdown 1</a></li>
+										<li><a href="#">Deep Dropdown 2</a></li>
+										<li><a href="#">Deep Dropdown 3</a></li>
+										<li><a href="#">Deep Dropdown 4</a></li>
+										<li><a href="#">Deep Dropdown 5</a></li>
+									</ul>
+								</li>
+								<li><a href="#">Dropdown 2</a></li>
+								<li><a href="#">Dropdown 3</a></li>
+								<li><a href="#">Dropdown 4</a></li>
+							</ul>
+						</li>
+						<li><a href="contact.html">Contact</a></li>
+					</ul>
+					<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+				</nav>
+
 			</div>
+
 		</div>
-	</nav>
 
-	<div class="container">
+	</header>
 
-		<!-- ============================================================ -->
-		<!-- HOME PAGE -->
-		<!-- ============================================================ -->
-		<div id="page-home" class="page-section active">
+	<main class="main">
 
-			<!-- HERO SLIDER -->
-			<div class="hero-slider-wrapper mb-4" data-aos="fade-down">
-				<div class="hero-slides" id="heroSlides">
-					<!-- Slide 1 -->
-					<div class="hero-slide">
-						<div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=1400&h=600&fit=crop');"></div>
-						<div class="slide-overlay"></div>
-						<div class="container-fluid px-0 d-flex flex-wrap align-items-center justify-content-between">
-							<div class="hero-slide-content">
-								<h2>Your Health, Our Priority ❤️</h2>
-								<div class="sub"><i class="bi bi-shield-check"></i> 15+ Years of Trusted Care</div>
-								<p>Multi-speciality clinic with advanced diagnostics, in-house pharmacy &amp; 24/7 emergency support.</p>
-								<div class="d-flex flex-wrap gap-2">
-									<button class="btn btn-primary-orange" onclick="scrollToDoctors()"><i class="bi bi-whatsapp"></i> Book via WhatsApp</button>
-									<button class="btn btn-outline-light-custom" onclick="openMap()"><i class="bi bi-geo-alt"></i> Directions</button>
+		<!-- Hero Section -->
+		<section id="hero" class="hero section">
+
+			<div class="container" data-aos="fade-up" data-aos-delay="100">
+
+				<div class="row align-items-center">
+					<div class="col-lg-6">
+						<div class="hero-content">
+							<div class="trust-badges mb-4" data-aos="fade-right" data-aos-delay="200">
+								<div class="badge-item">
+									<i class="bi bi-shield-check"></i>
+									<span>Accredited</span>
+								</div>
+								<div class="badge-item">
+									<i class="bi bi-clock"></i>
+									<span>08.00 AM - 10.00 PM</span>
+								</div>
+								<div class="badge-item">
+									<i class="bi bi-star-fill"></i>
+									<span>4.9/5 Rating</span>
 								</div>
 							</div>
-							<div class="hero-slide-badge">
-								<div class="label">Emergency / Appointments</div>
-								<div class="phone-big"><i class="bi bi-phone"></i> 97879 60590</div>
-								<div style="font-size:0.7rem;opacity:0.85;"><i class="bi bi-clock"></i> Walk-in 8AM–10PM</div>
-							</div>
-						</div>
-					</div>
-					<!-- Slide 2 -->
-					<div class="hero-slide">
-						<div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1400&h=600&fit=crop');"></div>
-						<div class="slide-overlay"></div>
-						<div class="container-fluid px-0 d-flex flex-wrap align-items-center justify-content-between">
-							<div class="hero-slide-content">
-								<h2>Elite Specialists <span style="color:#FFD966;">👨‍⚕️</span></h2>
-								<div class="sub">6+ Expert Doctors · Same-day slots</div>
-								<p>From Diabetology to Orthopedics, Gynaecology &amp; Dermatology — all under one roof.</p>
-								<div class="d-flex flex-wrap gap-2">
-									<button class="btn btn-primary-orange" onclick="switchPage('doctors')"><i class="bi bi-person-badge"></i> Meet Our Doctors</button>
-									<button class="btn btn-outline-light-custom" onclick="switchPage('services')"><i class="bi bi-clipboard2-pulse"></i> Services</button>
+
+							<h1 data-aos="fade-right" data-aos-delay="300">
+								Excellence in <span class="highlight">Healthcare</span> With Compassionate Care
+							</h1>
+
+							<p class="hero-description" data-aos="fade-right" data-aos-delay="400">
+								SAI CLINIC offers comprehensive medical services including Lab, X-Ray, and ECG.
+								Our team of experienced doctors is dedicated to providing personalized care for all your health needs.
+							</p>
+
+							<div class="hero-stats mb-4" data-aos="fade-right" data-aos-delay="500">
+								<div class="stat-item">
+									<h3>
+										<span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="2"
+											  class="purecounter"></span>+
+									</h3>
+									<p>Years Experience</p>
+								</div>
+								<div class="stat-item">
+									<h3>
+										<span data-purecounter-start="0" data-purecounter-end="5000" data-purecounter-duration="2"
+											  class="purecounter"></span>+
+									</h3>
+									<p>Patients Treated</p>
+								</div>
+								<div class="stat-item">
+									<h3>
+										<span data-purecounter-start="0" data-purecounter-end="4" data-purecounter-duration="2"
+											  class="purecounter"></span>+
+									</h3>
+									<p>Medical Experts</p>
 								</div>
 							</div>
-							<div class="hero-slide-badge">
-								<div class="label">⭐ Rated 4.9/5</div>
-								<div style="font-size:1.4rem;color:#FFD966;"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
-								<div style="font-size:0.7rem;">by 1200+ patients</div>
+
+							<div class="hero-actions" data-aos="fade-right" data-aos-delay="600">
+								<a href="appointment.html" class="btn btn-primary">Book Appointment</a>
+								<a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-outline glightbox">
+									<i class="bi bi-play-circle me-2"></i>
+									Watch Our Story
+								</a>
 							</div>
-						</div>
-					</div>
-					<!-- Slide 3 -->
-					<div class="hero-slide">
-						<div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1579154204601-01588f351e67?w=1400&h=600&fit=crop');"></div>
-						<div class="slide-overlay"></div>
-						<div class="container-fluid px-0 d-flex flex-wrap align-items-center justify-content-between">
-							<div class="hero-slide-content">
-								<h2>Advanced Diagnostics <span style="color:#FFD966;">🔬</span></h2>
-								<div class="sub">Digital X-Ray · ECG · STAT Lab</div>
-								<p>Instant reports within 2 hours* · Home sample collection available.</p>
-								<div class="d-flex flex-wrap gap-2">
-									<button class="btn btn-primary-orange" onclick="switchPage('services')"><i class="bi bi-flask"></i> Explore Lab</button>
-									<button class="btn btn-outline-light-custom" onclick="switchPage('contact')"><i class="bi bi-headset"></i> Contact</button>
+
+							<div class="emergency-contact" data-aos="fade-right" data-aos-delay="700">
+								<div class="emergency-icon">
+									<i class="bi bi-telephone-fill"></i>
+								</div>
+								<div class="emergency-info">
+									<small>Emergency Hotline</small>
+									<strong>+91 97879 60590</strong>
 								</div>
 							</div>
-							<div class="hero-slide-badge">
-								<div class="label">📍 Location</div>
-								<div style="font-size:0.9rem;font-weight:600;">Kavaraipettai, Chennai</div>
-								<div style="font-size:0.7rem;opacity:0.8;">Railway Station Road</div>
+						</div>
+					</div>
+
+					<div class="col-lg-6">
+						<div class="hero-visual" data-aos="fade-left" data-aos-delay="400">
+							<div class="main-image">
+								<img src="assets/img/health/staff-10.webp" alt="SAI CLINIC - Modern Healthcare Facility" class="img-fluid">
+								<div class="floating-card appointment-card">
+									<div class="card-icon">
+										<i class="bi bi-calendar-check"></i>
+									</div>
+									<div class="card-content">
+										<h6>Next Available</h6>
+										<p>Today 2:30 PM</p>
+										<small>Dr. S. Rubagam</small>
+									</div>
+								</div>
+								<div class="floating-card rating-card">
+									<div class="card-content">
+										<div class="rating-stars">
+											<i class="bi bi-star-fill"></i>
+											<i class="bi bi-star-fill"></i>
+											<i class="bi bi-star-fill"></i>
+											<i class="bi bi-star-fill"></i>
+											<i class="bi bi-star-fill"></i>
+										</div>
+										<h6>4.9/5</h6>
+										<small>1,234 Reviews</small>
+									</div>
+								</div>
+							</div>
+							<div class="background-elements">
+								<div class="element element-1"></div>
+								<div class="element element-2"></div>
+								<div class="element element-3"></div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="slider-dots" id="sliderDots">
-					<span class="active" data-index="0"></span>
-					<span data-index="1"></span>
-					<span data-index="2"></span>
-				</div>
+
 			</div>
 
-			<!-- Quick Stats -->
-			<div class="row g-4 mb-4" data-aos="fade-up">
-				<div class="col-lg-7">
-					<div class="bg-white p-4 rounded-4 shadow-sm">
-						<span class="badge-specialty"><i class="bi bi-award"></i> Multi-Awarded Clinic</span>
-						<h1 class="display-5 fw-bold mt-2" style="font-family:'Space Grotesk',sans-serif;">SAI CLINIC &amp; DIAGNOSTICS</h1>
-						<p class="text-teal fw-semibold"><i class="bi bi-translate"></i> சாய் கிளினிக் — முழுமையான சுகாதாரம்</p>
-						<p><i class="bi bi-flask text-warning"></i> Advanced Lab | Digital X-Ray | ECG | In-house Pharmacy</p>
-						<div class="d-flex flex-wrap gap-2 mt-2">
-							<span class="bg-light px-3 py-1 rounded-pill fw-semibold"><i class="bi bi-vial"></i> 24/7 STAT Lab</span>
-							<span class="bg-light px-3 py-1 rounded-pill fw-semibold"><i class="bi bi-bolt"></i> Emergency Ready</span>
-							<span class="bg-light px-3 py-1 rounded-pill fw-semibold"><i class="bi bi-wifi"></i> Digital Records</span>
+		</section><!-- /Hero Section -->
+		<!-- Home About Section -->
+		<section id="home-about" class="home-about section">
+
+			<div class="container" data-aos="fade-up" data-aos-delay="100">
+
+				<div class="row align-items-center">
+					<div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right" data-aos-delay="200">
+						<div class="about-content">
+							<h2 class="section-heading">Welcome to SAI CLINIC</h2>
+							<p class="lead-text">No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206</p>
+
+							<p>
+								SAI CLINIC is a multi-specialty healthcare center offering a wide range of medical services.
+								We are equipped with modern diagnostic facilities including Lab, X-Ray, and ECG.
+								Our team of dedicated doctors ensures compassionate and comprehensive care for every patient.
+							</p>
+
+							<div class="stats-grid">
+								<div class="stat-item">
+									<div class="stat-number purecounter" data-purecounter-start="0" data-purecounter-end="15"
+										 data-purecounter-duration="1"></div>
+									<div class="stat-label">Years of Service</div>
+								</div>
+								<div class="stat-item">
+									<div class="stat-number purecounter" data-purecounter-start="0" data-purecounter-end="4"
+										 data-purecounter-duration="1"></div>
+									<div class="stat-label">Specialists</div>
+								</div>
+								<div class="stat-item">
+									<div class="stat-number purecounter" data-purecounter-start="0" data-purecounter-end="5000"
+										 data-purecounter-duration="1"></div>
+									<div class="stat-label">Happy Patients</div>
+								</div>
+							</div>
+
+							<div class="cta-section">
+								<a href="about.html" class="btn-primary">Learn More About Us</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
+						<div class="about-visual">
+							<div class="main-image">
+								<img src="assets/img/health/facilities-9.webp" alt="SAI CLINIC facility" class="img-fluid">
+							</div>
+							<div class="floating-card">
+								<div class="card-content">
+									<div class="icon">
+										<i class="bi bi-heart-pulse"></i>
+									</div>
+									<div class="card-text">
+										<h4>Comprehensive Care</h4>
+										<p>Lab, X-Ray, ECG available</p>
+									</div>
+								</div>
+							</div>
+							<div class="experience-badge">
+								<div class="badge-content">
+									<span class="years">15+</span>
+									<span class="text">Years of Trusted Care</span>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-5">
-					<div class="bg-white p-4 rounded-4 shadow-sm h-100">
-						<div class="d-flex justify-content-between py-2 border-bottom"><span><i class="bi bi-calendar-event"></i> OPD Schedule</span><strong>8AM – 10PM (All Days)</strong></div>
-						<div class="d-flex justify-content-between py-2 border-bottom"><span><i class="bi bi-person-badge"></i> Specialists</span><strong>6+ Expert Doctors</strong></div>
-						<div class="d-flex justify-content-between py-2 border-bottom"><span><i class="bi bi-clock-history"></i> Instant Reports</span><strong>Within 2 Hours*</strong></div>
-						<div class="d-flex justify-content-between py-2"><span><i class="bi bi-whatsapp"></i> Direct Connect</span><strong>+91 97879 60590</strong></div>
+
+			</div>
+
+		</section><!-- /Home About Section -->
+		<!-- Doctors Section (based on image) -->
+		<section id="doctors" class="doctors section">
+
+			<!-- Section Title -->
+			<div class="container section-title" data-aos="fade-up">
+				<h2>Our Specialist Doctors</h2>
+				<p>Expert medical professionals dedicated to your health and well-being.</p>
+			</div><!-- End Section Title -->
+
+			<div class="container" data-aos="fade-up" data-aos-delay="100">
+
+				<div class="row gy-4">
+
+					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+						<div class="doctor-profile">
+							<div class="profile-header">
+								<div class="doctor-avatar">
+									<img src="assets/img/health/staff-2.webp" alt="Dr. S. Rubagam" class="img-fluid">
+									<div class="status-indicator available"></div>
+								</div>
+								<div class="doctor-details">
+									<h4>Dr. S. Rubagam</h4>
+									<span class="specialty-tag">M.B.S., Dip. in Dentistry, AVM</span>
+									<span class="specialty-tag" style="background:#1565c0;">MEM (GM University - USA)</span>
+								</div>
+							</div>
+							<div class="action-buttons">
+								<a href="#!" class="btn-secondary">View Details</a>
+								<a href="#!" class="btn-primary">Book Now</a>
+							</div>
+						</div>
+					</div><!-- End Doctor -->
+
+					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+						<div class="doctor-profile">
+							<div class="profile-header">
+								<div class="doctor-avatar">
+									<img src="assets/img/health/staff-6.webp" alt="Dr. M. Karthikeyan" class="img-fluid">
+									<div class="status-indicator busy"></div>
+								</div>
+								<div class="doctor-details">
+									<h4>Dr. M. Karthikeyan</h4>
+									<span class="specialty-tag">M.S. Dent.</span>
+									<span class="specialty-tag" style="background:#1565c0;">M.B.S. (General Surgery)</span>
+								</div>
+							</div>
+							<div class="action-buttons">
+								<a href="#!" class="btn-secondary">View Details</a>
+								<a href="#!" class="btn-primary">Schedule</a>
+							</div>
+						</div>
+					</div><!-- End Doctor -->
+
+					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+						<div class="doctor-profile">
+							<div class="profile-header">
+								<div class="doctor-avatar">
+									<img src="assets/img/health/staff-4.webp" alt="Dr. N. Ruba" class="img-fluid">
+									<div class="status-indicator available"></div>
+								</div>
+								<div class="doctor-details">
+									<h4>Dr. N. Ruba</h4>
+									<span class="specialty-tag">M.B.S. (General Surgery)</span>
+								</div>
+							</div>
+							<div class="action-buttons">
+								<a href="#!" class="btn-secondary">View Details</a>
+								<a href="#!" class="btn-primary">Book Now</a>
+							</div>
+						</div>
+					</div><!-- End Doctor -->
+
+					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+						<div class="doctor-profile">
+							<div class="profile-header">
+								<div class="doctor-avatar">
+									<img src="assets/img/health/staff-8.webp" alt="Dr. H. Rubagam" class="img-fluid">
+									<div class="status-indicator offline"></div>
+								</div>
+								<div class="doctor-details">
+									<h4>Dr. H. Rubagam</h4>
+									<span class="specialty-tag">M.B.S. (General Surgery)</span>
+								</div>
+							</div>
+							<div class="action-buttons">
+								<a href="#!" class="btn-secondary">View Details</a>
+								<a href="#!" class="btn-primary">Schedule</a>
+							</div>
+						</div>
+					</div><!-- End Doctor -->
+
+				</div>
+
+				<div class="text-center mt-5" data-aos="fade-up" data-aos-delay="700">
+					<a href="doctors.html" class="btn-view-all">
+						View All Doctors
+						<i class="bi bi-arrow-right"></i>
+					</a>
+				</div>
+
+			</div>
+
+		</section><!-- /Doctors Section -->
+		<!-- Services & Facilities Section -->
+		<section id="services" class="services section">
+
+			<div class="container section-title" data-aos="fade-up">
+				<h2>Our Services & Facilities</h2>
+				<p>Comprehensive diagnostic and treatment services under one roof.</p>
+			</div>
+
+			<div class="container" data-aos="fade-up" data-aos-delay="100">
+
+				<div class="row gy-4">
+
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+						<div class="service-item">
+							<div class="icon"><i class="bi bi-flask"></i></div>
+							<h3>LAB</h3>
+							<p>Full-service clinical laboratory for accurate and timely diagnostic testing.</p>
+						</div>
 					</div>
+
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+						<div class="service-item">
+							<div class="icon"><i class="bi bi-x-diamond"></i></div>
+							<h3>X-RAY</h3>
+							<p>Digital X-ray services for quick and precise imaging diagnostics.</p>
+						</div>
+					</div>
+
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+						<div class="service-item">
+							<div class="icon"><i class="bi bi-heart-pulse"></i></div>
+							<h3>ECG</h3>
+							<p>Electrocardiogram services for accurate heart function assessment.</p>
+						</div>
+					</div>
+
 				</div>
-			</div>
 
-			<!-- Doctors Preview -->
-			<div data-aos="fade-up">
-				<h2 class="section-title"><i class="bi bi-person-badge"></i> 👨‍⚕️ Elite Specialists</h2>
-			</div>
-			<div class="row g-4" id="doctorHomeGrid"></div>
+				<div class="row mt-4">
+					<div class="col-lg-12 text-center">
+						<div class="specialties-grid" data-aos="fade-up" data-aos-delay="400">
+							<div class="row align-items-center justify-content-center g-4">
 
-			<!-- Departments Preview -->
-			<div data-aos="zoom-in">
-				<h2 class="section-title"><i class="bi bi-grid-3x3-gap"></i> Advanced Departments</h2>
-				<div class="row g-3">
-					<div class="col-6 col-md-4 col-lg-2"><div class="bg-white p-3 text-center rounded-4 shadow-sm border-bottom border-warning border-4"><i class="bi bi-heart-pulse fs-1 text-warning"></i><h5 class="mt-2">General Medicine</h5></div></div>
-					<div class="col-6 col-md-4 col-lg-2"><div class="bg-white p-3 text-center rounded-4 shadow-sm border-bottom border-warning border-4"><i class="bi bi-bone fs-1 text-warning"></i><h5 class="mt-2">Orthopedics</h5></div></div>
-					<div class="col-6 col-md-4 col-lg-2"><div class="bg-white p-3 text-center rounded-4 shadow-sm border-bottom border-warning border-4"><i class="bi bi-gender-female fs-1 text-warning"></i><h5 class="mt-2">Gynaecology</h5></div></div>
-					<div class="col-6 col-md-4 col-lg-2"><div class="bg-white p-3 text-center rounded-4 shadow-sm border-bottom border-warning border-4"><i class="bi bi-baby fs-1 text-warning"></i><h5 class="mt-2">Pediatrics</h5></div></div>
-					<div class="col-6 col-md-4 col-lg-2"><div class="bg-white p-3 text-center rounded-4 shadow-sm border-bottom border-warning border-4"><i class="bi bi-droplet fs-1 text-warning"></i><h5 class="mt-2">Dermatology</h5></div></div>
-					<div class="col-6 col-md-4 col-lg-2"><div class="bg-white p-3 text-center rounded-4 shadow-sm border-bottom border-warning border-4"><i class="bi bi-cup-straw fs-1 text-warning"></i><h5 class="mt-2">Diabetology</h5></div></div>
-				</div>
-			</div>
+								<div class="col-lg-3 col-md-6">
+									<div class="specialty-card">
+										<div class="specialty-image">
+											<img src="assets/img/health/maternal-2.webp" alt="Maternal Care" class="img-fluid" loading="lazy">
+										</div>
+										<div class="specialty-content">
+											<h5>Maternal Care</h5>
+											<span>Expert pregnancy &amp; delivery support</span>
+										</div>
+									</div>
+								</div>
 
-			<!-- Location & Concierge -->
-			<div class="row g-4 mt-3">
-				<div class="col-md-6">
-					<div class="bg-white p-4 rounded-4 shadow-sm">
-						<h4><i class="bi bi-geo-alt text-warning"></i> 📍 Clinic Hub</h4>
-						<p class="fw-semibold">No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206</p>
-						<div class="bg-warning bg-opacity-10 p-3 rounded-3 cursor-pointer" onclick="openMap()" style="cursor:pointer;">
-							<span><i class="bi bi-route"></i> Navigate via Google Maps</span>
-							<i class="bi bi-arrow-right float-end"></i>
+								<div class="col-lg-3 col-md-6">
+									<div class="specialty-card">
+										<div class="specialty-image">
+											<img src="assets/img/health/vaccination-3.webp" alt="Vaccination" class="img-fluid" loading="lazy">
+										</div>
+										<div class="specialty-content">
+											<h5>Vaccination</h5>
+											<span>Complete immunization programs</span>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-lg-3 col-md-6">
+									<div class="specialty-card">
+										<div class="specialty-image">
+											<img src="assets/img/health/emergency-1.webp" alt="Emergency Care" class="img-fluid" loading="lazy">
+										</div>
+										<div class="specialty-content">
+											<h5>Emergency Care</h5>
+											<span>24/7 critical care services</span>
+										</div>
+									</div>
+								</div>
+
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6">
-					<div class="bg-white p-4 rounded-4 shadow-sm">
-						<h4><i class="bi bi-headset text-warning"></i> Centralized Concierge</h4>
-						<a href="tel:9787960590" class="text-decoration-none d-block fs-3 fw-bold text-warning"><i class="bi bi-telephone-fill"></i> 97879 60590</a>
-						<button class="btn btn-whatsapp w-100 mt-2" onclick="globalWhatsApp()"><i class="bi bi-whatsapp"></i> Get Appointment via WhatsApp</button>
-					</div>
-				</div>
+
 			</div>
-		</div>
 
-		<!-- ============================================================ -->
-		<!-- ABOUT -->
-		<!-- ============================================================ -->
-		<div id="page-about" class="page-section">
-			<div class="row g-4">
-				<div class="col-lg-8 mx-auto">
-					<h2 class="section-title">About Sai Clinic</h2>
-					<p class="fs-5" style="color:#2C3E50;">Since 2010, Sai Clinic has been a beacon of comprehensive healthcare in Kavaraipettai. We combine medical expertise with compassionate care, offering advanced diagnostics, in-house pharmacy, and a team of 6+ specialists across multiple disciplines.</p>
-					<div class="row g-3 mt-2">
-						<div class="col-sm-6"><div class="bg-white p-4 rounded-4 shadow-sm text-center"><i class="bi bi-clock-history fs-1 text-warning"></i><h4>15+ Years</h4><p>of trusted medical service</p></div></div>
-						<div class="col-sm-6"><div class="bg-white p-4 rounded-4 shadow-sm text-center"><i class="bi bi-flask fs-1 text-warning"></i><h4>Advanced Lab</h4><p>Digital X-Ray, ECG, STAT Lab</p></div></div>
-						<div class="col-sm-6"><div class="bg-white p-4 rounded-4 shadow-sm text-center"><i class="bi bi-capsule fs-1 text-warning"></i><h4>In-House Pharmacy</h4><p>SAI MEDICALS attached</p></div></div>
-						<div class="col-sm-6"><div class="bg-white p-4 rounded-4 shadow-sm text-center"><i class="bi bi-heart fs-1 text-warning"></i><h4>Patient First</h4><p>24/7 emergency &amp; walk-in</p></div></div>
-					</div>
-					<div class="mt-4 p-4 bg-white rounded-4 shadow-sm">
-						<i class="bi bi-quote fs-1 text-warning"></i>
-						<p class="fs-5 fst-italic">Our mission is to deliver affordable, world-class healthcare with a human touch. Every patient is family.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- ============================================================ -->
-		<!-- SERVICES -->
-		<!-- ============================================================ -->
-		<div id="page-services" class="page-section">
-			<h2 class="section-title">Our Services</h2>
-			<div class="row g-4">
-				<div class="col-sm-6 col-lg-4"><div class="bg-white p-4 rounded-4 shadow-sm text-center"><i class="bi bi-microscope fs-1 text-warning"></i><h4>Diagnostic Lab</h4><p>24/7 STAT lab, digital X-Ray, ECG</p></div></div>
-				<div class="col-sm-6 col-lg-4"><div class="bg-white p-4 rounded-4 shadow-sm text-center"><i class="bi bi-capsule fs-1 text-warning"></i><h4>Pharmacy</h4><p>In-house Sai Medicals with surgical items</p></div></div>
-				<div class="col-sm-6 col-lg-4"><div class="bg-white p-4 rounded-4 shadow-sm text-center"><i class="bi bi-truck fs-1 text-warning"></i><h4>Emergency Care</h4><p>8AM–10PM walk-in, trauma ready</p></div></div>
-				<div class="col-sm-6 col-lg-4"><div class="bg-white p-4 rounded-4 shadow-sm text-center"><i class="bi bi-house fs-1 text-warning"></i><h4>Home Collection</h4><p>Sample pick-up &amp; reports online</p></div></div>
-				<div class="col-sm-6 col-lg-4"><div class="bg-white p-4 rounded-4 shadow-sm text-center"><i class="bi bi-file-medical fs-1 text-warning"></i><h4>Digital Records</h4><p>Secure electronic health records</p></div></div>
-				<div class="col-sm-6 col-lg-4"><div class="bg-white p-4 rounded-4 shadow-sm text-center"><i class="bi bi-credit-card fs-1 text-warning"></i><h4>Insurance &amp; Cashless</h4><p>TPA support available</p></div></div>
-			</div>
-		</div>
-
-		<!-- ============================================================ -->
-		<!-- DEPARTMENTS -->
-		<!-- ============================================================ -->
-		<div id="page-departments" class="page-section">
-			<h2 class="section-title">Departments</h2>
-			<div class="row g-3">
-				<div class="col-6 col-md-4 col-lg-3"><div class="bg-white p-3 text-center rounded-4 shadow-sm border-bottom border-warning border-4"><i class="bi bi-heart-pulse fs-1 text-warning"></i><h5>General Medicine</h5><span class="text-muted small">பொது மருத்துவம்</span></div></div>
-				<div class="col-6 col-md-4 col-lg-3"><div class="bg-white p-3 text-center rounded-4 shadow-sm border-bottom border-warning border-4"><i class="bi bi-bone fs-1 text-warning"></i><h5>Orthopedics</h5><span class="text-muted small">எலும்பு மருத்துவம்</span></div></div>
-				<div class="col-6 col-md-4 col-lg-3"><div class="bg-white p-3 text-center rounded-4 shadow-sm border-bottom border-warning border-4"><i class="bi bi-gender-female fs-1 text-warning"></i><h5>Gynaecology</h5><span class="text-muted small">மகளிர் நலம்</span></div></div>
-				<div class="col-6 col-md-4 col-lg-3"><div class="bg-white p-3 text-center rounded-4 shadow-sm border-bottom border-warning border-4"><i class="bi bi-baby fs-1 text-warning"></i><h5>Pediatrics</h5><span class="text-muted small">குழந்தைகள்</span></div></div>
-				<div class="col-6 col-md-4 col-lg-3"><div class="bg-white p-3 text-center rounded-4 shadow-sm border-bottom border-warning border-4"><i class="bi bi-droplet fs-1 text-warning"></i><h5>Dermatology</h5><span class="text-muted small">தோல் மருத்துவம்</span></div></div>
-				<div class="col-6 col-md-4 col-lg-3"><div class="bg-white p-3 text-center rounded-4 shadow-sm border-bottom border-warning border-4"><i class="bi bi-cup-straw fs-1 text-warning"></i><h5>Diabetology</h5><span class="text-muted small">சர்க்கரை நோய்</span></div></div>
-				<div class="col-6 col-md-4 col-lg-3"><div class="bg-white p-3 text-center rounded-4 shadow-sm border-bottom border-warning border-4"><i class="bi bi-scissors fs-1 text-warning"></i><h5>Laparoscopic Surgery</h5><span class="text-muted small">அறுவை சிகிச்சை</span></div></div>
-				<div class="col-6 col-md-4 col-lg-3"><div class="bg-white p-3 text-center rounded-4 shadow-sm border-bottom border-warning border-4"><i class="bi bi-lungs fs-1 text-warning"></i><h5>Pulmonology</h5><span class="text-muted small">நுரையீரல்</span></div></div>
-			</div>
-		</div>
-
-		<!-- ============================================================ -->
-		<!-- DOCTORS -->
-		<!-- ============================================================ -->
-		<div id="page-doctors" class="page-section">
-			<h2 class="section-title">👨‍⚕️ Our Elite Doctors</h2>
-			<div class="row g-4" id="doctorFullGrid"></div>
-		</div>
-
-		<!-- ============================================================ -->
-		<!-- GALLERY -->
-		<!-- ============================================================ -->
-		<div id="page-gallery" class="page-section">
-			<h2 class="section-title">📸 Clinic Gallery</h2>
-			<div class="row g-3" id="galleryGrid"></div>
-		</div>
-
-		<!-- ============================================================ -->
-		<!-- VIDEOS -->
-		<!-- ============================================================ -->
-		<div id="page-videos" class="page-section">
-			<h2 class="section-title">🎬 Health & Clinic Videos</h2>
-			<div class="row g-4" id="videoGrid"></div>
-		</div>
-
-		<!-- ============================================================ -->
-		<!-- CONTACT -->
-		<!-- ============================================================ -->
-		<div id="page-contact" class="page-section">
-			<h2 class="section-title">Contact Us</h2>
-			<div class="row g-4">
-				<div class="col-md-5">
-					<div class="bg-white p-4 rounded-4 shadow-sm h-100">
-						<h4><i class="bi bi-geo-alt text-warning"></i> Address</h4>
-						<p class="fw-semibold">No. 253A, Railway Station Road,<br>Kavaraipettai, Chennai - 601206</p>
-						<h4 class="mt-3"><i class="bi bi-telephone text-warning"></i> Phone</h4>
-						<p class="fs-2 fw-bold text-warning">97879 60590</p>
-						<h4><i class="bi bi-clock text-warning"></i> OPD Hours</h4>
-						<p>8:00 AM – 10:00 PM (All Days)</p>
-						<button class="btn btn-whatsapp w-100 mt-2" onclick="globalWhatsApp()"><i class="bi bi-whatsapp"></i> WhatsApp Us</button>
-						<hr>
-						<p><i class="bi bi-capsule text-success"></i> <strong>SAI MEDICALS (In-house Pharmacy)</strong><br>Instant medicine dispensing &amp; surgical items</p>
-					</div>
-				</div>
-				<div class="col-md-7">
-					<div class="bg-white p-4 rounded-4 shadow-sm h-100">
-						<h4><i class="bi bi-map text-warning"></i> Find Us on Google Maps</h4>
-						<div class="map-container mt-2">
-							<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.123456789!2d80.123456789!3d13.123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDA3JzI0LjQiTiA4MMKwMDcnMjYuNCJF!5e0!3m2!1sen!2sin!4v1234567890" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+		</section><!-- /Services Section -->
+		<!-- SAI MEDICALS Section -->
+		<section id="sai-medicals" class="section" style="background: #f8f9fa; padding: 60px 0;">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-lg-8">
+						<h2 style="color: #0d47a1;">SAI MEDICALS</h2>
+						<p style="font-size: 1.2rem;">Your trusted pharmacy partner for all your healthcare needs.</p>
+						<p>Quality medicines and healthcare products available at competitive prices.</p>
+						<div class="contact-info mt-3">
+							<i class="bi bi-telephone"></i> <strong>+91 97879 60590</strong>
 						</div>
-						<div class="mt-3 d-flex gap-2 flex-wrap">
-							<button class="btn btn-primary-orange" onclick="openMap()"><i class="bi bi-route"></i> Open in Google Maps</button>
-							<button class="btn btn-outline-secondary" onclick="window.open('https://wa.me/917987960590?text=Hi%20Sai%20Clinic%2C%20I%20need%20directions%20to%20your%20clinic.','_blank')"><i class="bi bi-whatsapp"></i> Get Directions via WhatsApp</button>
+					</div>
+					<div class="col-lg-4 text-center">
+						<div class="badge" style="background: #0d47a1; color:#fff; padding: 15px 25px; border-radius: 50px; font-size: 1.1rem;">
+							<i class="bi bi-shop"></i> Visit SAI MEDICALS
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 
-	</div>
+		<!-- Call To Action Section -->
+		<section id="call-to-action" class="call-to-action section light-background">
 
-	<!-- ===== FOOTER ===== -->
-	<footer class="footer-custom container-fluid">
+			<div class="container" data-aos="fade-up" data-aos-delay="100">
+
+				<div class="hero-content">
+					<div class="row align-items-center">
+
+						<div class="col-lg-6">
+							<div class="content-wrapper" data-aos="fade-up" data-aos-delay="200">
+								<h1>Your Health is Our Priority</h1>
+								<p>
+									SAI CLINIC is committed to providing exceptional medical care with compassion and expertise.
+									Visit us for all your healthcare needs.
+								</p>
+
+								<div class="cta-wrapper">
+									<a href="appointment.html" class="primary-cta">
+										<span>Schedule Consultation</span>
+										<i class="bi bi-arrow-right"></i>
+									</a>
+									<a href="services.html" class="secondary-cta">
+										<span>Explore Services</span>
+										<i class="bi bi-arrow-right"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-6">
+							<div class="image-container" data-aos="fade-left" data-aos-delay="300">
+								<img src="assets/img/health/facilities-9.webp" alt="SAI CLINIC" class="img-fluid">
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="features-section">
+
+					<div class="row g-0">
+
+						<div class="col-lg-4">
+							<div class="feature-block" data-aos="fade-up" data-aos-delay="200">
+								<div class="feature-icon">
+									<i class="bi bi-shield-check"></i>
+								</div>
+								<h3>Advanced Technology</h3>
+								<p>State-of-the-art diagnostic equipment including digital X-ray and ECG.</p>
+							</div>
+						</div>
+
+						<div class="col-lg-4">
+							<div class="feature-block" data-aos="fade-up" data-aos-delay="300">
+								<div class="feature-icon">
+									<i class="bi bi-clock"></i>
+								</div>
+								<h3>Extended Hours</h3>
+								<p>Open from 08.00 AM to 10.00 PM, Monday to Sunday.</p>
+							</div>
+						</div>
+
+						<div class="col-lg-4">
+							<div class="feature-block" data-aos="fade-up" data-aos-delay="400">
+								<div class="feature-icon">
+									<i class="bi bi-people"></i>
+								</div>
+								<h3>Expert Team</h3>
+								<p>Qualified doctors with years of experience in their respective fields.</p>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="contact-block">
+					<div class="row">
+
+						<div class="col-lg-8">
+							<div class="contact-content" data-aos="fade-up" data-aos-delay="200">
+								<h2>Need Immediate Medical Assistance?</h2>
+								<p>Our team is available around the clock to provide immediate medical support when you need it most.</p>
+							</div>
+						</div>
+
+						<div class="col-lg-4">
+							<div class="contact-actions" data-aos="fade-up" data-aos-delay="300">
+								<a href="tel:+919787960590" class="emergency-call">
+									<i class="bi bi-telephone"></i>
+									<span>+91 97879 60590</span>
+								</a>
+								<a href="contact.html" class="contact-link">Find Location</a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+		</section><!-- /Call To Action Section -->
+
+	</main>
+
+	<footer id="footer" class="footer-16 footer position-relative">
+
 		<div class="container">
-			<div class="row g-3 align-items-center">
-				<div class="col-md-6">
-					<h5 class="fw-bold"><i class="bi bi-heart-pulse text-warning"></i> SAI CLINIC &amp; DIAGNOSTICS COMPLEX</h5>
-					<p class="mb-0">No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206</p>
-					<p><i class="bi bi-telephone"></i> +91 97879 60590</p>
+
+			<div class="footer-main" data-aos="fade-up" data-aos-delay="100">
+				<div class="row align-items-start">
+
+					<div class="col-lg-5">
+						<div class="brand-section">
+							<a href="index.html" class="logo d-flex align-items-center mb-4">
+								<span class="sitename">SAI CLINIC</span>
+							</a>
+							<p class="brand-description">
+								Caring for your health with expertise and compassion.
+								SAI CLINIC & SAI MEDICALS - Your trusted healthcare partner in Kavaraipettai.
+							</p>
+
+							<div class="contact-info mt-5">
+								<div class="contact-item">
+									<i class="bi bi-geo-alt"></i>
+									<span>No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206</span>
+								</div>
+								<div class="contact-item">
+									<i class="bi bi-telephone"></i>
+									<span>+91 97879 60590</span>
+								</div>
+								<div class="contact-item">
+									<i class="bi bi-envelope"></i>
+									<span>info@saigroupofclinic.com</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-7">
+						<div class="footer-nav-wrapper">
+							<div class="row">
+
+								<div class="col-6 col-lg-3">
+									<div class="nav-column">
+										<h6>Clinic</h6>
+										<nav class="footer-nav">
+											<a href="#!">About Us</a>
+											<a href="#!">Our Doctors</a>
+											<a href="#!">Services</a>
+											<a href="#!">Facilities</a>
+											<a href="#!">Contact</a>
+										</nav>
+									</div>
+								</div>
+
+								<div class="col-6 col-lg-3">
+									<div class="nav-column">
+										<h6>Services</h6>
+										<nav class="footer-nav">
+											<a href="#!">Lab Services</a>
+											<a href="#!">X-Ray</a>
+											<a href="#!">ECG</a>
+											<a href="#!">Vaccination</a>
+											<a href="#!">Maternal Care</a>
+										</nav>
+									</div>
+								</div>
+
+								<div class="col-6 col-lg-3">
+									<div class="nav-column">
+										<h6>Resources</h6>
+										<nav class="footer-nav">
+											<a href="#!">Health Blog</a>
+											<a href="#!">Patient Guide</a>
+											<a href="#!">FAQs</a>
+											<a href="#!">Testimonials</a>
+											<a href="#!">Gallery</a>
+										</nav>
+									</div>
+								</div>
+
+								<div class="col-6 col-lg-3">
+									<div class="nav-column">
+										<h6>Connect</h6>
+										<nav class="footer-nav">
+											<a href="#!">Book Appointment</a>
+											<a href="#!">Emergency</a>
+											<a href="#!">Feedback</a>
+											<a href="#!">Careers</a>
+											<a href="#!">Partnership</a>
+										</nav>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
 				</div>
-				<div class="col-md-6 text-md-end">
-					<p class="mb-0">© 2025 — Integrated Health Ecosystem</p>
-					<div class="mt-1">
-						<a href="#" class="text-white-50 me-2"><i class="bi bi-facebook"></i></a>
-						<a href="#" class="text-white-50 me-2"><i class="bi bi-instagram"></i></a>
-						<a href="#" class="text-white-50"><i class="bi bi-youtube"></i></a>
+			</div>
+
+		</div>
+
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
+					<div class="row align-items-center">
+
+						<div class="col-lg-6">
+							<div class="copyright">
+								<p>© <span class="sitename">SAI CLINIC</span>. All rights reserved.</p>
+							</div>
+						</div>
+
+						<div class="col-lg-6">
+							<div class="legal-links">
+								<a href="#!">Privacy Policy</a>
+								<a href="#!">Terms of Service</a>
+								<a href="#!">Cookie Policy</a>
+								<div class="credits">
+									Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>. Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+								</div>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>
 		</div>
+
 	</footer>
 
-	<!-- ===== SCRIPTS ===== -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
-	</script>
-	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
-	</script>
-	<script>
-    AOS.init({ duration: 700, once: true });
+	<!-- Scroll Top -->
+	<a href="#!" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+		<i class="bi bi-arrow-up-short"></i>
+	</a>
 
-    // ===== DOCTOR DATA =====
-    const doctorsData = [
-      { id: 1, name: "Dr. S. Sangami", specialization: "Clinical Diabetology & Metabolic Health", qualification: "M.B.B.S., Dip. Diabetology, FICM", img: "https://randomuser.me/api/portraits/women/68.jpg" },
-      { id: 2, name: "Dr. M. Karthikeyan", specialization: "Orthopedics & Joint Replacement", qualification: "M.S. (Ortho)", img: "https://randomuser.me/api/portraits/men/32.jpg" },
-      { id: 3, name: "Dr. M.R. Ramya", specialization: "Gynaecology & Fertility Expert", qualification: "M.B.B.S., D.G.O., DRM, F.M.A.S.", img: "https://randomuser.me/api/portraits/women/45.jpg" },
-      { id: 4, name: "Dr. N.H. Mallikarjun", specialization: "General & Laparoscopic Surgery", qualification: "M.B.B.S., M.S. (Gen Surg)", img: "https://randomuser.me/api/portraits/men/52.jpg" },
-      { id: 5, name: "Dr. H. Sadhiqul Ameen", specialization: "Dermatology & Venereology", qualification: "M.D. (DVL)", img: "https://randomuser.me/api/portraits/men/91.jpg" }
-    ];
+	<!-- Preloader -->
+	<div id="preloader"></div>
 
-    function getToday() {
-      let d = new Date();
-      return `${d.getFullYear()}-${(d.getMonth()+1).toString().padStart(2,'0')}-${d.getDate().toString().padStart(2,'0')}`;
-    }
-    const times = ["09:00 AM", "10:30 AM", "12:00 PM", "02:15 PM", "04:00 PM", "06:30 PM", "08:00 PM"];
+	<!-- Vendor JS Files -->
+	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/vendor/php-email-form/validate.js"></script>
+	<script src="assets/vendor/aos/aos.js"></script>
+	<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+	<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+	<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-    function renderDoctors(containerId) {
-      const grid = document.getElementById(containerId);
-      if (!grid) return;
-      grid.innerHTML = doctorsData.map(doc => `
-        <div class="col-md-6 col-lg-4">
-          <div class="card-premium">
-            <div class="card-body">
-              <div class="d-flex align-items-center gap-3">
-                <img src="${doc.img}" alt="${doc.name}" class="doc-img" onerror="this.src='https://ui-avatars.com/api/?background=E67E22&color=fff&name=${doc.name.split(' ').pop()}'">
-                <div>
-                  <h5 class="fw-bold mb-0">${doc.name}</h5>
-                  <span class="badge-specialty d-inline-block">${doc.specialization}</span>
-                  <div class="small text-muted">${doc.qualification}</div>
-                </div>
-              </div>
-              <div class="d-flex flex-wrap gap-2 mt-3">
-                <div class="bg-light rounded-pill px-2 py-1 d-flex align-items-center gap-1 flex-fill">
-                  <i class="bi bi-calendar text-warning"></i>
-                  <input type="date" class="border-0 bg-transparent w-100" value="${getToday()}" min="${getToday()}" style="font-size:0.75rem; outline:none;">
-                </div>
-                <div class="bg-light rounded-pill px-2 py-1 d-flex align-items-center gap-1 flex-fill">
-                  <i class="bi bi-clock text-warning"></i>
-                  <select class="border-0 bg-transparent w-100" style="font-size:0.75rem; outline:none;">
-                    ${times.map(t => `<option value="${t}">${t}</option>`).join('')}
-                  </select>
-                </div>
-                <button class="btn btn-whatsapp w-100 mt-1 wa-book" data-docname="${doc.name}"><i class="bi bi-whatsapp"></i> Book</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      `).join('');
+	<!-- Main JS File -->
+	<script src="assets/js/main.js"></script>
 
-      grid.querySelectorAll('.wa-book').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const docName = this.getAttribute('data-docname');
-          const card = this.closest('.card-premium');
-          const dateVal = card.querySelector('input[type="date"]')?.value || getToday();
-          const timeVal = card.querySelector('select')?.value || "10:30 AM";
-          const formatted = dateVal ? new Date(dateVal).toLocaleDateString('en-IN', { weekday: 'short',
-            day: 'numeric', month: 'short', year: 'numeric' }) : "Today";
-          sendWhatsApp(docName, formatted, timeVal);
-        });
-      });
-    }
-
-    function sendWhatsApp(docName, dateStr, timeStr) {
-      const phone = "917987960590";
-      const msg =
-        `🟢 *SAI CLINIC · ADVANCED BOOKING* 🟢%0A%0A👨‍⚕️ *Doctor:* ${docName}%0A📅 *Date:* ${dateStr}%0A⏰ *Time:* ${timeStr}%0A📍 *Sai Clinic, Kavaraipettai, Chennai%0A💊 *Pharmacy:* Attached Sai Medicals`;
-      window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
-      showToast(`✨ Booking for ${docName} ✨`);
-    }
-
-    function showToast(msg) {
-      let el = document.querySelector('.toast-sm');
-      if (el) el.remove();
-      el = document.createElement('div');
-      el.className = 'toast-sm';
-      el.style.cssText =
-        'position:fixed;bottom:20px;right:20px;background:linear-gradient(135deg,#2C3E50,#E67E22);color:#fff;padding:0.8rem 1.6rem;border-radius:50px;font-weight:600;z-index:9999;animation:fadeUp 0.3s;box-shadow:0 8px 24px rgba(0,0,0,0.2);';
-      el.innerHTML = `<i class="bi bi-whatsapp"></i> ${msg}`;
-      document.body.appendChild(el);
-      setTimeout(() => el.remove(), 2800);
-    }
-
-    function globalWhatsApp() {
-      window.open('https://wa.me/917987960590?text=Hi%20Sai%20Clinic%2C%20I%20want%20to%20book%20a%20consultation.', '_blank');
-    }
-
-    function openMap() {
-      window.open('https://www.google.com/maps/search/?api=1&query=Sai+Clinic+Kavaraipettai+Chennai', '_blank');
-    }
-
-    function scrollToDoctors() {
-      document.querySelector('.doctor-premium-grid')?.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // ===== PAGE NAVIGATION =====
-    function switchPage(pageId) {
-      document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
-      const target = document.getElementById(`page-${pageId}`);
-      if (target) target.classList.add('active');
-      document.querySelectorAll('.navbar-custom .nav-link').forEach(link => link.classList.remove('active'));
-      const navLink = document.querySelector(`.navbar-custom .nav-link[data-page="${pageId}"]`);
-      if (navLink) navLink.classList.add('active');
-      AOS.refresh();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    document.querySelectorAll('.navbar-custom .nav-link').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const page = this.getAttribute('data-page');
-        if (page) switchPage(page);
-      });
-    });
-
-    // ===== HERO SLIDER =====
-    let currentSlide = 0;
-    const slides = document.getElementById('heroSlides');
-    const dots = document.querySelectorAll('#sliderDots span');
-    const total = 3;
-
-    function goToSlide(index) {
-      if (index < 0) index = total - 1;
-      if (index >= total) index = 0;
-      currentSlide = index;
-      slides.style.transform = `translateX(-${currentSlide * 100}%)`;
-      dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
-    }
-
-    dots.forEach(d => d.addEventListener('click', function() {
-      goToSlide(parseInt(this.getAttribute('data-index')));
-    }));
-    setInterval(() => goToSlide(currentSlide + 1), 5000);
-
-    // ===== GALLERY =====
-    const galleryImages = [
-      { url: 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=400&h=300&fit=crop', label: 'Clinic Exterior' },
-      { url: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=400&h=300&fit=crop', label: 'Doctor Consultation' },
-      { url: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?w=400&h=300&fit=crop', label: 'Advanced Lab' },
-      { url: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&h=300&fit=crop', label: 'Patient Care' },
-      { url: 'https://images.unsplash.com/photo-1530023367847-a683933f4172?w=400&h=300&fit=crop', label: 'Pharmacy' },
-      { url: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop', label: 'Diagnostic Equipment' }
-    ];
-
-    document.getElementById('galleryGrid').innerHTML = galleryImages.map(img =>
-      `<div class="col-6 col-md-4"><div class="gallery-item" style="background-image:url('${img.url}');" onclick="window.open('${img.url}','_blank')"><div class="gallery-label">${img.label}</div></div></div>`
-    ).join('');
-
-    // ===== VIDEOS =====
-    const videos = [
-      { title: 'Clinic Tour & Facilities', desc: 'Walk through our state-of-the-art clinic', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-      { title: 'Health Awareness: Diabetes Care', desc: 'Tips for managing diabetes', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-      { title: 'Patient Testimonial', desc: 'Hear from our happy patients', src: 'https://www.w3schools.com/html/mov_bbb.mp4' }
-    ];
-
-    document.getElementById('videoGrid').innerHTML = videos.map(v =>
-      `<div class="col-md-6 col-lg-4"><div class="video-card"><video controls preload="metadata"><source src="${v.src}" type="video/mp4"></video><div class="video-info"><h5>${v.title}</h5><p class="text-muted small">${v.desc}</p></div></div></div>`
-    ).join('');
-
-    // Render doctors
-    renderDoctors('doctorHomeGrid');
-    renderDoctors('doctorFullGrid');
-
-    // Expose globally
-    window.switchPage = switchPage;
-    window.openMap = openMap;
-    window.scrollToDoctors = scrollToDoctors;
-    window.globalWhatsApp = globalWhatsApp;
-	</script>
 </body>
+
 </html>
