@@ -349,23 +349,54 @@
             cursor: pointer;
         }
 
-        .btn-primary-clinic {
+        /* Service Hours Badge */
+        .hours-badge {
             background: #0d47a1;
             color: #fff;
-            padding: 10px 30px;
+            padding: 10px 25px;
             border-radius: 50px;
-            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            display: inline-block;
         }
 
-            .btn-primary-clinic:hover {
-                background: #0a3a8a;
-                color: #fff;
-                transform: translateY(-2px);
-                box-shadow: 0 8px 25px rgba(13, 71, 161, 0.3);
+            .hours-badge i {
+                font-size: 1.2rem;
+            }
+
+        .clinic-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .clinic-service-item {
+            background: #fff;
+            padding: 20px 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+            .clinic-service-item:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 25px rgba(13, 71, 161, 0.1);
+            }
+
+            .clinic-service-item i {
+                font-size: 2rem;
+                color: #0d47a1;
+                margin-bottom: 8px;
+                display: block;
+            }
+
+            .clinic-service-item span {
+                font-weight: 600;
+                color: #333;
+                font-size: 0.9rem;
             }
     </style>
 
@@ -458,10 +489,14 @@
                         <div class="col-lg-8">
                             <h1 class="heading-title">Our Departments</h1>
                             <p class="mb-0">
-                                SAI CLINIC offers comprehensive medical services across multiple specialties.
-                                Our departments are equipped with modern technology and staffed by experienced professionals
-                                dedicated to providing exceptional healthcare in Kavaraipettai, Chennai.
+                                SAI CLINIC offers comprehensive healthcare services with specialized departments.
+                                We are equipped with modern diagnostic facilities including Lab, X-Ray, and ECG.
                             </p>
+                            <div class="mt-3">
+                                <span class="hours-badge">
+                                    <i class="bi bi-clock"></i> 08.00 AM - 10.00 PM
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -475,6 +510,51 @@
                 </div>
             </nav>
         </div><!-- End Page Title -->
+        <!-- Quick Services Overview -->
+        <section class="section" style="padding: 30px 0; background: #f8f9fa;">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-12">
+                        <h3 style="color: #0d47a1; font-weight: 700; margin-bottom: 20px;">Our Services</h3>
+                    </div>
+                </div>
+                <div class="clinic-services-grid">
+                    <div class="clinic-service-item">
+                        <i class="bi bi-flask"></i>
+                        <span>Lab Services</span>
+                    </div>
+                    <div class="clinic-service-item">
+                        <i class="bi bi-x-diamond"></i>
+                        <span>Digital X-Ray</span>
+                    </div>
+                    <div class="clinic-service-item">
+                        <i class="bi bi-heart-pulse"></i>
+                        <span>ECG Services</span>
+                    </div>
+                    <div class="clinic-service-item">
+                        <i class="bi bi-tooth"></i>
+                        <span>Dental Care</span>
+                    </div>
+                    <div class="clinic-service-item">
+                        <i class="bi bi-scissors"></i>
+                        <span>General Surgery</span>
+                    </div>
+                    <div class="clinic-service-item">
+                        <i class="bi bi-baby"></i>
+                        <span>Maternal Care</span>
+                    </div>
+                    <div class="clinic-service-item">
+                        <i class="bi bi-shield-plus"></i>
+                        <span>Vaccination</span>
+                    </div>
+                    <div class="clinic-service-item">
+                        <i class="bi bi-shop"></i>
+                        <span>SAI MEDICALS</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Departments Tabs Section -->
         <section id="departments-tabs" class="departments-tabs section">
 
@@ -1249,6 +1329,7 @@
 
       console.log('SAI CLINIC - Departments page ready!');
       console.log('Email: info@saigroupofclinic.com | Phone: +91 97879 60590');
+      console.log('Hours: 08.00 AM - 10.00 PM');
     });
     </script>
 
