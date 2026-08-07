@@ -2,458 +2,802 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Services - Clinic Bootstrap Template</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>Services - SAI CLINIC</title>
+	<meta name="description" content="SAI CLINIC & SAI MEDICALS - Comprehensive healthcare services in Kavaraipettai, Chennai.">
+	<meta name="keywords" content="Sai Clinic, SAI MEDICALS, Kavaraipettai, Chennai, doctors, lab, X-ray, ECG">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+	<!-- Favicons -->
+	<link href="assets/img/favicon.png" rel="icon">
+	<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
-    rel="stylesheet">
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com" rel="preconnect">
+	<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+		  rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+	<!-- Vendor CSS Files -->
+	<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+	<link href="assets/vendor/aos/aos.css" rel="stylesheet">
+	<link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+	<link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+	<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+	<!-- Main CSS File -->
+	<link href="assets/css/main.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Clinic
-  * Template URL: https://bootstrapmade.com/clinic-bootstrap-template/
-  * Updated: Jul 23 2025 with Bootstrap v5.3.7
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+	<style>
+		/* SAI CLINIC Custom Styles */
+		.topbar.dark-background {
+			background: #0d47a1 !important;
+		}
+
+		.topbar .contact-info i,
+		.topbar .contact-info a,
+		.topbar .social-links a {
+			color: #fff !important;
+		}
+
+		.branding .sitename {
+			color: #0d47a1 !important;
+			font-weight: 700;
+		}
+
+		.page-title .heading {
+			background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+			padding: 80px 0 60px;
+		}
+
+		.page-title .heading-title {
+			color: #fff;
+		}
+
+		.page-title .heading p {
+			color: rgba(255, 255, 255, 0.9);
+		}
+
+		.breadcrumbs {
+			background: #f0f4ff;
+			padding: 15px 0;
+		}
+
+			.breadcrumbs ol li a {
+				color: #0d47a1;
+			}
+
+			.breadcrumbs ol li.current {
+				color: #333;
+			}
+
+		/* Service Items */
+		.service-item {
+			background: #fff;
+			border-radius: 16px;
+			overflow: hidden;
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+			transition: all 0.3s ease;
+			height: 100%;
+		}
+
+			.service-item:hover {
+				transform: translateY(-8px);
+				box-shadow: 0 12px 40px rgba(13, 71, 161, 0.12);
+			}
+
+			.service-item .service-image {
+				position: relative;
+				overflow: hidden;
+			}
+
+				.service-item .service-image img {
+					width: 100%;
+					height: 220px;
+					object-fit: cover;
+					transition: transform 0.5s ease;
+				}
+
+			.service-item:hover .service-image img {
+				transform: scale(1.05);
+			}
+
+			.service-item .service-overlay {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(13, 71, 161, 0.7);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				opacity: 0;
+				transition: opacity 0.3s ease;
+			}
+
+			.service-item:hover .service-overlay {
+				opacity: 1;
+			}
+
+			.service-item .service-overlay i {
+				font-size: 3rem;
+				color: #fff;
+			}
+
+			.service-item .service-content {
+				padding: 25px;
+			}
+
+				.service-item .service-content h3 {
+					color: #0d47a1;
+					font-weight: 700;
+					font-size: 1.3rem;
+					margin-bottom: 10px;
+				}
+
+				.service-item .service-content p {
+					color: #555;
+					font-size: 0.95rem;
+					line-height: 1.6;
+					margin-bottom: 15px;
+				}
+
+			.service-item .service-features {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+				margin-bottom: 15px;
+			}
+
+				.service-item .service-features .feature-item {
+					background: #f0f4ff;
+					color: #0d47a1;
+					padding: 5px 15px;
+					border-radius: 50px;
+					font-size: 0.8rem;
+					font-weight: 500;
+					display: inline-flex;
+					align-items: center;
+					gap: 5px;
+				}
+
+					.service-item .service-features .feature-item i {
+						font-size: 0.7rem;
+					}
+
+			.service-item .service-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				background: #25D366;
+				color: #fff;
+				padding: 10px 25px;
+				border-radius: 50px;
+				text-decoration: none;
+				font-weight: 600;
+				font-size: 0.9rem;
+				transition: all 0.3s ease;
+			}
+
+				.service-item .service-btn:hover {
+					background: #1da851;
+					color: #fff;
+					gap: 15px;
+					transform: scale(1.02);
+				}
+
+				.service-item .service-btn i {
+					font-size: 1rem;
+				}
+
+		/* Footer Styles */
+		.footer-16 .sitename {
+			color: #0d47a1 !important;
+		}
+
+		.footer-16 .brand-description {
+			color: #555;
+		}
+
+		.footer-16 .contact-item i {
+			color: #0d47a1;
+		}
+
+		.footer-16 .footer-nav a {
+			color: #555;
+			text-decoration: none;
+			transition: color 0.3s ease;
+		}
+
+			.footer-16 .footer-nav a:hover {
+				color: #0d47a1;
+			}
+
+		.footer-16 .nav-column h6 {
+			color: #0d47a1;
+			font-weight: 700;
+		}
+
+		.footer-bottom {
+			background: #f0f4ff;
+			padding: 20px 0;
+		}
+
+			.footer-bottom .legal-links a {
+				color: #555;
+				text-decoration: none;
+				margin: 0 10px;
+				transition: color 0.3s ease;
+			}
+
+				.footer-bottom .legal-links a:hover {
+					color: #0d47a1;
+				}
+
+			.footer-bottom .credits {
+				color: #777;
+				font-size: 0.85rem;
+			}
+
+				.footer-bottom .credits a {
+					color: #0d47a1;
+					text-decoration: none;
+				}
+
+					.footer-bottom .credits a:hover {
+						text-decoration: underline;
+					}
+
+		/* Responsive */
+		@media (max-width: 768px) {
+			.page-title .heading {
+				padding: 60px 0 40px;
+			}
+
+			.service-item .service-image img {
+				height: 180px;
+			}
+
+			.service-item .service-content {
+				padding: 20px;
+			}
+
+			.service-item .service-features .feature-item {
+				font-size: 0.7rem;
+				padding: 4px 12px;
+			}
+		}
+
+		/* WhatsApp Floating Button */
+		.whatsapp-float {
+			position: fixed;
+			bottom: 30px;
+			right: 30px;
+			background: #25D366;
+			color: #fff;
+			width: 60px;
+			height: 60px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 2rem;
+			box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+			z-index: 999;
+			transition: all 0.3s ease;
+			text-decoration: none;
+		}
+
+			.whatsapp-float:hover {
+				transform: scale(1.1);
+				box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+				color: #fff;
+			}
+
+		.hours-badge {
+			background: rgba(255, 255, 255, 0.2);
+			color: #fff;
+			padding: 8px 20px;
+			border-radius: 50px;
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			font-weight: 600;
+			font-size: 0.9rem;
+			backdrop-filter: blur(10px);
+		}
+
+			.hours-badge i {
+				font-size: 1.1rem;
+			}
+
+		.whatsapp-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			background: #25D366;
+			color: #fff;
+			padding: 10px 25px;
+			border-radius: 50px;
+			text-decoration: none;
+			font-weight: 600;
+			transition: all 0.3s ease;
+			border: none;
+			font-size: 0.95rem;
+		}
+
+			.whatsapp-btn:hover {
+				background: #1da851;
+				color: #fff;
+				transform: scale(1.02);
+				box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+			}
+
+			.whatsapp-btn i {
+				font-size: 1.2rem;
+			}
+	</style>
+
 </head>
 
 <body class="services-page">
 
-  <header id="header" class="header fixed-top">
+	<header id="header" class="header fixed-top">
 
-    <div class="topbar d-flex align-items-center dark-background">
-      <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="contact-info d-flex align-items-center">
-          <i class="bi bi-envelope d-flex align-items-center"><a
-              href="mailto:contact@example.com">contact@example.com</a></i>
-          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
-        </div>
-        <div class="social-links d-none d-md-flex align-items-center">
-          <a href="#!" class="twitter"><i class="bi bi-twitter-x"></i></a>
-          <a href="#!" class="facebook"><i class="bi bi-facebook"></i></a>
-          <a href="#!" class="instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#!" class="linkedin"><i class="bi bi-linkedin"></i></a>
-        </div>
-      </div>
-    </div><!-- End Top Bar -->
+		<div class="topbar d-flex align-items-center dark-background">
+			<div class="container d-flex justify-content-center justify-content-md-between">
+				<div class="contact-info d-flex align-items-center">
+					<i class="bi bi-envelope d-flex align-items-center"><a href="mailto:info@saigroupofclinic.com">info@saigroupofclinic.com</a></i>
+					<i class="bi bi-phone d-flex align-items-center ms-4"><span>+91 97879 60590</span></i>
+				</div>
+				<div class="social-links d-none d-md-flex align-items-center">
+					<a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+					<a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+					<a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+					<a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+				</div>
+			</div>
+		</div><!-- End Top Bar -->
 
-    <div class="branding d-flex align-items-cente">
+		<div class="branding d-flex align-items-cente">
 
-      <div class="container position-relative d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-          <!-- <img src="assets/img/logo.webp" alt=""> -->
-          <h1 class="sitename">Clinic</h1>
-        </a>
+			<div class="container position-relative d-flex align-items-center justify-content-between">
+				<a href="index.html" class="logo d-flex align-items-center">
+					<h1 class="sitename">SAI CLINIC</h1>
+				</a>
 
-        <nav id="navmenu" class="navmenu">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="departments.html">Departments</a></li>
-            <li><a href="services.html" class="active">Services</a></li>
-            <li><a href="doctors.html">Doctors</a></li>
-            <li class="dropdown"><a href="#"><span>More Pages</span> <i
-                  class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="department-details.html">Department Details</a></li>
-                <li><a href="service-details.html">Service Details</a></li>
-                <li><a href="appointment.html">Appointment</a></li>
-                <li><a href="testimonials.html">Testimonials</a></li>
-                <li><a href="faq.html">Frequently Asked Questions</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="terms.html">Terms</a></li>
-                <li><a href="privacy.html">Privacy</a></li>
-                <li><a href="404.html">404</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#"><span>Dropdown</span> <i
-                  class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="#">Dropdown 1</a></li>
-                <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i
-                      class="bi bi-chevron-down toggle-dropdown"></i></a>
-                  <ul>
-                    <li><a href="#">Deep Dropdown 1</a></li>
-                    <li><a href="#">Deep Dropdown 2</a></li>
-                    <li><a href="#">Deep Dropdown 3</a></li>
-                    <li><a href="#">Deep Dropdown 4</a></li>
-                    <li><a href="#">Deep Dropdown 5</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Dropdown 2</a></li>
-                <li><a href="#">Dropdown 3</a></li>
-                <li><a href="#">Dropdown 4</a></li>
-              </ul>
-            </li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </nav>
+				<nav id="navmenu" class="navmenu">
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="about.html">About</a></li>
+						<li><a href="departments.html">Departments</a></li>
+						<li><a href="services.html" class="active">Services</a></li>
+						<li><a href="doctors.html">Doctors</a></li>
+						<li class="dropdown">
+							<a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+							<ul>
+								<li><a href="department-details.html">Department Details</a></li>
+								<li><a href="service-details.html">Service Details</a></li>
+								<li><a href="appointment.html">Appointment</a></li>
+								<li><a href="testimonials.html">Testimonials</a></li>
+								<li><a href="faq.html">Frequently Asked Questions</a></li>
+								<li><a href="gallery.html">Gallery</a></li>
+								<li><a href="terms.html">Terms</a></li>
+								<li><a href="privacy.html">Privacy</a></li>
+								<li><a href="404.html">404</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+							<ul>
+								<li><a href="#">Dropdown 1</a></li>
+								<li class="dropdown">
+									<a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+									<ul>
+										<li><a href="#">Deep Dropdown 1</a></li>
+										<li><a href="#">Deep Dropdown 2</a></li>
+										<li><a href="#">Deep Dropdown 3</a></li>
+										<li><a href="#">Deep Dropdown 4</a></li>
+										<li><a href="#">Deep Dropdown 5</a></li>
+									</ul>
+								</li>
+								<li><a href="#">Dropdown 2</a></li>
+								<li><a href="#">Dropdown 3</a></li>
+								<li><a href="#">Dropdown 4</a></li>
+							</ul>
+						</li>
+						<li><a href="contact.html">Contact</a></li>
+					</ul>
+					<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+				</nav>
 
-      </div>
+			</div>
 
-    </div>
+		</div>
 
-  </header>
+	</header>
 
-  <main class="main">
+	<main class="main">
 
-    <!-- Page Title -->
-    <div class="page-title">
-      <div class="heading">
-        <div class="container">
-          <div class="row d-flex justify-content-center text-center">
-            <div class="col-lg-8">
-              <h1 class="heading-title">Services</h1>
-              <p class="mb-0">
-                Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo
-                odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum
-                debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat
-                ipsum dolorem.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <nav class="breadcrumbs">
-        <div class="container">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Services</li>
-          </ol>
-        </div>
-      </nav>
-    </div><!-- End Page Title -->
+		<!-- Page Title -->
+		<div class="page-title">
+			<div class="heading">
+				<div class="container">
+					<div class="row d-flex justify-content-center text-center">
+						<div class="col-lg-8">
+							<h1 class="heading-title">Our Services</h1>
+							<p class="mb-0">
+								SAI CLINIC offers comprehensive healthcare services with modern diagnostic facilities
+								including Lab, X-Ray, and ECG. We are committed to providing quality medical care
+								with compassion and expertise.
+							</p>
+							<div class="mt-3 d-flex flex-wrap justify-content-center gap-2">
+								<span class="hours-badge">
+									<i class="bi bi-clock"></i> 08.00 AM - 10.00 PM
+								</span>
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20know%20about%20your%20services"
+								   target="_blank" class="whatsapp-btn">
+									<i class="bi bi-whatsapp"></i> Contact via WhatsApp
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<nav class="breadcrumbs">
+				<div class="container">
+					<ol>
+						<li><a href="index.html">Home</a></li>
+						<li class="current">Services</li>
+					</ol>
+				</div>
+			</nav>
+		</div><!-- End Page Title -->
+		<!-- Services Section -->
+		<section id="services" class="services section">
 
-    <!-- Services Section -->
-    <section id="services" class="services section">
+			<div class="container" data-aos="fade-up" data-aos-delay="100">
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+				<div class="row gy-4">
 
-        <div class="row gy-4">
+					<!-- Service 1: General Medicine -->
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+						<div class="service-item">
+							<div class="service-image">
+								<img src="assets/img/health/cardiology-2.webp" alt="General Medicine" class="img-fluid">
+								<div class="service-overlay">
+									<i class="fas fa-stethoscope"></i>
+								</div>
+							</div>
+							<div class="service-content">
+								<h3>General Medicine</h3>
+								<p>Comprehensive primary care services including routine check-ups, chronic disease management, and preventive healthcare for all ages.</p>
+								<div class="service-features">
+									<span class="feature-item"><i class="fas fa-check"></i> Health Check-ups</span>
+									<span class="feature-item"><i class="fas fa-check"></i> Chronic Care</span>
+									<span class="feature-item"><i class="fas fa-check"></i> Vaccination</span>
+								</div>
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment%20for%20General%20Medicine"
+								   target="_blank" class="service-btn">
+									<i class="bi bi-whatsapp"></i>
+									<span>Book via WhatsApp</span>
+								</a>
+							</div>
+						</div>
+					</div><!-- End Service Item -->
+					<!-- Service 2: Dental Care -->
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="250">
+						<div class="service-item">
+							<div class="service-image">
+								<img src="assets/img/health/staff-2.webp" alt="Dental Care" class="img-fluid">
+								<div class="service-overlay">
+									<i class="fas fa-tooth"></i>
+								</div>
+							</div>
+							<div class="service-content">
+								<h3>Dental Care</h3>
+								<p>Expert dental services including general dentistry, cosmetic procedures, orthodontics, and root canal treatments for optimal oral health.</p>
+								<div class="service-features">
+									<span class="feature-item"><i class="fas fa-check"></i> General Dentistry</span>
+									<span class="feature-item"><i class="fas fa-check"></i> Cosmetic Dentistry</span>
+									<span class="feature-item"><i class="fas fa-check"></i> Orthodontics</span>
+								</div>
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment%20for%20Dental%20Care"
+								   target="_blank" class="service-btn">
+									<i class="bi bi-whatsapp"></i>
+									<span>Book via WhatsApp</span>
+								</a>
+							</div>
+						</div>
+					</div><!-- End Service Item -->
+					<!-- Service 3: General Surgery -->
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+						<div class="service-item">
+							<div class="service-image">
+								<img src="assets/img/health/surgery-2.webp" alt="General Surgery" class="img-fluid">
+								<div class="service-overlay">
+									<i class="fas fa-cut"></i>
+								</div>
+							</div>
+							<div class="service-content">
+								<h3>General Surgery</h3>
+								<p>Comprehensive surgical services including minor and major surgeries with expert pre- and post-operative care for best outcomes.</p>
+								<div class="service-features">
+									<span class="feature-item"><i class="fas fa-check"></i> Minor Surgeries</span>
+									<span class="feature-item"><i class="fas fa-check"></i> Major Surgeries</span>
+									<span class="feature-item"><i class="fas fa-check"></i> Emergency Surgery</span>
+								</div>
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment%20for%20General%20Surgery"
+								   target="_blank" class="service-btn">
+									<i class="bi bi-whatsapp"></i>
+									<span>Book via WhatsApp</span>
+								</a>
+							</div>
+						</div>
+					</div><!-- End Service Item -->
+					<!-- Service 4: Lab Services -->
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="350">
+						<div class="service-item">
+							<div class="service-image">
+								<img src="assets/img/health/laboratory-3.webp" alt="Lab Services" class="img-fluid">
+								<div class="service-overlay">
+									<i class="fas fa-flask"></i>
+								</div>
+							</div>
+							<div class="service-content">
+								<h3>Lab Services</h3>
+								<p>Full-service clinical laboratory for accurate and timely diagnostic testing with comprehensive testing panels and rapid result delivery.</p>
+								<div class="service-features">
+									<span class="feature-item"><i class="fas fa-check"></i> Blood Tests</span>
+									<span class="feature-item"><i class="fas fa-check"></i> Pathology</span>
+									<span class="feature-item"><i class="fas fa-check"></i> Health Screenings</span>
+								</div>
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment%20for%20Lab%20Services"
+								   target="_blank" class="service-btn">
+									<i class="bi bi-whatsapp"></i>
+									<span>Book via WhatsApp</span>
+								</a>
+							</div>
+						</div>
+					</div><!-- End Service Item -->
+					<!-- Service 5: Digital X-Ray -->
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+						<div class="service-item">
+							<div class="service-image">
+								<img src="assets/img/health/neurology-3.webp" alt="Digital X-Ray" class="img-fluid">
+								<div class="service-overlay">
+									<i class="fas fa-x-ray"></i>
+								</div>
+							</div>
+							<div class="service-content">
+								<h3>Digital X-Ray</h3>
+								<p>State-of-the-art digital X-Ray services for quick and precise imaging diagnostics with minimal radiation exposure and instant results.</p>
+								<div class="service-features">
+									<span class="feature-item"><i class="fas fa-check"></i> Digital Imaging</span>
+									<span class="feature-item"><i class="fas fa-check"></i> Quick Results</span>
+									<span class="feature-item"><i class="fas fa-check"></i> Low Radiation</span>
+								</div>
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment%20for%20X-Ray"
+								   target="_blank" class="service-btn">
+									<i class="bi bi-whatsapp"></i>
+									<span>Book via WhatsApp</span>
+								</a>
+							</div>
+						</div>
+					</div><!-- End Service Item -->
+					<!-- Service 6: ECG Services -->
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="450">
+						<div class="service-item">
+							<div class="service-image">
+								<img src="assets/img/health/emergency-2.webp" alt="ECG Services" class="img-fluid">
+								<div class="service-overlay">
+									<i class="fas fa-heartbeat"></i>
+								</div>
+							</div>
+							<div class="service-content">
+								<h3>ECG Services</h3>
+								<p>Electrocardiogram services for accurate heart function assessment and monitoring with advanced equipment and expert interpretation.</p>
+								<div class="service-features">
+									<span class="feature-item"><i class="fas fa-check"></i> Heart Monitoring</span>
+									<span class="feature-item"><i class="fas fa-check"></i> Cardiac Assessment</span>
+									<span class="feature-item"><i class="fas fa-check"></i> Expert Analysis</span>
+								</div>
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment%20for%20ECG"
+								   target="_blank" class="service-btn">
+									<i class="bi bi-whatsapp"></i>
+									<span>Book via WhatsApp</span>
+								</a>
+							</div>
+						</div>
+					</div><!-- End Service Item -->
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item">
-              <div class="service-image">
-                <img src="assets/img/health/cardiology-2.webp" alt="Cardiology Services" class="img-fluid">
-                <div class="service-overlay">
-                  <i class="fas fa-heartbeat"></i>
-                </div>
-              </div>
-              <div class="service-content">
-                <h3>Cardiology</h3>
-                <p>Comprehensive heart care with advanced diagnostic tools and treatment options for cardiovascular
-                  conditions.</p>
-                <div class="service-features">
-                  <span class="feature-item"><i class="fas fa-check"></i> ECG Testing</span>
-                  <span class="feature-item"><i class="fas fa-check"></i> Heart Surgery</span>
-                </div>
-                <a href="service-details.html" class="service-btn">
-                  <span>Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
+				</div>
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="250">
-            <div class="service-item">
-              <div class="service-image">
-                <img src="assets/img/health/neurology-3.webp" alt="Neurology Services" class="img-fluid">
-                <div class="service-overlay">
-                  <i class="fas fa-brain"></i>
-                </div>
-              </div>
-              <div class="service-content">
-                <h3>Neurology</h3>
-                <p>Expert neurological care for brain and nervous system disorders with state-of-the-art imaging
-                  technology.</p>
-                <div class="service-features">
-                  <span class="feature-item"><i class="fas fa-check"></i> MRI Scans</span>
-                  <span class="feature-item"><i class="fas fa-check"></i> Stroke Care</span>
-                </div>
-                <a href="service-details.html" class="service-btn">
-                  <span>Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
+			</div>
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item">
-              <div class="service-image">
-                <img src="assets/img/health/orthopedics-1.webp" alt="Orthopedics Services" class="img-fluid">
-                <div class="service-overlay">
-                  <i class="fas fa-bone"></i>
-                </div>
-              </div>
-              <div class="service-content">
-                <h3>Orthopedics</h3>
-                <p>Specialized bone and joint treatment including sports medicine and reconstructive surgery procedures.
-                </p>
-                <div class="service-features">
-                  <span class="feature-item"><i class="fas fa-check"></i> Joint Replacement</span>
-                  <span class="feature-item"><i class="fas fa-check"></i> Sports Medicine</span>
-                </div>
-                <a href="service-details.html" class="service-btn">
-                  <span>Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
+		</section><!-- /Services Section -->
+		<!-- SAI MEDICALS Section -->
+		<section class="section" style="padding: 40px 0; background: #f8f9fa;">
+			<div class="container">
+				<div class="row align-items-center" style="background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%); padding: 40px; border-radius: 20px;">
+					<div class="col-lg-8">
+						<h3 style="color: #0d47a1; font-weight: 700;"><i class="bi bi-shop" style="color: #0d47a1;"></i> SAI MEDICALS</h3>
+						<p style="font-size: 1.1rem; color: #333;">Your trusted pharmacy partner located within SAI CLINIC premises.</p>
+						<p style="color: #555;">Quality medicines and healthcare products available at competitive prices. Our pharmacy is fully stocked with genuine medications and healthcare essentials.</p>
+						<div class="contact-info mt-3">
+							<i class="bi bi-telephone" style="color: #0d47a1;"></i> <strong style="color: #0d47a1;">+91 97879 60590</strong>
+							<span style="margin-left: 1.5rem;"><i class="bi bi-clock" style="color: #0d47a1;"></i> 08:00 AM - 10:00 PM</span>
+						</div>
+					</div>
+					<div class="col-lg-4 text-center">
+						<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20know%20about%20SAI%20MEDICALS"
+						   target="_blank" class="whatsapp-btn">
+							<i class="bi bi-whatsapp"></i> Contact via WhatsApp
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="350">
-            <div class="service-item">
-              <div class="service-image">
-                <img src="assets/img/health/pediatrics-4.webp" alt="Pediatrics Services" class="img-fluid">
-                <div class="service-overlay">
-                  <i class="fas fa-child"></i>
-                </div>
-              </div>
-              <div class="service-content">
-                <h3>Pediatrics</h3>
-                <p>Dedicated healthcare for children from infancy through adolescence with specialized treatment
-                  protocols.</p>
-                <div class="service-features">
-                  <span class="feature-item"><i class="fas fa-check"></i> Well-Child Visits</span>
-                  <span class="feature-item"><i class="fas fa-check"></i> Immunizations</span>
-                </div>
-                <a href="service-details.html" class="service-btn">
-                  <span>Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
+	</main>
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item">
-              <div class="service-image">
-                <img src="assets/img/health/emergency-2.webp" alt="Emergency Services" class="img-fluid">
-                <div class="service-overlay">
-                  <i class="fas fa-ambulance"></i>
-                </div>
-              </div>
-              <div class="service-content">
-                <h3>Emergency Care</h3>
-                <p>24/7 emergency medical services with rapid response teams and critical care capabilities.</p>
-                <div class="service-features">
-                  <span class="feature-item"><i class="fas fa-check"></i> Trauma Center</span>
-                  <span class="feature-item"><i class="fas fa-check"></i> Critical Care</span>
-                </div>
-                <a href="service-details.html" class="service-btn">
-                  <span>Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
+	<footer id="footer" class="footer-16 footer position-relative">
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="450">
-            <div class="service-item">
-              <div class="service-image">
-                <img src="assets/img/health/laboratory-3.webp" alt="Laboratory Services" class="img-fluid">
-                <div class="service-overlay">
-                  <i class="fas fa-microscope"></i>
-                </div>
-              </div>
-              <div class="service-content">
-                <h3>Laboratory Testing</h3>
-                <p>Advanced diagnostic laboratory services with comprehensive testing panels and rapid result delivery.
-                </p>
-                <div class="service-features">
-                  <span class="feature-item"><i class="fas fa-check"></i> Blood Tests</span>
-                  <span class="feature-item"><i class="fas fa-check"></i> Pathology</span>
-                </div>
-                <a href="service-details.html" class="service-btn">
-                  <span>Learn More</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </div><!-- End Service Item -->
+		<div class="container">
 
-        </div>
+			<div class="footer-main" data-aos="fade-up" data-aos-delay="100">
+				<div class="row align-items-start">
 
-      </div>
+					<div class="col-lg-5">
+						<div class="brand-section">
+							<a href="index.html" class="logo d-flex align-items-center mb-4">
+								<span class="sitename">SAI CLINIC</span>
+							</a>
+							<p class="brand-description">Caring for your health with expertise and compassion. SAI CLINIC & SAI MEDICALS - Your trusted healthcare partner in Kavaraipettai.</p>
 
-    </section><!-- /Services Section -->
+							<div class="contact-info mt-5">
+								<div class="contact-item">
+									<i class="bi bi-geo-alt"></i>
+									<span>No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206</span>
+								</div>
+								<div class="contact-item">
+									<i class="bi bi-telephone"></i>
+									<span>+91 97879 60590</span>
+								</div>
+								<div class="contact-item">
+									<i class="bi bi-envelope"></i>
+									<span>info@saigroupofclinic.com</span>
+								</div>
+							</div>
+						</div>
+					</div>
 
-  </main>
+					<div class="col-lg-7">
+						<div class="footer-nav-wrapper">
+							<div class="row">
 
-  <footer id="footer" class="footer-16 footer position-relative">
+								<div class="col-6 col-lg-3">
+									<div class="nav-column">
+										<h6>Clinic</h6>
+										<nav class="footer-nav">
+											<a href="about.html">About Us</a>
+											<a href="doctors.html">Our Doctors</a>
+											<a href="services.html">Services</a>
+											<a href="#">Facilities</a>
+											<a href="contact.html">Contact</a>
+										</nav>
+									</div>
+								</div>
 
-    <div class="container">
+								<div class="col-6 col-lg-3">
+									<div class="nav-column">
+										<h6>Services</h6>
+										<nav class="footer-nav">
+											<a href="services.html">Lab Services</a>
+											<a href="services.html">X-Ray</a>
+											<a href="services.html">ECG</a>
+											<a href="services.html">Vaccination</a>
+											<a href="services.html">Dental Care</a>
+										</nav>
+									</div>
+								</div>
 
-      <div class="footer-main" data-aos="fade-up" data-aos-delay="100">
-        <div class="row align-items-start">
+								<div class="col-6 col-lg-3">
+									<div class="nav-column">
+										<h6>Resources</h6>
+										<nav class="footer-nav">
+											<a href="#">Health Blog</a>
+											<a href="#">Patient Guide</a>
+											<a href="faq.html">FAQs</a>
+											<a href="testimonials.html">Testimonials</a>
+											<a href="gallery.html">Gallery</a>
+										</nav>
+									</div>
+								</div>
 
-          <div class="col-lg-5">
-            <div class="brand-section">
-              <a href="index.html" class="logo d-flex align-items-center mb-4">
-                <span class="sitename">Clinic</span>
-              </a>
-              <p class="brand-description">Crafting exceptional digital experiences through thoughtful design and
-                innovative solutions that elevate your brand presence.</p>
+								<div class="col-6 col-lg-3">
+									<div class="nav-column">
+										<h6>Connect</h6>
+										<nav class="footer-nav">
+											<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment"
+											   target="_blank">Book Appointment</a>
+											<a href="tel:+919787960590">Emergency</a>
+											<a href="contact.html">Feedback</a>
+											<a href="#">Careers</a>
+											<a href="#">Partnership</a>
+										</nav>
+									</div>
+								</div>
 
-              <div class="contact-info mt-5">
-                <div class="contact-item">
-                  <i class="bi bi-geo-alt"></i>
-                  <span>123 Creative Boulevard, Design District, NY 10012</span>
-                </div>
-                <div class="contact-item">
-                  <i class="bi bi-telephone"></i>
-                  <span>+1 (555) 987-6543</span>
-                </div>
-                <div class="contact-item">
-                  <i class="bi bi-envelope"></i>
-                  <span>hello@designstudio.com</span>
-                </div>
-              </div>
-            </div>
-          </div>
+							</div>
+						</div>
+					</div>
 
-          <div class="col-lg-7">
-            <div class="footer-nav-wrapper">
-              <div class="row">
+				</div>
+			</div>
 
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Studio</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Our Story</a>
-                      <a href="#!">Design Process</a>
-                      <a href="#!">Portfolio</a>
-                      <a href="#!">Case Studies</a>
-                      <a href="#!">Awards</a>
-                    </nav>
-                  </div>
-                </div>
+		</div>
 
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Services</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Brand Identity</a>
-                      <a href="#!">Web Design</a>
-                      <a href="#!">Mobile Apps</a>
-                      <a href="#!">Digital Strategy</a>
-                      <a href="#!">Consultation</a>
-                    </nav>
-                  </div>
-                </div>
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
+					<div class="row align-items-center">
 
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Resources</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Design Blog</a>
-                      <a href="#!">Style Guide</a>
-                      <a href="#!">Free Assets</a>
-                      <a href="#!">Tutorials</a>
-                      <a href="#!">Inspiration</a>
-                    </nav>
-                  </div>
-                </div>
+						<div class="col-lg-6">
+							<div class="copyright">
+								<p>© <span class="sitename">SAI CLINIC</span>. All rights reserved.</p>
+							</div>
+						</div>
 
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Connect</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Start Project</a>
-                      <a href="#!">Schedule Call</a>
-                      <a href="#!">Join Newsletter</a>
-                      <a href="#!">Follow Updates</a>
-                      <a href="#!">Partnership</a>
-                    </nav>
-                  </div>
-                </div>
+						<div class="col-lg-6">
+							<div class="legal-links">
+								<a href="privacy.html">Privacy Policy</a>
+								<a href="terms.html">Terms of Service</a>
+								<a href="#">Cookie Policy</a>
+								<div class="credits">
+									Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>. Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+								</div>
+							</div>
+						</div>
 
-              </div>
-            </div>
-          </div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-        </div>
-      </div>
+	</footer>
 
-    </div>
+	<!-- WhatsApp Floating Button -->
+	<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment"
+	   target="_blank" class="whatsapp-float" title="Book via WhatsApp">
+		<i class="bi bi-whatsapp"></i>
+	</a>
 
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
-          <div class="row align-items-center">
+	<!-- Scroll Top -->
+	<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-            <div class="col-lg-6">
-              <div class="copyright">
-                <p>© <span class="sitename">Clinic</span>. All rights reserved.</p>
-              </div>
-            </div>
+	<!-- Preloader -->
+	<div id="preloader"></div>
 
-            <div class="col-lg-6">
-              <div class="legal-links">
-                <a href="#!">Privacy Policy</a>
-                <a href="#!">Terms of Service</a>
-                <a href="#!">Cookie Policy</a>
-                <div class="credits">
-                  <!-- All the links in the footer should remain intact. -->
-                  <!-- You can delete the links only if you've purchased the pro version. -->
-                  <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                  <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                  Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>. Distributed by <a
-                    href="https://themewagon.com" target="_blank">ThemeWagon</a>
-                </div>
-              </div>
-            </div>
+	<!-- Vendor JS Files -->
+	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/vendor/php-email-form/validate.js"></script>
+	<script src="assets/vendor/aos/aos.js"></script>
+	<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+	<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+	<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-          </div>
-        </div>
-      </div>
-    </div>
+	<!-- Main JS File -->
+	<script src="assets/js/main.js"></script>
 
-  </footer>
-
-  <!-- Scroll Top -->
-  <a href="#!" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+	<script>
+    console.log('SAI CLINIC - Services page ready!');
+    console.log('WhatsApp: +91 97879 60590');
+    console.log('Email: info@saigroupofclinic.com');
+    console.log('Hours: 08.00 AM - 10.00 PM');
+	</script>
 
 </body>
 

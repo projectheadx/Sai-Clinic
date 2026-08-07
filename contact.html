@@ -2,396 +2,780 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Contact - Clinic Bootstrap Template</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Contact - SAI CLINIC</title>
+    <meta name="description" content="SAI CLINIC & SAI MEDICALS - Comprehensive healthcare services in Kavaraipettai, Chennai.">
+    <meta name="keywords" content="Sai Clinic, SAI MEDICALS, Kavaraipettai, Chennai, doctors, lab, X-ray, ECG">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
-    rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+          rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Clinic
-  * Template URL: https://bootstrapmade.com/clinic-bootstrap-template/
-  * Updated: Jul 23 2025 with Bootstrap v5.3.7
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <style>
+        /* SAI CLINIC Custom Styles */
+        .topbar.dark-background {
+            background: #0d47a1 !important;
+        }
+
+        .topbar .contact-info i,
+        .topbar .contact-info a,
+        .topbar .social-links a {
+            color: #fff !important;
+        }
+
+        .branding .sitename {
+            color: #0d47a1 !important;
+            font-weight: 700;
+        }
+
+        .page-title .heading {
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+            padding: 80px 0 60px;
+        }
+
+        .page-title .heading-title {
+            color: #fff;
+        }
+
+        .page-title .heading p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .breadcrumbs {
+            background: #f0f4ff;
+            padding: 15px 0;
+        }
+
+            .breadcrumbs ol li a {
+                color: #0d47a1;
+            }
+
+            .breadcrumbs ol li.current {
+                color: #333;
+            }
+
+        /* Contact Info */
+        .contact-info-wrapper {
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 16px;
+            height: 100%;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+
+            .contact-info-item:hover {
+                transform: translateX(5px);
+                box-shadow: 0 4px 25px rgba(13, 71, 161, 0.1);
+            }
+
+            .contact-info-item .info-icon {
+                width: 50px;
+                height: 50px;
+                min-width: 50px;
+                background: #f0f4ff;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.4rem;
+                color: #0d47a1;
+                transition: all 0.3s ease;
+            }
+
+            .contact-info-item:hover .info-icon {
+                background: #0d47a1;
+                color: #fff;
+            }
+
+            .contact-info-item .info-content h3 {
+                color: #0d47a1;
+                font-size: 1rem;
+                font-weight: 700;
+                margin-bottom: 4px;
+            }
+
+            .contact-info-item .info-content p {
+                color: #555;
+                margin-bottom: 2px;
+                font-size: 0.95rem;
+            }
+
+            .contact-info-item .info-content .contact-link {
+                color: #0d47a1;
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.3s ease;
+            }
+
+                .contact-info-item .info-content .contact-link:hover {
+                    color: #0a3a8a;
+                    text-decoration: underline;
+                }
+
+        /* Contact Form */
+        .contact-form-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+        }
+
+            .contact-form-card h2 {
+                color: #0d47a1;
+                font-weight: 700;
+                font-size: 1.8rem;
+            }
+
+            .contact-form-card p {
+                color: #555;
+            }
+
+            .contact-form-card .form-control {
+                padding: 12px 18px;
+                border: 2px solid #e8f0fe;
+                border-radius: 10px;
+                font-size: 0.95rem;
+                transition: all 0.3s ease;
+            }
+
+                .contact-form-card .form-control:focus {
+                    border-color: #0d47a1;
+                    box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.1);
+                }
+
+                .contact-form-card .form-control::placeholder {
+                    color: #aaa;
+                }
+
+            .contact-form-card .btn-submit {
+                background: #0d47a1;
+                color: #fff;
+                padding: 14px 40px;
+                border: none;
+                border-radius: 50px;
+                font-weight: 600;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                cursor: pointer;
+                width: 100%;
+            }
+
+                .contact-form-card .btn-submit:hover {
+                    background: #0a3a8a;
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 30px rgba(13, 71, 161, 0.3);
+                }
+
+        /* Map */
+        .map-container {
+            margin-top: 50px;
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+        }
+
+            .map-container iframe {
+                display: block;
+                width: 100%;
+                height: 400px;
+            }
+
+        /* WhatsApp Contact Button */
+        .whatsapp-contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #25D366;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+            .whatsapp-contact-btn:hover {
+                background: #1da851;
+                color: #fff;
+                transform: scale(1.02);
+                box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+            }
+
+            .whatsapp-contact-btn i {
+                font-size: 1.3rem;
+            }
+
+        /* Footer Styles */
+        .footer-16 .sitename {
+            color: #0d47a1 !important;
+        }
+
+        .footer-16 .brand-description {
+            color: #555;
+        }
+
+        .footer-16 .contact-item i {
+            color: #0d47a1;
+        }
+
+        .footer-16 .footer-nav a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+            .footer-16 .footer-nav a:hover {
+                color: #0d47a1;
+            }
+
+        .footer-16 .nav-column h6 {
+            color: #0d47a1;
+            font-weight: 700;
+        }
+
+        .footer-bottom {
+            background: #f0f4ff;
+            padding: 20px 0;
+        }
+
+            .footer-bottom .legal-links a {
+                color: #555;
+                text-decoration: none;
+                margin: 0 10px;
+                transition: color 0.3s ease;
+            }
+
+                .footer-bottom .legal-links a:hover {
+                    color: #0d47a1;
+                }
+
+            .footer-bottom .credits {
+                color: #777;
+                font-size: 0.85rem;
+            }
+
+                .footer-bottom .credits a {
+                    color: #0d47a1;
+                    text-decoration: none;
+                }
+
+                    .footer-bottom .credits a:hover {
+                        text-decoration: underline;
+                    }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title .heading {
+                padding: 60px 0 40px;
+            }
+
+            .contact-info-wrapper {
+                padding: 20px;
+            }
+
+            .contact-form-card {
+                padding: 25px 20px;
+            }
+
+                .contact-form-card h2 {
+                    font-size: 1.4rem;
+                }
+
+            .map-container iframe {
+                height: 300px;
+            }
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+            .whatsapp-float:hover {
+                transform: scale(1.1);
+                box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+                color: #fff;
+            }
+
+        .hours-badge {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+            .hours-badge i {
+                font-size: 1.1rem;
+            }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #25D366;
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+            .whatsapp-btn:hover {
+                background: #1da851;
+                color: #fff;
+                transform: scale(1.02);
+                box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+            }
+
+            .whatsapp-btn i {
+                font-size: 1.2rem;
+            }
+    </style>
+
 </head>
 
 <body class="contact-page">
 
-  <header id="header" class="header fixed-top">
+    <header id="header" class="header fixed-top">
 
-    <div class="topbar d-flex align-items-center dark-background">
-      <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="contact-info d-flex align-items-center">
-          <i class="bi bi-envelope d-flex align-items-center"><a
-              href="mailto:contact@example.com">contact@example.com</a></i>
-          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+        <div class="topbar d-flex align-items-center dark-background">
+            <div class="container d-flex justify-content-center justify-content-md-between">
+                <div class="contact-info d-flex align-items-center">
+                    <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:info@saigroupofclinic.com">info@saigroupofclinic.com</a></i>
+                    <i class="bi bi-phone d-flex align-items-center ms-4"><span>+91 97879 60590</span></i>
+                </div>
+                <div class="social-links d-none d-md-flex align-items-center">
+                    <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div><!-- End Top Bar -->
+
+        <div class="branding d-flex align-items-cente">
+
+            <div class="container position-relative d-flex align-items-center justify-content-between">
+                <a href="index.html" class="logo d-flex align-items-center">
+                    <h1 class="sitename">SAI CLINIC</h1>
+                </a>
+
+                <nav id="navmenu" class="navmenu">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Doctors</a></li>
+                        <li class="dropdown">
+                            <a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                            <ul>
+                                <li><a href="department-details.html">Department Details</a></li>
+                                <li><a href="service-details.html">Service Details</a></li>
+                                <li><a href="appointment.html">Appointment</a></li>
+                                <li><a href="testimonials.html">Testimonials</a></li>
+                                <li><a href="faq.html">Frequently Asked Questions</a></li>
+                                <li><a href="gallery.html">Gallery</a></li>
+                                <li><a href="terms.html">Terms</a></li>
+                                <li><a href="privacy.html">Privacy</a></li>
+                                <li><a href="404.html">404</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                            <ul>
+                                <li><a href="#">Dropdown 1</a></li>
+                                <li class="dropdown">
+                                    <a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                    <ul>
+                                        <li><a href="#">Deep Dropdown 1</a></li>
+                                        <li><a href="#">Deep Dropdown 2</a></li>
+                                        <li><a href="#">Deep Dropdown 3</a></li>
+                                        <li><a href="#">Deep Dropdown 4</a></li>
+                                        <li><a href="#">Deep Dropdown 5</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Dropdown 2</a></li>
+                                <li><a href="#">Dropdown 3</a></li>
+                                <li><a href="#">Dropdown 4</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html" class="active">Contact</a></li>
+                    </ul>
+                    <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                </nav>
+
+            </div>
+
         </div>
-        <div class="social-links d-none d-md-flex align-items-center">
-          <a href="#!" class="twitter"><i class="bi bi-twitter-x"></i></a>
-          <a href="#!" class="facebook"><i class="bi bi-facebook"></i></a>
-          <a href="#!" class="instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#!" class="linkedin"><i class="bi bi-linkedin"></i></a>
-        </div>
-      </div>
-    </div><!-- End Top Bar -->
 
-    <div class="branding d-flex align-items-cente">
+    </header>
 
-      <div class="container position-relative d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-          <!-- <img src="assets/img/logo.webp" alt=""> -->
-          <h1 class="sitename">Clinic</h1>
-        </a>
+    <main class="main">
 
-        <nav id="navmenu" class="navmenu">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="departments.html">Departments</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="doctors.html">Doctors</a></li>
-            <li class="dropdown"><a href="#"><span>More Pages</span> <i
-                  class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="department-details.html">Department Details</a></li>
-                <li><a href="service-details.html">Service Details</a></li>
-                <li><a href="appointment.html">Appointment</a></li>
-                <li><a href="testimonials.html">Testimonials</a></li>
-                <li><a href="faq.html">Frequently Asked Questions</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="terms.html">Terms</a></li>
-                <li><a href="privacy.html">Privacy</a></li>
-                <li><a href="404.html">404</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#"><span>Dropdown</span> <i
-                  class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="#">Dropdown 1</a></li>
-                <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i
-                      class="bi bi-chevron-down toggle-dropdown"></i></a>
-                  <ul>
-                    <li><a href="#">Deep Dropdown 1</a></li>
-                    <li><a href="#">Deep Dropdown 2</a></li>
-                    <li><a href="#">Deep Dropdown 3</a></li>
-                    <li><a href="#">Deep Dropdown 4</a></li>
-                    <li><a href="#">Deep Dropdown 5</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Dropdown 2</a></li>
-                <li><a href="#">Dropdown 3</a></li>
-                <li><a href="#">Dropdown 4</a></li>
-              </ul>
-            </li>
-            <li><a href="contact.html" class="active">Contact</a></li>
-          </ul>
-          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </nav>
+        <!-- Page Title -->
+        <div class="page-title">
+            <div class="heading">
+                <div class="container">
+                    <div class="row d-flex justify-content-center text-center">
+                        <div class="col-lg-8">
+                            <h1 class="heading-title">Contact Us</h1>
+                            <p class="mb-0">
+                                We're here to help! Reach out to SAI CLINIC for appointments, inquiries, or any healthcare needs.
+                                Our team is ready to assist you with compassionate care and expert guidance.
+                            </p>
+                            <div class="mt-3 d-flex flex-wrap justify-content-center gap-2">
+                                <span class="hours-badge">
+                                    <i class="bi bi-clock"></i> 08.00 AM - 10.00 PM
+                                </span>
+                                <a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20get%20in%20touch"
+                                   target="_blank" class="whatsapp-btn">
+                                    <i class="bi bi-whatsapp"></i> WhatsApp Us
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav class="breadcrumbs">
+                <div class="container">
+                    <ol>
+                        <li><a href="index.html">Home</a></li>
+                        <li class="current">Contact</li>
+                    </ol>
+                </div>
+            </nav>
+        </div><!-- End Page Title -->
+        <!-- Contact Section -->
+        <section id="contact" class="contact section">
 
-      </div>
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <div class="row g-5">
+                    <div class="col-lg-5">
+                        <div class="contact-info-wrapper">
+                            <div class="contact-info-item" data-aos="fade-up" data-aos-delay="100">
+                                <div class="info-icon">
+                                    <i class="bi bi-geo-alt"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h3>Our Address</h3>
+                                    <p>No. 253A, Railway Station Road</p>
+                                    <p>Kavaraipettai, Chennai - 601206</p>
+                                    <a href="https://maps.google.com/maps?q=253A+Railway+Station+Road+Kavaraipettai+Chennai"
+                                       target="_blank" class="contact-link">
+                                        <i class="bi bi-box-arrow-up-right"></i> View on Map
+                                    </a>
+                                </div>
+                            </div>
 
-    </div>
+                            <div class="contact-info-item" data-aos="fade-up" data-aos-delay="200">
+                                <div class="info-icon">
+                                    <i class="bi bi-envelope"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h3>Email Address</h3>
+                                    <p><a href="mailto:info@saigroupofclinic.com" class="contact-link">info@saigroupofclinic.com</a></p>
+                                    <p><a href="mailto:contact@saigroupofclinic.com" class="contact-link">contact@saigroupofclinic.com</a></p>
+                                </div>
+                            </div>
 
-  </header>
+                            <div class="contact-info-item" data-aos="fade-up" data-aos-delay="300">
+                                <div class="info-icon">
+                                    <i class="bi bi-headset"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h3>Hours of Operation</h3>
+                                    <p><strong>Monday - Sunday:</strong> 08:00 AM - 10:00 PM</p>
+                                    <p><strong>Emergency:</strong> 24/7 Available</p>
+                                </div>
+                            </div>
 
-  <main class="main">
+                            <div class="contact-info-item" data-aos="fade-up" data-aos-delay="400">
+                                <div class="info-icon">
+                                    <i class="bi bi-telephone"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h3>Phone Numbers</h3>
+                                    <p><strong>Appointments:</strong> <a href="tel:+919787960590" class="contact-link">+91 97879 60590</a></p>
+                                    <p><strong>Emergency:</strong> <a href="tel:+919787960590" class="contact-link">+91 97879 60590</a></p>
+                                    <a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20get%20in%20touch"
+                                       target="_blank" class="whatsapp-contact-btn">
+                                        <i class="bi bi-whatsapp"></i> Chat on WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <!-- Page Title -->
-    <div class="page-title">
-      <div class="heading">
+                    <div class="col-lg-7">
+                        <div class="contact-form-card" data-aos="fade-up" data-aos-delay="200">
+                            <h2>Send us a Message</h2>
+                            <p class="mb-4">Have questions or want to book an appointment? Reach out to us and our team will get back to you shortly.</p>
+
+                            <form action="https://formsubmit.co/info@saigroupofclinic.com" method="POST" class="php-email-form">
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Your Full Name" required>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email Address" required>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="Phone Number">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject (e.g., Appointment, Inquiry)" required>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <textarea class="form-control" name="message" id="message" placeholder="Your Message..." rows="6" required></textarea>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="loading">Loading...</div>
+                                        <div class="error-message"></div>
+                                        <div class="sent-message">Your message has been sent. Thank you!</div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-submit">
+                                            <i class="bi bi-send"></i> Send Message
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map -->
+            <div class="container-fluid map-container" data-aos="fade-up" data-aos-delay="200">
+                <div class="map-overlay"></div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.5!2d80.123456!3d13.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5265c7e5c5e5c5%3A0x5c5c5c5c5c5c5c5c!2sKavaraipettai%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000"
+                        width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+        </section><!-- /Contact Section -->
+
+    </main>
+
+    <footer id="footer" class="footer-16 footer position-relative">
+
         <div class="container">
-          <div class="row d-flex justify-content-center text-center">
-            <div class="col-lg-8">
-              <h1 class="heading-title">Contact</h1>
-              <p class="mb-0">
-                Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo
-                odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum
-                debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat
-                ipsum dolorem.
-              </p>
+
+            <div class="footer-main" data-aos="fade-up" data-aos-delay="100">
+                <div class="row align-items-start">
+
+                    <div class="col-lg-5">
+                        <div class="brand-section">
+                            <a href="index.html" class="logo d-flex align-items-center mb-4">
+                                <span class="sitename">SAI CLINIC</span>
+                            </a>
+                            <p class="brand-description">Caring for your health with expertise and compassion. SAI CLINIC & SAI MEDICALS - Your trusted healthcare partner in Kavaraipettai.</p>
+
+                            <div class="contact-info mt-5">
+                                <div class="contact-item">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <span>No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="bi bi-telephone"></i>
+                                    <span>+91 97879 60590</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="bi bi-envelope"></i>
+                                    <span>info@saigroupofclinic.com</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="footer-nav-wrapper">
+                            <div class="row">
+
+                                <div class="col-6 col-lg-3">
+                                    <div class="nav-column">
+                                        <h6>Clinic</h6>
+                                        <nav class="footer-nav">
+                                            <a href="about.html">About Us</a>
+                                            <a href="doctors.html">Our Doctors</a>
+                                            <a href="services.html">Services</a>
+                                            <a href="#">Facilities</a>
+                                            <a href="contact.html">Contact</a>
+                                        </nav>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-lg-3">
+                                    <div class="nav-column">
+                                        <h6>Services</h6>
+                                        <nav class="footer-nav">
+                                            <a href="services.html">Lab Services</a>
+                                            <a href="services.html">X-Ray</a>
+                                            <a href="services.html">ECG</a>
+                                            <a href="services.html">Vaccination</a>
+                                            <a href="services.html">Dental Care</a>
+                                        </nav>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-lg-3">
+                                    <div class="nav-column">
+                                        <h6>Resources</h6>
+                                        <nav class="footer-nav">
+                                            <a href="#">Health Blog</a>
+                                            <a href="#">Patient Guide</a>
+                                            <a href="faq.html">FAQs</a>
+                                            <a href="testimonials.html">Testimonials</a>
+                                            <a href="gallery.html">Gallery</a>
+                                        </nav>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-lg-3">
+                                    <div class="nav-column">
+                                        <h6>Connect</h6>
+                                        <nav class="footer-nav">
+                                            <a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment"
+                                               target="_blank">Book Appointment</a>
+                                            <a href="tel:+919787960590">Emergency</a>
+                                            <a href="contact.html">Feedback</a>
+                                            <a href="#">Careers</a>
+                                            <a href="#">Partnership</a>
+                                        </nav>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <nav class="breadcrumbs">
-        <div class="container">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Contact</li>
-          </ol>
-        </div>
-      </nav>
-    </div><!-- End Page Title -->
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row g-5">
-          <div class="col-lg-5">
-            <div class="contact-info-wrapper">
-              <div class="contact-info-item" data-aos="fade-up" data-aos-delay="100">
-                <div class="info-icon">
-                  <i class="bi bi-geo-alt"></i>
-                </div>
-                <div class="info-content">
-                  <h3>Our Address</h3>
-                  <p>1842 Maple Avenue, Portland, Oregon 97204</p>
-                </div>
-              </div>
-
-              <div class="contact-info-item" data-aos="fade-up" data-aos-delay="200">
-                <div class="info-icon">
-                  <i class="bi bi-envelope"></i>
-                </div>
-                <div class="info-content">
-                  <h3>Email Address</h3>
-                  <p>info@example.com</p>
-                  <p>contact@example.com</p>
-                </div>
-              </div>
-
-              <div class="contact-info-item" data-aos="fade-up" data-aos-delay="300">
-                <div class="info-icon">
-                  <i class="bi bi-headset"></i>
-                </div>
-                <div class="info-content">
-                  <h3>Hours of Operation</h3>
-                  <p>Sunday-Fri: 9 AM - 6 PM</p>
-                  <p>Saturday: 9 AM - 4 PM</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-7">
-            <div class="contact-form-card" data-aos="fade-up" data-aos-delay="200">
-              <h2>Send us a Message</h2>
-              <p class="mb-4">Have questions or want to learn more? Reach out to us and our team will get back to you
-                shortly.</p>
-
-              <form action="forms/contact.php" method="post" class="php-email-form">
-                <div class="row g-4">
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Your Name" required="">
-                  </div>
-
-                  <div class="col-md-6">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"
-                      required="">
-                  </div>
-
-                  <div class="col-12">
-                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
-                      required="">
-                  </div>
-
-                  <div class="col-12">
-                    <textarea class="form-control" name="message" id="message" placeholder="Your Message" rows="6"
-                      required=""></textarea>
-                  </div>
-
-                  <div class="col-12">
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your message has been sent. Thank you!</div>
-                  </div>
-
-                  <div class="col-12">
-                    <button type="submit" class="btn btn-submit">Send Message</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container-fluid map-container" data-aos="fade-up" data-aos-delay="200">
-        <div class="map-overlay"></div>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus"
-          width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-
-    </section><!-- /Contact Section -->
-
-  </main>
-
-  <footer id="footer" class="footer-16 footer position-relative">
-
-    <div class="container">
-
-      <div class="footer-main" data-aos="fade-up" data-aos-delay="100">
-        <div class="row align-items-start">
-
-          <div class="col-lg-5">
-            <div class="brand-section">
-              <a href="index.html" class="logo d-flex align-items-center mb-4">
-                <span class="sitename">Clinic</span>
-              </a>
-              <p class="brand-description">Crafting exceptional digital experiences through thoughtful design and
-                innovative solutions that elevate your brand presence.</p>
-
-              <div class="contact-info mt-5">
-                <div class="contact-item">
-                  <i class="bi bi-geo-alt"></i>
-                  <span>123 Creative Boulevard, Design District, NY 10012</span>
-                </div>
-                <div class="contact-item">
-                  <i class="bi bi-telephone"></i>
-                  <span>+1 (555) 987-6543</span>
-                </div>
-                <div class="contact-item">
-                  <i class="bi bi-envelope"></i>
-                  <span>hello@designstudio.com</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-7">
-            <div class="footer-nav-wrapper">
-              <div class="row">
-
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Studio</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Our Story</a>
-                      <a href="#!">Design Process</a>
-                      <a href="#!">Portfolio</a>
-                      <a href="#!">Case Studies</a>
-                      <a href="#!">Awards</a>
-                    </nav>
-                  </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Services</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Brand Identity</a>
-                      <a href="#!">Web Design</a>
-                      <a href="#!">Mobile Apps</a>
-                      <a href="#!">Digital Strategy</a>
-                      <a href="#!">Consultation</a>
-                    </nav>
-                  </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Resources</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Design Blog</a>
-                      <a href="#!">Style Guide</a>
-                      <a href="#!">Free Assets</a>
-                      <a href="#!">Tutorials</a>
-                      <a href="#!">Inspiration</a>
-                    </nav>
-                  </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Connect</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Start Project</a>
-                      <a href="#!">Schedule Call</a>
-                      <a href="#!">Join Newsletter</a>
-                      <a href="#!">Follow Updates</a>
-                      <a href="#!">Partnership</a>
-                    </nav>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
 
         </div>
-      </div>
 
-    </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
+                    <div class="row align-items-center">
 
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
-          <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="copyright">
+                                <p>© <span class="sitename">SAI CLINIC</span>. All rights reserved.</p>
+                            </div>
+                        </div>
 
-            <div class="col-lg-6">
-              <div class="copyright">
-                <p>© <span class="sitename">Clinic</span>. All rights reserved.</p>
-              </div>
-            </div>
+                        <div class="col-lg-6">
+                            <div class="legal-links">
+                                <a href="privacy.html">Privacy Policy</a>
+                                <a href="terms.html">Terms of Service</a>
+                                <a href="#">Cookie Policy</a>
+                                <div class="credits">
+                                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>. Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="col-lg-6">
-              <div class="legal-links">
-                <a href="#!">Privacy Policy</a>
-                <a href="#!">Terms of Service</a>
-                <a href="#!">Cookie Policy</a>
-                <div class="credits">
-                  <!-- All the links in the footer should remain intact. -->
-                  <!-- You can delete the links only if you've purchased the pro version. -->
-                  <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                  <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                  Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>. Distributed by <a
-                    href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                    </div>
                 </div>
-              </div>
             </div>
-
-          </div>
         </div>
-      </div>
-    </div>
 
-  </footer>
+    </footer>
 
-  <!-- Scroll Top -->
-  <a href="#!" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20get%20in%20touch"
+       target="_blank" class="whatsapp-float" title="Chat on WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+    </a>
 
-  <!-- Preloader -->
-  <div id="preloader"></div>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- Preloader -->
+    <div id="preloader"></div>
 
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        console.log('SAI CLINIC - Contact page ready!');
+        console.log('WhatsApp: +91 97879 60590');
+        console.log('Email: info@saigroupofclinic.com');
+        console.log('Hours: 08.00 AM - 10.00 PM');
+    </script>
 
 </body>
 

@@ -2,403 +2,854 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Gallery - Clinic Bootstrap Template</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Gallery - SAI CLINIC</title>
+    <meta name="description" content="SAI CLINIC & SAI MEDICALS - Comprehensive healthcare services in Kavaraipettai, Chennai.">
+    <meta name="keywords" content="Sai Clinic, SAI MEDICALS, Kavaraipettai, Chennai, doctors, lab, X-ray, ECG">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
-    rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+          rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Clinic
-  * Template URL: https://bootstrapmade.com/clinic-bootstrap-template/
-  * Updated: Jul 23 2025 with Bootstrap v5.3.7
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <style>
+        /* SAI CLINIC Custom Styles */
+        .topbar.dark-background {
+            background: #0d47a1 !important;
+        }
+
+        .topbar .contact-info i,
+        .topbar .contact-info a,
+        .topbar .social-links a {
+            color: #fff !important;
+        }
+
+        .branding .sitename {
+            color: #0d47a1 !important;
+            font-weight: 700;
+        }
+
+        .page-title .heading {
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+            padding: 80px 0 60px;
+        }
+
+        .page-title .heading-title {
+            color: #fff;
+        }
+
+        .page-title .heading p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .breadcrumbs {
+            background: #f0f4ff;
+            padding: 15px 0;
+        }
+
+            .breadcrumbs ol li a {
+                color: #0d47a1;
+            }
+
+            .breadcrumbs ol li.current {
+                color: #333;
+            }
+
+        /* Gallery Styles */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+        }
+
+            .gallery-item:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 12px 40px rgba(13, 71, 161, 0.12);
+            }
+
+            .gallery-item img {
+                width: 100%;
+                height: 280px;
+                object-fit: cover;
+                transition: transform 0.5s ease;
+            }
+
+            .gallery-item:hover img {
+                transform: scale(1.08);
+            }
+
+            .gallery-item .gallery-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(13, 71, 161, 0.75);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                padding: 20px;
+                flex-direction: column;
+            }
+
+            .gallery-item:hover .gallery-overlay {
+                opacity: 1;
+            }
+
+            .gallery-item .gallery-overlay .gallery-title {
+                color: #fff;
+                font-size: 1.1rem;
+                font-weight: 700;
+                margin-bottom: 5px;
+                text-align: center;
+            }
+
+            .gallery-item .gallery-overlay .gallery-subtitle {
+                color: rgba(255, 255, 255, 0.8);
+                font-size: 0.85rem;
+                text-align: center;
+            }
+
+            .gallery-item .gallery-overlay .gallery-links {
+                display: flex;
+                gap: 15px;
+                margin-top: 15px;
+            }
+
+                .gallery-item .gallery-overlay .gallery-links a {
+                    color: #fff;
+                    font-size: 1.5rem;
+                    transition: all 0.3s ease;
+                    width: 45px;
+                    height: 45px;
+                    background: rgba(255, 255, 255, 0.2);
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-decoration: none;
+                }
+
+                    .gallery-item .gallery-overlay .gallery-links a:hover {
+                        background: #fff;
+                        color: #0d47a1;
+                        transform: scale(1.1);
+                    }
+
+        /* Gallery Categories */
+        .gallery-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+            .gallery-filters .filter-btn {
+                padding: 8px 25px;
+                border: 2px solid #0d47a1;
+                border-radius: 50px;
+                background: transparent;
+                color: #0d47a1;
+                font-weight: 600;
+                font-size: 0.9rem;
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+
+                .gallery-filters .filter-btn:hover,
+                .gallery-filters .filter-btn.active {
+                    background: #0d47a1;
+                    color: #fff;
+                }
+
+        /* Footer Styles */
+        .footer-16 .sitename {
+            color: #0d47a1 !important;
+        }
+
+        .footer-16 .brand-description {
+            color: #555;
+        }
+
+        .footer-16 .contact-item i {
+            color: #0d47a1;
+        }
+
+        .footer-16 .footer-nav a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+            .footer-16 .footer-nav a:hover {
+                color: #0d47a1;
+            }
+
+        .footer-16 .nav-column h6 {
+            color: #0d47a1;
+            font-weight: 700;
+        }
+
+        .footer-bottom {
+            background: #f0f4ff;
+            padding: 20px 0;
+        }
+
+            .footer-bottom .legal-links a {
+                color: #555;
+                text-decoration: none;
+                margin: 0 10px;
+                transition: color 0.3s ease;
+            }
+
+                .footer-bottom .legal-links a:hover {
+                    color: #0d47a1;
+                }
+
+            .footer-bottom .credits {
+                color: #777;
+                font-size: 0.85rem;
+            }
+
+                .footer-bottom .credits a {
+                    color: #0d47a1;
+                    text-decoration: none;
+                }
+
+                    .footer-bottom .credits a:hover {
+                        text-decoration: underline;
+                    }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title .heading {
+                padding: 60px 0 40px;
+            }
+
+            .gallery-item img {
+                height: 220px;
+            }
+
+            .gallery-filters .filter-btn {
+                padding: 6px 18px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+            .whatsapp-float:hover {
+                transform: scale(1.1);
+                box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+                color: #fff;
+            }
+
+        .hours-badge {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+            .hours-badge i {
+                font-size: 1.1rem;
+            }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #25D366;
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+            .whatsapp-btn:hover {
+                background: #1da851;
+                color: #fff;
+                transform: scale(1.02);
+                box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+            }
+
+            .whatsapp-btn i {
+                font-size: 1.2rem;
+            }
+    </style>
+
 </head>
 
 <body class="gallery-page">
 
-  <header id="header" class="header fixed-top">
+    <header id="header" class="header fixed-top">
 
-    <div class="topbar d-flex align-items-center dark-background">
-      <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="contact-info d-flex align-items-center">
-          <i class="bi bi-envelope d-flex align-items-center"><a
-              href="mailto:contact@example.com">contact@example.com</a></i>
-          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+        <div class="topbar d-flex align-items-center dark-background">
+            <div class="container d-flex justify-content-center justify-content-md-between">
+                <div class="contact-info d-flex align-items-center">
+                    <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:info@saigroupofclinic.com">info@saigroupofclinic.com</a></i>
+                    <i class="bi bi-phone d-flex align-items-center ms-4"><span>+91 97879 60590</span></i>
+                </div>
+                <div class="social-links d-none d-md-flex align-items-center">
+                    <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div><!-- End Top Bar -->
+
+        <div class="branding d-flex align-items-cente">
+
+            <div class="container position-relative d-flex align-items-center justify-content-between">
+                <a href="index.html" class="logo d-flex align-items-center">
+                    <h1 class="sitename">SAI CLINIC</h1>
+                </a>
+
+                <nav id="navmenu" class="navmenu">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="doctors.html">Doctors</a></li>
+                        <li class="dropdown">
+                            <a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                            <ul>
+                                <li><a href="department-details.html">Department Details</a></li>
+                                <li><a href="service-details.html">Service Details</a></li>
+                                <li><a href="appointment.html">Appointment</a></li>
+                                <li><a href="testimonials.html">Testimonials</a></li>
+                                <li><a href="faq.html">Frequently Asked Questions</a></li>
+                                <li><a href="gallery.html" class="active">Gallery</a></li>
+                                <li><a href="terms.html">Terms</a></li>
+                                <li><a href="privacy.html">Privacy</a></li>
+                                <li><a href="404.html">404</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                            <ul>
+                                <li><a href="#">Dropdown 1</a></li>
+                                <li class="dropdown">
+                                    <a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                    <ul>
+                                        <li><a href="#">Deep Dropdown 1</a></li>
+                                        <li><a href="#">Deep Dropdown 2</a></li>
+                                        <li><a href="#">Deep Dropdown 3</a></li>
+                                        <li><a href="#">Deep Dropdown 4</a></li>
+                                        <li><a href="#">Deep Dropdown 5</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Dropdown 2</a></li>
+                                <li><a href="#">Dropdown 3</a></li>
+                                <li><a href="#">Dropdown 4</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                </nav>
+
+            </div>
+
         </div>
-        <div class="social-links d-none d-md-flex align-items-center">
-          <a href="#!" class="twitter"><i class="bi bi-twitter-x"></i></a>
-          <a href="#!" class="facebook"><i class="bi bi-facebook"></i></a>
-          <a href="#!" class="instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#!" class="linkedin"><i class="bi bi-linkedin"></i></a>
-        </div>
-      </div>
-    </div><!-- End Top Bar -->
 
-    <div class="branding d-flex align-items-cente">
+    </header>
 
-      <div class="container position-relative d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-          <!-- <img src="assets/img/logo.webp" alt=""> -->
-          <h1 class="sitename">Clinic</h1>
-        </a>
+    <main class="main">
 
-        <nav id="navmenu" class="navmenu">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="departments.html">Departments</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="doctors.html">Doctors</a></li>
-            <li class="dropdown"><a href="#"><span>More Pages</span> <i
-                  class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="department-details.html">Department Details</a></li>
-                <li><a href="service-details.html">Service Details</a></li>
-                <li><a href="appointment.html">Appointment</a></li>
-                <li><a href="testimonials.html">Testimonials</a></li>
-                <li><a href="faq.html">Frequently Asked Questions</a></li>
-                <li><a href="gallery.html" class="active">Gallery</a></li>
-                <li><a href="terms.html">Terms</a></li>
-                <li><a href="privacy.html">Privacy</a></li>
-                <li><a href="404.html">404</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#"><span>Dropdown</span> <i
-                  class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="#">Dropdown 1</a></li>
-                <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i
-                      class="bi bi-chevron-down toggle-dropdown"></i></a>
-                  <ul>
-                    <li><a href="#">Deep Dropdown 1</a></li>
-                    <li><a href="#">Deep Dropdown 2</a></li>
-                    <li><a href="#">Deep Dropdown 3</a></li>
-                    <li><a href="#">Deep Dropdown 4</a></li>
-                    <li><a href="#">Deep Dropdown 5</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Dropdown 2</a></li>
-                <li><a href="#">Dropdown 3</a></li>
-                <li><a href="#">Dropdown 4</a></li>
-              </ul>
-            </li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </nav>
+        <!-- Page Title -->
+        <div class="page-title">
+            <div class="heading">
+                <div class="container">
+                    <div class="row d-flex justify-content-center text-center">
+                        <div class="col-lg-8">
+                            <h1 class="heading-title">Our Gallery</h1>
+                            <p class="mb-0">
+                                Explore our state-of-the-art facilities, dedicated medical team, and the compassionate care
+                                we provide at SAI CLINIC. Each image reflects our commitment to excellence in healthcare.
+                            </p>
+                            <div class="mt-3 d-flex flex-wrap justify-content-center gap-2">
+                                <span class="hours-badge">
+                                    <i class="bi bi-clock"></i> 08.00 AM - 10.00 PM
+                                </span>
+                                <a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20know%20more%20about%20your%20facilities"
+                                   target="_blank" class="whatsapp-btn">
+                                    <i class="bi bi-whatsapp"></i> Contact via WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav class="breadcrumbs">
+                <div class="container">
+                    <ol>
+                        <li><a href="index.html">Home</a></li>
+                        <li class="current">Gallery</li>
+                    </ol>
+                </div>
+            </nav>
+        </div><!-- End Page Title -->
+        <!-- Gallery Filters -->
+        <section class="section" style="padding: 20px 0 0;">
+            <div class="container">
+                <div class="gallery-filters" data-aos="fade-up">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="facility">Facility</button>
+                    <button class="filter-btn" data-filter="doctors">Doctors</button>
+                    <button class="filter-btn" data-filter="services">Services</button>
+                    <button class="filter-btn" data-filter="team">Team</button>
+                </div>
+            </div>
+        </section>
 
-      </div>
+        <!-- Gallery Section -->
+        <section id="gallery" class="gallery section">
 
-    </div>
+            <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
 
-  </header>
+                <div class="row gy-4 justify-content-center">
 
-  <main class="main">
+                    <!-- Gallery Item 1 - Facility -->
+                    <div class="col-xl-3 col-lg-4 col-md-6 gallery-item-wrap" data-category="facility">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/health/facilities-9.webp" class="img-fluid" alt="SAI CLINIC Modern Facility">
+                            <div class="gallery-overlay">
+                                <h4 class="gallery-title">Modern Healthcare Facility</h4>
+                                <p class="gallery-subtitle">State-of-the-art medical infrastructure</p>
+                                <div class="gallery-links">
+                                    <a href="assets/img/health/facilities-9.webp" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Gallery Item -->
+                    <!-- Gallery Item 2 - Doctors -->
+                    <div class="col-xl-3 col-lg-4 col-md-6 gallery-item-wrap" data-category="doctors">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/health/staff-10.webp" class="img-fluid" alt="SAI CLINIC Medical Team">
+                            <div class="gallery-overlay">
+                                <h4 class="gallery-title">Expert Medical Team</h4>
+                                <p class="gallery-subtitle">Dedicated doctors and healthcare professionals</p>
+                                <div class="gallery-links">
+                                    <a href="assets/img/health/staff-10.webp" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Gallery Item -->
+                    <!-- Gallery Item 3 - Services -->
+                    <div class="col-xl-3 col-lg-4 col-md-6 gallery-item-wrap" data-category="services">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/health/cardiology-3.webp" class="img-fluid" alt="Diagnostic Services">
+                            <div class="gallery-overlay">
+                                <h4 class="gallery-title">Diagnostic Services</h4>
+                                <p class="gallery-subtitle">Advanced diagnostic equipment</p>
+                                <div class="gallery-links">
+                                    <a href="assets/img/health/cardiology-3.webp" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Gallery Item -->
+                    <!-- Gallery Item 4 - Team -->
+                    <div class="col-xl-3 col-lg-4 col-md-6 gallery-item-wrap" data-category="team">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/health/staff-2.webp" class="img-fluid" alt="Dr. S. Rubagam">
+                            <div class="gallery-overlay">
+                                <h4 class="gallery-title">Dr. S. Rubagam</h4>
+                                <p class="gallery-subtitle">Dentistry & Oral Health Specialist</p>
+                                <div class="gallery-links">
+                                    <a href="assets/img/health/staff-2.webp" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Gallery Item -->
+                    <!-- Gallery Item 5 - Facility -->
+                    <div class="col-xl-3 col-lg-4 col-md-6 gallery-item-wrap" data-category="facility">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/health/facilities-6.webp" class="img-fluid" alt="Clinic Interior">
+                            <div class="gallery-overlay">
+                                <h4 class="gallery-title">Comfortable Environment</h4>
+                                <p class="gallery-subtitle">Patient-friendly clinic interiors</p>
+                                <div class="gallery-links">
+                                    <a href="assets/img/health/facilities-6.webp" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Gallery Item -->
+                    <!-- Gallery Item 6 - Doctors -->
+                    <div class="col-xl-3 col-lg-4 col-md-6 gallery-item-wrap" data-category="doctors">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/health/staff-6.webp" class="img-fluid" alt="Dr. M. Karthikeyan">
+                            <div class="gallery-overlay">
+                                <h4 class="gallery-title">Dr. M. Karthikeyan</h4>
+                                <p class="gallery-subtitle">Orthopedics & Joint Replacement</p>
+                                <div class="gallery-links">
+                                    <a href="assets/img/health/staff-6.webp" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Gallery Item -->
+                    <!-- Gallery Item 7 - Services -->
+                    <div class="col-xl-3 col-lg-4 col-md-6 gallery-item-wrap" data-category="services">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/health/laboratory-3.webp" class="img-fluid" alt="Lab Services">
+                            <div class="gallery-overlay">
+                                <h4 class="gallery-title">Lab Services</h4>
+                                <p class="gallery-subtitle">Full-service clinical laboratory</p>
+                                <div class="gallery-links">
+                                    <a href="assets/img/health/laboratory-3.webp" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Gallery Item -->
+                    <!-- Gallery Item 8 - Team -->
+                    <div class="col-xl-3 col-lg-4 col-md-6 gallery-item-wrap" data-category="team">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/health/staff-4.webp" class="img-fluid" alt="Dr. N. Ruba">
+                            <div class="gallery-overlay">
+                                <h4 class="gallery-title">Dr. N. Ruba</h4>
+                                <p class="gallery-subtitle">General Surgery Specialist</p>
+                                <div class="gallery-links">
+                                    <a href="assets/img/health/staff-4.webp" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Gallery Item -->
+                    <!-- Gallery Item 9 - Services -->
+                    <div class="col-xl-3 col-lg-4 col-md-6 gallery-item-wrap" data-category="services">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/health/emergency-2.webp" class="img-fluid" alt="Emergency Care">
+                            <div class="gallery-overlay">
+                                <h4 class="gallery-title">Emergency Care</h4>
+                                <p class="gallery-subtitle">24/7 Emergency services</p>
+                                <div class="gallery-links">
+                                    <a href="assets/img/health/emergency-2.webp" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Gallery Item -->
+                    <!-- Gallery Item 10 - Facility -->
+                    <div class="col-xl-3 col-lg-4 col-md-6 gallery-item-wrap" data-category="facility">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/health/maternal-2.webp" class="img-fluid" alt="Maternal Care">
+                            <div class="gallery-overlay">
+                                <h4 class="gallery-title">Maternal Care</h4>
+                                <p class="gallery-subtitle">Comprehensive pregnancy & postnatal care</p>
+                                <div class="gallery-links">
+                                    <a href="assets/img/health/maternal-2.webp" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Gallery Item -->
+                    <!-- Gallery Item 11 - Doctors -->
+                    <div class="col-xl-3 col-lg-4 col-md-6 gallery-item-wrap" data-category="doctors">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/health/staff-8.webp" class="img-fluid" alt="Dr. H. Rubagam">
+                            <div class="gallery-overlay">
+                                <h4 class="gallery-title">Dr. H. Rubagam</h4>
+                                <p class="gallery-subtitle">General Surgery Specialist</p>
+                                <div class="gallery-links">
+                                    <a href="assets/img/health/staff-8.webp" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Gallery Item -->
+                    <!-- Gallery Item 12 - Services -->
+                    <div class="col-xl-3 col-lg-4 col-md-6 gallery-item-wrap" data-category="services">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/health/vaccination-3.webp" class="img-fluid" alt="Vaccination">
+                            <div class="gallery-overlay">
+                                <h4 class="gallery-title">Vaccination Center</h4>
+                                <p class="gallery-subtitle">Complete immunization programs</p>
+                                <div class="gallery-links">
+                                    <a href="assets/img/health/vaccination-3.webp" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Gallery Item -->
 
-    <!-- Page Title -->
-    <div class="page-title">
-      <div class="heading">
+                </div>
+
+            </div>
+
+        </section><!-- /Gallery Section -->
+        <!-- SAI MEDICALS Section -->
+        <section class="section" style="padding: 40px 0; background: #f8f9fa;">
+            <div class="container">
+                <div class="row align-items-center" style="background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%); padding: 40px; border-radius: 20px;">
+                    <div class="col-lg-8">
+                        <h3 style="color: #0d47a1; font-weight: 700;"><i class="bi bi-shop" style="color: #0d47a1;"></i> SAI MEDICALS</h3>
+                        <p style="font-size: 1.1rem; color: #333;">Your trusted pharmacy partner located within SAI CLINIC premises.</p>
+                        <p style="color: #555;">Quality medicines and healthcare products available at competitive prices. Our pharmacy is fully stocked with genuine medications and healthcare essentials.</p>
+                        <div class="contact-info mt-3">
+                            <i class="bi bi-telephone" style="color: #0d47a1;"></i> <strong style="color: #0d47a1;">+91 97879 60590</strong>
+                            <span style="margin-left: 1.5rem;"><i class="bi bi-clock" style="color: #0d47a1;"></i> 08:00 AM - 10:00 PM</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20know%20about%20SAI%20MEDICALS"
+                           target="_blank" class="whatsapp-btn">
+                            <i class="bi bi-whatsapp"></i> Contact via WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="footer" class="footer-16 footer position-relative">
+
         <div class="container">
-          <div class="row d-flex justify-content-center text-center">
-            <div class="col-lg-8">
-              <h1 class="heading-title">Gallery</h1>
-              <p class="mb-0">
-                Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo
-                odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum
-                debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat
-                ipsum dolorem.
-              </p>
+
+            <div class="footer-main" data-aos="fade-up" data-aos-delay="100">
+                <div class="row align-items-start">
+
+                    <div class="col-lg-5">
+                        <div class="brand-section">
+                            <a href="index.html" class="logo d-flex align-items-center mb-4">
+                                <span class="sitename">SAI CLINIC</span>
+                            </a>
+                            <p class="brand-description">Caring for your health with expertise and compassion. SAI CLINIC & SAI MEDICALS - Your trusted healthcare partner in Kavaraipettai.</p>
+
+                            <div class="contact-info mt-5">
+                                <div class="contact-item">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <span>No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="bi bi-telephone"></i>
+                                    <span>+91 97879 60590</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="bi bi-envelope"></i>
+                                    <span>info@saigroupofclinic.com</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="footer-nav-wrapper">
+                            <div class="row">
+
+                                <div class="col-6 col-lg-3">
+                                    <div class="nav-column">
+                                        <h6>Clinic</h6>
+                                        <nav class="footer-nav">
+                                            <a href="about.html">About Us</a>
+                                            <a href="doctors.html">Our Doctors</a>
+                                            <a href="services.html">Services</a>
+                                            <a href="#">Facilities</a>
+                                            <a href="contact.html">Contact</a>
+                                        </nav>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-lg-3">
+                                    <div class="nav-column">
+                                        <h6>Services</h6>
+                                        <nav class="footer-nav">
+                                            <a href="services.html">Lab Services</a>
+                                            <a href="services.html">X-Ray</a>
+                                            <a href="services.html">ECG</a>
+                                            <a href="services.html">Vaccination</a>
+                                            <a href="services.html">Dental Care</a>
+                                        </nav>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-lg-3">
+                                    <div class="nav-column">
+                                        <h6>Resources</h6>
+                                        <nav class="footer-nav">
+                                            <a href="#">Health Blog</a>
+                                            <a href="#">Patient Guide</a>
+                                            <a href="faq.html">FAQs</a>
+                                            <a href="testimonials.html">Testimonials</a>
+                                            <a href="gallery.html">Gallery</a>
+                                        </nav>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-lg-3">
+                                    <div class="nav-column">
+                                        <h6>Connect</h6>
+                                        <nav class="footer-nav">
+                                            <a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment"
+                                               target="_blank">Book Appointment</a>
+                                            <a href="tel:+919787960590">Emergency</a>
+                                            <a href="contact.html">Feedback</a>
+                                            <a href="#">Careers</a>
+                                            <a href="#">Partnership</a>
+                                        </nav>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <nav class="breadcrumbs">
-        <div class="container">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Gallery</li>
-          </ol>
-        </div>
-      </nav>
-    </div><!-- End Page Title -->
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="gallery section">
-
-      <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4 justify-content-center">
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/gallery/gallery-1.webp" class="img-fluid" alt="">
-              <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="assets/img/gallery/gallery-1.webp" title="Gallery 1" class="glightbox preview-link"><i
-                    class="bi bi-arrows-angle-expand"></i></a>
-                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/gallery/gallery-2.webp" class="img-fluid" alt="">
-              <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="assets/img/gallery/gallery-2.webp" title="Gallery 2" class="glightbox preview-link"><i
-                    class="bi bi-arrows-angle-expand"></i></a>
-                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/gallery/gallery-3.webp" class="img-fluid" alt="">
-              <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="assets/img/gallery/gallery-3.webp" title="Gallery 3" class="glightbox preview-link"><i
-                    class="bi bi-arrows-angle-expand"></i></a>
-                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/gallery/gallery-4.webp" class="img-fluid" alt="">
-              <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="assets/img/gallery/gallery-4.webp" title="Gallery 4" class="glightbox preview-link"><i
-                    class="bi bi-arrows-angle-expand"></i></a>
-                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/gallery/gallery-5.webp" class="img-fluid" alt="">
-              <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="assets/img/gallery/gallery-5.webp" title="Gallery 5" class="glightbox preview-link"><i
-                    class="bi bi-arrows-angle-expand"></i></a>
-                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/gallery/gallery-6.webp" class="img-fluid" alt="">
-              <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="assets/img/gallery/gallery-6.webp" title="Gallery 6" class="glightbox preview-link"><i
-                    class="bi bi-arrows-angle-expand"></i></a>
-                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/gallery/gallery-7.webp" class="img-fluid" alt="">
-              <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="assets/img/gallery/gallery-7.webp" title="Gallery 7" class="glightbox preview-link"><i
-                    class="bi bi-arrows-angle-expand"></i></a>
-                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="gallery-item h-100">
-              <img src="assets/img/gallery/gallery-8.webp" class="img-fluid" alt="">
-              <div class="gallery-links d-flex align-items-center justify-content-center">
-                <a href="assets/img/gallery/gallery-8.webp" title="Gallery 8" class="glightbox preview-link"><i
-                    class="bi bi-arrows-angle-expand"></i></a>
-                <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>
-          </div><!-- End Gallery Item -->
 
         </div>
 
-      </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
+                    <div class="row align-items-center">
 
-    </section><!-- /Gallery Section -->
+                        <div class="col-lg-6">
+                            <div class="copyright">
+                                <p>© <span class="sitename">SAI CLINIC</span>. All rights reserved.</p>
+                            </div>
+                        </div>
 
-  </main>
+                        <div class="col-lg-6">
+                            <div class="legal-links">
+                                <a href="privacy.html">Privacy Policy</a>
+                                <a href="terms.html">Terms of Service</a>
+                                <a href="#">Cookie Policy</a>
+                                <div class="credits">
+                                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>. Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                                </div>
+                            </div>
+                        </div>
 
-  <footer id="footer" class="footer-16 footer position-relative">
-
-    <div class="container">
-
-      <div class="footer-main" data-aos="fade-up" data-aos-delay="100">
-        <div class="row align-items-start">
-
-          <div class="col-lg-5">
-            <div class="brand-section">
-              <a href="index.html" class="logo d-flex align-items-center mb-4">
-                <span class="sitename">Clinic</span>
-              </a>
-              <p class="brand-description">Crafting exceptional digital experiences through thoughtful design and
-                innovative solutions that elevate your brand presence.</p>
-
-              <div class="contact-info mt-5">
-                <div class="contact-item">
-                  <i class="bi bi-geo-alt"></i>
-                  <span>123 Creative Boulevard, Design District, NY 10012</span>
+                    </div>
                 </div>
-                <div class="contact-item">
-                  <i class="bi bi-telephone"></i>
-                  <span>+1 (555) 987-6543</span>
-                </div>
-                <div class="contact-item">
-                  <i class="bi bi-envelope"></i>
-                  <span>hello@designstudio.com</span>
-                </div>
-              </div>
             </div>
-          </div>
-
-          <div class="col-lg-7">
-            <div class="footer-nav-wrapper">
-              <div class="row">
-
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Studio</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Our Story</a>
-                      <a href="#!">Design Process</a>
-                      <a href="#!">Portfolio</a>
-                      <a href="#!">Case Studies</a>
-                      <a href="#!">Awards</a>
-                    </nav>
-                  </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Services</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Brand Identity</a>
-                      <a href="#!">Web Design</a>
-                      <a href="#!">Mobile Apps</a>
-                      <a href="#!">Digital Strategy</a>
-                      <a href="#!">Consultation</a>
-                    </nav>
-                  </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Resources</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Design Blog</a>
-                      <a href="#!">Style Guide</a>
-                      <a href="#!">Free Assets</a>
-                      <a href="#!">Tutorials</a>
-                      <a href="#!">Inspiration</a>
-                    </nav>
-                  </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Connect</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Start Project</a>
-                      <a href="#!">Schedule Call</a>
-                      <a href="#!">Join Newsletter</a>
-                      <a href="#!">Follow Updates</a>
-                      <a href="#!">Partnership</a>
-                    </nav>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
         </div>
-      </div>
 
-    </div>
+    </footer>
 
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
-          <div class="row align-items-center">
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20know%20more%20about%20your%20facilities"
+       target="_blank" class="whatsapp-float" title="Contact via WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+    </a>
 
-            <div class="col-lg-6">
-              <div class="copyright">
-                <p>© <span class="sitename">Clinic</span>. All rights reserved.</p>
-              </div>
-            </div>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-            <div class="col-lg-6">
-              <div class="legal-links">
-                <a href="#!">Privacy Policy</a>
-                <a href="#!">Terms of Service</a>
-                <a href="#!">Cookie Policy</a>
-                <div class="credits">
-                  <!-- All the links in the footer should remain intact. -->
-                  <!-- You can delete the links only if you've purchased the pro version. -->
-                  <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                  <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                  Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>. Distributed by <a
-                    href="https://themewagon.com" target="_blank">ThemeWagon</a>
-                </div>
-              </div>
-            </div>
+    <!-- Preloader -->
+    <div id="preloader"></div>
 
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-  </footer>
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
 
-  <!-- Scroll Top -->
-  <a href="#!" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+    <!-- Gallery Filter Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item-wrap');
 
-  <!-- Preloader -->
-  <div id="preloader"></div>
+            filterButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(function (btn) {
+                        btn.classList.remove('active');
+                    });
+                    // Add active class to clicked button
+                    this.classList.add('active');
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+                    const filterValue = this.getAttribute('data-filter');
 
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+                    galleryItems.forEach(function (item) {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                            // Add animation
+                            item.style.animation = 'fadeInUp 0.5s ease';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Add animation keyframes
+            const style = document.createElement('style');
+            style.textContent = `
+            @keyframes fadeInUp {
+              from {
+                opacity: 0;
+                transform: translateY(20px);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+          `;
+            document.head.appendChild(style);
+
+            console.log('SAI CLINIC - Gallery page ready!');
+            console.log('WhatsApp: +91 97879 60590');
+            console.log('Email: info@saigroupofclinic.com');
+            console.log('Hours: 08.00 AM - 10.00 PM');
+        });
+    </script>
 
 </body>
 

@@ -2,569 +2,1174 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Doctors - Clinic Bootstrap Template</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>Doctors - SAI CLINIC</title>
+	<meta name="description" content="SAI CLINIC & SAI MEDICALS - Comprehensive healthcare services in Kavaraipettai, Chennai.">
+	<meta name="keywords" content="Sai Clinic, SAI MEDICALS, Kavaraipettai, Chennai, doctors, lab, X-ray, ECG">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+	<!-- Favicons -->
+	<link href="assets/img/favicon.png" rel="icon">
+	<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
-    rel="stylesheet">
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com" rel="preconnect">
+	<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+		  rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+	<!-- Vendor CSS Files -->
+	<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+	<link href="assets/vendor/aos/aos.css" rel="stylesheet">
+	<link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+	<link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+	<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+	<!-- Main CSS File -->
+	<link href="assets/css/main.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Clinic
-  * Template URL: https://bootstrapmade.com/clinic-bootstrap-template/
-  * Updated: Jul 23 2025 with Bootstrap v5.3.7
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+	<!-- SweetAlert2 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<style>
+		/* SAI CLINIC Custom Styles */
+		.topbar.dark-background {
+			background: #0d47a1 !important;
+		}
+
+		.topbar .contact-info i,
+		.topbar .contact-info a,
+		.topbar .social-links a {
+			color: #fff !important;
+		}
+
+		.branding .sitename {
+			color: #0d47a1 !important;
+			font-weight: 700;
+		}
+
+		.page-title .heading {
+			background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+			padding: 80px 0 60px;
+		}
+
+		.page-title .heading-title {
+			color: #fff;
+		}
+
+		.page-title .heading p {
+			color: rgba(255, 255, 255, 0.9);
+		}
+
+		.breadcrumbs {
+			background: #f0f4ff;
+			padding: 15px 0;
+		}
+
+			.breadcrumbs ol li a {
+				color: #0d47a1;
+			}
+
+			.breadcrumbs ol li.current {
+				color: #333;
+			}
+
+		/* Doctor Cards */
+		.doctor-card {
+			background: #fff;
+			border-radius: 16px;
+			overflow: hidden;
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+			transition: all 0.3s ease;
+			height: 100%;
+		}
+
+			.doctor-card:hover {
+				transform: translateY(-8px);
+				box-shadow: 0 12px 40px rgba(13, 71, 161, 0.12);
+			}
+
+			.doctor-card .doctor-image {
+				position: relative;
+				overflow: hidden;
+				height: 250px;
+			}
+
+				.doctor-card .doctor-image img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					transition: transform 0.5s ease;
+				}
+
+			.doctor-card:hover .doctor-image img {
+				transform: scale(1.05);
+			}
+
+			.doctor-card .doctor-overlay {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(13, 71, 161, 0.7);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				opacity: 0;
+				transition: opacity 0.3s ease;
+			}
+
+			.doctor-card:hover .doctor-overlay {
+				opacity: 1;
+			}
+
+			.doctor-card .doctor-overlay .social-links {
+				display: flex;
+				gap: 15px;
+			}
+
+				.doctor-card .doctor-overlay .social-links a {
+					color: #fff;
+					font-size: 1.5rem;
+					transition: all 0.3s ease;
+					width: 45px;
+					height: 45px;
+					background: rgba(255, 255, 255, 0.2);
+					border-radius: 50%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					text-decoration: none;
+				}
+
+					.doctor-card .doctor-overlay .social-links a:hover {
+						background: #fff;
+						color: #0d47a1;
+						transform: scale(1.1);
+					}
+
+			.doctor-card .doctor-content {
+				padding: 20px 25px 25px;
+			}
+
+				.doctor-card .doctor-content h4 {
+					color: #0d47a1;
+					font-weight: 700;
+					font-size: 1.15rem;
+					margin-bottom: 2px;
+				}
+
+				.doctor-card .doctor-content .specialty {
+					color: #1565c0;
+					font-weight: 600;
+					font-size: 0.85rem;
+					display: inline-block;
+					background: #f0f4ff;
+					padding: 3px 15px;
+					border-radius: 50px;
+					margin-bottom: 6px;
+				}
+
+				.doctor-card .doctor-content .qualifications {
+					font-size: 0.8rem;
+					color: #666;
+					margin-bottom: 10px;
+					line-height: 1.5;
+					background: #f8f9fa;
+					padding: 8px 12px;
+					border-radius: 8px;
+					border-left: 3px solid #0d47a1;
+				}
+
+				.doctor-card .doctor-content p {
+					color: #555;
+					font-size: 0.9rem;
+					line-height: 1.6;
+					margin-bottom: 12px;
+				}
+
+			.doctor-card .doctor-meta {
+				display: flex;
+				flex-direction: column;
+				gap: 5px;
+				margin-bottom: 15px;
+			}
+
+				.doctor-card .doctor-meta .experience,
+				.doctor-card .doctor-meta .department {
+					display: flex;
+					align-items: center;
+					gap: 8px;
+					font-size: 0.85rem;
+					color: #555;
+				}
+
+				.doctor-card .doctor-meta i {
+					color: #0d47a1;
+					font-size: 0.9rem;
+				}
+
+			.doctor-card .btn-appointment {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				background: #25D366;
+				color: #fff;
+				padding: 10px 25px;
+				border-radius: 50px;
+				text-decoration: none;
+				font-weight: 600;
+				font-size: 0.9rem;
+				transition: all 0.3s ease;
+				width: 100%;
+				justify-content: center;
+				border: none;
+				cursor: pointer;
+			}
+
+				.doctor-card .btn-appointment:hover {
+					background: #1da851;
+					color: #fff;
+					transform: scale(1.02);
+					box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+				}
+
+				.doctor-card .btn-appointment i {
+					font-size: 1.2rem;
+				}
+
+		/* Status Badge - All Available */
+		.status-badge {
+			display: inline-block;
+			padding: 3px 12px;
+			border-radius: 50px;
+			font-size: 0.7rem;
+			font-weight: 600;
+			margin-left: 8px;
+		}
+
+			.status-badge.available {
+				background: #e8f5e9;
+				color: #2e7d32;
+			}
+
+		/* Footer Styles */
+		.footer-16 .sitename {
+			color: #0d47a1 !important;
+		}
+
+		.footer-16 .brand-description {
+			color: #555;
+		}
+
+		.footer-16 .contact-item i {
+			color: #0d47a1;
+		}
+
+		.footer-16 .footer-nav a {
+			color: #555;
+			text-decoration: none;
+			transition: color 0.3s ease;
+		}
+
+			.footer-16 .footer-nav a:hover {
+				color: #0d47a1;
+			}
+
+		.footer-16 .nav-column h6 {
+			color: #0d47a1;
+			font-weight: 700;
+		}
+
+		.footer-bottom {
+			background: #f0f4ff;
+			padding: 20px 0;
+		}
+
+			.footer-bottom .legal-links a {
+				color: #555;
+				text-decoration: none;
+				margin: 0 10px;
+				transition: color 0.3s ease;
+			}
+
+				.footer-bottom .legal-links a:hover {
+					color: #0d47a1;
+				}
+
+			.footer-bottom .credits {
+				color: #777;
+				font-size: 0.85rem;
+			}
+
+				.footer-bottom .credits a {
+					color: #0d47a1;
+					text-decoration: none;
+				}
+
+					.footer-bottom .credits a:hover {
+						text-decoration: underline;
+					}
+
+		/* Responsive */
+		@media (max-width: 768px) {
+			.page-title .heading {
+				padding: 60px 0 40px;
+			}
+
+			.doctor-card .doctor-image {
+				height: 200px;
+			}
+
+			.doctor-card .doctor-content {
+				padding: 15px 20px 20px;
+			}
+		}
+
+		/* WhatsApp Floating Button */
+		.whatsapp-float {
+			position: fixed;
+			bottom: 30px;
+			right: 30px;
+			background: #25D366;
+			color: #fff;
+			width: 60px;
+			height: 60px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 2rem;
+			box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+			z-index: 999;
+			transition: all 0.3s ease;
+			text-decoration: none;
+		}
+
+			.whatsapp-float:hover {
+				transform: scale(1.1);
+				box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+				color: #fff;
+			}
+
+		.hours-badge {
+			background: rgba(255, 255, 255, 0.2);
+			color: #fff;
+			padding: 8px 20px;
+			border-radius: 50px;
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			font-weight: 600;
+			font-size: 0.9rem;
+			backdrop-filter: blur(10px);
+		}
+
+			.hours-badge i {
+				font-size: 1.1rem;
+			}
+
+		.whatsapp-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			background: #25D366;
+			color: #fff;
+			padding: 10px 25px;
+			border-radius: 50px;
+			text-decoration: none;
+			font-weight: 600;
+			transition: all 0.3s ease;
+			border: none;
+			font-size: 0.95rem;
+		}
+
+			.whatsapp-btn:hover {
+				background: #1da851;
+				color: #fff;
+				transform: scale(1.02);
+				box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+			}
+
+			.whatsapp-btn i {
+				font-size: 1.2rem;
+			}
+
+		/* Slot Timing */
+		.slot-timing {
+			display: inline-flex;
+			align-items: center;
+			gap: 5px;
+			background: #e3f2fd;
+			color: #0d47a1;
+			padding: 4px 12px;
+			border-radius: 50px;
+			font-size: 0.75rem;
+			font-weight: 600;
+			margin-top: 5px;
+		}
+
+			.slot-timing i {
+				font-size: 0.8rem;
+			}
+
+		/* Date Picker Modal Styles */
+		.date-picker-modal .swal2-popup {
+			padding: 20px;
+		}
+
+		.date-picker-modal .swal2-html-container {
+			margin: 10px 0;
+		}
+
+		.date-picker-input {
+			width: 100%;
+			padding: 12px 15px;
+			border: 2px solid #e0e0e0;
+			border-radius: 10px;
+			font-size: 1rem;
+			transition: all 0.3s ease;
+			margin-bottom: 10px;
+		}
+
+			.date-picker-input:focus {
+				border-color: #0d47a1;
+				outline: none;
+				box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.1);
+			}
+
+		.time-select {
+			width: 100%;
+			padding: 12px 15px;
+			border: 2px solid #e0e0e0;
+			border-radius: 10px;
+			font-size: 1rem;
+			transition: all 0.3s ease;
+			background: #fff;
+			cursor: pointer;
+		}
+
+			.time-select:focus {
+				border-color: #0d47a1;
+				outline: none;
+				box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.1);
+			}
+
+		.doctor-info-display {
+			background: #f0f4ff;
+			padding: 12px 15px;
+			border-radius: 10px;
+			margin-bottom: 15px;
+			border-left: 4px solid #0d47a1;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+			.doctor-info-display i {
+				color: #0d47a1;
+				font-size: 1.2rem;
+			}
+
+			.doctor-info-display span {
+				color: #333;
+				font-weight: 500;
+			}
+	</style>
+
 </head>
 
 <body class="doctors-page">
 
-  <header id="header" class="header fixed-top">
+	<header id="header" class="header fixed-top">
 
-    <div class="topbar d-flex align-items-center dark-background">
-      <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="contact-info d-flex align-items-center">
-          <i class="bi bi-envelope d-flex align-items-center"><a
-              href="mailto:contact@example.com">contact@example.com</a></i>
-          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
-        </div>
-        <div class="social-links d-none d-md-flex align-items-center">
-          <a href="#!" class="twitter"><i class="bi bi-twitter-x"></i></a>
-          <a href="#!" class="facebook"><i class="bi bi-facebook"></i></a>
-          <a href="#!" class="instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#!" class="linkedin"><i class="bi bi-linkedin"></i></a>
-        </div>
-      </div>
-    </div><!-- End Top Bar -->
+		<div class="topbar d-flex align-items-center dark-background">
+			<div class="container d-flex justify-content-center justify-content-md-between">
+				<div class="contact-info d-flex align-items-center">
+					<i class="bi bi-envelope d-flex align-items-center"><a href="mailto:info@saigroupofclinic.com">info@saigroupofclinic.com</a></i>
+					<i class="bi bi-phone d-flex align-items-center ms-4"><span>+91 97879 60590</span></i>
+				</div>
+				<div class="social-links d-none d-md-flex align-items-center">
+					<a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+					<a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+					<a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+					<a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+				</div>
+			</div>
+		</div><!-- End Top Bar -->
 
-    <div class="branding d-flex align-items-cente">
+		<div class="branding d-flex align-items-cente">
 
-      <div class="container position-relative d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-          <!-- <img src="assets/img/logo.webp" alt=""> -->
-          <h1 class="sitename">Clinic</h1>
-        </a>
+			<div class="container position-relative d-flex align-items-center justify-content-between">
+				<a href="index.html" class="logo d-flex align-items-center">
+					<h1 class="sitename">SAI CLINIC</h1>
+				</a>
 
-        <nav id="navmenu" class="navmenu">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="departments.html">Departments</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="doctors.html" class="active">Doctors</a></li>
-            <li class="dropdown"><a href="#"><span>More Pages</span> <i
-                  class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="department-details.html">Department Details</a></li>
-                <li><a href="service-details.html">Service Details</a></li>
-                <li><a href="appointment.html">Appointment</a></li>
-                <li><a href="testimonials.html">Testimonials</a></li>
-                <li><a href="faq.html">Frequently Asked Questions</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="terms.html">Terms</a></li>
-                <li><a href="privacy.html">Privacy</a></li>
-                <li><a href="404.html">404</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#"><span>Dropdown</span> <i
-                  class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="#">Dropdown 1</a></li>
-                <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i
-                      class="bi bi-chevron-down toggle-dropdown"></i></a>
-                  <ul>
-                    <li><a href="#">Deep Dropdown 1</a></li>
-                    <li><a href="#">Deep Dropdown 2</a></li>
-                    <li><a href="#">Deep Dropdown 3</a></li>
-                    <li><a href="#">Deep Dropdown 4</a></li>
-                    <li><a href="#">Deep Dropdown 5</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Dropdown 2</a></li>
-                <li><a href="#">Dropdown 3</a></li>
-                <li><a href="#">Dropdown 4</a></li>
-              </ul>
-            </li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </nav>
+				<nav id="navmenu" class="navmenu">
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="about.html">About</a></li>
+						<li><a href="departments.html">Departments</a></li>
+						<li><a href="services.html">Services</a></li>
+						<li><a href="doctors.html" class="active">Doctors</a></li>
+						<li class="dropdown">
+							<a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+							<ul>
+								<li><a href="department-details.html">Department Details</a></li>
+								<li><a href="service-details.html">Service Details</a></li>
+								<li><a href="appointment.html">Appointment</a></li>
+								<li><a href="testimonials.html">Testimonials</a></li>
+								<li><a href="faq.html">Frequently Asked Questions</a></li>
+								<li><a href="gallery.html">Gallery</a></li>
+								<li><a href="terms.html">Terms</a></li>
+								<li><a href="privacy.html">Privacy</a></li>
+								<li><a href="404.html">404</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+							<ul>
+								<li><a href="#">Dropdown 1</a></li>
+								<li class="dropdown">
+									<a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+									<ul>
+										<li><a href="#">Deep Dropdown 1</a></li>
+										<li><a href="#">Deep Dropdown 2</a></li>
+										<li><a href="#">Deep Dropdown 3</a></li>
+										<li><a href="#">Deep Dropdown 4</a></li>
+										<li><a href="#">Deep Dropdown 5</a></li>
+									</ul>
+								</li>
+								<li><a href="#">Dropdown 2</a></li>
+								<li><a href="#">Dropdown 3</a></li>
+								<li><a href="#">Dropdown 4</a></li>
+							</ul>
+						</li>
+						<li><a href="contact.html">Contact</a></li>
+					</ul>
+					<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+				</nav>
 
-      </div>
+			</div>
 
-    </div>
+		</div>
 
-  </header>
+	</header>
 
-  <main class="main">
+	<main class="main">
 
-    <!-- Page Title -->
-    <div class="page-title">
-      <div class="heading">
-        <div class="container">
-          <div class="row d-flex justify-content-center text-center">
-            <div class="col-lg-8">
-              <h1 class="heading-title">Doctors</h1>
-              <p class="mb-0">
-                Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo
-                odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum
-                debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat
-                ipsum dolorem.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <nav class="breadcrumbs">
-        <div class="container">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Doctors</li>
-          </ol>
-        </div>
-      </nav>
-    </div><!-- End Page Title -->
+		<!-- Page Title -->
+		<div class="page-title">
+			<div class="heading">
+				<div class="container">
+					<div class="row d-flex justify-content-center text-center">
+						<div class="col-lg-8">
+							<h1 class="heading-title">Our Specialist Doctors</h1>
+							<p class="mb-0">
+								SAI CLINIC is proud to have a team of experienced and dedicated medical professionals
+								who are committed to providing exceptional healthcare services to our patients.
+							</p>
+							<div class="mt-3 d-flex flex-wrap justify-content-center gap-2">
+								<span class="hours-badge">
+									<i class="bi bi-clock"></i> 08.00 AM - 10.00 PM
+								</span>
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment"
+								   target="_blank" class="whatsapp-btn">
+									<i class="bi bi-whatsapp"></i> Book via WhatsApp
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<nav class="breadcrumbs">
+				<div class="container">
+					<ol>
+						<li><a href="index.html">Home</a></li>
+						<li class="current">Doctors</li>
+					</ol>
+				</div>
+			</nav>
+		</div><!-- End Page Title -->
+		<!-- Doctors Section -->
+		<section id="doctors" class="doctors section">
 
-    <!-- Doctors Section -->
-    <section id="doctors" class="doctors section">
+			<div class="container" data-aos="fade-up" data-aos-delay="100">
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+				<div class="row gy-4">
 
-        <div class="row gy-4">
+					<!-- Doctor 1: Dr. S. Sangami -->
+					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+						<div class="doctor-card">
+							<div class="doctor-image">
+								<img src="assets/img/health/staff-2.webp" alt="Dr. S. Sangami" class="img-fluid">
+								<div class="doctor-overlay">
+									<div class="social-links">
+										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20S.%20Sangami%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
+										<a href="mailto:info@saigroupofclinic.com"><i class="bi bi-envelope"></i></a>
+										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="doctor-content">
+								<h4>Dr. S. Sangami</h4>
+								<span class="specialty">Clinical Diabetology & Metabolic Health</span>
+								<span class="status-badge available">Available</span>
+								<div class="qualifications">M.B.B.S., Dip. Diabetology, FICM</div>
+								<p>Expert in clinical diabetology and metabolic health management with comprehensive care for diabetes patients.</p>
+								<div class="doctor-meta">
+									<div class="experience">
+										<i class="bi bi-award"></i>
+										<span>10+ Years Experience</span>
+									</div>
+									<div class="department">
+										<i class="bi bi-building"></i>
+										<span>Diabetology Dept.</span>
+									</div>
+								</div>
+								<button class="btn-appointment book-appointment" data-doctor="Dr. S. Sangami" data-specialty="Clinical Diabetology & Metabolic Health">
+									<i class="bi bi-calendar-check"></i> Book Appointment
+								</button>
+							</div>
+						</div>
+					</div><!-- End Doctor Card -->
+					<!-- Doctor 2: Dr. M. Karthikeyan -->
+					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+						<div class="doctor-card">
+							<div class="doctor-image">
+								<img src="assets/img/health/staff-6.webp" alt="Dr. M. Karthikeyan" class="img-fluid">
+								<div class="doctor-overlay">
+									<div class="social-links">
+										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20M.%20Karthikeyan%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
+										<a href="mailto:info@saigroupofclinic.com"><i class="bi bi-envelope"></i></a>
+										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="doctor-content">
+								<h4>Dr. M. Karthikeyan</h4>
+								<span class="specialty">Orthopedics & Joint Replacement</span>
+								<span class="status-badge available">Available</span>
+								<div class="qualifications">M.S. (Ortho)</div>
+								<p>Specialized in orthopedics and joint replacement surgeries with advanced surgical techniques for better outcomes.</p>
+								<div class="doctor-meta">
+									<div class="experience">
+										<i class="bi bi-award"></i>
+										<span>12+ Years Experience</span>
+									</div>
+									<div class="department">
+										<i class="bi bi-building"></i>
+										<span>Orthopedics Dept.</span>
+									</div>
+								</div>
+								<button class="btn-appointment book-appointment" data-doctor="Dr. M. Karthikeyan" data-specialty="Orthopedics & Joint Replacement">
+									<i class="bi bi-calendar-check"></i> Book Appointment
+								</button>
+							</div>
+						</div>
+					</div><!-- End Doctor Card -->
+					<!-- Doctor 3: Dr. M.R. Ramya -->
+					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+						<div class="doctor-card">
+							<div class="doctor-image">
+								<img src="assets/img/health/staff-4.webp" alt="Dr. M.R. Ramya" class="img-fluid">
+								<div class="doctor-overlay">
+									<div class="social-links">
+										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20M.R.%20Ramya%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
+										<a href="mailto:info@saigroupofclinic.com"><i class="bi bi-envelope"></i></a>
+										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="doctor-content">
+								<h4>Dr. M.R. Ramya</h4>
+								<span class="specialty">Gynaecology & Fertility Expert</span>
+								<span class="status-badge available">Available</span>
+								<div class="qualifications">M.B.B.S., D.G.O., DRM, F.M.A.S.</div>
+								<p>Expert in gynaecology and fertility treatments with comprehensive care for women's health and reproductive wellness.</p>
+								<div class="doctor-meta">
+									<div class="experience">
+										<i class="bi bi-award"></i>
+										<span>8+ Years Experience</span>
+									</div>
+									<div class="department">
+										<i class="bi bi-building"></i>
+										<span>Gynaecology Dept.</span>
+									</div>
+								</div>
+								<button class="btn-appointment book-appointment" data-doctor="Dr. M.R. Ramya" data-specialty="Gynaecology & Fertility Expert">
+									<i class="bi bi-calendar-check"></i> Book Appointment
+								</button>
+							</div>
+						</div>
+					</div><!-- End Doctor Card -->
+					<!-- Doctor 4: Dr. N.H. Mallikarjun -->
+					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+						<div class="doctor-card">
+							<div class="doctor-image">
+								<img src="assets/img/health/staff-8.webp" alt="Dr. N.H. Mallikarjun" class="img-fluid">
+								<div class="doctor-overlay">
+									<div class="social-links">
+										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20N.H.%20Mallikarjun%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
+										<a href="mailto:info@saigroupofclinic.com"><i class="bi bi-envelope"></i></a>
+										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="doctor-content">
+								<h4>Dr. N.H. Mallikarjun</h4>
+								<span class="specialty">General & Laparoscopic Surgery</span>
+								<span class="status-badge available">Available</span>
+								<div class="qualifications">M.B.B.S., M.S. (Gen Surg)</div>
+								<p>Experienced in general and laparoscopic surgical procedures with focus on minimally invasive techniques.</p>
+								<div class="doctor-meta">
+									<div class="experience">
+										<i class="bi bi-award"></i>
+										<span>6+ Years Experience</span>
+									</div>
+									<div class="department">
+										<i class="bi bi-building"></i>
+										<span>Surgery Dept.</span>
+									</div>
+								</div>
+								<button class="btn-appointment book-appointment" data-doctor="Dr. N.H. Mallikarjun" data-specialty="General & Laparoscopic Surgery">
+									<i class="bi bi-calendar-check"></i> Book Appointment
+								</button>
+							</div>
+						</div>
+					</div><!-- End Doctor Card -->
+					<!-- Doctor 5: Dr. H. Sadhiqual Ameen -->
+					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="500">
+						<div class="doctor-card">
+							<div class="doctor-image">
+								<img src="assets/img/health/staff-5.webp" alt="Dr. H. Sadhiqual Ameen" class="img-fluid">
+								<div class="doctor-overlay">
+									<div class="social-links">
+										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20H.%20Sadhiqual%20Ameen%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
+										<a href="mailto:info@saigroupofclinic.com"><i class="bi bi-envelope"></i></a>
+										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="doctor-content">
+								<h4>Dr. H. Sadhiqual Ameen</h4>
+								<span class="specialty">Dermatology & Venereology</span>
+								<span class="status-badge available">Available</span>
+								<div class="qualifications">M.D. (DVL)</div>
+								<p>Expert in dermatology and venereology with comprehensive skin care treatments and management.</p>
+								<div class="doctor-meta">
+									<div class="experience">
+										<i class="bi bi-award"></i>
+										<span>7+ Years Experience</span>
+									</div>
+									<div class="department">
+										<i class="bi bi-building"></i>
+										<span>Dermatology Dept.</span>
+									</div>
+								</div>
+								<button class="btn-appointment book-appointment" data-doctor="Dr. H. Sadhiqual Ameen" data-specialty="Dermatology & Venereology">
+									<i class="bi bi-calendar-check"></i> Book Appointment
+								</button>
+							</div>
+						</div>
+					</div><!-- End Doctor Card -->
+					<!-- Doctor 6: Dr. R. S. Sangami -->
+					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+						<div class="doctor-card">
+							<div class="doctor-image">
+								<img src="assets/img/health/staff-1.webp" alt="Dr. R. S. Sangami" class="img-fluid">
+								<div class="doctor-overlay">
+									<div class="social-links">
+										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20R.S.%20Sangami%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
+										<a href="mailto:info@saigroupofclinic.com"><i class="bi bi-envelope"></i></a>
+										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="doctor-content">
+								<h4>Dr. R. S. Sangami</h4>
+								<span class="specialty">Clinical Diabetology & Metabolic Health</span>
+								<span class="status-badge available">Available</span>
+								<div class="qualifications">M.B.B.S., Dip. Diabetology, FICM</div>
+								<p>Specialized in clinical diabetology with comprehensive metabolic health management for diabetes patients.</p>
+								<div class="doctor-meta">
+									<div class="experience">
+										<i class="bi bi-award"></i>
+										<span>10+ Years Experience</span>
+									</div>
+									<div class="department">
+										<i class="bi bi-building"></i>
+										<span>Diabetology Dept.</span>
+									</div>
+								</div>
+								<button class="btn-appointment book-appointment" data-doctor="Dr. R. S. Sangami" data-specialty="Clinical Diabetology & Metabolic Health">
+									<i class="bi bi-calendar-check"></i> Book Appointment
+								</button>
+							</div>
+						</div>
+					</div><!-- End Doctor Card -->
 
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="doctor-card">
-              <div class="doctor-image">
-                <img src="assets/img/health/staff-1.webp" alt="Dr. Marcus Johnson" class="img-fluid">
-                <div class="doctor-overlay">
-                  <div class="social-links">
-                    <a href="#!"><i class="bi bi-linkedin"></i></a>
-                    <a href="#!"><i class="bi bi-envelope"></i></a>
-                    <a href="#!"><i class="bi bi-phone"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="doctor-content">
-                <h4>Dr. Marcus Johnson</h4>
-                <span class="specialty">Cardiologist</span>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
-                  et dolore magna aliqua.</p>
-                <div class="doctor-meta">
-                  <div class="experience">
-                    <i class="bi bi-award"></i>
-                    <span>15+ Years Experience</span>
-                  </div>
-                  <div class="department">
-                    <i class="bi bi-building"></i>
-                    <span>Cardiology Dept.</span>
-                  </div>
-                </div>
-                <a href="appointment.html" class="btn-appointment">Book Appointment</a>
-              </div>
-            </div>
-          </div><!-- End Doctor Card -->
+				</div>
 
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="doctor-card">
-              <div class="doctor-image">
-                <img src="assets/img/health/staff-2.webp" alt="Dr. Sarah Williams" class="img-fluid">
-                <div class="doctor-overlay">
-                  <div class="social-links">
-                    <a href="#!"><i class="bi bi-linkedin"></i></a>
-                    <a href="#!"><i class="bi bi-envelope"></i></a>
-                    <a href="#!"><i class="bi bi-phone"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="doctor-content">
-                <h4>Dr. Sarah Williams</h4>
-                <span class="specialty">Neurologist</span>
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat.</p>
-                <div class="doctor-meta">
-                  <div class="experience">
-                    <i class="bi bi-award"></i>
-                    <span>12+ Years Experience</span>
-                  </div>
-                  <div class="department">
-                    <i class="bi bi-building"></i>
-                    <span>Neurology Dept.</span>
-                  </div>
-                </div>
-                <a href="appointment.html" class="btn-appointment">Book Appointment</a>
-              </div>
-            </div>
-          </div><!-- End Doctor Card -->
+			</div>
 
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="doctor-card">
-              <div class="doctor-image">
-                <img src="assets/img/health/staff-3.webp" alt="Dr. Michael Chen" class="img-fluid">
-                <div class="doctor-overlay">
-                  <div class="social-links">
-                    <a href="#!"><i class="bi bi-linkedin"></i></a>
-                    <a href="#!"><i class="bi bi-envelope"></i></a>
-                    <a href="#!"><i class="bi bi-phone"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="doctor-content">
-                <h4>Dr. Michael Chen</h4>
-                <span class="specialty">Orthopedic Surgeon</span>
-                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                  pariatur.</p>
-                <div class="doctor-meta">
-                  <div class="experience">
-                    <i class="bi bi-award"></i>
-                    <span>18+ Years Experience</span>
-                  </div>
-                  <div class="department">
-                    <i class="bi bi-building"></i>
-                    <span>Orthopedics Dept.</span>
-                  </div>
-                </div>
-                <a href="appointment.html" class="btn-appointment">Book Appointment</a>
-              </div>
-            </div>
-          </div><!-- End Doctor Card -->
+		</section><!-- /Doctors Section -->
+		<!-- SAI MEDICALS Section -->
+		<section class="section" style="padding: 40px 0; background: #f8f9fa;">
+			<div class="container">
+				<div class="row align-items-center" style="background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%); padding: 40px; border-radius: 20px;">
+					<div class="col-lg-8">
+						<h3 style="color: #0d47a1; font-weight: 700;"><i class="bi bi-shop" style="color: #0d47a1;"></i> SAI MEDICALS</h3>
+						<p style="font-size: 1.1rem; color: #333;">Your trusted pharmacy partner located within SAI CLINIC premises.</p>
+						<p style="color: #555;">Quality medicines and healthcare products available at competitive prices. Our pharmacy is fully stocked with genuine medications and healthcare essentials.</p>
+						<div class="contact-info mt-3">
+							<i class="bi bi-telephone" style="color: #0d47a1;"></i> <strong style="color: #0d47a1;">+91 97879 60590</strong>
+							<span style="margin-left: 1.5rem;"><i class="bi bi-clock" style="color: #0d47a1;"></i> 08:00 AM - 10:00 PM</span>
+						</div>
+					</div>
+					<div class="col-lg-4 text-center">
+						<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20know%20about%20SAI%20MEDICALS"
+						   target="_blank" class="whatsapp-btn">
+							<i class="bi bi-whatsapp"></i> Contact via WhatsApp
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
 
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="doctor-card">
-              <div class="doctor-image">
-                <img src="assets/img/health/staff-4.webp" alt="Dr. Emily Rodriguez" class="img-fluid">
-                <div class="doctor-overlay">
-                  <div class="social-links">
-                    <a href="#!"><i class="bi bi-linkedin"></i></a>
-                    <a href="#!"><i class="bi bi-envelope"></i></a>
-                    <a href="#!"><i class="bi bi-phone"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="doctor-content">
-                <h4>Dr. Emily Rodriguez</h4>
-                <span class="specialty">Pediatrician</span>
-                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                  laborum.</p>
-                <div class="doctor-meta">
-                  <div class="experience">
-                    <i class="bi bi-award"></i>
-                    <span>10+ Years Experience</span>
-                  </div>
-                  <div class="department">
-                    <i class="bi bi-building"></i>
-                    <span>Pediatrics Dept.</span>
-                  </div>
-                </div>
-                <a href="appointment.html" class="btn-appointment">Book Appointment</a>
-              </div>
-            </div>
-          </div><!-- End Doctor Card -->
+	</main>
 
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="doctor-card">
-              <div class="doctor-image">
-                <img src="assets/img/health/staff-5.webp" alt="Dr. David Thompson" class="img-fluid">
-                <div class="doctor-overlay">
-                  <div class="social-links">
-                    <a href="#!"><i class="bi bi-linkedin"></i></a>
-                    <a href="#!"><i class="bi bi-envelope"></i></a>
-                    <a href="#!"><i class="bi bi-phone"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="doctor-content">
-                <h4>Dr. David Thompson</h4>
-                <span class="specialty">Dermatologist</span>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
-                <div class="doctor-meta">
-                  <div class="experience">
-                    <i class="bi bi-award"></i>
-                    <span>14+ Years Experience</span>
-                  </div>
-                  <div class="department">
-                    <i class="bi bi-building"></i>
-                    <span>Dermatology Dept.</span>
-                  </div>
-                </div>
-                <a href="appointment.html" class="btn-appointment">Book Appointment</a>
-              </div>
-            </div>
-          </div><!-- End Doctor Card -->
+	<footer id="footer" class="footer-16 footer position-relative">
 
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="doctor-card">
-              <div class="doctor-image">
-                <img src="assets/img/health/staff-6.webp" alt="Dr. Lisa Anderson" class="img-fluid">
-                <div class="doctor-overlay">
-                  <div class="social-links">
-                    <a href="#!"><i class="bi bi-linkedin"></i></a>
-                    <a href="#!"><i class="bi bi-envelope"></i></a>
-                    <a href="#!"><i class="bi bi-phone"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="doctor-content">
-                <h4>Dr. Lisa Anderson</h4>
-                <span class="specialty">Oncologist</span>
-                <p>Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
-                  sunt.</p>
-                <div class="doctor-meta">
-                  <div class="experience">
-                    <i class="bi bi-award"></i>
-                    <span>16+ Years Experience</span>
-                  </div>
-                  <div class="department">
-                    <i class="bi bi-building"></i>
-                    <span>Oncology Dept.</span>
-                  </div>
-                </div>
-                <a href="appointment.html" class="btn-appointment">Book Appointment</a>
-              </div>
-            </div>
-          </div><!-- End Doctor Card -->
+		<div class="container">
 
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="doctor-card">
-              <div class="doctor-image">
-                <img src="assets/img/health/staff-7.webp" alt="Dr. Robert Martinez" class="img-fluid">
-                <div class="doctor-overlay">
-                  <div class="social-links">
-                    <a href="#!"><i class="bi bi-linkedin"></i></a>
-                    <a href="#!"><i class="bi bi-envelope"></i></a>
-                    <a href="#!"><i class="bi bi-phone"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="doctor-content">
-                <h4>Dr. Robert Martinez</h4>
-                <span class="specialty">Emergency Medicine</span>
-                <p>Explicabo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                  consequuntur.</p>
-                <div class="doctor-meta">
-                  <div class="experience">
-                    <i class="bi bi-award"></i>
-                    <span>11+ Years Experience</span>
-                  </div>
-                  <div class="department">
-                    <i class="bi bi-building"></i>
-                    <span>Emergency Dept.</span>
-                  </div>
-                </div>
-                <a href="appointment.html" class="btn-appointment">Book Appointment</a>
-              </div>
-            </div>
-          </div><!-- End Doctor Card -->
+			<div class="footer-main" data-aos="fade-up" data-aos-delay="100">
+				<div class="row align-items-start">
 
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="doctor-card">
-              <div class="doctor-image">
-                <img src="assets/img/health/staff-8.webp" alt="Dr. Jennifer Lee" class="img-fluid">
-                <div class="doctor-overlay">
-                  <div class="social-links">
-                    <a href="#!"><i class="bi bi-linkedin"></i></a>
-                    <a href="#!"><i class="bi bi-envelope"></i></a>
-                    <a href="#!"><i class="bi bi-phone"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="doctor-content">
-                <h4>Dr. Jennifer Lee</h4>
-                <span class="specialty">Radiologist</span>
-                <p>Magni dolores eos qui ratione voluptatem sequi nesciunt neque porro quisquam est qui dolorem.</p>
-                <div class="doctor-meta">
-                  <div class="experience">
-                    <i class="bi bi-award"></i>
-                    <span>13+ Years Experience</span>
-                  </div>
-                  <div class="department">
-                    <i class="bi bi-building"></i>
-                    <span>Radiology Dept.</span>
-                  </div>
-                </div>
-                <a href="appointment.html" class="btn-appointment">Book Appointment</a>
-              </div>
-            </div>
-          </div><!-- End Doctor Card -->
+					<div class="col-lg-5">
+						<div class="brand-section">
+							<a href="index.html" class="logo d-flex align-items-center mb-4">
+								<span class="sitename">SAI CLINIC</span>
+							</a>
+							<p class="brand-description">Caring for your health with expertise and compassion. SAI CLINIC & SAI MEDICALS - Your trusted healthcare partner in Kavaraipettai.</p>
 
-        </div>
+							<div class="contact-info mt-5">
+								<div class="contact-item">
+									<i class="bi bi-geo-alt"></i>
+									<span>No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206</span>
+								</div>
+								<div class="contact-item">
+									<i class="bi bi-telephone"></i>
+									<span>+91 97879 60590</span>
+								</div>
+								<div class="contact-item">
+									<i class="bi bi-envelope"></i>
+									<span>info@saigroupofclinic.com</span>
+								</div>
+							</div>
+						</div>
+					</div>
 
-      </div>
+					<div class="col-lg-7">
+						<div class="footer-nav-wrapper">
+							<div class="row">
 
-    </section><!-- /Doctors Section -->
+								<div class="col-6 col-lg-3">
+									<div class="nav-column">
+										<h6>Clinic</h6>
+										<nav class="footer-nav">
+											<a href="about.html">About Us</a>
+											<a href="doctors.html">Our Doctors</a>
+											<a href="services.html">Services</a>
+											<a href="#">Facilities</a>
+											<a href="contact.html">Contact</a>
+										</nav>
+									</div>
+								</div>
 
-  </main>
+								<div class="col-6 col-lg-3">
+									<div class="nav-column">
+										<h6>Services</h6>
+										<nav class="footer-nav">
+											<a href="services.html">Lab Services</a>
+											<a href="services.html">X-Ray</a>
+											<a href="services.html">ECG</a>
+											<a href="services.html">Vaccination</a>
+											<a href="services.html">Dental Care</a>
+										</nav>
+									</div>
+								</div>
 
-  <footer id="footer" class="footer-16 footer position-relative">
+								<div class="col-6 col-lg-3">
+									<div class="nav-column">
+										<h6>Resources</h6>
+										<nav class="footer-nav">
+											<a href="#">Health Blog</a>
+											<a href="#">Patient Guide</a>
+											<a href="faq.html">FAQs</a>
+											<a href="testimonials.html">Testimonials</a>
+											<a href="gallery.html">Gallery</a>
+										</nav>
+									</div>
+								</div>
 
-    <div class="container">
+								<div class="col-6 col-lg-3">
+									<div class="nav-column">
+										<h6>Connect</h6>
+										<nav class="footer-nav">
+											<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment"
+											   target="_blank">Book Appointment</a>
+											<a href="tel:+919787960590">Emergency</a>
+											<a href="contact.html">Feedback</a>
+											<a href="#">Careers</a>
+											<a href="#">Partnership</a>
+										</nav>
+									</div>
+								</div>
 
-      <div class="footer-main" data-aos="fade-up" data-aos-delay="100">
-        <div class="row align-items-start">
+							</div>
+						</div>
+					</div>
 
-          <div class="col-lg-5">
-            <div class="brand-section">
-              <a href="index.html" class="logo d-flex align-items-center mb-4">
-                <span class="sitename">Clinic</span>
-              </a>
-              <p class="brand-description">Crafting exceptional digital experiences through thoughtful design and
-                innovative solutions that elevate your brand presence.</p>
+				</div>
+			</div>
 
-              <div class="contact-info mt-5">
-                <div class="contact-item">
-                  <i class="bi bi-geo-alt"></i>
-                  <span>123 Creative Boulevard, Design District, NY 10012</span>
-                </div>
-                <div class="contact-item">
-                  <i class="bi bi-telephone"></i>
-                  <span>+1 (555) 987-6543</span>
-                </div>
-                <div class="contact-item">
-                  <i class="bi bi-envelope"></i>
-                  <span>hello@designstudio.com</span>
-                </div>
-              </div>
-            </div>
-          </div>
+		</div>
 
-          <div class="col-lg-7">
-            <div class="footer-nav-wrapper">
-              <div class="row">
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
+					<div class="row align-items-center">
 
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Studio</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Our Story</a>
-                      <a href="#!">Design Process</a>
-                      <a href="#!">Portfolio</a>
-                      <a href="#!">Case Studies</a>
-                      <a href="#!">Awards</a>
-                    </nav>
-                  </div>
-                </div>
+						<div class="col-lg-6">
+							<div class="copyright">
+								<p>© <span class="sitename">SAI CLINIC</span>. All rights reserved.</p>
+							</div>
+						</div>
 
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Services</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Brand Identity</a>
-                      <a href="#!">Web Design</a>
-                      <a href="#!">Mobile Apps</a>
-                      <a href="#!">Digital Strategy</a>
-                      <a href="#!">Consultation</a>
-                    </nav>
-                  </div>
-                </div>
+						<div class="col-lg-6">
+							<div class="legal-links">
+								<a href="privacy.html">Privacy Policy</a>
+								<a href="terms.html">Terms of Service</a>
+								<a href="#">Cookie Policy</a>
+								<div class="credits">
+									Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>. Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+								</div>
+							</div>
+						</div>
 
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Resources</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Design Blog</a>
-                      <a href="#!">Style Guide</a>
-                      <a href="#!">Free Assets</a>
-                      <a href="#!">Tutorials</a>
-                      <a href="#!">Inspiration</a>
-                    </nav>
-                  </div>
-                </div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-                <div class="col-6 col-lg-3">
-                  <div class="nav-column">
-                    <h6>Connect</h6>
-                    <nav class="footer-nav">
-                      <a href="#!">Start Project</a>
-                      <a href="#!">Schedule Call</a>
-                      <a href="#!">Join Newsletter</a>
-                      <a href="#!">Follow Updates</a>
-                      <a href="#!">Partnership</a>
-                    </nav>
-                  </div>
-                </div>
+	</footer>
 
-              </div>
-            </div>
-          </div>
+	<!-- WhatsApp Floating Button -->
+	<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment"
+	   target="_blank" class="whatsapp-float" title="Book via WhatsApp">
+		<i class="bi bi-whatsapp"></i>
+	</a>
 
-        </div>
-      </div>
+	<!-- Scroll Top -->
+	<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-    </div>
+	<!-- Preloader -->
+	<div id="preloader"></div>
 
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
-          <div class="row align-items-center">
+	<!-- Vendor JS Files -->
+	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/vendor/php-email-form/validate.js"></script>
+	<script src="assets/vendor/aos/aos.js"></script>
+	<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+	<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+	<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-            <div class="col-lg-6">
-              <div class="copyright">
-                <p>© <span class="sitename">Clinic</span>. All rights reserved.</p>
-              </div>
-            </div>
+	<!-- Main JS File -->
+	<script src="assets/js/main.js"></script>
 
-            <div class="col-lg-6">
-              <div class="legal-links">
-                <a href="#!">Privacy Policy</a>
-                <a href="#!">Terms of Service</a>
-                <a href="#!">Cookie Policy</a>
-                <div class="credits">
-                  <!-- All the links in the footer should remain intact. -->
-                  <!-- You can delete the links only if you've purchased the pro version. -->
-                  <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                  <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                  Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>. Distributed by <a
-                    href="https://themewagon.com" target="_blank">ThemeWagon</a>
-                </div>
-              </div>
-            </div>
+	<!-- Appointment Booking Script with Date Picker -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			// Get all book appointment buttons
+			const bookButtons = document.querySelectorAll('.book-appointment');
 
-          </div>
-        </div>
-      </div>
-    </div>
+			bookButtons.forEach(function (button) {
+				button.addEventListener('click', function (e) {
+					e.preventDefault();
 
-  </footer>
+					const doctorName = this.getAttribute('data-doctor');
+					const specialty = this.getAttribute('data-specialty');
 
-  <!-- Scroll Top -->
-  <a href="#!" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+					// Get today's date for min date
+					const today = new Date();
+					const todayStr = today.toISOString().split('T')[0];
 
-  <!-- Preloader -->
-  <div id="preloader"></div>
+					// Get max date (30 days from now)
+					const maxDate = new Date(today);
+					maxDate.setDate(maxDate.getDate() + 30);
+					const maxDateStr = maxDate.toISOString().split('T')[0];
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+					// Show SweetAlert2 with date picker
+					Swal.fire({
+						title: 'Book Appointment',
+						html: `
+				  <div class="doctor-info-display">
+					<i class="bi bi-person-circle"></i>
+					<span><strong>${doctorName}</strong> - ${specialty}</span>
+				  </div>
+				  <div style="text-align: left;">
+					<label style="font-weight: 600; display: block; margin-bottom: 5px; color: #333;">
+					  <i class="bi bi-calendar3" style="color: #0d47a1;"></i> Select Date *
+					</label>
+					<input type="date" id="appointmentDate" class="date-picker-input"
+						   min="${todayStr}" max="${maxDateStr}" value="${todayStr}" required>
 
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+					<label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
+					  <i class="bi bi-clock" style="color: #0d47a1;"></i> Select Time *
+					</label>
+					<select id="appointmentTime" class="time-select">
+					  <option value="09:00">09:00 AM</option>
+					  <option value="09:30">09:30 AM</option>
+					  <option value="10:00">10:00 AM</option>
+					  <option value="10:30">10:30 AM</option>
+					  <option value="11:00">11:00 AM</option>
+					  <option value="11:30">11:30 AM</option>
+					  <option value="12:00">12:00 PM</option>
+					  <option value="12:30">12:30 PM</option>
+					  <option value="13:00">01:00 PM</option>
+					  <option value="13:30">01:30 PM</option>
+					  <option value="14:00">02:00 PM</option>
+					  <option value="14:30">02:30 PM</option>
+					  <option value="15:00">03:00 PM</option>
+					  <option value="15:30">03:30 PM</option>
+					  <option value="16:00">04:00 PM</option>
+					  <option value="16:30">04:30 PM</option>
+					  <option value="17:00">05:00 PM</option>
+					  <option value="17:30">05:30 PM</option>
+					  <option value="18:00">06:00 PM</option>
+					  <option value="18:30">06:30 PM</option>
+					  <option value="19:00">07:00 PM</option>
+					  <option value="19:30">07:30 PM</option>
+					  <option value="20:00">08:00 PM</option>
+					  <option value="20:30">08:30 PM</option>
+					  <option value="21:00">09:00 PM</option>
+					</select>
+
+					<label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
+					  <i class="bi bi-person" style="color: #0d47a1;"></i> Your Name *
+					</label>
+					<input type="text" id="patientName" class="date-picker-input" placeholder="Enter your full name" required>
+
+					<label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
+					  <i class="bi bi-phone" style="color: #0d47a1;"></i> Phone Number *
+					</label>
+					<input type="tel" id="patientPhone" class="date-picker-input" placeholder="+91 98765 43210" required>
+				  </div>
+				`,
+						confirmButtonText: 'Confirm Appointment',
+						cancelButtonText: 'Cancel',
+						showCancelButton: true,
+						confirmButtonColor: '#0d47a1',
+						cancelButtonColor: '#dc3545',
+						customClass: {
+							popup: 'date-picker-modal'
+						},
+						preConfirm: () => {
+							const date = document.getElementById('appointmentDate').value;
+							const time = document.getElementById('appointmentTime').value;
+							const name = document.getElementById('patientName').value;
+							const phone = document.getElementById('patientPhone').value;
+
+							if (!date) {
+								Swal.showValidationMessage('Please select a date');
+								return false;
+							}
+							if (!name || name.trim() === '') {
+								Swal.showValidationMessage('Please enter your name');
+								return false;
+							}
+							if (!phone || phone.trim() === '' || phone.length < 10) {
+								Swal.showValidationMessage('Please enter a valid phone number');
+								return false;
+							}
+
+							return { date, time, name, phone, doctor: doctorName, specialty: specialty };
+						}
+					}).then((result) => {
+						if (result.isConfirmed) {
+							const data = result.value;
+
+							// Format date for display
+							const dateObj = new Date(data.date + 'T00:00:00');
+							const formattedDate = dateObj.toLocaleDateString('en-IN', {
+								weekday: 'short',
+								day: '2-digit',
+								month: 'short',
+								year: 'numeric'
+							});
+
+							// Show success message
+							Swal.fire({
+								title: 'Appointment Confirmed! ✅',
+								html: `
+					  <div style="text-align: left; padding: 10px 0;">
+						<div style="background: #f0f4ff; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+						  <p style="margin-bottom: 5px;"><strong>👨‍⚕️ Doctor:</strong> ${data.doctor}</p>
+						  <p style="margin-bottom: 5px;"><strong>🏥 Specialty:</strong> ${data.specialty}</p>
+						  <p style="margin-bottom: 5px;"><strong>📅 Date:</strong> ${formattedDate}</p>
+						  <p style="margin-bottom: 0;"><strong>🕐 Time:</strong> ${data.time}</p>
+						</div>
+						<div style="background: #e8f5e9; padding: 12px; border-radius: 10px; border-left: 4px solid #2e7d32;">
+						  <p style="margin-bottom: 0; color: #2e7d32;">
+							<i class="bi bi-check-circle-fill"></i>
+							Appointment confirmed for <strong>${data.name}</strong>
+						  </p>
+						</div>
+						<p style="margin-top: 15px; font-size: 0.85rem; color: #666; text-align: center;">
+						  <i class="bi bi-info-circle" style="color: #0d47a1;"></i>
+						  You will receive a confirmation call shortly.
+						</p>
+						<hr>
+						<p style="font-size: 0.8rem; color: #888; text-align: center; margin-bottom: 0;">
+						  SAI CLINIC<br>
+						  No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206
+						</p>
+					  </div>
+					`,
+								icon: 'success',
+								confirmButtonColor: '#0d47a1',
+								confirmButtonText: 'OK'
+							});
+
+							// Log appointment data
+							console.log('Appointment Booked:', {
+								doctor: data.doctor,
+								specialty: data.specialty,
+								date: data.date,
+								time: data.time,
+								patient: data.name,
+								phone: data.phone
+							});
+
+							// Open WhatsApp with appointment details (optional)
+							const message = `Hi SAI CLINIC, I would like to book an appointment with ${data.doctor} for ${formattedDate} at ${data.time}. Patient: ${data.name}, Phone: ${data.phone}`;
+							const whatsappURL = `https://wa.me/919787960590?text=${encodeURIComponent(message)}`;
+							// Uncomment below to open WhatsApp automatically
+							// window.open(whatsappURL, '_blank');
+						}
+					});
+				});
+			});
+
+			console.log('SAI CLINIC - Doctors page ready with date picker!');
+			console.log('WhatsApp: +91 97879 60590');
+			console.log('Email: info@saigroupofclinic.com');
+			console.log('Hours: 08.00 AM - 10.00 PM');
+		});
+	</script>
 
 </body>
 
