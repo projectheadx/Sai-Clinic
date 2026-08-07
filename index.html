@@ -29,67 +29,23 @@
 	<!-- Main CSS File -->
 	<link href="assets/css/main.css" rel="stylesheet">
 
+	<!-- SweetAlert2 -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 	<style>
-		/* Fix spacing for services section - remove Home Sample Collection */
-		.specialties-grid .row {
-			justify-content: center;
+		/* SAI CLINIC Custom Styles */
+		.topbar.dark-background {
+			background: #0d47a1 !important;
 		}
 
-		.specialties-grid .col-lg-3 {
-			flex: 0 0 auto;
-			width: 25%;
-		}
-
-		@media (max-width: 768px) {
-			.specialties-grid .col-lg-3 {
-				width: 50%;
-			}
-		}
-
-		@media (max-width: 576px) {
-			.specialties-grid .col-lg-3 {
-				width: 100%;
-			}
-		}
-
-		/* Custom SAI Clinic Styles */
-		.doctor-details .specialty-tag {
-			background: #0d47a1;
-			color: #fff;
-			padding: 0.3rem 0.8rem;
-			border-radius: 20px;
-			font-size: 0.75rem;
-			display: inline-block;
-		}
-
-		.contact-info i {
-			color: #0d47a1;
-		}
-
-		.emergency-btn {
-			background: #c62828;
-			color: #fff;
-			padding: 0.8rem 1.5rem;
-			border-radius: 50px;
-			text-decoration: none;
-			font-weight: 600;
-		}
-
-			.emergency-btn:hover {
-				background: #b71c1c;
-				color: #fff;
-			}
-
-		.topbar .contact-info i, .topbar .contact-info a {
-			color: #fff;
-		}
-
+		.topbar .contact-info i,
+		.topbar .contact-info a,
 		.topbar .social-links a {
-			color: #fff;
+			color: #fff !important;
 		}
 
 		.branding .sitename {
-			color: #0d47a1;
+			color: #0d47a1 !important;
 			font-weight: 700;
 		}
 
@@ -125,7 +81,7 @@
 			color: #0d47a1;
 		}
 
-		/* Doctor Profile Styles - Enhanced */
+		/* Doctor Profile Styles */
 		.doctor-profile {
 			background: #ffffff;
 			border-radius: 16px;
@@ -367,7 +323,6 @@
 				transform: scale(1.02);
 			}
 
-		/* Responsive fixes */
 		@media (max-width: 768px) {
 			.doctor-avatar {
 				width: 100px;
@@ -386,10 +341,10 @@
 			}
 		}
 
-		/* Footer Styles - Bright & Clean */
+		/* Footer Styles - Improved */
 		.footer-16 {
 			background: #f8f9fa;
-			border-top: 3px solid #0d47a1;
+			border-top: 4px solid #0d47a1;
 		}
 
 			.footer-16 .brand-description {
@@ -474,16 +429,17 @@
 
 			.footer-bottom .social-links-bottom {
 				display: flex;
-				gap: 15px;
+				gap: 12px;
 				justify-content: flex-end;
+				align-items: center;
 			}
 
 				.footer-bottom .social-links-bottom a {
 					color: #fff;
-					font-size: 1.2rem;
+					font-size: 1.1rem;
 					transition: all 0.3s ease;
-					width: 40px;
-					height: 40px;
+					width: 38px;
+					height: 38px;
 					background: rgba(255,255,255,0.15);
 					border-radius: 50%;
 					display: flex;
@@ -496,6 +452,15 @@
 						background: #fff;
 						color: #0d47a1;
 						transform: translateY(-3px);
+					}
+
+				.footer-bottom .social-links-bottom .whatsapp-link {
+					background: #25D366;
+				}
+
+					.footer-bottom .social-links-bottom .whatsapp-link:hover {
+						background: #fff;
+						color: #25D366;
 					}
 
 		@media (max-width: 768px) {
@@ -560,6 +525,50 @@
 				transform: scale(1.1);
 				box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
 				color: #fff;
+			}
+
+		/* Floating Cards */
+		.floating-card {
+			background: #fff;
+			border-radius: 12px;
+			padding: 15px 20px;
+			box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+			position: absolute;
+		}
+
+			.floating-card.appointment-card {
+				bottom: 20px;
+				left: 20px;
+				max-width: 200px;
+			}
+
+			.floating-card .card-icon {
+				display: inline-block;
+				background: #0d47a1;
+				color: #fff;
+				border-radius: 50%;
+				width: 40px;
+				height: 40px;
+				line-height: 40px;
+				text-align: center;
+				margin-right: 10px;
+			}
+
+			.floating-card .card-content h6 {
+				font-weight: 700;
+				color: #0d47a1;
+				margin-bottom: 2px;
+			}
+
+			.floating-card .card-content p {
+				margin-bottom: 0;
+				font-size: 0.8rem;
+				color: #555;
+			}
+
+			.floating-card .card-content small {
+				color: #888;
+				font-size: 0.7rem;
 			}
 	</style>
 
@@ -891,218 +900,6 @@
 
 		</section><!-- /Doctors Section -->
 		<!-- Services & Facilities Section -->
-		<section id="services" class="services section">
-
-			<div class="container section-title" data-aos="fade-up">
-				<h2>Our Services & Facilities</h2>
-				<p>Comprehensive diagnostic and treatment services under one roof.</p>
-			</div>
-
-			<div class="container" data-aos="fade-up" data-aos-delay="100">
-
-				<div class="row gy-4">
-
-					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-						<div class="service-item">
-							<div class="icon"><i class="bi bi-flask"></i></div>
-							<h3>Lab Services</h3>
-							<p>Full-service clinical laboratory for accurate and timely diagnostic testing.</p>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-						<div class="service-item">
-							<div class="icon"><i class="bi bi-x-diamond"></i></div>
-							<h3>Digital X-Ray</h3>
-							<p>State-of-the-art digital X-ray services for quick and precise imaging diagnostics.</p>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-						<div class="service-item">
-							<div class="icon"><i class="bi bi-heart-pulse"></i></div>
-							<h3>ECG Services</h3>
-							<p>Electrocardiogram services for accurate heart function assessment and monitoring.</p>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="row mt-4">
-					<div class="col-lg-12 text-center">
-						<div class="specialties-grid" data-aos="fade-up" data-aos-delay="400">
-							<div class="row align-items-center justify-content-center g-4">
-
-								<div class="col-lg-3 col-md-6">
-									<div class="specialty-card">
-										<div class="specialty-image">
-											<img src="assets/img/health/maternal-2.webp" alt="Maternal Care" class="img-fluid" loading="lazy">
-										</div>
-										<div class="specialty-content">
-											<h5>Maternal Care</h5>
-											<span>Expert pregnancy &amp; delivery support</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-lg-3 col-md-6">
-									<div class="specialty-card">
-										<div class="specialty-image">
-											<img src="assets/img/health/vaccination-3.webp" alt="Vaccination" class="img-fluid" loading="lazy">
-										</div>
-										<div class="specialty-content">
-											<h5>Vaccination</h5>
-											<span>Complete immunization programs</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-lg-3 col-md-6">
-									<div class="specialty-card">
-										<div class="specialty-image">
-											<img src="assets/img/health/emergency-1.webp" alt="Emergency Care" class="img-fluid" loading="lazy">
-										</div>
-										<div class="specialty-content">
-											<h5>Emergency Care</h5>
-											<span>24/7 critical care services</span>
-										</div>
-									</div>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-		</section><!-- /Services Section -->
-		<!-- SAI MEDICALS Section -->
-		<section id="sai-medicals" class="section">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-lg-8">
-						<h2 style="color: #0d47a1;">SAI MEDICALS</h2>
-						<p style="font-size: 1.2rem; color: #333;">Your trusted pharmacy partner for all your healthcare needs.</p>
-						<p style="color: #555;">Quality medicines and healthcare products available at competitive prices. Our pharmacy is fully stocked with genuine medications and healthcare essentials.</p>
-						<div class="contact-info mt-3">
-							<i class="bi bi-telephone" style="color: #0d47a1;"></i> <strong style="color: #0d47a1;">+91 97879 60590</strong>
-							<span style="margin-left: 1.5rem;"><i class="bi bi-clock" style="color: #0d47a1;"></i> 08:00 AM - 10:00 PM</span>
-						</div>
-					</div>
-					<div class="col-lg-4 text-center">
-						<div class="badge-clinic">
-							<i class="bi bi-shop"></i> Visit SAI MEDICALS
-						</div>
-						<p style="margin-top: 0.8rem; font-size: 0.9rem; color: #666;">Located within SAI CLINIC premises</p>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Call To Action Section -->
-		<section id="call-to-action" class="call-to-action section light-background">
-
-			<div class="container" data-aos="fade-up" data-aos-delay="100">
-
-				<div class="hero-content">
-					<div class="row align-items-center">
-
-						<div class="col-lg-6">
-							<div class="content-wrapper" data-aos="fade-up" data-aos-delay="200">
-								<h1>Your Health is Our Priority</h1>
-								<p>
-									SAI CLINIC is committed to providing exceptional medical care with compassion and expertise.
-									Visit us for all your healthcare needs.
-								</p>
-
-								<div class="cta-wrapper">
-									<a href="#" class="primary-cta book-appointment-btn">
-										<span>Schedule Consultation</span>
-										<i class="bi bi-arrow-right"></i>
-									</a>
-									<a href="services.html" class="secondary-cta">
-										<span>Explore Services</span>
-										<i class="bi bi-arrow-right"></i>
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-6">
-							<div class="image-container" data-aos="fade-left" data-aos-delay="300">
-								<img src="assets/img/health/facilities-9.webp" alt="SAI CLINIC" class="img-fluid">
-							</div>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="features-section">
-
-					<div class="row g-0">
-
-						<div class="col-lg-4">
-							<div class="feature-block" data-aos="fade-up" data-aos-delay="200">
-								<div class="feature-icon">
-									<i class="bi bi-shield-check"></i>
-								</div>
-								<h3>Advanced Technology</h3>
-								<p>State-of-the-art diagnostic equipment including digital X-ray and ECG.</p>
-							</div>
-						</div>
-
-						<div class="col-lg-4">
-							<div class="feature-block" data-aos="fade-up" data-aos-delay="300">
-								<div class="feature-icon">
-									<i class="bi bi-clock"></i>
-								</div>
-								<h3>Extended Hours</h3>
-								<p>Open from 08.00 AM to 10.00 PM, Monday to Sunday.</p>
-							</div>
-						</div>
-
-						<div class="col-lg-4">
-							<div class="feature-block" data-aos="fade-up" data-aos-delay="400">
-								<div class="feature-icon">
-									<i class="bi bi-people"></i>
-								</div>
-								<h3>Expert Team</h3>
-								<p>Qualified doctors with years of experience in their respective fields.</p>
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-
-				<div class="contact-block">
-					<div class="row">
-
-						<div class="col-lg-8">
-							<div class="contact-content" data-aos="fade-up" data-aos-delay="200">
-								<h2>Need Immediate Medical Assistance?</h2>
-								<p>Our team is available around the clock to provide immediate medical support when you need it most.</p>
-							</div>
-						</div>
-
-						<div class="col-lg-4">
-							<div class="contact-actions" data-aos="fade-up" data-aos-delay="300">
-								<a href="tel:+919787960590" class="emergency-call">
-									<i class="bi bi-telephone"></i>
-									<span>+91 97879 60590</span>
-								</a>
-								<a href="contact.html" class="contact-link">Find Location</a>
-							</div>
-						</div>
-
-					</div>
-				</div>
-
-			</div>
-
-		</section><!-- /Call To Action Section -->
-
 	</main>
 
 	<footer id="footer" class="footer-16 footer position-relative">
@@ -1134,6 +931,10 @@
 								<div class="contact-item">
 									<i class="bi bi-envelope"></i>
 									<span>info@saigroupofclinics.com</span>
+								</div>
+								<div class="contact-item">
+									<i class="bi bi-clock"></i>
+									<span>08:00 AM - 10:00 PM</span>
 								</div>
 							</div>
 						</div>
@@ -1171,12 +972,12 @@
 
 								<div class="col-6 col-lg-3">
 									<div class="nav-column">
-										<h6>Resources</h6>
+										<h6>Quick Links</h6>
 										<nav class="footer-nav">
 											<a href="testimonials.html">Testimonials</a>
 											<a href="faq.html">FAQs</a>
 											<a href="gallery.html">Gallery</a>
-											<a href="appointment.html">Appointment</a>
+											<a href="appointment.html">Book Appointment</a>
 										</nav>
 									</div>
 								</div>
@@ -1186,11 +987,11 @@
 										<h6>Connect</h6>
 										<nav class="footer-nav">
 											<a href="#" class="book-appointment-btn">Book Appointment</a>
-											<a href="tel:+919787960590">Emergency</a>
+											<a href="tel:+919787960590">Emergency: +91 97879 60590</a>
 											<a href="contact.html">Feedback</a>
 											<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment"
 											   target="_blank" style="color: #25D366; font-weight: 600;">
-												<i class="bi bi-whatsapp"></i> WhatsApp
+												<i class="bi bi-whatsapp"></i> WhatsApp Us
 											</a>
 										</nav>
 									</div>
@@ -1212,7 +1013,7 @@
 
 						<div class="col-lg-6">
 							<div class="copyright">
-								<p>© <span class="sitename">SAI CLINIC</span>. All rights reserved.</p>
+								<p>© 2024 <span class="sitename">SAI CLINIC</span>. All rights reserved.</p>
 							</div>
 						</div>
 
@@ -1223,7 +1024,7 @@
 								<a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
 								<a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
 								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20get%20in%20touch"
-								   target="_blank" style="background: #25D366; color: #fff;">
+								   target="_blank" class="whatsapp-link" style="background: #25D366; color: #fff;">
 									<i class="bi bi-whatsapp"></i>
 								</a>
 							</div>
