@@ -186,6 +186,10 @@
 					font-weight: 600;
 					text-decoration: none;
 					transition: all 0.3s ease;
+					cursor: pointer;
+					background: none;
+					border: none;
+					padding: 0;
 				}
 
 					.blog-card .blog-content .btn-read-more:hover {
@@ -205,7 +209,12 @@
 		.article-section {
 			padding: 60px 0;
 			background: #f8f9fa;
+			display: none;
 		}
+
+			.article-section.active {
+				display: block;
+			}
 
 			.article-section .article-image {
 				border-radius: 16px;
@@ -218,6 +227,26 @@
 					height: 400px;
 					object-fit: cover;
 				}
+
+				.article-section .article-image .image-gallery {
+					display: grid;
+					grid-template-columns: repeat(3, 1fr);
+					gap: 15px;
+					margin-top: 20px;
+				}
+
+					.article-section .article-image .image-gallery img {
+						height: 150px;
+						width: 100%;
+						object-fit: cover;
+						border-radius: 12px;
+						cursor: pointer;
+						transition: transform 0.3s ease;
+					}
+
+						.article-section .article-image .image-gallery img:hover {
+							transform: scale(1.05);
+						}
 
 			.article-section .article-content h2 {
 				color: #0e7c7b;
@@ -232,6 +261,7 @@
 				margin-bottom: 20px;
 				color: #888;
 				font-size: 0.9rem;
+				flex-wrap: wrap;
 			}
 
 				.article-section .article-content .article-meta i {
@@ -258,6 +288,34 @@
 					color: #0e7c7b;
 					font-size: 1.5rem;
 					margin-right: 10px;
+				}
+
+			.article-section .article-content .back-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				color: #0e7c7b;
+				text-decoration: none;
+				font-weight: 600;
+				margin-bottom: 20px;
+				transition: all 0.3s ease;
+				cursor: pointer;
+				background: none;
+				border: none;
+				padding: 0;
+			}
+
+				.article-section .article-content .back-btn:hover {
+					color: #1a9e9d;
+					gap: 15px;
+				}
+
+				.article-section .article-content .back-btn i {
+					transition: transform 0.3s ease;
+				}
+
+				.article-section .article-content .back-btn:hover i {
+					transform: translateX(-5px);
 				}
 
 		/* Footer Styles */
@@ -361,6 +419,20 @@
 			.article-section .article-content h2 {
 				font-size: 1.5rem;
 			}
+
+			.article-section .article-image .image-gallery {
+				grid-template-columns: repeat(2, 1fr);
+			}
+
+				.article-section .article-image .image-gallery img {
+					height: 120px;
+				}
+		}
+
+		@media (max-width: 576px) {
+			.article-section .article-image .image-gallery {
+				grid-template-columns: 1fr 1fr;
+			}
 		}
 
 		/* WhatsApp Floating Button */
@@ -435,6 +507,15 @@
 		.book-appointment-btn {
 			cursor: pointer;
 		}
+
+		/* Blog List Section */
+		.blog-list-section {
+			padding: 60px 0;
+		}
+
+			.blog-list-section.hidden {
+				display: none;
+			}
 	</style>
 
 </head>
@@ -521,8 +602,8 @@
 				</div>
 			</nav>
 		</div><!-- End Page Title -->
-		<!-- Blog Posts Section -->
-		<section id="blog" class="section" style="padding: 60px 0;">
+		<!-- Blog List Section -->
+		<section id="blog-list" class="blog-list-section">
 			<div class="container" data-aos="fade-up" data-aos-delay="100">
 				<div class="row g-4">
 
@@ -530,7 +611,7 @@
 					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
 						<div class="blog-card">
 							<div class="blog-image">
-								<img src="img/saiiiii-213.jpeg" alt="Free Eye Camp at SAI CLINIC">
+								<img src="assets/img/saiiii-213.jpeg" alt="Free Eye Camp at SAI CLINIC">
 								<span class="blog-badge">Community Event</span>
 								<span class="blog-date"><i class="bi bi-calendar3"></i> August 30, 2024</span>
 							</div>
@@ -546,9 +627,9 @@
 									<span>Free Camp</span>
 									<span>Community</span>
 								</div>
-								<a href="#article-eye-camp" class="btn-read-more">
+								<button class="btn-read-more" data-article="article-eye-camp">
 									Read Full Article <i class="bi bi-arrow-right"></i>
-								</a>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -573,9 +654,9 @@
 									<span>Free Camp</span>
 									<span>Community</span>
 								</div>
-								<a href="#" class="btn-read-more">
+								<button class="btn-read-more" data-article="article-health-camp">
 									Read Full Article <i class="bi bi-arrow-right"></i>
-								</a>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -600,9 +681,9 @@
 									<span>Health Tips</span>
 									<span>Prevention</span>
 								</div>
-								<a href="#" class="btn-read-more">
+								<button class="btn-read-more" data-article="article-diabetes">
 									Read Full Article <i class="bi bi-arrow-right"></i>
-								</a>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -611,22 +692,30 @@
 			</div>
 		</section>
 
-		<!-- Full Article Section: Eye Camp -->
+		<!-- Article 1: Eye Camp -->
 		<section id="article-eye-camp" class="article-section">
 			<div class="container" data-aos="fade-up" data-aos-delay="100">
 				<div class="row g-5">
 					<div class="col-lg-12">
-						<div class="article-image">
-							<img src="assets/img/saiiiii-213.jpeg" alt="Free Eye Camp at SAI CLINIC">
-						</div>
-					</div>
-					<div class="col-lg-12">
 						<div class="article-content">
+							<button class="back-btn" onclick="showBlogList()">
+								<i class="bi bi-arrow-left"></i> Back to Blog
+							</button>
+
 							<h2>Free Eye Screening Camp at SAI CLINIC - Kannikaiper</h2>
 							<div class="article-meta">
 								<span><i class="bi bi-calendar3"></i> August 30, 2024</span>
-								<span><i class="bi bi-person"></i> Dr. Samraj </span>
+								<span><i class="bi bi-person"></i> Dr. S. Sangami</span>
 								<span><i class="bi bi-geo-alt"></i> Kannikaiper, Thiruvallur Dist</span>
+							</div>
+
+							<div class="article-image">
+								<img src="assets/img/saiiii-213.jpeg" alt="Free Eye Camp at SAI CLINIC">
+								<div class="image-gallery">
+									<img src="assets/img/saiiii-213-1.jpeg" alt="Eye Camp Image 1" onclick="openImage(this.src)">
+									<img src="assets/img/saiiii-2134.jpeg" alt="Eye Camp Image 2" onclick="openImage(this.src)">
+									<img src="assets/img/saiiii-2135.jpeg" alt="Eye Camp Image 3" onclick="openImage(this.src)">
+								</div>
 							</div>
 
 							<p>
@@ -668,6 +757,127 @@
 							<div style="margin-top: 30px; padding: 20px; background: #f0f4ff; border-radius: 12px;">
 								<h5 style="color: #0e7c7b; font-weight: 700;"><i class="bi bi-calendar-check"></i> Next Camp</h5>
 								<p style="margin-bottom: 0;">Stay tuned for upcoming health camps and events at SAI CLINIC locations. Follow us for more updates!</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Article 2: Health Camp -->
+		<section id="article-health-camp" class="article-section">
+			<div class="container" data-aos="fade-up" data-aos-delay="100">
+				<div class="row g-5">
+					<div class="col-lg-12">
+						<div class="article-content">
+							<button class="back-btn" onclick="showBlogList()">
+								<i class="bi bi-arrow-left"></i> Back to Blog
+							</button>
+
+							<h2>Upcoming General Health Check-up Camp</h2>
+							<div class="article-meta">
+								<span><i class="bi bi-calendar3"></i> Coming Soon</span>
+								<span><i class="bi bi-person"></i> Dr. M. Karthikeyan</span>
+								<span><i class="bi bi-geo-alt"></i> Arambakkam</span>
+							</div>
+
+							<div class="article-image">
+								<img src="assets/img/health/emergency-1.webp" alt="Health Camp">
+							</div>
+
+							<p>
+								SAI CLINIC is excited to announce a <strong>Free General Health Check-up Camp</strong> coming soon at our Arambakkam location.
+							</p>
+
+							<div class="article-highlight">
+								<i class="bi bi-info-circle"></i>
+								<strong>Stay tuned for the exact date and time!</strong>
+							</div>
+
+							<p>
+								The camp will offer free health check-ups including:
+							</p>
+							<ul style="color: #444; font-size: 1.05rem; line-height: 1.8;">
+								<li>🩺 General physical examination</li>
+								<li>💉 Blood pressure and sugar testing</li>
+								<li>🫀 ECG screening</li>
+								<li>👨‍⚕️ Consultation with doctors</li>
+							</ul>
+
+							<p>
+								This initiative is part of SAI CLINIC's ongoing commitment to community health and wellness. All services will be provided free of charge.
+							</p>
+
+							<p style="color: #0e7c7b; font-weight: 600; font-size: 1.1rem;">
+								<i class="bi bi-star-fill" style="color: #ffc107;"></i>
+								Mark your calendars and stay healthy!
+							</p>
+
+							<div style="margin-top: 30px; padding: 20px; background: #f0f4ff; border-radius: 12px;">
+								<h5 style="color: #0e7c7b; font-weight: 700;"><i class="bi bi-bell"></i> Stay Updated</h5>
+								<p style="margin-bottom: 0;">Follow us on social media and check our website for the official announcement.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Article 3: Diabetes Awareness -->
+		<section id="article-diabetes" class="article-section">
+			<div class="container" data-aos="fade-up" data-aos-delay="100">
+				<div class="row g-5">
+					<div class="col-lg-12">
+						<div class="article-content">
+							<button class="back-btn" onclick="showBlogList()">
+								<i class="bi bi-arrow-left"></i> Back to Blog
+							</button>
+
+							<h2>Diabetes Awareness Month - Know Your Risk</h2>
+							<div class="article-meta">
+								<span><i class="bi bi-calendar3"></i> September 2024</span>
+								<span><i class="bi bi-person"></i> Dr. S. Sangami</span>
+								<span><i class="bi bi-tag"></i> Health Tips</span>
+							</div>
+
+							<div class="article-image">
+								<img src="assets/img/health/cardiology-2.webp" alt="Diabetes Awareness">
+							</div>
+
+							<p>
+								September is <strong>Diabetes Awareness Month</strong>, and SAI CLINIC is dedicated to helping you understand your risk and take control of your health.
+							</p>
+
+							<div class="article-highlight">
+								<i class="bi bi-heart-pulse"></i>
+								<strong>Did you know? Over 70 million people in India have diabetes.</strong>
+							</div>
+
+							<h4 style="color: #0e7c7b; margin-top: 25px;">Early Signs of Diabetes</h4>
+							<ul style="color: #444; font-size: 1.05rem; line-height: 1.8;">
+								<li>🚽 Frequent urination, especially at night</li>
+								<li>💧 Increased thirst and hunger</li>
+								<li>⚖️ Unexplained weight loss</li>
+								<li>🫨 Fatigue and weakness</li>
+								<li>👁️ Blurred vision</li>
+							</ul>
+
+							<h4 style="color: #0e7c7b; margin-top: 25px;">Risk Factors</h4>
+							<ul style="color: #444; font-size: 1.05rem; line-height: 1.8;">
+								<li>👨‍👩‍👧‍👦 Family history of diabetes</li>
+								<li>⚖️ Obesity or overweight</li>
+								<li>🚶 Sedentary lifestyle</li>
+								<li>🍬 Unhealthy diet</li>
+								<li>📈 High blood pressure</li>
+							</ul>
+
+							<p>
+								SAI CLINIC offers comprehensive diabetes screening and management programs. <strong>Early detection can prevent complications.</strong>
+							</p>
+
+							<div style="margin-top: 30px; padding: 20px; background: #f0f4ff; border-radius: 12px;">
+								<h5 style="color: #0e7c7b; font-weight: 700;"><i class="bi bi-calendar-check"></i> Book Your Screening</h5>
+								<p style="margin-bottom: 0;">Contact SAI CLINIC today to schedule your diabetes screening. Your health is our priority!</p>
 							</div>
 						</div>
 					</div>
@@ -836,6 +1046,11 @@
 		<i class="bi bi-whatsapp"></i>
 	</a>
 
+	<!-- Image Lightbox Modal -->
+	<div id="imageModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; cursor:pointer; display:none; align-items:center; justify-content:center;" onclick="closeImage()">
+		<img id="modalImage" src="" alt="Enlarged Image" style="max-width:90%; max-height:90%; object-fit:contain; border-radius:8px;">
+	</div>
+
 	<!-- Scroll Top -->
 	<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -853,9 +1068,58 @@
 	<!-- Main JS File -->
 	<script src="assets/js/main.js"></script>
 
-	<!-- Appointment Booking Script -->
+	<!-- Blog and Appointment Script -->
 	<script>
+        // Blog navigation functions
+        function showBlogList() {
+            document.querySelectorAll('.article-section').forEach(function(el) {
+                el.classList.remove('active');
+            });
+            document.getElementById('blog-list').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showArticle(articleId) {
+            document.getElementById('blog-list').classList.add('hidden');
+            document.querySelectorAll('.article-section').forEach(function(el) {
+                el.classList.remove('active');
+            });
+            document.getElementById(articleId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Image lightbox functions
+        function openImage(src) {
+            const modal = document.getElementById('imageModal');
+            const img = document.getElementById('modalImage');
+            modal.style.display = 'flex';
+            img.src = src;
+        }
+
+        function closeImage() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            // Blog read more buttons
+            const readMoreButtons = document.querySelectorAll('.btn-read-more');
+            readMoreButtons.forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const articleId = this.getAttribute('data-article');
+                    if (articleId) {
+                        showArticle(articleId);
+                    }
+                });
+            });
+
+            // Close modal on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeImage();
+                }
+            });
+
             // Get all appointment buttons
             const bookButtons = document.querySelectorAll('.book-appointment-btn');
 
