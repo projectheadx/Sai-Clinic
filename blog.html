@@ -94,6 +94,7 @@
 			.blog-card .blog-image {
 				overflow: hidden;
 				position: relative;
+				cursor: pointer;
 			}
 
 				.blog-card .blog-image img {
@@ -556,9 +557,7 @@
 						<li><a href="FounderandDirector.html">Founder</a></li>
 						<li><a href="clinics.html">Clinics</a></li>
 						<li><a href="blog.html" class="active">Blog</a></li>
-							
-							
-							<li><a href="contact.html">Contact</a></li>
+						<li><a href="contact.html">Contact</a></li>
 					</ul>
 					<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 				</nav>
@@ -582,12 +581,10 @@
 								Stay updated with the latest news, health tips, and community events from SAI CLINIC.
 								We're committed to keeping our community informed and healthy.
 							</p>
-							
 						</div>
 					</div>
 				</div>
 			</div>
-			
 		</div><!-- End Page Title -->
 		<!-- Blog List Section -->
 		<section id="blog-list" class="blog-list-section">
@@ -597,7 +594,7 @@
 					<!-- Blog Post 1: Free Eye Camp News -->
 					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
 						<div class="blog-card">
-							<div class="blog-image">
+							<div class="blog-image" onclick="showArticle('article-eye-camp')">
 								<img src="img/saiiiii-213.jpeg" alt="Free Eye Camp at SAI CLINIC">
 								<span class="blog-badge">Community Event</span>
 								<span class="blog-date"><i class="bi bi-calendar3"></i> August 30, 2024</span>
@@ -624,7 +621,7 @@
 					<!-- Blog Post 2: Upcoming Health Camp -->
 					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
 						<div class="blog-card">
-							<div class="blog-image">
+							<div class="blog-image" onclick="showArticle('article-health-camp')">
 								<img src="img/emergency-1.webp" alt="Health Camp">
 								<span class="blog-badge">Upcoming Event</span>
 								<span class="blog-date"><i class="bi bi-calendar3"></i> Coming Soon</span>
@@ -651,7 +648,7 @@
 					<!-- Blog Post 3: Diabetes Awareness -->
 					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
 						<div class="blog-card">
-							<div class="blog-image">
+							<div class="blog-image" onclick="showArticle('article-diabetes')">
 								<img src="img/cardiology-2.webp" alt="Diabetes Awareness">
 								<span class="blog-badge">Health Tips</span>
 								<span class="blog-date"><i class="bi bi-calendar3"></i> September 2024</span>
@@ -769,7 +766,7 @@
 							</div>
 
 							<div class="article-image">
-								<img src="img/health/emergency-1.webp" alt="Health Camp">
+								<img src="img/emergency-1.webp" alt="Health Camp">
 							</div>
 
 							<p>
@@ -828,7 +825,7 @@
 							</div>
 
 							<div class="article-image">
-								<img src="img/health/cardiology-2.webp" alt="Diabetes Awareness">
+								<img src="img/cardiology-2.webp" alt="Diabetes Awareness">
 							</div>
 
 							<p>
