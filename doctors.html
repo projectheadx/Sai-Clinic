@@ -255,6 +255,11 @@
 				color: #2e7d32;
 			}
 
+			.status-badge.appointment {
+				background: #fff3e0;
+				color: #e65100;
+			}
+
 		/* Footer Styles */
 		.footer-16 .sitename {
 			color: #0e7c7b !important;
@@ -508,6 +513,24 @@
 		.book-appointment-btn {
 			cursor: pointer;
 		}
+
+		/* Tamil Name */
+		.doctor-tamil-name {
+			display: block;
+			font-size: 0.85rem;
+			color: #0e7c7b;
+			font-weight: 500;
+			margin-bottom: 2px;
+		}
+
+		/* On Appointment Note */
+		.on-appointment {
+			font-size: 0.75rem;
+			color: #e65100;
+			font-weight: 600;
+			display: block;
+			margin-top: 2px;
+		}
 	</style>
 
 </head>
@@ -541,25 +564,14 @@
 				<nav id="navmenu" class="navmenu">
 					<ul>
 						<li><a href="index.html">Home</a></li>
-						<li><a href="FounderandDirector.html">Founder</a></li> <li><a href="about.html">About</a></li>
+						<li><a href="FounderandDirector.html">Founder</a></li>
+						<li><a href="about.html">About</a></li>
 						<li><a href="departments.html">Departments</a></li>
 						<li><a href="services.html">Services</a></li>
 						<li><a href="doctors.html" class="active">Doctors</a></li>
-						
-					
 						<li><a href="clinics.html">Our Clinics</a></li>
-						<!--<li class="dropdown">
-							<a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-							<ul>
-								<li><a href="department-details.html">Department Details</a></li>
-								<li><a href="service-details.html">Service Details</a></li>
-								<li><a href="appointment.html">Appointment</a></li>
-								<li><a href="testimonials.html">Testimonials</a></li>
-								<li><a href="faq.html">Frequently Asked Questions</a></li>
-								<li><a href="gallery.html">Gallery</a></li>
-							</ul>
-						</li>-->
-							<li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li>
+						<li><a href="blog.html">Blog</a></li>
+						<li><a href="contact.html">Contact</a></li>
 					</ul>
 					<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 				</nav>
@@ -596,14 +608,6 @@
 					</div>
 				</div>
 			</div>
-			<!--<nav class="breadcrumbs">
-				<div class="container">
-					<ol>
-						<li><a href="index.html">Home</a></li>
-						<li class="current">Doctors</li>
-					</ol>
-				</div>
-			</nav>-->
 		</div><!-- End Page Title -->
 		<!-- Doctors Section -->
 		<section id="doctors" class="doctors section">
@@ -629,7 +633,7 @@
 								<h4>Dr. S. Sangami</h4>
 								<span class="specialty">Clinical Diabetology & Metabolic Health</span>
 								<span class="status-badge available">Available</span>
-								<div class="qualifications">M.B.B.S., Dip. Diabetology, FICM</div>
+								<div class="qualifications">M.B.B.S., Dip. Diabetology, FICM<br>MEM (GW University-USA)</div>
 								<p>Expert in clinical diabetology and metabolic health management with comprehensive care for diabetes patients.</p>
 								<div class="doctor-meta">
 									<div class="experience">
@@ -682,25 +686,60 @@
 							</div>
 						</div>
 					</div><!-- End Doctor Card -->
-					<!-- Doctor 3: Dr. M.R. Ramya -->
+					<!-- Doctor 3: Dr. M.R. Ramya (M. Salomon Themothi in image?) -->
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
 						<div class="doctor-card">
 							<div class="doctor-image">
-								<img src="assets/img/health/staff-4.webp" alt="Dr. M.R. Ramya" class="img-fluid">
+								<img src="assets/img/health/staff-4.webp" alt="Dr. M. Salomon Themothi" class="img-fluid">
 								<div class="doctor-overlay">
 									<div class="social-links">
-										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20M.R.%20Ramya%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
+										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20M.%20Salomon%20Themothi%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
 										<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
 										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
 									</div>
 								</div>
 							</div>
 							<div class="doctor-content">
-								<h4>Dr. M.R. Ramya</h4>
-								<span class="specialty">Gynaecology & Fertility Expert</span>
-								<span class="status-badge available">Available</span>
-								<div class="qualifications">M.B.B.S., D.G.O., DRM, F.M.A.S.</div>
-								<p>Expert in gynaecology and fertility treatments with comprehensive care for women's health and reproductive wellness.</p>
+								<h4>Dr. M. Salomon Themothi</h4>
+								<span class="specialty">General Surgery</span>
+								<span class="status-badge appointment">On Appointment</span>
+								<div class="qualifications">M.B.B.S., MS., DNB., FIAGES</div>
+								<p>Experienced surgeon specializing in general and laparoscopic surgical procedures.</p>
+								<div class="doctor-meta">
+									<div class="experience">
+										<i class="bi bi-award"></i>
+										<span>15+ Years Experience</span>
+									</div>
+									<div class="department">
+										<i class="bi bi-building"></i>
+										<span>Surgery Dept.</span>
+									</div>
+								</div>
+								<button class="btn-appointment book-appointment" data-doctor="Dr. M. Salomon Themothi" data-specialty="General Surgery">
+									<i class="bi bi-calendar-check"></i> Book Appointment
+								</button>
+							</div>
+						</div>
+					</div><!-- End Doctor Card -->
+					<!-- Doctor 4: Dr. D. Tharun -->
+					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+						<div class="doctor-card">
+							<div class="doctor-image">
+								<img src="assets/img/health/staff-6.webp" alt="Dr. D. Tharun" class="img-fluid">
+								<div class="doctor-overlay">
+									<div class="social-links">
+										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20D.%20Tharun%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
+										<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
+										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="doctor-content">
+								<h4>Dr. D. Tharun</h4>
+								<span class="specialty">Pulmonology</span>
+								<span class="status-badge appointment">On Appointment</span>
+								<div class="qualifications">MD., Pulmonology</div>
+								<p>Specialist in respiratory medicine and asthma care with comprehensive pulmonary treatment.</p>
 								<div class="doctor-meta">
 									<div class="experience">
 										<i class="bi bi-award"></i>
@@ -708,80 +747,80 @@
 									</div>
 									<div class="department">
 										<i class="bi bi-building"></i>
-										<span>Gynaecology Dept.</span>
+										<span>Pulmonology Dept.</span>
 									</div>
 								</div>
-								<button class="btn-appointment book-appointment" data-doctor="Dr. M.R. Ramya" data-specialty="Gynaecology & Fertility Expert">
+								<button class="btn-appointment book-appointment" data-doctor="Dr. D. Tharun" data-specialty="Pulmonology">
 									<i class="bi bi-calendar-check"></i> Book Appointment
 								</button>
 							</div>
 						</div>
 					</div><!-- End Doctor Card -->
-					<!-- Doctor 4: Dr. N.H. Mallikarjun -->
-					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
-						<div class="doctor-card">
-							<div class="doctor-image">
-								<img src="assets/img/health/staff-6.webp" alt="Dr. N.H. Mallikarjun" class="img-fluid">
-								<div class="doctor-overlay">
-									<div class="social-links">
-										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20N.H.%20Mallikarjun%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
-										<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
-										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
-									</div>
-								</div>
-							</div>
-							<div class="doctor-content">
-								<h4>Dr. N.H. Mallikarjun</h4>
-								<span class="specialty">General & Laparoscopic Surgery</span>
-								<span class="status-badge available">Available</span>
-								<div class="qualifications">M.B.B.S., M.S. (Gen Surg)</div>
-								<p>Experienced in general and laparoscopic surgical procedures with focus on minimally invasive techniques.</p>
-								<div class="doctor-meta">
-									<div class="experience">
-										<i class="bi bi-award"></i>
-										<span>6+ Years Experience</span>
-									</div>
-									<div class="department">
-										<i class="bi bi-building"></i>
-										<span>Surgery Dept.</span>
-									</div>
-								</div>
-								<button class="btn-appointment book-appointment" data-doctor="Dr. N.H. Mallikarjun" data-specialty="General & Laparoscopic Surgery">
-									<i class="bi bi-calendar-check"></i> Book Appointment
-								</button>
-							</div>
-						</div>
-					</div><!-- End Doctor Card -->
-					<!-- Doctor 5: Dr. H. Sadhiqual Ameen -->
+					<!-- Doctor 5: Dr. T.G. Subash Kolachik -->
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="500">
 						<div class="doctor-card">
 							<div class="doctor-image">
-								<img src="assets/img/health/staff-5.webp" alt="Dr. H. Sadhiqual Ameen" class="img-fluid">
+								<img src="assets/img/health/staff-5.webp" alt="Dr. T.G. Subash Kolachik" class="img-fluid">
 								<div class="doctor-overlay">
 									<div class="social-links">
-										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20H.%20Sadhiqual%20Ameen%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
+										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20T.G.%20Subash%20Kolachik%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
 										<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
 										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
 									</div>
 								</div>
 							</div>
 							<div class="doctor-content">
-								<h4>Dr. H. Sadhiqual Ameen</h4>
-								<span class="specialty">Dermatology & Venereology</span>
-								<span class="status-badge available">Available</span>
-								<div class="qualifications">M.D. (DVL)</div>
-								<p>Expert in dermatology and venereology with comprehensive skin care treatments and management.</p>
+								<h4>Dr. T.G. Subash Kolachik</h4>
+								<span class="specialty">Urology</span>
+								<span class="status-badge appointment">On Appointment</span>
+								<div class="qualifications">M.B.B.S., MS., Urology</div>
+								<p>Expert in urological surgery and treatment with focus on minimally invasive procedures.</p>
 								<div class="doctor-meta">
 									<div class="experience">
 										<i class="bi bi-award"></i>
-										<span>7+ Years Experience</span>
+										<span>10+ Years Experience</span>
 									</div>
 									<div class="department">
 										<i class="bi bi-building"></i>
-										<span>Dermatology Dept.</span>
+										<span>Urology Dept.</span>
 									</div>
 								</div>
-								<button class="btn-appointment book-appointment" data-doctor="Dr. H. Sadhiqual Ameen" data-specialty="Dermatology & Venereology">
+								<button class="btn-appointment book-appointment" data-doctor="Dr. T.G. Subash Kolachik" data-specialty="Urology">
+									<i class="bi bi-calendar-check"></i> Book Appointment
+								</button>
+							</div>
+						</div>
+					</div><!-- End Doctor Card -->
+					<!-- Doctor 6: Dr. V. Prathapkumar -->
+					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="600">
+						<div class="doctor-card">
+							<div class="doctor-image">
+								<img src="assets/img/health/staff-2.webp" alt="Dr. V. Prathapkumar" class="img-fluid">
+								<div class="doctor-overlay">
+									<div class="social-links">
+										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20V.%20Prathapkumar%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
+										<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
+										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="doctor-content">
+								<h4>Dr. V. Prathapkumar</h4>
+								<span class="specialty">General Medicine</span>
+								<span class="status-badge appointment">On Appointment</span>
+								<div class="qualifications">M.B.B.S., MD., General Medicine<br>DNB., CCCDM</div>
+								<p>Expert in general medicine with comprehensive diagnosis and treatment for various health conditions.</p>
+								<div class="doctor-meta">
+									<div class="experience">
+										<i class="bi bi-award"></i>
+										<span>12+ Years Experience</span>
+									</div>
+									<div class="department">
+										<i class="bi bi-building"></i>
+										<span>General Medicine Dept.</span>
+									</div>
+								</div>
+								<button class="btn-appointment book-appointment" data-doctor="Dr. V. Prathapkumar" data-specialty="General Medicine">
 									<i class="bi bi-calendar-check"></i> Book Appointment
 								</button>
 							</div>
@@ -971,184 +1010,184 @@
 
 	<!-- Appointment Booking Script with WhatsApp -->
 	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			// Get all book appointment buttons
-			const bookButtons = document.querySelectorAll('.book-appointment');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all book appointment buttons
+            const bookButtons = document.querySelectorAll('.book-appointment');
 
-			bookButtons.forEach(function(button) {
-				button.addEventListener('click', function(e) {
-					e.preventDefault();
+            bookButtons.forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
 
-					const doctorName = this.getAttribute('data-doctor');
-					const specialty = this.getAttribute('data-specialty');
+                    const doctorName = this.getAttribute('data-doctor');
+                    const specialty = this.getAttribute('data-specialty');
 
-					// Get today's date for min date
-					const today = new Date();
-					const todayStr = today.toISOString().split('T')[0];
+                    // Get today's date for min date
+                    const today = new Date();
+                    const todayStr = today.toISOString().split('T')[0];
 
-					// Get max date (30 days from now)
-					const maxDate = new Date(today);
-					maxDate.setDate(maxDate.getDate() + 30);
-					const maxDateStr = maxDate.toISOString().split('T')[0];
+                    // Get max date (30 days from now)
+                    const maxDate = new Date(today);
+                    maxDate.setDate(maxDate.getDate() + 30);
+                    const maxDateStr = maxDate.toISOString().split('T')[0];
 
-					// Show SweetAlert2 with date picker
-					Swal.fire({
-						title: 'Book Appointment',
-						html: `
-							<div class="doctor-info-display">
-								<i class="bi bi-person-circle"></i>
-								<span><strong>${doctorName}</strong> - ${specialty}</span>
-							</div>
-							<div style="text-align: left;">
-								<label style="font-weight: 600; display: block; margin-bottom: 5px; color: #333;">
-									<i class="bi bi-calendar3" style="color: #0e7c7b;"></i> Select Date *
-								</label>
-								<input type="date" id="appointmentDate" class="date-picker-input"
-									   min="${todayStr}" max="${maxDateStr}" value="${todayStr}" required>
+                    // Show SweetAlert2 with date picker
+                    Swal.fire({
+                        title: 'Book Appointment',
+                        html: `
+                            <div class="doctor-info-display">
+                                <i class="bi bi-person-circle"></i>
+                                <span><strong>${doctorName}</strong> - ${specialty}</span>
+                            </div>
+                            <div style="text-align: left;">
+                                <label style="font-weight: 600; display: block; margin-bottom: 5px; color: #333;">
+                                    <i class="bi bi-calendar3" style="color: #0e7c7b;"></i> Select Date *
+                                </label>
+                                <input type="date" id="appointmentDate" class="date-picker-input"
+                                       min="${todayStr}" max="${maxDateStr}" value="${todayStr}" required>
 
-								<label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
-									<i class="bi bi-clock" style="color: #0e7c7b;"></i> Select Time *
-								</label>
-								<select id="appointmentTime" class="time-select">
-									<option value="09:00">09:00 AM</option>
-									<option value="09:30">09:30 AM</option>
-									<option value="10:00">10:00 AM</option>
-									<option value="10:30">10:30 AM</option>
-									<option value="11:00">11:00 AM</option>
-									<option value="11:30">11:30 AM</option>
-									<option value="12:00">12:00 PM</option>
-									<option value="12:30">12:30 PM</option>
-									<option value="13:00">01:00 PM</option>
-									<option value="13:30">01:30 PM</option>
-									<option value="14:00">02:00 PM</option>
-									<option value="14:30">02:30 PM</option>
-									<option value="15:00">03:00 PM</option>
-									<option value="15:30">03:30 PM</option>
-									<option value="16:00">04:00 PM</option>
-									<option value="16:30">04:30 PM</option>
-									<option value="17:00">05:00 PM</option>
-									<option value="17:30">05:30 PM</option>
-									<option value="18:00">06:00 PM</option>
-									<option value="18:30">06:30 PM</option>
-									<option value="19:00">07:00 PM</option>
-									<option value="19:30">07:30 PM</option>
-									<option value="20:00">08:00 PM</option>
-									<option value="20:30">08:30 PM</option>
-									<option value="21:00">09:00 PM</option>
-								</select>
+                                <label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
+                                    <i class="bi bi-clock" style="color: #0e7c7b;"></i> Select Time *
+                                </label>
+                                <select id="appointmentTime" class="time-select">
+                                    <option value="09:00">09:00 AM</option>
+                                    <option value="09:30">09:30 AM</option>
+                                    <option value="10:00">10:00 AM</option>
+                                    <option value="10:30">10:30 AM</option>
+                                    <option value="11:00">11:00 AM</option>
+                                    <option value="11:30">11:30 AM</option>
+                                    <option value="12:00">12:00 PM</option>
+                                    <option value="12:30">12:30 PM</option>
+                                    <option value="13:00">01:00 PM</option>
+                                    <option value="13:30">01:30 PM</option>
+                                    <option value="14:00">02:00 PM</option>
+                                    <option value="14:30">02:30 PM</option>
+                                    <option value="15:00">03:00 PM</option>
+                                    <option value="15:30">03:30 PM</option>
+                                    <option value="16:00">04:00 PM</option>
+                                    <option value="16:30">04:30 PM</option>
+                                    <option value="17:00">05:00 PM</option>
+                                    <option value="17:30">05:30 PM</option>
+                                    <option value="18:00">06:00 PM</option>
+                                    <option value="18:30">06:30 PM</option>
+                                    <option value="19:00">07:00 PM</option>
+                                    <option value="19:30">07:30 PM</option>
+                                    <option value="20:00">08:00 PM</option>
+                                    <option value="20:30">08:30 PM</option>
+                                    <option value="21:00">09:00 PM</option>
+                                </select>
 
-								<label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
-									<i class="bi bi-person" style="color: #0e7c7b;"></i> Your Name *
-								</label>
-								<input type="text" id="patientName" class="date-picker-input" placeholder="Enter your full name" required>
+                                <label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
+                                    <i class="bi bi-person" style="color: #0e7c7b;"></i> Your Name *
+                                </label>
+                                <input type="text" id="patientName" class="date-picker-input" placeholder="Enter your full name" required>
 
-								<label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
-									<i class="bi bi-phone" style="color: #0e7c7b;"></i> Phone Number *
-								</label>
-								<input type="tel" id="patientPhone" class="date-picker-input" placeholder="+91 98765 43210" required>
-							</div>
-						`,
-						confirmButtonText: 'Confirm & Send to WhatsApp',
-						cancelButtonText: 'Cancel',
-						showCancelButton: true,
-						confirmButtonColor: '#0e7c7b',
-						cancelButtonColor: '#dc3545',
-						customClass: {
-							popup: 'date-picker-modal'
-						},
-						preConfirm: () => {
-							const date = document.getElementById('appointmentDate').value;
-							const time = document.getElementById('appointmentTime').value;
-							const name = document.getElementById('patientName').value;
-							const phone = document.getElementById('patientPhone').value;
+                                <label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
+                                    <i class="bi bi-phone" style="color: #0e7c7b;"></i> Phone Number *
+                                </label>
+                                <input type="tel" id="patientPhone" class="date-picker-input" placeholder="+91 98765 43210" required>
+                            </div>
+                        `,
+                        confirmButtonText: 'Confirm & Send to WhatsApp',
+                        cancelButtonText: 'Cancel',
+                        showCancelButton: true,
+                        confirmButtonColor: '#0e7c7b',
+                        cancelButtonColor: '#dc3545',
+                        customClass: {
+                            popup: 'date-picker-modal'
+                        },
+                        preConfirm: () => {
+                            const date = document.getElementById('appointmentDate').value;
+                            const time = document.getElementById('appointmentTime').value;
+                            const name = document.getElementById('patientName').value;
+                            const phone = document.getElementById('patientPhone').value;
 
-							if (!date) {
-								Swal.showValidationMessage('Please select a date');
-								return false;
-							}
-							if (!name || name.trim() === '') {
-								Swal.showValidationMessage('Please enter your name');
-								return false;
-							}
-							if (!phone || phone.trim() === '' || phone.length < 10) {
-								Swal.showValidationMessage('Please enter a valid phone number');
-								return false;
-							}
+                            if (!date) {
+                                Swal.showValidationMessage('Please select a date');
+                                return false;
+                            }
+                            if (!name || name.trim() === '') {
+                                Swal.showValidationMessage('Please enter your name');
+                                return false;
+                            }
+                            if (!phone || phone.trim() === '' || phone.length < 10) {
+                                Swal.showValidationMessage('Please enter a valid phone number');
+                                return false;
+                            }
 
-							return { date, time, name, phone, doctor: doctorName, specialty: specialty };
-						}
-					}).then((result) => {
-						if (result.isConfirmed) {
-							const data = result.value;
+                            return { date, time, name, phone, doctor: doctorName, specialty: specialty };
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            const data = result.value;
 
-							// Format date for display
-							const dateObj = new Date(data.date + 'T00:00:00');
-							const formattedDate = dateObj.toLocaleDateString('en-IN', {
-								weekday: 'short',
-								day: '2-digit',
-								month: 'short',
-								year: 'numeric'
-							});
+                            // Format date for display
+                            const dateObj = new Date(data.date + 'T00:00:00');
+                            const formattedDate = dateObj.toLocaleDateString('en-IN', {
+                                weekday: 'short',
+                                day: '2-digit',
+                                month: 'short',
+                                year: 'numeric'
+                            });
 
-							// Create WhatsApp message
-							let whatsappMsg = `Hi SAI CLINIC,%0A%0A`;
-							whatsappMsg += `I would like to book an appointment with the following details:%0A%0A`;
-							whatsappMsg += `👤 Patient Name: ${data.name}%0A`;
-							whatsappMsg += `📞 Phone: ${data.phone}%0A`;
-							whatsappMsg += `👨‍⚕️ Doctor: ${data.doctor}%0A`;
-							whatsappMsg += `📅 Date: ${formattedDate}%0A`;
-							whatsappMsg += `🕐 Time: ${data.time}%0A`;
-							whatsappMsg += `🏥 Specialty: ${data.specialty}%0A`;
-							whatsappMsg += `%0AThank you!`;
+                            // Create WhatsApp message
+                            let whatsappMsg = `Hi SAI CLINIC,%0A%0A`;
+                            whatsappMsg += `I would like to book an appointment with the following details:%0A%0A`;
+                            whatsappMsg += `👤 Patient Name: ${data.name}%0A`;
+                            whatsappMsg += `📞 Phone: ${data.phone}%0A`;
+                            whatsappMsg += `👨‍⚕️ Doctor: ${data.doctor}%0A`;
+                            whatsappMsg += `📅 Date: ${formattedDate}%0A`;
+                            whatsappMsg += `🕐 Time: ${data.time}%0A`;
+                            whatsappMsg += `🏥 Specialty: ${data.specialty}%0A`;
+                            whatsappMsg += `%0AThank you!`;
 
-							// Open WhatsApp
-							const whatsappURL = `https://wa.me/919787960590?text=${whatsappMsg}`;
-							window.open(whatsappURL, '_blank');
+                            // Open WhatsApp
+                            const whatsappURL = `https://wa.me/919787960590?text=${whatsappMsg}`;
+                            window.open(whatsappURL, '_blank');
 
-							// Show success message
-							Swal.fire({
-								title: 'Appointment Request Sent! ✅',
-								html: `
-									<div style="text-align: left; padding: 10px 0;">
-										<div style="background: #f0f4ff; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-											<p style="margin-bottom: 5px;"><strong>👨‍⚕️ Doctor:</strong> ${data.doctor}</p>
-											<p style="margin-bottom: 5px;"><strong>🏥 Specialty:</strong> ${data.specialty}</p>
-											<p style="margin-bottom: 5px;"><strong>📅 Date:</strong> ${formattedDate}</p>
-											<p style="margin-bottom: 0;"><strong>🕐 Time:</strong> ${data.time}</p>
-										</div>
-										<div style="background: #e8f5e9; padding: 12px; border-radius: 10px; border-left: 4px solid #2e7d32;">
-											<p style="margin-bottom: 0; color: #2e7d32;">
-												<i class="bi bi-check-circle-fill"></i>
-												Appointment confirmed for <strong>${data.name}</strong>
-											</p>
-										</div>
-										<hr>
-										<p style="color: #25D366; font-size: 0.95rem; text-align: center;">
-											<i class="bi bi-whatsapp"></i>
-											WhatsApp opened with your appointment details.
-										</p>
-										<p style="font-size: 0.8rem; color: #666; text-align: center;">
-											SAI CLINIC<br>
-											No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206
-										</p>
-									</div>
-								`,
-								icon: 'success',
-								confirmButtonColor: '#0e7c7b',
-								confirmButtonText: 'OK'
-							});
+                            // Show success message
+                            Swal.fire({
+                                title: 'Appointment Request Sent! ✅',
+                                html: `
+                                    <div style="text-align: left; padding: 10px 0;">
+                                        <div style="background: #f0f4ff; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                                            <p style="margin-bottom: 5px;"><strong>👨‍⚕️ Doctor:</strong> ${data.doctor}</p>
+                                            <p style="margin-bottom: 5px;"><strong>🏥 Specialty:</strong> ${data.specialty}</p>
+                                            <p style="margin-bottom: 5px;"><strong>📅 Date:</strong> ${formattedDate}</p>
+                                            <p style="margin-bottom: 0;"><strong>🕐 Time:</strong> ${data.time}</p>
+                                        </div>
+                                        <div style="background: #e8f5e9; padding: 12px; border-radius: 10px; border-left: 4px solid #2e7d32;">
+                                            <p style="margin-bottom: 0; color: #2e7d32;">
+                                                <i class="bi bi-check-circle-fill"></i>
+                                                Appointment confirmed for <strong>${data.name}</strong>
+                                            </p>
+                                        </div>
+                                        <hr>
+                                        <p style="color: #25D366; font-size: 0.95rem; text-align: center;">
+                                            <i class="bi bi-whatsapp"></i>
+                                            WhatsApp opened with your appointment details.
+                                        </p>
+                                        <p style="font-size: 0.8rem; color: #666; text-align: center;">
+                                            SAI CLINIC<br>
+                                            No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206
+                                        </p>
+                                    </div>
+                                `,
+                                icon: 'success',
+                                confirmButtonColor: '#0e7c7b',
+                                confirmButtonText: 'OK'
+                            });
 
-							console.log('Appointment Booked:', data);
-						}
-					});
-				});
-			});
+                            console.log('Appointment Booked:', data);
+                        }
+                    });
+                });
+            });
 
-			console.log('SAI CLINIC - Doctors page ready!');
-			console.log('WhatsApp: +91 97879 60590');
-			console.log('Email: info@saigroupofclinics.com');
-			console.log('Hours: 08.00 AM - 10.00 PM');
-		});
+            console.log('SAI CLINIC - Doctors page ready!');
+            console.log('WhatsApp: +91 97879 60590');
+            console.log('Email: info@saigroupofclinics.com');
+            console.log('Hours: 08.00 AM - 10.00 PM');
+        });
 	</script>
 
 </body>
