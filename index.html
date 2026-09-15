@@ -128,106 +128,306 @@
 			color: #0e7c7b;
 		}
 
-		/* Doctor Profile Styles - Enhanced */
-		.doctor-profile {
-			background: #ffffff;
-			border-radius: 16px;
-			padding: 1.5rem;
-			box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-			transition: all 0.3s ease;
-			text-align: center;
+		/* ==========================================
+		   STYLISH ROUND DOCTOR CARD - HOME PAGE
+		   ========================================== */
+		.doctor-card-home {
+			background: #fff;
+			border-radius: 20px;
+			overflow: hidden;
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+			transition: all 0.4s ease;
 			height: 100%;
+			display: flex;
+			flex-direction: column;
+			border: 1px solid #f0f4ff;
+			position: relative;
 		}
 
-			.doctor-profile:hover {
-				transform: translateY(-5px);
-				box-shadow: 0 8px 30px rgba(13, 71, 161, 0.15);
+			.doctor-card-home:hover {
+				transform: translateY(-10px);
+				box-shadow: 0 20px 50px rgba(14, 124, 123, 0.15);
+				border-color: #0e7c7b;
 			}
 
-		.doctor-avatar {
-			position: relative;
-			width: 120px;
-			height: 120px;
-			margin: 0 auto 1rem;
-			border-radius: 50%;
-			overflow: hidden;
-			border: 4px solid #e8f0fe;
-		}
+			.doctor-card-home .doctor-banner {
+				height: 85px;
+				background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
+				position: relative;
+				flex-shrink: 0;
+			}
 
-			.doctor-avatar img {
+				.doctor-card-home .doctor-banner::after {
+					content: '';
+					position: absolute;
+					bottom: -1px;
+					left: 0;
+					right: 0;
+					height: 30px;
+					background: #fff;
+					border-radius: 30px 30px 0 0;
+				}
+
+			.doctor-card-home .doctor-avatar-wrapper {
+				position: relative;
+				margin-top: -75px;
+				display: flex;
+				justify-content: center;
+				z-index: 2;
+				flex-shrink: 0;
+			}
+
+			.doctor-card-home .doctor-avatar {
+				width: 130px;
+				height: 130px;
+				border-radius: 50%;
+				overflow: hidden;
+				border: 5px solid #fff;
+				box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+				background: #f0f4ff;
+				transition: all 0.4s ease;
+				position: relative;
+			}
+
+			.doctor-card-home:hover .doctor-avatar {
+				border-color: #0e7c7b;
+				transform: scale(1.05);
+				box-shadow: 0 10px 30px rgba(14, 124, 123, 0.25);
+			}
+
+			.doctor-card-home .doctor-avatar img {
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
+				object-position: center top;
+				transition: transform 0.5s ease;
 			}
 
-		.status-indicator {
-			position: absolute;
-			bottom: 4px;
-			right: 4px;
-			width: 16px;
-			height: 16px;
-			border-radius: 50%;
-			border: 3px solid #fff;
-		}
+			.doctor-card-home:hover .doctor-avatar img {
+				transform: scale(1.08);
+			}
 
-			.status-indicator.available {
+			.doctor-card-home .doctor-avatar .status-dot {
+				position: absolute;
+				bottom: 8px;
+				right: 8px;
+				width: 20px;
+				height: 20px;
+				border-radius: 50%;
+				border: 3px solid #fff;
 				background: #2e7d32;
+				z-index: 3;
+				animation: pulse-green 2s infinite;
 			}
 
-			.status-indicator.busy {
-				background: #ed6c02;
+				.doctor-card-home .doctor-avatar .status-dot.appointment {
+					background: #ed6c02;
+					animation: pulse-orange 2s infinite;
+				}
+
+		@keyframes pulse-green {
+			0% {
+				box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.7);
 			}
 
-			.status-indicator.offline {
-				background: #9e9e9e;
+			70% {
+				box-shadow: 0 0 0 10px rgba(46, 125, 50, 0);
 			}
 
-		.doctor-details h4 {
-			font-size: 1.1rem;
+			100% {
+				box-shadow: 0 0 0 0 rgba(46, 125, 50, 0);
+			}
+		}
+
+		@keyframes pulse-orange {
+			0% {
+				box-shadow: 0 0 0 0 rgba(237, 108, 2, 0.7);
+			}
+
+			70% {
+				box-shadow: 0 0 0 10px rgba(237, 108, 2, 0);
+			}
+
+			100% {
+				box-shadow: 0 0 0 0 rgba(237, 108, 2, 0);
+			}
+		}
+
+		.doctor-card-home .doctor-content {
+			padding: 10px 22px 22px;
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
+			text-align: center;
+		}
+
+			.doctor-card-home .doctor-content h4 {
+				color: #0e7c7b;
+				font-weight: 700;
+				font-size: 1.15rem;
+				margin-bottom: 8px;
+				margin-top: 8px;
+				min-height: 2.3rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+		.doctor-card-home .status-badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 5px;
+			padding: 5px 15px;
+			border-radius: 50px;
+			font-size: 0.72rem;
 			font-weight: 700;
-			color: #0e7c7b;
-			margin-bottom: 0.3rem;
+			margin-bottom: 10px;
+			letter-spacing: 0.3px;
+			text-transform: uppercase;
+			justify-content: center;
 		}
 
-		.doctor-details .specialty-tag {
-			background: #0e7c7b;
-			color: #fff;
-			padding: 0.2rem 0.7rem;
-			border-radius: 20px;
-			font-size: 0.7rem;
-			display: inline-block;
-			margin: 0.15rem;
+			.doctor-card-home .status-badge.available {
+				background: #e8f5e9;
+				color: #2e7d32;
+				border: 1px solid #c8e6c9;
+			}
+
+				.doctor-card-home .status-badge.available::before {
+					content: '';
+					width: 7px;
+					height: 7px;
+					border-radius: 50%;
+					background: #2e7d32;
+					animation: blink 1.5s infinite;
+				}
+
+			.doctor-card-home .status-badge.appointment {
+				background: #fff3e0;
+				color: #e65100;
+				border: 1px solid #ffe0b2;
+			}
+
+				.doctor-card-home .status-badge.appointment::before {
+					content: '';
+					width: 7px;
+					height: 7px;
+					border-radius: 50%;
+					background: #e65100;
+					animation: blink 1.5s infinite;
+				}
+
+		@keyframes blink {
+			0%, 100% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0.4;
+			}
 		}
 
-		.action-buttons {
+		.doctor-card-home .doctor-content .specialty {
+			color: #1565c0;
+			font-weight: 600;
+			font-size: 0.82rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: #f0f4ff;
+			padding: 5px 14px;
+			border-radius: 50px;
+			margin-bottom: 10px;
+			min-height: 2.4rem;
+			line-height: 1.3;
+			text-align: center;
+		}
+
+		.doctor-card-home .doctor-content .qualifications {
+			font-size: 0.78rem;
+			color: #666;
+			margin-bottom: 12px;
+			line-height: 1.5;
+			background: #f8f9fa;
+			padding: 10px 12px;
+			border-radius: 10px;
+			border-left: 3px solid #0e7c7b;
+			text-align: left;
+			min-height: 3.6rem;
+			display: flex;
+			align-items: center;
+		}
+
+		.doctor-card-home .doctor-content p {
+			color: #555;
+			font-size: 0.85rem;
+			line-height: 1.6;
+			margin-bottom: 15px;
+			min-height: 4.2rem;
+			display: flex;
+			align-items: center;
+			text-align: center;
+		}
+
+		.doctor-card-home .doctor-meta {
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+			margin-bottom: 15px;
+			text-align: left;
+			padding: 10px 12px;
+			background: #fafbfc;
+			border-radius: 10px;
+			min-height: 4.5rem;
+			justify-content: center;
+		}
+
+			.doctor-card-home .doctor-meta .experience,
+			.doctor-card-home .doctor-meta .department {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				font-size: 0.82rem;
+				color: #555;
+			}
+
+			.doctor-card-home .doctor-meta i {
+				color: #0e7c7b;
+				font-size: 0.88rem;
+				min-width: 16px;
+			}
+
+		.doctor-card-home .action-buttons {
 			display: flex;
 			gap: 0.5rem;
-			margin-top: 1rem;
+			margin-top: auto;
 			justify-content: center;
 			flex-wrap: wrap;
 		}
 
-			.action-buttons .btn-secondary {
+			.doctor-card-home .action-buttons .btn-secondary {
 				background: #f0f4ff;
 				color: #0e7c7b;
-				padding: 0.4rem 1rem;
+				padding: 0.5rem 1rem;
 				border-radius: 50px;
 				text-decoration: none;
 				font-size: 0.8rem;
 				font-weight: 600;
 				transition: all 0.3s ease;
 				border: 1px solid #0e7c7b;
+				flex: 1;
+				text-align: center;
 			}
 
-				.action-buttons .btn-secondary:hover {
+				.doctor-card-home .action-buttons .btn-secondary:hover {
 					background: #0e7c7b;
 					color: #fff;
 				}
 
-			.action-buttons .btn-primary {
-				background: #0e7c7b;
+			.doctor-card-home .action-buttons .btn-primary {
+				background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
 				color: #fff;
-				padding: 0.4rem 1.2rem;
+				padding: 0.5rem 1rem;
 				border-radius: 50px;
 				text-decoration: none;
 				font-size: 0.8rem;
@@ -235,11 +435,14 @@
 				transition: all 0.3s ease;
 				border: none;
 				cursor: pointer;
+				flex: 1;
+				text-align: center;
 			}
 
-				.action-buttons .btn-primary:hover {
-					background: #0a3a8a;
+				.doctor-card-home .action-buttons .btn-primary:hover {
+					background: linear-gradient(135deg, #1da851 0%, #168a42 100%);
 					transform: scale(1.02);
+					box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
 				}
 
 		.btn-view-all {
@@ -372,16 +575,34 @@
 
 		/* Responsive fixes */
 		@media (max-width: 768px) {
-			.doctor-avatar {
-				width: 100px;
-				height: 100px;
+			.doctor-card-home .doctor-avatar {
+				width: 110px;
+				height: 110px;
 			}
 
-			.action-buttons .btn-secondary,
-			.action-buttons .btn-primary {
-				font-size: 0.7rem;
-				padding: 0.3rem 0.8rem;
+			.doctor-card-home .doctor-avatar-wrapper {
+				margin-top: -65px;
 			}
+
+			.doctor-card-home .doctor-banner {
+				height: 75px;
+			}
+
+			.doctor-card-home .doctor-content {
+				padding: 10px 18px 18px;
+			}
+
+				.doctor-card-home .doctor-content h4 {
+					font-size: 1.05rem;
+					min-height: auto;
+				}
+
+				.doctor-card-home .doctor-content .specialty,
+				.doctor-card-home .doctor-content .qualifications,
+				.doctor-card-home .doctor-content p,
+				.doctor-card-home .doctor-meta {
+					min-height: auto;
+				}
 
 			#sai-medicals {
 				padding: 40px 20px;
@@ -599,24 +820,14 @@
 				<nav id="navmenu" class="navmenu">
 					<ul>
 						<li><a href="index.html" class="active">Home</a></li>
-						<li><a href="FounderandDirector.html">Founder</a></li> <li><a href="about.html">About</a></li>
+						<li><a href="FounderandDirector.html">Founder</a></li>
+						<li><a href="about.html">About</a></li>
 						<li><a href="departments.html">Departments</a></li>
 						<li><a href="services.html">Services</a></li>
 						<li><a href="doctors.html">Doctors</a></li>
-						
 						<li><a href="clinics.html">Our Clinics</a></li>
-						<!--<li class="dropdown">
-							<a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-							<ul>
-								<li><a href="department-details.html">Department Details</a></li>
-								<li><a href="service-details.html">Service Details</a></li>
-								<li><a href="appointment.html">Appointment</a></li>
-								<li><a href="testimonials.html">Testimonials</a></li>
-								<li><a href="faq.html">Frequently Asked Questions</a></li>
-								<li><a href="gallery.html">Gallery</a></li>
-							</ul>
-						</li>-->
-							<li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li>
+						<li><a href="blog.html">Blog</a></li>
+						<li><a href="contact.html">Contact</a></li>
 					</ul>
 					<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 				</nav>
@@ -802,84 +1013,136 @@
 
 					<!-- Doctor 1: Dr. S. Sangami -->
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-						<div class="doctor-profile">
-							<div class="profile-header">
+						<div class="doctor-card-home">
+							<div class="doctor-banner"></div>
+							<div class="doctor-avatar-wrapper">
 								<div class="doctor-avatar">
-									<img src="assets/img/health/dr-sangami-pro.jpg" alt="Dr. S. Sangami" class="img-fluid">
-									<div class="status-indicator available"></div>
-								</div>
-								<div class="doctor-details">
-									<h4>Dr. S. Sangami</h4>
-									<span class="specialty-tag">M.B.B.S., Dip. Diabetology</span>
-									<span class="specialty-tag" style="background:#1565c0;">FICM</span>
+									<img src="img/drsangami1.jfif" alt="Dr. S. Sangami">
+									<div class="status-dot"></div>
 								</div>
 							</div>
-							<div class="action-buttons">
-								<a href="#!" class="btn-secondary view-doctor" data-doctor="Dr. S. Sangami">View Details</a>
-								<a href="#" class="btn-primary book-appointment-btn" data-doctor="Dr. S. Sangami">Book Now</a>
+							<div class="doctor-content">
+								<h4>Dr. S. Sangami</h4>
+								<span class="status-badge available">Available</span>
+								<span class="specialty">Clinical Diabetology & Metabolic Health</span>
+								<div class="qualifications">M.B.B.S., Dip. Diabetology, FICM<br>MEM (GW University-USA)</div>
+								<p>Expert in clinical diabetology and metabolic health management.</p>
+								<div class="doctor-meta">
+									<div class="experience">
+										<i class="bi bi-award"></i>
+										<span>10+ Years Experience</span>
+									</div>
+									<div class="department">
+										<i class="bi bi-building"></i>
+										<span>Diabetology Dept.</span>
+									</div>
+								</div>
+								<div class="action-buttons">
+									<a href="#!" class="btn-secondary view-doctor" data-doctor="Dr. S. Sangami">Details</a>
+									<a href="#" class="btn-primary book-appointment-btn" data-doctor="Dr. S. Sangami">Book Now</a>
+								</div>
 							</div>
 						</div>
 					</div>
 
 					<!-- Doctor 2: Dr. M. Karthikeyan -->
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-						<div class="doctor-profile">
-							<div class="profile-header">
+						<div class="doctor-card-home">
+							<div class="doctor-banner"></div>
+							<div class="doctor-avatar-wrapper">
 								<div class="doctor-avatar">
-									<img src="img/mrtr-doctor.png" alt="Dr. M. Karthikeyan" class="img-fluid">
-									<div class="status-indicator available"></div>
-								</div>
-								<div class="doctor-details">
-									<h4>Dr. M. Karthikeyan</h4>
-									<span class="specialty-tag">M.S. (Ortho)</span>
-									<span class="specialty-tag" style="background:#1565c0;">Orthopedics</span>
+									<img src="img/pradeepkumr.jfif" alt="Dr. M. Karthikeyan">
+									<div class="status-dot"></div>
 								</div>
 							</div>
-							<div class="action-buttons">
-								<a href="#!" class="btn-secondary view-doctor" data-doctor="Dr. M. Karthikeyan">View Details</a>
-								<a href="#" class="btn-primary book-appointment-btn" data-doctor="Dr. M. Karthikeyan">Schedule</a>
+							<div class="doctor-content">
+								<h4>Dr. M. Karthikeyan</h4>
+								<span class="status-badge available">Available</span>
+								<span class="specialty">Orthopedics & Joint Replacement</span>
+								<div class="qualifications">M.S. (Ortho)</div>
+								<p>Specialized in orthopedics and joint replacement surgeries.</p>
+								<div class="doctor-meta">
+									<div class="experience">
+										<i class="bi bi-award"></i>
+										<span>12+ Years Experience</span>
+									</div>
+									<div class="department">
+										<i class="bi bi-building"></i>
+										<span>Orthopedics Dept.</span>
+									</div>
+								</div>
+								<div class="action-buttons">
+									<a href="#!" class="btn-secondary view-doctor" data-doctor="Dr. M. Karthikeyan">Details</a>
+									<a href="#" class="btn-primary book-appointment-btn" data-doctor="Dr. M. Karthikeyan">Book Now</a>
+								</div>
 							</div>
 						</div>
 					</div>
 
-					<!-- Doctor 3: Dr. M.R. Ramya -->
+					<!-- Doctor 3: Dr. M. Salomon Themothi -->
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-						<div class="doctor-profile">
-							<div class="profile-header">
+						<div class="doctor-card-home">
+							<div class="doctor-banner"></div>
+							<div class="doctor-avatar-wrapper">
 								<div class="doctor-avatar">
-									<img src="img/mis-doctr.png" alt="Dr. M.R. Ramya" class="img-fluid">
-									<div class="status-indicator available"></div>
-								</div>
-								<div class="doctor-details">
-									<h4>Dr. M.R. Ramya</h4>
-									<span class="specialty-tag">M.B.B.S., D.G.O.</span>
-									<span class="specialty-tag" style="background:#1565c0;">DRM, F.M.A.S.</span>
+									<img src="img/Solomon.jfif" alt="Dr. M. Salomon Themothi">
+									<div class="status-dot appointment"></div>
 								</div>
 							</div>
-							<div class="action-buttons">
-								<a href="#!" class="btn-secondary view-doctor" data-doctor="Dr. M.R. Ramya">View Details</a>
-								<a href="#" class="btn-primary book-appointment-btn" data-doctor="Dr. M.R. Ramya">Book Now</a>
+							<div class="doctor-content">
+								<h4>Dr. M. Salomon Themothi</h4>
+								<span class="status-badge appointment">On Appointment</span>
+								<span class="specialty">General Surgery</span>
+								<div class="qualifications">M.B.B.S., MS., DNB., FIAGES</div>
+								<p>Experienced surgeon specializing in general and laparoscopic surgery.</p>
+								<div class="doctor-meta">
+									<div class="experience">
+										<i class="bi bi-award"></i>
+										<span>15+ Years Experience</span>
+									</div>
+									<div class="department">
+										<i class="bi bi-building"></i>
+										<span>Surgery Dept.</span>
+									</div>
+								</div>
+								<div class="action-buttons">
+									<a href="#!" class="btn-secondary view-doctor" data-doctor="Dr. M. Salomon Themothi">Details</a>
+									<a href="#" class="btn-primary book-appointment-btn" data-doctor="Dr. M. Salomon Themothi">Book Now</a>
+								</div>
 							</div>
 						</div>
 					</div>
 
-					<!-- Doctor 4: Dr. N.H. Mallikarjun -->
+					<!-- Doctor 4: Dr. D. Tharun -->
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
-						<div class="doctor-profile">
-							<div class="profile-header">
+						<div class="doctor-card-home">
+							<div class="doctor-banner"></div>
+							<div class="doctor-avatar-wrapper">
 								<div class="doctor-avatar">
-									<img src="img/mrtr-doctor.png" alt="Dr. N.H. Mallikarjun" class="img-fluid">
-									<div class="status-indicator available"></div>
-								</div>
-								<div class="doctor-details">
-									<h4>Dr. N.H. Mallikarjun</h4>
-									<span class="specialty-tag">M.B.B.S., M.S.</span>
-									<span class="specialty-tag" style="background:#1565c0;">General Surgery</span>
+									<img src="img/Tharun.jfif" alt="Dr. D. Tharun">
+									<div class="status-dot appointment"></div>
 								</div>
 							</div>
-							<div class="action-buttons">
-								<a href="#!" class="btn-secondary view-doctor" data-doctor="Dr. N.H. Mallikarjun">View Details</a>
-								<a href="#" class="btn-primary book-appointment-btn" data-doctor="Dr. N.H. Mallikarjun">Schedule</a>
+							<div class="doctor-content">
+								<h4>Dr. D. Tharun</h4>
+								<span class="status-badge appointment">On Appointment</span>
+								<span class="specialty">Pulmonology</span>
+								<div class="qualifications">MD., Pulmonology</div>
+								<p>Specialist in respiratory medicine and asthma care.</p>
+								<div class="doctor-meta">
+									<div class="experience">
+										<i class="bi bi-award"></i>
+										<span>8+ Years Experience</span>
+									</div>
+									<div class="department">
+										<i class="bi bi-building"></i>
+										<span>Pulmonology Dept.</span>
+									</div>
+								</div>
+								<div class="action-buttons">
+									<a href="#!" class="btn-secondary view-doctor" data-doctor="Dr. D. Tharun">Details</a>
+									<a href="#" class="btn-primary book-appointment-btn" data-doctor="Dr. D. Tharun">Book Now</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -1218,7 +1481,7 @@
 
 						<div class="col-lg-6">
 							<div class="copyright">
-								<p style="color:#ffffff;" >© 2025 <span class="sitename">SAI CLINIC</span>. All Rights Reserved.</p>
+								<p><span class="sitename">SAI CLINIC</span> All Rights Reserved</p>
 							</div>
 						</div>
 
@@ -1317,8 +1580,10 @@
 												<option value="">Choose a doctor</option>
 												<option value="Dr. S. Sangami" ${doctorName === 'Dr. S. Sangami' ? 'selected' : ''}>Dr. S. Sangami (Diabetology)</option>
 												<option value="Dr. M. Karthikeyan" ${doctorName === 'Dr. M. Karthikeyan' ? 'selected' : ''}>Dr. M. Karthikeyan (Orthopedics)</option>
-												<option value="Dr. M.R. Ramya" ${doctorName === 'Dr. M.R. Ramya' ? 'selected' : ''}>Dr. M.R. Ramya (Gynaecology)</option>
-												<option value="Dr. N.H. Mallikarjun" ${doctorName === 'Dr. N.H. Mallikarjun' ? 'selected' : ''}>Dr. N.H. Mallikarjun (General Surgery)</option>
+												<option value="Dr. M. Salomon Themothi" ${doctorName === 'Dr. M. Salomon Themothi' ? 'selected' : ''}>Dr. M. Salomon Themothi (General Surgery)</option>
+												<option value="Dr. D. Tharun" ${doctorName === 'Dr. D. Tharun' ? 'selected' : ''}>Dr. D. Tharun (Pulmonology)</option>
+												<option value="Dr. Subash Kaushik. T. G" ${doctorName === 'Dr. Subash Kaushik. T. G' ? 'selected' : ''}>Dr. Subash Kaushik. T. G (Urology)</option>
+												<option value="Dr. V. Prathapkumar" ${doctorName === 'Dr. V. Prathapkumar' ? 'selected' : ''}>Dr. V. Prathapkumar (General Medicine)</option>
 											</select>
 										</div>
 										<div class="mb-3">
@@ -1434,29 +1699,43 @@
 						details = {
 							specialty: 'Clinical Diabetology & Metabolic Health',
 							experience: '12+ years',
-							education: 'M.B.B.S., Dip. Diabetology, FICM',
+							education: 'M.B.B.S., Dip. Diabetology, FICM, MEM (GW University-USA)',
 							availability: 'Available Today'
 						};
 					} else if (doctorName === 'Dr. M. Karthikeyan') {
 						details = {
 							specialty: 'Orthopedics & Joint Replacement',
-							experience: '8+ years',
+							experience: '12+ years',
 							education: 'M.S. (Ortho)',
 							availability: 'Available Today'
 						};
-					} else if (doctorName === 'Dr. M.R. Ramya') {
+					} else if (doctorName === 'Dr. M. Salomon Themothi') {
 						details = {
-							specialty: 'Gynaecology & Fertility Expert',
-							experience: '6+ years',
-							education: 'M.B.B.S., D.G.O., DRM, F.M.A.S.',
-							availability: 'Available Today'
+							specialty: 'General Surgery',
+							experience: '15+ years',
+							education: 'M.B.B.S., MS., DNB., FIAGES',
+							availability: 'On Appointment'
 						};
-					} else if (doctorName === 'Dr. N.H. Mallikarjun') {
+					} else if (doctorName === 'Dr. D. Tharun') {
 						details = {
-							specialty: 'General & Laparoscopic Surgery',
-							experience: '4+ years',
-							education: 'M.B.B.S., M.S. (Gen Surg)',
-							availability: 'Available Today'
+							specialty: 'Pulmonology',
+							experience: '8+ years',
+							education: 'MD., Pulmonology',
+							availability: 'On Appointment'
+							};
+					} else if (doctorName === 'Dr. Subash Kaushik. T. G') {
+						details = {
+							specialty: 'Urology',
+							experience: '10+ years',
+							education: 'M.B.B.S., MS., Urology',
+							availability: 'On Appointment'
+						};
+					} else if (doctorName === 'Dr. V. Prathapkumar') {
+						details = {
+							specialty: 'General Medicine',
+							experience: '12+ years',
+							education: 'M.B.B.S., MD., General Medicine, DNB., CCCDM',
+							availability: 'On Appointment'
 						};
 					}
 
@@ -1492,7 +1771,7 @@
 				});
 			});
 
-			console.log('SAI CLINIC - Appointment system ready!');
+			console.log('SAI CLINIC - Home page ready!');
 			console.log('Email: info@saigroupofclinics.com | Phone: +91 97879 60590');
 		});
 	</script>

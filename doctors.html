@@ -62,203 +62,343 @@
 			color: rgba(255, 255, 255, 0.9);
 		}
 
-		.breadcrumbs {
-			background: #f0f4ff;
-			padding: 15px 0;
-		}
-
-			.breadcrumbs ol li a {
-				color: #0e7c7b;
-			}
-
-			.breadcrumbs ol li.current {
-				color: #333;
-			}
-
-		/* Doctor Cards */
+		/* ==========================================
+		   STYLISH ROUND DOCTOR CARD - SAME HEIGHT
+		   ========================================== */
 		.doctor-card {
 			background: #fff;
-			border-radius: 16px;
+			border-radius: 20px;
 			overflow: hidden;
 			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-			transition: all 0.3s ease;
+			transition: all 0.4s ease;
 			height: 100%;
+			display: flex;
+			flex-direction: column;
+			border: 1px solid #f0f4ff;
+			position: relative;
 		}
 
 			.doctor-card:hover {
-				transform: translateY(-8px);
-				box-shadow: 0 12px 40px rgba(13, 71, 161, 0.12);
+				transform: translateY(-10px);
+				box-shadow: 0 20px 50px rgba(14, 124, 123, 0.15);
+				border-color: #0e7c7b;
 			}
 
-			.doctor-card .doctor-image {
+			/* Top Decorative Banner */
+			.doctor-card .doctor-banner {
+				height: 85px;
+				background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
 				position: relative;
-				overflow: hidden;
-				height: 250px;
+				flex-shrink: 0;
 			}
 
-				.doctor-card .doctor-image img {
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
-					transition: transform 0.5s ease;
+				.doctor-card .doctor-banner::after {
+					content: '';
+					position: absolute;
+					bottom: -1px;
+					left: 0;
+					right: 0;
+					height: 30px;
+					background: #fff;
+					border-radius: 30px 30px 0 0;
 				}
 
-			.doctor-card:hover .doctor-image img {
-				transform: scale(1.05);
+			/* Round Avatar */
+			.doctor-card .doctor-avatar-wrapper {
+				position: relative;
+				margin-top: -75px;
+				display: flex;
+				justify-content: center;
+				z-index: 2;
+				flex-shrink: 0;
 			}
 
-			.doctor-card .doctor-overlay {
+			.doctor-card .doctor-avatar {
+				width: 130px;
+				height: 130px;
+				border-radius: 50%;
+				overflow: hidden;
+				border: 5px solid #fff;
+				box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+				background: #f0f4ff;
+				transition: all 0.4s ease;
+				position: relative;
+			}
+
+			.doctor-card:hover .doctor-avatar {
+				border-color: #0e7c7b;
+				transform: scale(1.05);
+				box-shadow: 0 10px 30px rgba(14, 124, 123, 0.25);
+			}
+
+			.doctor-card .doctor-avatar img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center top;
+				transition: transform 0.5s ease;
+			}
+
+			.doctor-card:hover .doctor-avatar img {
+				transform: scale(1.08);
+			}
+
+			/* Online Status Dot */
+			.doctor-card .doctor-avatar .status-dot {
 				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				background: rgba(13, 71, 161, 0.7);
+				bottom: 8px;
+				right: 8px;
+				width: 20px;
+				height: 20px;
+				border-radius: 50%;
+				border: 3px solid #fff;
+				background: #2e7d32;
+				z-index: 3;
+				animation: pulse-green 2s infinite;
+			}
+
+				.doctor-card .doctor-avatar .status-dot.appointment {
+					background: #ed6c02;
+					animation: pulse-orange 2s infinite;
+				}
+
+		@keyframes pulse-green {
+			0% {
+				box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.7);
+			}
+
+			70% {
+				box-shadow: 0 0 0 10px rgba(46, 125, 50, 0);
+			}
+
+			100% {
+				box-shadow: 0 0 0 0 rgba(46, 125, 50, 0);
+			}
+		}
+
+		@keyframes pulse-orange {
+			0% {
+				box-shadow: 0 0 0 0 rgba(237, 108, 2, 0.7);
+			}
+
+			70% {
+				box-shadow: 0 0 0 10px rgba(237, 108, 2, 0);
+			}
+
+			100% {
+				box-shadow: 0 0 0 0 rgba(237, 108, 2, 0);
+			}
+		}
+
+		/* Doctor Content */
+		.doctor-card .doctor-content {
+			padding: 10px 22px 22px;
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
+			text-align: center;
+		}
+
+			.doctor-card .doctor-content h4 {
+				color: #0e7c7b;
+				font-weight: 700;
+				font-size: 1.15rem;
+				margin-bottom: 8px;
+				margin-top: 8px;
+				min-height: 2.3rem;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				opacity: 0;
-				transition: opacity 0.3s ease;
 			}
 
-			.doctor-card:hover .doctor-overlay {
+		/* Status Badge */
+		.doctor-card .status-badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 5px;
+			padding: 5px 15px;
+			border-radius: 50px;
+			font-size: 0.72rem;
+			font-weight: 700;
+			margin-bottom: 10px;
+			letter-spacing: 0.3px;
+			text-transform: uppercase;
+		}
+
+			.doctor-card .status-badge.available {
+				background: #e8f5e9;
+				color: #2e7d32;
+				border: 1px solid #c8e6c9;
+			}
+
+				.doctor-card .status-badge.available::before {
+					content: '';
+					width: 7px;
+					height: 7px;
+					border-radius: 50%;
+					background: #2e7d32;
+					animation: blink 1.5s infinite;
+				}
+
+			.doctor-card .status-badge.appointment {
+				background: #fff3e0;
+				color: #e65100;
+				border: 1px solid #ffe0b2;
+			}
+
+				.doctor-card .status-badge.appointment::before {
+					content: '';
+					width: 7px;
+					height: 7px;
+					border-radius: 50%;
+					background: #e65100;
+					animation: blink 1.5s infinite;
+				}
+
+		@keyframes blink {
+			0%, 100% {
 				opacity: 1;
 			}
 
-			.doctor-card .doctor-overlay .social-links {
-				display: flex;
-				gap: 15px;
+			50% {
+				opacity: 0.4;
 			}
-
-				.doctor-card .doctor-overlay .social-links a {
-					color: #fff;
-					font-size: 1.5rem;
-					transition: all 0.3s ease;
-					width: 45px;
-					height: 45px;
-					background: rgba(255, 255, 255, 0.2);
-					border-radius: 50%;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					text-decoration: none;
-				}
-
-					.doctor-card .doctor-overlay .social-links a:hover {
-						background: #fff;
-						color: #0e7c7b;
-						transform: scale(1.1);
-					}
-
-			.doctor-card .doctor-content {
-				padding: 20px 25px 25px;
-			}
-
-				.doctor-card .doctor-content h4 {
-					color: #0e7c7b;
-					font-weight: 700;
-					font-size: 1.15rem;
-					margin-bottom: 2px;
-				}
-
-				.doctor-card .doctor-content .specialty {
-					color: #1565c0;
-					font-weight: 600;
-					font-size: 0.85rem;
-					display: inline-block;
-					background: #f0f4ff;
-					padding: 3px 15px;
-					border-radius: 50px;
-					margin-bottom: 6px;
-				}
-
-				.doctor-card .doctor-content .qualifications {
-					font-size: 0.8rem;
-					color: #666;
-					margin-bottom: 10px;
-					line-height: 1.5;
-					background: #f8f9fa;
-					padding: 8px 12px;
-					border-radius: 8px;
-					border-left: 3px solid #0e7c7b;
-				}
-
-				.doctor-card .doctor-content p {
-					color: #555;
-					font-size: 0.9rem;
-					line-height: 1.6;
-					margin-bottom: 12px;
-				}
-
-			.doctor-card .doctor-meta {
-				display: flex;
-				flex-direction: column;
-				gap: 5px;
-				margin-bottom: 15px;
-			}
-
-				.doctor-card .doctor-meta .experience,
-				.doctor-card .doctor-meta .department {
-					display: flex;
-					align-items: center;
-					gap: 8px;
-					font-size: 0.85rem;
-					color: #555;
-				}
-
-				.doctor-card .doctor-meta i {
-					color: #0e7c7b;
-					font-size: 0.9rem;
-				}
-
-			.doctor-card .btn-appointment {
-				display: inline-flex;
-				align-items: center;
-				gap: 8px;
-				background: #25D366;
-				color: #fff;
-				padding: 10px 25px;
-				border-radius: 50px;
-				text-decoration: none;
-				font-weight: 600;
-				font-size: 0.9rem;
-				transition: all 0.3s ease;
-				width: 100%;
-				justify-content: center;
-				border: none;
-				cursor: pointer;
-			}
-
-				.doctor-card .btn-appointment:hover {
-					background: #1da851;
-					color: #fff;
-					transform: scale(1.02);
-					box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
-				}
-
-				.doctor-card .btn-appointment i {
-					font-size: 1.2rem;
-				}
-
-		/* Status Badge - All Available */
-		.status-badge {
-			display: inline-block;
-			padding: 3px 12px;
-			border-radius: 50px;
-			font-size: 0.7rem;
-			font-weight: 600;
-			margin-left: 8px;
 		}
 
-			.status-badge.available {
-				background: #e8f5e9;
-				color: #2e7d32;
+		.doctor-card .doctor-content .specialty {
+			color: #1565c0;
+			font-weight: 600;
+			font-size: 0.82rem;
+			display: inline-block;
+			background: #f0f4ff;
+			padding: 5px 14px;
+			border-radius: 50px;
+			margin-bottom: 10px;
+			min-height: 2.4rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			line-height: 1.3;
+		}
+
+		.doctor-card .doctor-content .qualifications {
+			font-size: 0.78rem;
+			color: #666;
+			margin-bottom: 12px;
+			line-height: 1.5;
+			background: #f8f9fa;
+			padding: 10px 12px;
+			border-radius: 10px;
+			border-left: 3px solid #0e7c7b;
+			text-align: left;
+			min-height: 3.6rem;
+			display: flex;
+			align-items: center;
+		}
+
+		.doctor-card .doctor-content p {
+			color: #555;
+			font-size: 0.85rem;
+			line-height: 1.6;
+			margin-bottom: 15px;
+			min-height: 4.2rem;
+			display: flex;
+			align-items: center;
+			text-align: center;
+		}
+
+		.doctor-card .doctor-meta {
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+			margin-bottom: 15px;
+			text-align: left;
+			padding: 10px 12px;
+			background: #fafbfc;
+			border-radius: 10px;
+			min-height: 4.5rem;
+			justify-content: center;
+		}
+
+			.doctor-card .doctor-meta .experience,
+			.doctor-card .doctor-meta .department {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				font-size: 0.82rem;
+				color: #555;
 			}
 
-			.status-badge.appointment {
-				background: #fff3e0;
-				color: #e65100;
+			.doctor-card .doctor-meta i {
+				color: #0e7c7b;
+				font-size: 0.88rem;
+				min-width: 16px;
 			}
+
+		/* Button */
+		.doctor-card .btn-appointment {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
+			color: #fff;
+			padding: 11px 25px;
+			border-radius: 50px;
+			text-decoration: none;
+			font-weight: 600;
+			font-size: 0.88rem;
+			transition: all 0.3s ease;
+			width: 100%;
+			justify-content: center;
+			border: none;
+			cursor: pointer;
+			margin-top: auto;
+		}
+
+			.doctor-card .btn-appointment:hover {
+				background: linear-gradient(135deg, #1da851 0%, #168a42 100%);
+				color: #fff;
+				transform: scale(1.02);
+				box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+			}
+
+			.doctor-card .btn-appointment i {
+				font-size: 1.15rem;
+			}
+
+		/* Social Icons Row */
+		.doctor-card .doctor-social {
+			display: flex;
+			justify-content: center;
+			gap: 10px;
+			margin-top: 12px;
+			padding-top: 12px;
+			border-top: 1px solid #f0f4ff;
+		}
+
+			.doctor-card .doctor-social a {
+				width: 34px;
+				height: 34px;
+				border-radius: 50%;
+				background: #f0f4ff;
+				color: #0e7c7b;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-decoration: none;
+				transition: all 0.3s ease;
+				font-size: 0.9rem;
+			}
+
+				.doctor-card .doctor-social a:hover {
+					background: #0e7c7b;
+					color: #fff;
+					transform: translateY(-3px);
+				}
+
+				.doctor-card .doctor-social a.whatsapp:hover {
+					background: #25D366;
+				}
 
 		/* Footer Styles */
 		.footer-16 .sitename {
@@ -350,13 +490,34 @@
 				padding: 60px 0 40px;
 			}
 
-			.doctor-card .doctor-image {
-				height: 200px;
+			.doctor-card .doctor-avatar {
+				width: 110px;
+				height: 110px;
+			}
+
+			.doctor-card .doctor-avatar-wrapper {
+				margin-top: -65px;
+			}
+
+			.doctor-card .doctor-banner {
+				height: 75px;
 			}
 
 			.doctor-card .doctor-content {
-				padding: 15px 20px 20px;
+				padding: 10px 18px 18px;
 			}
+
+				.doctor-card .doctor-content h4 {
+					font-size: 1.05rem;
+					min-height: auto;
+				}
+
+				.doctor-card .doctor-content .specialty,
+				.doctor-card .doctor-content .qualifications,
+				.doctor-card .doctor-content p,
+				.doctor-card .doctor-meta {
+					min-height: auto;
+				}
 		}
 
 		/* WhatsApp Floating Button */
@@ -428,24 +589,6 @@
 				font-size: 1.2rem;
 			}
 
-		/* Slot Timing */
-		.slot-timing {
-			display: inline-flex;
-			align-items: center;
-			gap: 5px;
-			background: #e3f2fd;
-			color: #0e7c7b;
-			padding: 4px 12px;
-			border-radius: 50px;
-			font-size: 0.75rem;
-			font-weight: 600;
-			margin-top: 5px;
-		}
-
-			.slot-timing i {
-				font-size: 0.8rem;
-			}
-
 		/* Date Picker Modal Styles */
 		.date-picker-modal .swal2-popup {
 			padding: 20px;
@@ -509,27 +652,8 @@
 				font-weight: 500;
 			}
 
-		/* Book Appointment Button */
 		.book-appointment-btn {
 			cursor: pointer;
-		}
-
-		/* Tamil Name */
-		.doctor-tamil-name {
-			display: block;
-			font-size: 0.85rem;
-			color: #0e7c7b;
-			font-weight: 500;
-			margin-bottom: 2px;
-		}
-
-		/* On Appointment Note */
-		.on-appointment {
-			font-size: 0.75rem;
-			color: #e65100;
-			font-weight: 600;
-			display: block;
-			margin-top: 2px;
 		}
 	</style>
 
@@ -611,28 +735,23 @@
 		</div><!-- End Page Title -->
 		<!-- Doctors Section -->
 		<section id="doctors" class="doctors section">
-
 			<div class="container" data-aos="fade-up" data-aos-delay="100">
-
 				<div class="row gy-4">
 
 					<!-- Doctor 1: Dr. S. Sangami -->
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
 						<div class="doctor-card">
-							<div class="doctor-image">
-								<img src="assets/img/health/dr-sangami-pro.jpg" alt="Dr. S. Sangami" class="img-fluid">
-								<div class="doctor-overlay">
-									<div class="social-links">
-										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20S.%20Sangami%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
-										<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
-										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
-									</div>
+							<div class="doctor-banner"></div>
+							<div class="doctor-avatar-wrapper">
+								<div class="doctor-avatar">
+									<img src="img/drsangami1.jfif" alt="Dr. S. Sangami">
+									<div class="status-dot"></div>
 								</div>
 							</div>
 							<div class="doctor-content">
 								<h4>Dr. S. Sangami</h4>
-								<span class="specialty">Clinical Diabetology & Metabolic Health</span>
 								<span class="status-badge available">Available</span>
+								<span class="specialty">Clinical Diabetology & Metabolic Health</span>
 								<div class="qualifications">M.B.B.S., Dip. Diabetology, FICM<br>MEM (GW University-USA)</div>
 								<p>Expert in clinical diabetology and metabolic health management with comprehensive care for diabetes patients.</p>
 								<div class="doctor-meta">
@@ -648,26 +767,28 @@
 								<button class="btn-appointment book-appointment" data-doctor="Dr. S. Sangami" data-specialty="Clinical Diabetology & Metabolic Health">
 									<i class="bi bi-calendar-check"></i> Book Appointment
 								</button>
+								<div class="doctor-social">
+									<a href="https://wa.me/919787960590?text=Hi%20Dr.%20S.%20Sangami%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+									<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
+									<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
+								</div>
 							</div>
 						</div>
 					</div><!-- End Doctor Card -->
 					<!-- Doctor 2: Dr. M. Karthikeyan -->
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
 						<div class="doctor-card">
-							<div class="doctor-image">
-								<img src="assets/img/health/staff-8.webp" alt="Dr. M. Karthikeyan" class="img-fluid">
-								<div class="doctor-overlay">
-									<div class="social-links">
-										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20M.%20Karthikeyan%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
-										<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
-										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
-									</div>
+							<div class="doctor-banner"></div>
+							<div class="doctor-avatar-wrapper">
+								<div class="doctor-avatar">
+									<img src="img/pradeepkumr.jfif" alt="Dr. M. Karthikeyan">
+									<div class="status-dot"></div>
 								</div>
 							</div>
 							<div class="doctor-content">
 								<h4>Dr. M. Karthikeyan</h4>
-								<span class="specialty">Orthopedics & Joint Replacement</span>
 								<span class="status-badge available">Available</span>
+								<span class="specialty">Orthopedics & Joint Replacement</span>
 								<div class="qualifications">M.S. (Ortho)</div>
 								<p>Specialized in orthopedics and joint replacement surgeries with advanced surgical techniques for better outcomes.</p>
 								<div class="doctor-meta">
@@ -683,26 +804,28 @@
 								<button class="btn-appointment book-appointment" data-doctor="Dr. M. Karthikeyan" data-specialty="Orthopedics & Joint Replacement">
 									<i class="bi bi-calendar-check"></i> Book Appointment
 								</button>
+								<div class="doctor-social">
+									<a href="https://wa.me/919787960590?text=Hi%20Dr.%20M.%20Karthikeyan%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+									<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
+									<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
+								</div>
 							</div>
 						</div>
 					</div><!-- End Doctor Card -->
-					<!-- Doctor 3: Dr. M.R. Ramya (M. Salomon Themothi in image?) -->
+					<!-- Doctor 3: Dr. M. Salomon Themothi -->
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
 						<div class="doctor-card">
-							<div class="doctor-image">
-								<img src="assets/img/health/staff-4.webp" alt="Dr. M. Salomon Themothi" class="img-fluid">
-								<div class="doctor-overlay">
-									<div class="social-links">
-										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20M.%20Salomon%20Themothi%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
-										<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
-										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
-									</div>
+							<div class="doctor-banner"></div>
+							<div class="doctor-avatar-wrapper">
+								<div class="doctor-avatar">
+									<img src="img/Solomon.jfif" alt="Dr. M. Salomon Themothi">
+									<div class="status-dot appointment"></div>
 								</div>
 							</div>
 							<div class="doctor-content">
 								<h4>Dr. M. Salomon Themothi</h4>
-								<span class="specialty">General Surgery</span>
 								<span class="status-badge appointment">On Appointment</span>
+								<span class="specialty">General Surgery</span>
 								<div class="qualifications">M.B.B.S., MS., DNB., FIAGES</div>
 								<p>Experienced surgeon specializing in general and laparoscopic surgical procedures.</p>
 								<div class="doctor-meta">
@@ -718,26 +841,28 @@
 								<button class="btn-appointment book-appointment" data-doctor="Dr. M. Salomon Themothi" data-specialty="General Surgery">
 									<i class="bi bi-calendar-check"></i> Book Appointment
 								</button>
+								<div class="doctor-social">
+									<a href="https://wa.me/919787960590?text=Hi%20Dr.%20M.%20Salomon%20Themothi%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+									<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
+									<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
+								</div>
 							</div>
 						</div>
 					</div><!-- End Doctor Card -->
 					<!-- Doctor 4: Dr. D. Tharun -->
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
 						<div class="doctor-card">
-							<div class="doctor-image">
-								<img src="assets/img/health/staff-6.webp" alt="Dr. D. Tharun" class="img-fluid">
-								<div class="doctor-overlay">
-									<div class="social-links">
-										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20D.%20Tharun%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
-										<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
-										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
-									</div>
+							<div class="doctor-banner"></div>
+							<div class="doctor-avatar-wrapper">
+								<div class="doctor-avatar">
+									<img src="img/Tharun.jfif" alt="Dr. D. Tharun">
+									<div class="status-dot appointment"></div>
 								</div>
 							</div>
 							<div class="doctor-content">
 								<h4>Dr. D. Tharun</h4>
-								<span class="specialty">Pulmonology</span>
 								<span class="status-badge appointment">On Appointment</span>
+								<span class="specialty">Pulmonology</span>
 								<div class="qualifications">MD., Pulmonology</div>
 								<p>Specialist in respiratory medicine and asthma care with comprehensive pulmonary treatment.</p>
 								<div class="doctor-meta">
@@ -753,26 +878,28 @@
 								<button class="btn-appointment book-appointment" data-doctor="Dr. D. Tharun" data-specialty="Pulmonology">
 									<i class="bi bi-calendar-check"></i> Book Appointment
 								</button>
+								<div class="doctor-social">
+									<a href="https://wa.me/919787960590?text=Hi%20Dr.%20D.%20Tharun%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+									<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
+									<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
+								</div>
 							</div>
 						</div>
 					</div><!-- End Doctor Card -->
-					<!-- Doctor 5: Dr. T.G. Subash Kolachik -->
+					<!-- Doctor 5: Dr. Subash Kaushik. T. G -->
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="500">
 						<div class="doctor-card">
-							<div class="doctor-image">
-								<img src="assets/img/health/staff-5.webp" alt="Dr. T.G. Subash Kolachik" class="img-fluid">
-								<div class="doctor-overlay">
-									<div class="social-links">
-										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20T.G.%20Subash%20Kolachik%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
-										<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
-										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
-									</div>
+							<div class="doctor-banner"></div>
+							<div class="doctor-avatar-wrapper">
+								<div class="doctor-avatar">
+									<img src="img/Subash.jfif" alt="Dr. Subash Kaushik. T. G">
+									<div class="status-dot appointment"></div>
 								</div>
 							</div>
 							<div class="doctor-content">
-								<h4>Dr. T.G. Subash Kolachik</h4>
-								<span class="specialty">Urology</span>
+								<h4>Dr. Subash Kaushik. T. G</h4>
 								<span class="status-badge appointment">On Appointment</span>
+								<span class="specialty">Urology</span>
 								<div class="qualifications">M.B.B.S., MS., Urology</div>
 								<p>Expert in urological surgery and treatment with focus on minimally invasive procedures.</p>
 								<div class="doctor-meta">
@@ -785,29 +912,31 @@
 										<span>Urology Dept.</span>
 									</div>
 								</div>
-								<button class="btn-appointment book-appointment" data-doctor="Dr. T.G. Subash Kolachik" data-specialty="Urology">
+								<button class="btn-appointment book-appointment" data-doctor="Dr. Subash Kaushik. T. G" data-specialty="Urology">
 									<i class="bi bi-calendar-check"></i> Book Appointment
 								</button>
+								<div class="doctor-social">
+									<a href="https://wa.me/919787960590?text=Hi%20Dr.%20Subash%20Kaushik%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+									<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
+									<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
+								</div>
 							</div>
 						</div>
 					</div><!-- End Doctor Card -->
 					<!-- Doctor 6: Dr. V. Prathapkumar -->
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="600">
 						<div class="doctor-card">
-							<div class="doctor-image">
-								<img src="assets/img/health/staff-2.webp" alt="Dr. V. Prathapkumar" class="img-fluid">
-								<div class="doctor-overlay">
-									<div class="social-links">
-										<a href="https://wa.me/919787960590?text=Hi%20Dr.%20V.%20Prathapkumar%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank"><i class="bi bi-whatsapp"></i></a>
-										<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
-										<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
-									</div>
+							<div class="doctor-banner"></div>
+							<div class="doctor-avatar-wrapper">
+								<div class="doctor-avatar">
+									<img src="img/pradeepkumr.jfif" alt="Dr. V. Prathapkumar">
+									<div class="status-dot appointment"></div>
 								</div>
 							</div>
 							<div class="doctor-content">
 								<h4>Dr. V. Prathapkumar</h4>
-								<span class="specialty">General Medicine</span>
 								<span class="status-badge appointment">On Appointment</span>
+								<span class="specialty">General Medicine</span>
 								<div class="qualifications">M.B.B.S., MD., General Medicine<br>DNB., CCCDM</div>
 								<p>Expert in general medicine with comprehensive diagnosis and treatment for various health conditions.</p>
 								<div class="doctor-meta">
@@ -823,14 +952,17 @@
 								<button class="btn-appointment book-appointment" data-doctor="Dr. V. Prathapkumar" data-specialty="General Medicine">
 									<i class="bi bi-calendar-check"></i> Book Appointment
 								</button>
+								<div class="doctor-social">
+									<a href="https://wa.me/919787960590?text=Hi%20Dr.%20V.%20Prathapkumar%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+									<a href="mailto:info@saigroupofclinics.com"><i class="bi bi-envelope"></i></a>
+									<a href="tel:+919787960590"><i class="bi bi-phone"></i></a>
+								</div>
 							</div>
 						</div>
 					</div><!-- End Doctor Card -->
 
 				</div>
-
 			</div>
-
 		</section><!-- /Doctors Section -->
 		<!-- SAI MEDICALS Section -->
 		<section class="section" style="padding: 40px 0; background: #f8f9fa;">
