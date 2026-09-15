@@ -60,6 +60,32 @@
 /*--------------------------------------------------------------
 # General Styling & Shared Classes
 --------------------------------------------------------------*/
+
+
+
+
+
+.logo img {
+    max-height: 55px;
+    width: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .logo img {
+        max-height: 45px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
 body {
   color: var(--default-color);
   background-color: var(--background-color);
@@ -209,7 +235,7 @@ h6 {
 }
 
 .header .logo img {
-  max-height: 36px;
+  max-height: 65px;
   margin-right: 8px;
 }
 
