@@ -82,94 +82,121 @@
 				color: #333;
 			}
 
-		/* Gallery Grid */
-		.gallery-item-wrap {
-			margin-bottom: 24px;
-		}
-
-		.gallery-item {
+		/* ==========================================
+		   IFRAME GALLERY STYLES
+		   ========================================== */
+		.iframe-container {
 			position: relative;
+			width: 100%;
+			border-radius: 20px;
 			overflow: hidden;
-			border-radius: 16px;
-			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-			cursor: pointer;
-			transition: all 0.4s ease;
-			height: 280px;
-			background: #f0f4ff;
+			box-shadow: 0 8px 40px rgba(14, 124, 123, 0.15);
+			background: #fff;
+			margin-bottom: 30px;
 		}
 
-			.gallery-item:hover {
-				transform: translateY(-8px);
-				box-shadow: 0 15px 40px rgba(14, 124, 123, 0.2);
-			}
-
-			.gallery-item img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				transition: transform 0.5s ease;
-			}
-
-			.gallery-item:hover img {
-				transform: scale(1.08);
-			}
-
-			.gallery-item .gallery-overlay {
-				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				background: linear-gradient(180deg, rgba(14, 124, 123, 0) 0%, rgba(14, 124, 123, 0.85) 100%);
-				display: flex;
-				flex-direction: column;
-				justify-content: flex-end;
-				padding: 20px;
-				opacity: 0;
-				transition: opacity 0.4s ease;
-			}
-
-			.gallery-item:hover .gallery-overlay {
-				opacity: 1;
-			}
-
-			.gallery-item .gallery-overlay .zoom-icon {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%) scale(0.7);
-				width: 55px;
-				height: 55px;
-				background: rgba(255, 255, 255, 0.95);
-				color: #0e7c7b;
-				border-radius: 50%;
+			.iframe-container .iframe-header {
+				background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
+				padding: 15px 25px;
 				display: flex;
 				align-items: center;
-				justify-content: center;
-				font-size: 1.4rem;
-				transition: transform 0.4s ease;
-			}
-
-			.gallery-item:hover .gallery-overlay .zoom-icon {
-				transform: translate(-50%, -50%) scale(1);
-			}
-
-			.gallery-item .gallery-overlay .gallery-info {
+				justify-content: space-between;
 				color: #fff;
-				z-index: 2;
 			}
 
-				.gallery-item .gallery-overlay .gallery-info h4 {
-					font-size: 1.1rem;
-					font-weight: 700;
-					margin-bottom: 4px;
+				.iframe-container .iframe-header h3 {
 					color: #fff;
+					font-weight: 700;
+					margin: 0;
+					font-size: 1.2rem;
+					display: flex;
+					align-items: center;
+					gap: 10px;
 				}
 
-				.gallery-item .gallery-overlay .gallery-info p {
+					.iframe-container .iframe-header h3 i {
+						font-size: 1.4rem;
+					}
+
+				.iframe-container .iframe-header .btn-open-new {
+					background: rgba(255, 255, 255, 0.2);
+					color: #fff;
+					padding: 8px 18px;
+					border-radius: 50px;
+					text-decoration: none;
 					font-size: 0.85rem;
+					font-weight: 600;
+					display: inline-flex;
+					align-items: center;
+					gap: 6px;
+					transition: all 0.3s ease;
+					backdrop-filter: blur(10px);
+				}
+
+					.iframe-container .iframe-header .btn-open-new:hover {
+						background: #fff;
+						color: #0e7c7b;
+						transform: translateY(-2px);
+					}
+
+			.iframe-container .gallery-iframe {
+				width: 100%;
+				height: 1200px;
+				border: 0;
+				display: block;
+				background: #fff;
+			}
+
+		/* Iframe Loading */
+		.iframe-loading {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			text-align: center;
+			display: none;
+		}
+
+			.iframe-loading.active {
+				display: block;
+			}
+
+			.iframe-loading .spinner-border {
+				color: #0e7c7b;
+				width: 3rem;
+				height: 3rem;
+			}
+
+		/* Info Box */
+		.info-box {
+			background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+			padding: 30px 40px;
+			border-radius: 20px;
+			margin-bottom: 40px;
+			border-left: 5px solid #0e7c7b;
+		}
+
+			.info-box h4 {
+				color: #0e7c7b;
+				font-weight: 700;
+				margin-bottom: 10px;
+				display: flex;
+				align-items: center;
+				gap: 10px;
+			}
+
+				.info-box h4 i {
+					font-size: 1.3rem;
+				}
+
+			.info-box p {
+				color: #555;
+				margin-bottom: 8px;
+				font-size: 0.95rem;
+			}
+
+				.info-box p:last-child {
 					margin-bottom: 0;
-					color: rgba(255, 255, 255, 0.9);
 				}
 
 		/* Gallery Stats */
@@ -421,8 +448,28 @@
 				max-height: 45px;
 			}
 
-			.gallery-item {
-				height: 220px;
+			.iframe-container .gallery-iframe {
+				height: 800px;
+			}
+
+			.iframe-container .iframe-header {
+				padding: 12px 15px;
+				flex-direction: column;
+				gap: 10px;
+				text-align: center;
+			}
+
+				.iframe-container .iframe-header h3 {
+					font-size: 1rem;
+				}
+
+				.iframe-container .iframe-header .btn-open-new {
+					font-size: 0.75rem;
+					padding: 6px 14px;
+				}
+
+			.info-box {
+				padding: 20px 25px;
 			}
 
 			.gallery-cta {
@@ -440,8 +487,8 @@
 		}
 
 		@media (max-width: 576px) {
-			.gallery-item {
-				height: 200px;
+			.iframe-container .gallery-iframe {
+				height: 600px;
 			}
 		}
 	</style>
@@ -538,7 +585,7 @@
 					<div class="col-lg-3 col-6" data-aos="fade-up" data-aos-delay="100">
 						<div class="gallery-stat-box">
 							<i class="bi bi-images"></i>
-							<span class="stat-number">16+</span>
+							<span class="stat-number" id="photoCount">100+</span>
 							<span class="stat-label">Photos</span>
 						</div>
 					</div>
@@ -570,232 +617,60 @@
 		<!-- Gallery Section -->
 		<section id="gallery" class="gallery section" style="padding: 60px 0;">
 			<div class="container" data-aos="fade-up" data-aos-delay="100">
-				<div class="row gy-4">
 
-					<!-- 1. Eye Camp - Main -->
-					<div class="col-lg-3 col-md-6 gallery-item-wrap" data-aos="fade-up" data-aos-delay="100">
-						<div class="gallery-item">
-							<img src="img/saiiii-213.jpeg" alt="Free Eye Screening Camp">
-							<div class="gallery-overlay">
-								<div class="zoom-icon"><i class="bi bi-zoom-in"></i></div>
-								<div class="gallery-info">
-									<h4>Free Eye Camp - Kannikaiper</h4>
-									<p>August 30, 2024</p>
-								</div>
-							</div>
-						</div>
+				<!-- Info Box -->
+				<div class="info-box">
+					<h4><i class="bi bi-info-circle"></i> Photo Gallery</h4>
+					<p>Explore all our photos in the gallery below. Click any photo to view it in full size.</p>
+					<p>New photos are added regularly - visit often to see our latest events and activities!</p>
+				</div>
+
+				<!-- ==========================================
+					 IFRAME CONTAINER - BLOGGER GALLERY
+					 ========================================== -->
+				<div class="iframe-container">
+					<div class="iframe-header">
+						<h3><i class="bi bi-images"></i> SAI CLINIC Photo Gallery</h3>
+						<a href="https://saigroupofclinics.blogspot.com/p/gallery.html"
+						   target="_blank"
+						   class="btn-open-new">
+							<i class="bi bi-box-arrow-up-right"></i> Open in New Tab
+						</a>
 					</div>
 
-					<!-- 2. Eye Camp - Photo 1 -->
-					<div class="col-lg-3 col-md-6 gallery-item-wrap" data-aos="fade-up" data-aos-delay="150">
-						<div class="gallery-item">
-							<img src="img/saiiii-213-1.jpeg" alt="Eye Camp - Screening">
-							<div class="gallery-overlay">
-								<div class="zoom-icon"><i class="bi bi-zoom-in"></i></div>
-								<div class="gallery-info">
-									<h4>Eye Screening in Progress</h4>
-									<p>Kannikaiper Camp</p>
-								</div>
-							</div>
+					<!-- Loading Spinner -->
+					<div class="iframe-loading" id="iframeLoading">
+						<div class="spinner-border" role="status">
+							<span class="visually-hidden">Loading...</span>
 						</div>
+						<p class="mt-3" style="color: #0e7c7b; font-weight: 600;">Loading Gallery...</p>
 					</div>
 
-					<!-- 3. Eye Camp - Photo 2 -->
-					<div class="col-lg-3 col-md-6 gallery-item-wrap" data-aos="fade-up" data-aos-delay="200">
-						<div class="gallery-item">
-							<img src="img/saiiii-2134.jpeg" alt="Eye Camp - Patient Care">
-							<div class="gallery-overlay">
-								<div class="zoom-icon"><i class="bi bi-zoom-in"></i></div>
-								<div class="gallery-info">
-									<h4>Patient Care at Camp</h4>
-									<p>100+ Beneficiaries</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- 4. Eye Camp - Photo 3 -->
-					<div class="col-lg-3 col-md-6 gallery-item-wrap" data-aos="fade-up" data-aos-delay="250">
-						<div class="gallery-item">
-							<img src="img/saiiii-2135.jpeg" alt="Eye Camp - Team">
-							<div class="gallery-overlay">
-								<div class="zoom-icon"><i class="bi bi-zoom-in"></i></div>
-								<div class="gallery-info">
-									<h4>Medical Team</h4>
-									<p>Free Eye Camp</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- 5. Doctor - Dr. S. Sangami -->
-					<div class="col-lg-3 col-md-6 gallery-item-wrap" data-aos="fade-up" data-aos-delay="300">
-						<div class="gallery-item">
-							<img src="img/drsangami1.jfif" alt="Dr. S. Sangami">
-							<div class="gallery-overlay">
-								<div class="zoom-icon"><i class="bi bi-zoom-in"></i></div>
-								<div class="gallery-info">
-									<h4>Dr. S. Sangami</h4>
-									<p>Clinical Diabetology</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- 6. Doctor - Dr. M. Salomon -->
-					<div class="col-lg-3 col-md-6 gallery-item-wrap" data-aos="fade-up" data-aos-delay="350">
-						<div class="gallery-item">
-							<img src="img/Solomon.jfif" alt="Dr. M. Salomon Themothi">
-							<div class="gallery-overlay">
-								<div class="zoom-icon"><i class="bi bi-zoom-in"></i></div>
-								<div class="gallery-info">
-									<h4>Dr. M. Salomon Themothi</h4>
-									<p>General Surgery</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- 7. Doctor - Dr. D. Tharun -->
-					<div class="col-lg-3 col-md-6 gallery-item-wrap" data-aos="fade-up" data-aos-delay="400">
-						<div class="gallery-item">
-							<img src="img/Tharun.jfif" alt="Dr. D. Tharun">
-							<div class="gallery-overlay">
-								<div class="zoom-icon"><i class="bi bi-zoom-in"></i></div>
-								<div class="gallery-info">
-									<h4>Dr. D. Tharun</h4>
-									<p>Pulmonology</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- 8. Doctor - Dr. Subash Kaushik -->
-					<div class="col-lg-3 col-md-6 gallery-item-wrap" data-aos="fade-up" data-aos-delay="450">
-						<div class="gallery-item">
-							<img src="img/Subash.jfif" alt="Dr. Subash Kaushik. T. G">
-							<div class="gallery-overlay">
-								<div class="zoom-icon"><i class="bi bi-zoom-in"></i></div>
-								<div class="gallery-info">
-									<h4>Dr. Subash Kaushik. T. G</h4>
-									<p>Urology</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- 9. Doctor - Dr. V. Prathapkumar -->
-					<div class="col-lg-3 col-md-6 gallery-item-wrap" data-aos="fade-up" data-aos-delay="500">
-						<div class="gallery-item">
-							<img src="img/pradeepkumr.jfif" alt="Dr. V. Prathapkumar">
-							<div class="gallery-overlay">
-								<div class="zoom-icon"><i class="bi bi-zoom-in"></i></div>
-								<div class="gallery-info">
-									<h4>Dr. V. Prathapkumar</h4>
-									<p>General Medicine</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- 10. Clinic - Facility -->
-					<div class="col-lg-3 col-md-6 gallery-item-wrap" data-aos="fade-up" data-aos-delay="550">
-						<div class="gallery-item">
-							<img src="assets/img/health/facilities-9.webp" alt="SAI CLINIC Facility">
-							<div class="gallery-overlay">
-								<div class="zoom-icon"><i class="bi bi-zoom-in"></i></div>
-								<div class="gallery-info">
-									<h4>Modern Healthcare Facility</h4>
-									<p>SAI CLINIC Kavaraipettai</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- 11. Clinic - Lab -->
-					<div class="col-lg-3 col-md-6 gallery-item-wrap" data-aos="fade-up" data-aos-delay="600">
-						<div class="gallery-item">
-							<img src="assets/img/health/sai-lab-1.webp" alt="SAI CLINIC Lab">
-							<div class="gallery-overlay">
-								<div class="zoom-icon"><i class="bi bi-zoom-in"></i></div>
-								<div class="gallery-info">
-									<h4>Lab Services</h4>
-									<p>Full-Service Laboratory</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- 12. Events - Health Checkup -->
-					<div class="col-lg-3 col-md-6 gallery-item-wrap" data-aos="fade-up" data-aos-delay="650">
-						<div class="gallery-item">
-							<img src="assets/img/health/emergency-1.webp" alt="Health Camp">
-							<div class="gallery-overlay">
-								<div class="zoom-icon"><i class="bi bi-zoom-in"></i></div>
-								<div class="gallery-info">
-									<h4>Health Checkup Camp</h4>
-									<p>Community Event</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- 13. Services - Lab -->
-					<div class="col-lg-3 col-md-6 gallery-item-wrap" data-aos="fade-up" data-aos-delay="700">
-						<div class="gallery-item">
-							<img src="assets/img/health/laboratory-3.webp" alt="Lab Services">
-							<div class="gallery-overlay">
-								<div class="zoom-icon"><i class="bi bi-zoom-in"></i></div>
-								<div class="gallery-info">
-									<h4>Laboratory Services</h4>
-									<p>Accurate Testing</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- 14. Services - X-Ray -->
-					<div class="col-lg-3 col-md-6 gallery-item-wrap" data-aos="fade-up" data-aos-delay="750">
-						<div class="gallery-item">
-							<img src="assets/img/health/cardiology-3.webp" alt="Diagnostic Services">
-							<div class="gallery-overlay">
-								<div class="zoom-icon"><i class="bi bi-zoom-in"></i></div>
-								<div class="gallery-info">
-									<h4>Diagnostic Services</h4>
-									<p>X-Ray & ECG</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- 15. Services - Maternal Care -->
-					<div class="col-lg-3 col-md-6 gallery-item-wrap" data-aos="fade-up" data-aos-delay="800">
-						<div class="gallery-item">
-							<img src="assets/img/health/maternal-2.webp" alt="Maternal Care">
-							<div class="gallery-overlay">
-								<div class="zoom-icon"><i class="bi bi-zoom-in"></i></div>
-								<div class="gallery-info">
-									<h4>Maternal Care</h4>
-									<p>Expert Pregnancy Support</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- 16. Services - Vaccination -->
-					<div class="col-lg-3 col-md-6 gallery-item-wrap" data-aos="fade-up" data-aos-delay="850">
-						<div class="gallery-item">
-							<img src="assets/img/health/vaccination-3.webp" alt="Vaccination">
-							<div class="gallery-overlay">
-								<div class="zoom-icon"><i class="bi bi-zoom-in"></i></div>
-								<div class="gallery-info">
-									<h4>Vaccination Center</h4>
-									<p>Complete Immunization</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
+					<!-- BLOGGER GALLERY IFRAME -->
+					<iframe id="galleryIframe"
+							class="gallery-iframe"
+							src="https://saigroupofclinics.blogspot.com/p/gallery.html"
+							title="SAI CLINIC Gallery"
+							loading="lazy"
+							allowfullscreen
+							referrerpolicy="no-referrer-when-downgrade">
+					</iframe>
+				</div>
+				<!-- END IFRAME CONTAINER -->
+				<!-- Mobile App View Button -->
+				<div class="text-center mb-4">
+					<a href="https://saigroupofclinics.blogspot.com/?view=flipcard"
+					   target="_blank"
+					   class="whatsapp-btn"
+					   style="background: #0e7c7b;">
+						<i class="bi bi-phone"></i> View in Flipcard Mode
+					</a>
+					<a href="https://saigroupofclinics.blogspot.com/"
+					   target="_blank"
+					   class="whatsapp-btn"
+					   style="background: #1565c0;">
+						<i class="bi bi-box-arrow-up-right"></i> Open Full Blog
+					</a>
 				</div>
 
 				<!-- CTA Section -->
@@ -812,6 +687,7 @@
 						<i class="bi bi-whatsapp"></i> WhatsApp
 					</a>
 				</div>
+
 			</div>
 		</section>
 
@@ -968,35 +844,40 @@
 	<!-- Main JS File -->
 	<script src="assets/js/main.js"></script>
 
-	<!-- Gallery Lightbox and Appointment Script -->
+	<!-- Iframe and Appointment Script -->
 	<script>
         document.addEventListener('DOMContentLoaded', function () {
-            // ============ LIGHTBOX ============
-            const galleryItems = document.querySelectorAll('.gallery-item');
-            galleryItems.forEach(function (item) {
-                item.addEventListener('click', function () {
-                    const img = item.querySelector('img');
-                    const imageSrc = img.getAttribute('src');
-                    const imageTitle = item.querySelector('.gallery-info h4').textContent;
-                    const imageSubtitle = item.querySelector('.gallery-info p').textContent;
+            // ============ IFRAME LOADING ============
+            const galleryIframe = document.getElementById('galleryIframe');
+            const iframeLoading = document.getElementById('iframeLoading');
 
-                    Swal.fire({
-                        imageUrl: imageSrc,
-                        imageAlt: imageTitle,
-                        title: imageTitle,
-                        text: imageSubtitle,
-                        showCloseButton: true,
-                        showConfirmButton: false,
-                        width: 'auto',
-                        padding: '15px',
-                        background: '#fff',
-                        backdrop: 'rgba(14, 124, 123, 0.9)',
-                        customClass: {
-                            popup: 'gallery-lightbox-popup'
-                        }
-                    });
+            if (galleryIframe) {
+                // Show loading
+                iframeLoading.classList.add('active');
+
+                // Hide loading when iframe loads
+                galleryIframe.addEventListener('load', function () {
+                    iframeLoading.classList.remove('active');
+                    console.log('Gallery iframe loaded successfully');
                 });
-            });
+
+                // Auto-resize iframe based on content (optional)
+                galleryIframe.addEventListener('load', function () {
+                    try {
+                        // Try to resize to content height
+                        const iframeDoc = galleryIframe.contentDocument || galleryIframe.contentWindow.document;
+                        if (iframeDoc) {
+                            const height = iframeDoc.body.scrollHeight;
+                            if (height > 400) {
+                                galleryIframe.style.height = height + 'px';
+                            }
+                        }
+                    } catch (e) {
+                        // Cross-origin, can't access - use fixed height
+                        console.log('Cannot auto-resize iframe (cross-origin)');
+                    }
+                });
+            }
 
             // ============ APPOINTMENT BOOKING ============
             const bookButtons = document.querySelectorAll('.book-appointment-btn');
@@ -1124,30 +1005,6 @@
                     });
                 });
             });
-
-            // Custom Lightbox Styles
-            const style = document.createElement('style');
-            style.textContent = `
-                .gallery-lightbox-popup {
-                    border-radius: 16px !important;
-                    max-width: 900px !important;
-                }
-                .gallery-lightbox-popup .swal2-image {
-                    max-height: 70vh !important;
-                    border-radius: 12px !important;
-                    margin: 10px auto !important;
-                }
-                .gallery-lightbox-popup .swal2-title {
-                    color: #0e7c7b !important;
-                    font-size: 1.2rem !important;
-                    font-weight: 700 !important;
-                }
-                .gallery-lightbox-popup .swal2-html-container {
-                    color: #555 !important;
-                    font-size: 0.95rem !important;
-                }
-            `;
-            document.head.appendChild(style);
 
             console.log('SAI CLINIC - Gallery page ready!');
             console.log('WhatsApp: +91 97879 60590');
