@@ -40,7 +40,6 @@
 			object-fit: contain;
 		}
 
-		/* Fix spacing for services section - remove Home Sample Collection */
 		.specialties-grid .row {
 			justify-content: center;
 		}
@@ -66,7 +65,7 @@
 			}
 		}
 
-		/* Custom SAI Clinic Styles */
+		/* Base Styles */
 		.doctor-details .specialty-tag {
 			background: #0e7c7b;
 			color: #fff;
@@ -88,11 +87,6 @@
 			text-decoration: none;
 			font-weight: 600;
 		}
-
-			.emergency-btn:hover {
-				background: #b71c1c;
-				color: #fff;
-			}
 
 		.topbar .contact-info i, .topbar .contact-info a {
 			color: #fff;
@@ -140,14 +134,1259 @@
 		}
 
 		/* ==========================================
-		   STYLISH ROUND DOCTOR CARD - HOME PAGE
+		   ANIMATIONS KEYFRAMES
+		   ========================================== */
+		@keyframes floatImage {
+			0%, 100% {
+				transform: translateY(0px);
+			}
+
+			50% {
+				transform: translateY(-20px);
+			}
+		}
+
+		@keyframes floatBadge {
+			0%, 100% {
+				transform: translateY(0px) rotate(0deg);
+			}
+
+			50% {
+				transform: translateY(-15px) rotate(5deg);
+			}
+		}
+
+		@keyframes rotateRing {
+			0% {
+				transform: translate(-50%, -50%) rotate(0deg);
+			}
+
+			100% {
+				transform: translate(-50%, -50%) rotate(360deg);
+			}
+		}
+
+		@keyframes floatCard1 {
+			0%, 100% {
+				transform: translateY(0px) translateX(0px);
+			}
+
+			50% {
+				transform: translateY(-12px) translateX(-5px);
+			}
+		}
+
+		@keyframes floatCard2 {
+			0%, 100% {
+				transform: translateY(0px) translateX(0px);
+			}
+
+			50% {
+				transform: translateY(12px) translateX(5px);
+			}
+		}
+
+		@keyframes pulseHeart {
+			0%, 100% {
+				transform: scale(1);
+			}
+
+			50% {
+				transform: scale(1.3);
+			}
+		}
+
+		@keyframes bounceShield {
+			0%, 100% {
+				transform: translateY(0);
+			}
+
+			50% {
+				transform: translateY(-5px);
+			}
+		}
+
+		@keyframes shineEffect {
+			0% {
+				background-position: -200% center;
+			}
+
+			100% {
+				background-position: 200% center;
+			}
+		}
+
+		@keyframes rotateDots {
+			0% {
+				transform: rotate(0deg);
+				opacity: 0.3;
+			}
+
+			50% {
+				transform: rotate(180deg);
+				opacity: 0.5;
+			}
+
+			100% {
+				transform: rotate(360deg);
+				opacity: 0.3;
+			}
+		}
+
+		@keyframes gradientShift {
+			0%, 100% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+		}
+
+		@keyframes slideUpFade {
+			from {
+				opacity: 0;
+				transform: translateY(30px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes fadeInLeft {
+			from {
+				opacity: 0;
+				transform: translateX(-50px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+
+		@keyframes fadeInRight {
+			from {
+				opacity: 0;
+				transform: translateX(50px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+
+		@keyframes glowPulse {
+			0%, 100% {
+				box-shadow: 0 0 20px rgba(14, 124, 123, 0.3);
+			}
+
+			50% {
+				box-shadow: 0 0 40px rgba(14, 124, 123, 0.6);
+			}
+		}
+
+		@keyframes borderRotate {
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		/* ==========================================
+		   STYLISH HOME ABOUT SECTION - ANIMATED
+		   ========================================== */
+		.home-about {
+			padding: 80px 0;
+			background: linear-gradient(135deg, #f8f9fa 0%, #f0f4ff 100%);
+			position: relative;
+			overflow: hidden;
+		}
+
+			.home-about::before {
+				content: '';
+				position: absolute;
+				top: -150px;
+				right: -150px;
+				width: 400px;
+				height: 400px;
+				background: radial-gradient(circle, rgba(14, 124, 123, 0.08) 0%, transparent 70%);
+				border-radius: 50%;
+				pointer-events: none;
+				animation: floatImage 8s ease-in-out infinite;
+			}
+
+			.home-about::after {
+				content: '';
+				position: absolute;
+				bottom: -100px;
+				left: -100px;
+				width: 300px;
+				height: 300px;
+				background: radial-gradient(circle, rgba(21, 101, 192, 0.06) 0%, transparent 70%);
+				border-radius: 50%;
+				pointer-events: none;
+				animation: floatImage 10s ease-in-out infinite reverse;
+			}
+
+		/* ==========================================
+		   IMAGE SIDE - ANIMATED
+		   ========================================== */
+		.about-visual-new {
+			position: relative;
+			padding: 30px 30px 60px 30px;
+			animation: fadeInLeft 1s ease-out;
+		}
+
+		.about-main-img {
+			position: relative;
+			border-radius: 24px;
+			overflow: hidden;
+			box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+			z-index: 2;
+			transition: all 0.5s ease;
+			animation: floatImage 6s ease-in-out infinite;
+		}
+
+			.about-main-img:hover {
+				transform: translateY(-10px) scale(1.02);
+				box-shadow: 0 30px 70px rgba(14, 124, 123, 0.25);
+				animation-play-state: paused;
+			}
+
+			.about-main-img::before {
+				content: '';
+				position: absolute;
+				top: -50%;
+				left: -50%;
+				width: 200%;
+				height: 200%;
+				background: linear-gradient( 45deg, transparent 40%, rgba(255, 255, 255, 0.4) 50%, transparent 60% );
+				z-index: 4;
+				pointer-events: none;
+				animation: shineEffect 3s ease-in-out infinite;
+			}
+
+			.about-main-img img {
+				width: 100%;
+				height: 480px;
+				object-fit: cover;
+				display: block;
+				transition: transform 0.8s ease;
+			}
+
+			.about-main-img:hover img {
+				transform: scale(1.08);
+			}
+
+			.about-main-img .img-frame {
+				position: absolute;
+				top: 15px;
+				left: 15px;
+				right: 15px;
+				bottom: 15px;
+				border: 2px solid rgba(255, 255, 255, 0.4);
+				border-radius: 16px;
+				pointer-events: none;
+				z-index: 3;
+				transition: all 0.5s ease;
+			}
+
+			.about-main-img:hover .img-frame {
+				top: 10px;
+				left: 10px;
+				right: 10px;
+				bottom: 10px;
+				border-color: rgba(14, 124, 123, 0.6);
+			}
+
+		/* ==========================================
+		   EXPERIENCE FLOATING BADGE - ANIMATED
+		   ========================================== */
+		.exp-floating-badge {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 140px;
+			height: 140px;
+			z-index: 5;
+			animation: floatBadge 4s ease-in-out infinite;
+		}
+
+			.exp-floating-badge .badge-inner {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 120px;
+				height: 120px;
+				background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
+				background-size: 200% 200%;
+				border-radius: 50%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				color: #fff;
+				text-align: center;
+				z-index: 2;
+				box-shadow: 0 15px 40px rgba(14, 124, 123, 0.4);
+				border: 4px solid #fff;
+				animation: gradientShift 4s ease-in-out infinite, glowPulse 3s ease-in-out infinite;
+			}
+
+				.exp-floating-badge .badge-inner .exp-number {
+					font-size: 1.8rem;
+					font-weight: 800;
+					line-height: 1;
+					margin-bottom: 4px;
+				}
+
+				.exp-floating-badge .badge-inner .exp-text {
+					font-size: 0.65rem;
+					font-weight: 600;
+					line-height: 1.2;
+					letter-spacing: 0.3px;
+				}
+
+			.exp-floating-badge .badge-ring {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 140px;
+				height: 140px;
+				border: 2px dashed rgba(14, 124, 123, 0.5);
+				border-radius: 50%;
+				animation: rotateRing 20s linear infinite;
+			}
+
+		/* ==========================================
+		   FLOATING STAT CARDS - ANIMATED
+		   ========================================== */
+		.float-stat-card {
+			position: absolute;
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(15px);
+			-webkit-backdrop-filter: blur(15px);
+			padding: 15px 22px;
+			border-radius: 16px;
+			box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			z-index: 4;
+			border: 1px solid rgba(255, 255, 255, 0.8);
+			transition: all 0.3s ease;
+			opacity: 0;
+			animation: slideUpFade 1s ease-out 0.5s forwards;
+		}
+
+			.float-stat-card:hover {
+				transform: translateY(-8px) scale(1.08);
+				box-shadow: 0 20px 50px rgba(14, 124, 123, 0.3);
+			}
+
+			.float-stat-card .stat-icon {
+				width: 45px;
+				height: 45px;
+				background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
+				border-radius: 12px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #fff;
+				font-size: 1.3rem;
+				flex-shrink: 0;
+				box-shadow: 0 6px 15px rgba(14, 124, 123, 0.3);
+			}
+
+			.float-stat-card .stat-info {
+				display: flex;
+				flex-direction: column;
+				line-height: 1.2;
+			}
+
+				.float-stat-card .stat-info .stat-number {
+					font-size: 1.4rem;
+					font-weight: 800;
+					color: #0e7c7b;
+				}
+
+				.float-stat-card .stat-info .stat-label {
+					font-size: 0.75rem;
+					font-weight: 600;
+					color: #666;
+				}
+
+			.float-stat-card.stat-1 {
+				top: 50px;
+				right: -20px;
+				animation: slideUpFade 1s ease-out 0.5s forwards, floatCard1 5s ease-in-out 1.5s infinite;
+			}
+
+			.float-stat-card.stat-2 {
+				bottom: 0;
+				left: -20px;
+				animation: slideUpFade 1s ease-out 0.8s forwards, floatCard2 5s ease-in-out 1.8s infinite;
+			}
+
+		.about-visual-new .deco-dots {
+			position: absolute;
+			top: 20px;
+			right: 0;
+			width: 100px;
+			height: 100px;
+			background-image: radial-gradient(circle, #0e7c7b 2px, transparent 2px);
+			background-size: 15px 15px;
+			opacity: 0.3;
+			z-index: 1;
+			animation: rotateDots 20s linear infinite;
+		}
+
+		/* ==========================================
+		   CONTENT SIDE - ANIMATED
+		   ========================================== */
+		.about-content-new {
+			padding-left: 20px;
+			animation: fadeInRight 1s ease-out;
+		}
+
+		@media (max-width: 991px) {
+			.about-content-new {
+				padding-left: 0;
+				margin-top: 30px;
+			}
+		}
+
+		.welcome-badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+			color: #0e7c7b;
+			padding: 8px 20px;
+			border-radius: 50px;
+			font-size: 0.85rem;
+			font-weight: 700;
+			letter-spacing: 0.3px;
+			margin-bottom: 20px;
+			border: 1px solid #d4e3ff;
+			box-shadow: 0 4px 15px rgba(14, 124, 123, 0.08);
+			opacity: 0;
+			animation: slideUpFade 0.8s ease-out 0.2s forwards;
+		}
+
+			.welcome-badge i {
+				font-size: 1rem;
+				color: #0e7c7b;
+				animation: bounceShield 1.5s ease-in-out infinite;
+			}
+
+		.about-heading {
+			font-size: 2.4rem;
+			font-weight: 800;
+			color: #1a1a1a;
+			line-height: 1.25;
+			margin-bottom: 20px;
+			letter-spacing: -0.5px;
+			opacity: 0;
+			animation: slideUpFade 0.8s ease-out 0.4s forwards;
+		}
+
+			.about-heading .heading-highlight {
+				color: #0e7c7b;
+				position: relative;
+				display: inline-block;
+			}
+
+				.about-heading .heading-highlight::after {
+					content: '';
+					position: absolute;
+					bottom: 2px;
+					left: 0;
+					right: 0;
+					height: 8px;
+					background: rgba(14, 124, 123, 0.15);
+					border-radius: 4px;
+					z-index: -1;
+					animation: gradientShift 3s ease-in-out infinite;
+				}
+
+		.heading-divider {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			margin-bottom: 20px;
+			opacity: 0;
+			animation: slideUpFade 0.8s ease-out 0.6s forwards;
+		}
+
+			.heading-divider span {
+				height: 2px;
+				background: linear-gradient(90deg, #0e7c7b 0%, transparent 100%);
+				flex: 1;
+				border-radius: 2px;
+			}
+
+				.heading-divider span:last-child {
+					background: linear-gradient(90deg, transparent 0%, #0e7c7b 100%);
+				}
+
+			.heading-divider i {
+				color: #0e7c7b;
+				font-size: 1.3rem;
+				animation: pulseHeart 1.5s ease-in-out infinite;
+			}
+
+		.about-address {
+			display: flex;
+			align-items: flex-start;
+			gap: 10px;
+			color: #555;
+			font-size: 0.95rem;
+			font-weight: 500;
+			margin-bottom: 18px;
+			padding: 12px 18px;
+			background: #fff;
+			border-radius: 12px;
+			border-left: 4px solid #0e7c7b;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+			transition: all 0.3s ease;
+			opacity: 0;
+			animation: slideUpFade 0.8s ease-out 0.8s forwards;
+		}
+
+			.about-address:hover {
+				transform: translateX(8px);
+				box-shadow: 0 8px 25px rgba(14, 124, 123, 0.15);
+			}
+
+			.about-address i {
+				color: #0e7c7b;
+				font-size: 1.1rem;
+				margin-top: 2px;
+				flex-shrink: 0;
+			}
+
+		.about-description {
+			color: #555;
+			font-size: 1rem;
+			line-height: 1.8;
+			margin-bottom: 25px;
+			opacity: 0;
+			animation: slideUpFade 0.8s ease-out 1s forwards;
+		}
+
+			.about-description strong {
+				color: #0e7c7b;
+				font-weight: 700;
+				transition: all 0.3s ease;
+			}
+
+				.about-description strong:hover {
+					color: #0a3a8a;
+					text-shadow: 0 0 10px rgba(14, 124, 123, 0.3);
+				}
+
+		.trust-features {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 12px;
+			margin-bottom: 30px;
+		}
+
+		.trust-item {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 12px 15px;
+			background: #fff;
+			border-radius: 12px;
+			border: 1px solid #f0f4ff;
+			transition: all 0.4s ease;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+			opacity: 0;
+			animation: slideUpFade 0.6s ease-out forwards;
+		}
+
+			.trust-item:nth-child(1) {
+				animation-delay: 1.2s;
+			}
+
+			.trust-item:nth-child(2) {
+				animation-delay: 1.35s;
+			}
+
+			.trust-item:nth-child(3) {
+				animation-delay: 1.5s;
+			}
+
+			.trust-item:nth-child(4) {
+				animation-delay: 1.65s;
+			}
+
+			.trust-item:hover {
+				transform: translateY(-6px) scale(1.03);
+				border-color: #0e7c7b;
+				box-shadow: 0 12px 30px rgba(14, 124, 123, 0.18);
+				background: linear-gradient(135deg, #f8fbfb 0%, #f0f8f8 100%);
+			}
+
+			.trust-item i {
+				color: #0e7c7b;
+				font-size: 1.3rem;
+				flex-shrink: 0;
+				transition: all 0.3s ease;
+			}
+
+			.trust-item:hover i {
+				transform: scale(1.2) rotate(-10deg);
+				color: #0a3a8a;
+			}
+
+			.trust-item span {
+				color: #333;
+				font-weight: 600;
+				font-size: 0.88rem;
+			}
+
+		.about-cta {
+			display: flex;
+			gap: 12px;
+			flex-wrap: wrap;
+			opacity: 0;
+			animation: slideUpFade 0.8s ease-out 1.8s forwards;
+		}
+
+		.btn-about-primary {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
+			background-size: 200% 200%;
+			color: #fff;
+			padding: 14px 28px;
+			border-radius: 50px;
+			text-decoration: none;
+			font-weight: 600;
+			font-size: 0.95rem;
+			transition: all 0.4s ease;
+			box-shadow: 0 8px 25px rgba(14, 124, 123, 0.3);
+			border: none;
+			cursor: pointer;
+			position: relative;
+			overflow: hidden;
+		}
+
+			.btn-about-primary::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient( 90deg, transparent, rgba(255, 255, 255, 0.3), transparent );
+				transition: left 0.5s ease;
+			}
+
+			.btn-about-primary:hover::before {
+				left: 100%;
+			}
+
+			.btn-about-primary:hover {
+				background: linear-gradient(135deg, #0a3a8a 0%, #0e7c7b 100%);
+				color: #fff;
+				transform: translateY(-5px);
+				box-shadow: 0 15px 40px rgba(14, 124, 123, 0.5);
+				gap: 15px;
+			}
+
+			.btn-about-primary i {
+				transition: transform 0.3s ease;
+			}
+
+			.btn-about-primary:hover i:last-child {
+				transform: translateX(8px);
+			}
+
+		.btn-about-outline {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			background: #fff;
+			color: #0e7c7b;
+			padding: 14px 28px;
+			border-radius: 50px;
+			text-decoration: none;
+			font-weight: 600;
+			font-size: 0.95rem;
+			transition: all 0.4s ease;
+			border: 2px solid #0e7c7b;
+			cursor: pointer;
+			position: relative;
+			overflow: hidden;
+		}
+
+			.btn-about-outline::before {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 0;
+				height: 0;
+				background: #0e7c7b;
+				border-radius: 50%;
+				transform: translate(-50%, -50%);
+				transition: width 0.5s ease, height 0.5s ease;
+				z-index: -1;
+			}
+
+			.btn-about-outline:hover::before {
+				width: 300px;
+				height: 300px;
+			}
+
+			.btn-about-outline:hover {
+				color: #fff;
+				transform: translateY(-5px);
+				box-shadow: 0 15px 40px rgba(14, 124, 123, 0.4);
+				z-index: 1;
+			}
+
+			.btn-about-outline i {
+				font-size: 1.1rem;
+				transition: transform 0.3s ease;
+				position: relative;
+				z-index: 2;
+			}
+
+			.btn-about-outline span {
+				position: relative;
+				z-index: 2;
+			}
+
+			.btn-about-outline:hover i {
+				transform: rotate(-15deg) scale(1.2);
+			}
+
+		/* ==========================================
+		   RESPONSIVE
+		   ========================================== */
+		@media (max-width: 991px) {
+			.home-about {
+				padding: 60px 0;
+			}
+
+			.about-main-img img {
+				height: 400px;
+			}
+
+			.about-heading {
+				font-size: 2rem;
+			}
+
+			.exp-floating-badge {
+				width: 110px;
+				height: 110px;
+				top: -10px;
+				left: -10px;
+			}
+
+				.exp-floating-badge .badge-inner {
+					width: 95px;
+					height: 95px;
+				}
+
+				.exp-floating-badge .badge-ring {
+					width: 110px;
+					height: 110px;
+				}
+
+				.exp-floating-badge .badge-inner .exp-number {
+					font-size: 1.4rem;
+				}
+
+			.float-stat-card.stat-1 {
+				right: 0;
+				top: 30px;
+			}
+
+			.float-stat-card.stat-2 {
+				left: 0;
+			}
+		}
+
+		@media (max-width: 768px) {
+			.home-about {
+				padding: 50px 0;
+			}
+
+			.about-visual-new {
+				padding: 20px 20px 40px;
+			}
+
+			.about-main-img img {
+				height: 320px;
+			}
+
+			.about-heading {
+				font-size: 1.6rem;
+			}
+
+			.trust-features {
+				grid-template-columns: 1fr;
+			}
+
+			.about-cta {
+				flex-direction: column;
+			}
+
+			.btn-about-primary,
+			.btn-about-outline {
+				width: 100%;
+				justify-content: center;
+			}
+
+			.float-stat-card {
+				padding: 10px 15px;
+			}
+
+				.float-stat-card .stat-icon {
+					width: 38px;
+					height: 38px;
+					font-size: 1.1rem;
+				}
+
+				.float-stat-card .stat-info .stat-number {
+					font-size: 1.1rem;
+				}
+
+				.float-stat-card .stat-info .stat-label {
+					font-size: 0.65rem;
+				}
+
+			.exp-floating-badge {
+				width: 90px;
+				height: 90px;
+			}
+
+				.exp-floating-badge .badge-inner {
+					width: 80px;
+					height: 80px;
+				}
+
+				.exp-floating-badge .badge-ring {
+					width: 90px;
+					height: 90px;
+				}
+
+				.exp-floating-badge .badge-inner .exp-number {
+					font-size: 1.2rem;
+				}
+
+				.exp-floating-badge .badge-inner .exp-text {
+					font-size: 0.55rem;
+				}
+		}
+
+		@media (max-width: 576px) {
+			.about-main-img img {
+				height: 260px;
+			}
+
+			.about-heading {
+				font-size: 1.4rem;
+			}
+
+			.float-stat-card.stat-1,
+			.float-stat-card.stat-2 {
+				display: none;
+			}
+		}
+
+		/* ==========================================
+		   FOUNDERS SECTION
+		   ========================================== */
+		.founders-section {
+			padding: 80px 0;
+			background: linear-gradient(135deg, #f8f9fa 0%, #f0f4ff 100%);
+			position: relative;
+			overflow: hidden;
+		}
+
+			.founders-section::before {
+				content: '';
+				position: absolute;
+				top: -100px;
+				right: -100px;
+				width: 400px;
+				height: 400px;
+				background: radial-gradient(circle, rgba(14, 124, 123, 0.08) 0%, transparent 70%);
+				border-radius: 50%;
+				animation: floatImage 8s ease-in-out infinite;
+			}
+
+			.founders-section .section-title {
+				text-align: center;
+				margin-bottom: 50px;
+				position: relative;
+				z-index: 2;
+			}
+
+				.founders-section .section-title h2 {
+					color: #0e7c7b;
+					font-weight: 700;
+					font-size: 2.5rem;
+					margin-bottom: 10px;
+				}
+
+				.founders-section .section-title p {
+					color: #555;
+					font-size: 1.1rem;
+				}
+
+		.founder-full-card {
+			position: relative;
+			border-radius: 24px;
+			overflow: hidden;
+			height: 500px;
+			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+			transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+			cursor: pointer;
+			background: #f0f4ff;
+			border: 3px solid transparent;
+		}
+
+			.founder-full-card:hover {
+				transform: translateY(-10px);
+				box-shadow: 0 25px 60px rgba(14, 124, 123, 0.3);
+				border-color: #0e7c7b;
+			}
+
+			.founder-full-card .founder-full-image {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+			}
+
+				.founder-full-card .founder-full-image img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					object-position: center top;
+					transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+				}
+
+			.founder-full-card:hover .founder-full-image img {
+				transform: scale(1.1);
+			}
+
+			.founder-full-card .founder-full-image::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(180deg, rgba(14, 124, 123, 0) 0%, rgba(14, 124, 123, 0.1) 40%, rgba(14, 124, 123, 0.85) 75%, rgba(10, 58, 138, 0.95) 100%);
+				transition: all 0.5s ease;
+			}
+
+			.founder-full-card .founder-full-info {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				padding: 35px 30px;
+				z-index: 3;
+				transform: translateY(0);
+				transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+			}
+
+			.founder-full-card:hover .founder-full-info {
+				transform: translateY(-8px);
+			}
+
+			.founder-full-card .founder-badge-role {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				background: rgba(255, 255, 255, 0.25);
+				color: #fff;
+				padding: 6px 18px;
+				border-radius: 50px;
+				font-size: 0.8rem;
+				font-weight: 600;
+				margin-bottom: 12px;
+				backdrop-filter: blur(10px);
+				-webkit-backdrop-filter: blur(10px);
+				border: 1px solid rgba(255, 255, 255, 0.3);
+			}
+
+			.founder-full-card .founder-full-info h4 {
+				color: #fff;
+				font-weight: 700;
+				font-size: 1.8rem;
+				margin-bottom: 8px;
+				text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+			}
+
+			.founder-full-card .founder-full-info .founder-full-role {
+				color: rgba(255, 255, 255, 0.95);
+				font-size: 0.95rem;
+				margin-bottom: 15px;
+				display: block;
+			}
+
+			.founder-full-card .founder-full-desc {
+				color: rgba(255, 255, 255, 0.9);
+				font-size: 0.88rem;
+				line-height: 1.6;
+				margin-bottom: 15px;
+				max-height: 0;
+				opacity: 0;
+				overflow: hidden;
+				transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+			}
+
+			.founder-full-card:hover .founder-full-desc {
+				max-height: 100px;
+				opacity: 1;
+			}
+
+			.founder-full-card .founder-full-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				background: #fff;
+				color: #0e7c7b;
+				padding: 10px 24px;
+				border-radius: 50px;
+				text-decoration: none;
+				font-weight: 700;
+				font-size: 0.85rem;
+				transition: all 0.3s ease;
+				box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+				opacity: 0;
+				transform: translateY(10px);
+			}
+
+			.founder-full-card:hover .founder-full-btn {
+				opacity: 1;
+				transform: translateY(0);
+				background: #0e7c7b;
+				color: #fff;
+			}
+
+			.founder-full-card .founder-full-btn:hover {
+				background: #0a3a8a;
+				gap: 12px;
+				transform: scale(1.05);
+			}
+
+			.founder-full-card .founder-year-badge {
+				position: absolute;
+				top: 25px;
+				right: 25px;
+				background: rgba(255, 255, 255, 0.95);
+				color: #0e7c7b;
+				padding: 8px 18px;
+				border-radius: 50px;
+				font-size: 0.8rem;
+				font-weight: 700;
+				box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+				z-index: 4;
+				display: flex;
+				align-items: center;
+				gap: 6px;
+			}
+
+		.founders-story-full {
+			background: #fff;
+			border-radius: 24px;
+			padding: 50px 45px;
+			margin-top: 40px;
+			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+			border: 2px solid #f0f4ff;
+			position: relative;
+			overflow: hidden;
+			text-align: center;
+		}
+
+			.founders-story-full::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 5px;
+				background: linear-gradient(90deg, #0e7c7b 0%, #1a9e9d 50%, #1565c0 100%);
+				background-size: 200% 100%;
+				animation: gradientShift 3s ease infinite;
+			}
+
+			.founders-story-full .story-quote-icon {
+				font-size: 3rem;
+				color: #0e7c7b;
+				opacity: 0.2;
+				line-height: 1;
+				margin-bottom: 15px;
+				display: block;
+			}
+
+			.founders-story-full .story-badge-top {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
+				color: #fff;
+				padding: 8px 22px;
+				border-radius: 50px;
+				font-size: 0.85rem;
+				font-weight: 600;
+				margin-bottom: 20px;
+			}
+
+			.founders-story-full h3 {
+				color: #0e7c7b;
+				font-weight: 700;
+				font-size: 2rem;
+				margin-bottom: 20px;
+			}
+
+			.founders-story-full .story-main-text {
+				color: #444;
+				font-size: 1.05rem;
+				line-height: 1.9;
+				max-width: 800px;
+				margin: 0 auto 25px;
+			}
+
+				.founders-story-full .story-main-text .highlight-text {
+					color: #0e7c7b;
+					font-weight: 600;
+				}
+
+			.founders-story-full .story-quote-box {
+				background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+				padding: 25px 30px;
+				border-radius: 16px;
+				border-left: 4px solid #0e7c7b;
+				margin: 25px auto;
+				max-width: 700px;
+				text-align: left;
+			}
+
+			.founders-story-full .story-stats-row {
+				display: flex;
+				justify-content: center;
+				gap: 30px;
+				margin: 30px 0;
+				flex-wrap: wrap;
+			}
+
+				.founders-story-full .story-stats-row .stat-item {
+					text-align: center;
+					padding: 15px 25px;
+					background: #f8f9fa;
+					border-radius: 16px;
+					transition: all 0.4s ease;
+					min-width: 130px;
+					border: 1px solid #f0f4ff;
+				}
+
+					.founders-story-full .story-stats-row .stat-item:hover {
+						background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+						transform: translateY(-8px) scale(1.05);
+						box-shadow: 0 15px 35px rgba(14, 124, 123, 0.2);
+						border-color: #0e7c7b;
+					}
+
+				.founders-story-full .story-stats-row .stat-number {
+					display: block;
+					color: #0e7c7b;
+					font-weight: 700;
+					font-size: 2rem;
+				}
+
+				.founders-story-full .story-stats-row .stat-label {
+					color: #666;
+					font-size: 0.85rem;
+					font-weight: 500;
+					margin-top: 5px;
+				}
+
+			.founders-story-full .btn-story-cta {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
+				color: #fff;
+				padding: 14px 35px;
+				border-radius: 50px;
+				text-decoration: none;
+				font-weight: 600;
+				font-size: 1rem;
+				transition: all 0.4s ease;
+				box-shadow: 0 8px 25px rgba(14, 124, 123, 0.25);
+				margin-top: 10px;
+			}
+
+				.founders-story-full .btn-story-cta:hover {
+					background: linear-gradient(135deg, #0a3a8a 0%, #0e7c7b 100%);
+					color: #fff;
+					transform: translateY(-5px);
+					box-shadow: 0 15px 40px rgba(14, 124, 123, 0.5);
+					gap: 15px;
+				}
+
+		@media (max-width: 992px) {
+			.founder-full-card {
+				height: 450px;
+			}
+		}
+
+		@media (max-width: 768px) {
+			.founders-section {
+				padding: 60px 0;
+			}
+
+				.founders-section .section-title h2 {
+					font-size: 1.8rem;
+				}
+
+			.founder-full-card {
+				height: 420px;
+			}
+
+			.founders-story-full {
+				padding: 35px 25px;
+			}
+
+				.founders-story-full h3 {
+					font-size: 1.5rem;
+				}
+		}
+
+		/* ==========================================
+		   DOCTOR CARD - ANIMATED
 		   ========================================== */
 		.doctor-card-home {
 			background: #fff;
 			border-radius: 20px;
 			overflow: hidden;
 			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-			transition: all 0.4s ease;
+			transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 			height: 100%;
 			display: flex;
 			flex-direction: column;
@@ -156,28 +1395,33 @@
 		}
 
 			.doctor-card-home:hover {
-				transform: translateY(-10px);
-				box-shadow: 0 20px 50px rgba(14, 124, 123, 0.15);
+				transform: translateY(-15px) scale(1.02);
+				box-shadow: 0 25px 60px rgba(14, 124, 123, 0.2);
 				border-color: #0e7c7b;
 			}
 
 			.doctor-card-home .doctor-banner {
 				height: 85px;
 				background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
+				background-size: 200% 200%;
 				position: relative;
 				flex-shrink: 0;
 			}
 
-				.doctor-card-home .doctor-banner::after {
-					content: '';
-					position: absolute;
-					bottom: -1px;
-					left: 0;
-					right: 0;
-					height: 30px;
-					background: #fff;
-					border-radius: 30px 30px 0 0;
-				}
+			.doctor-card-home:hover .doctor-banner {
+				animation: gradientShift 3s ease infinite;
+			}
+
+			.doctor-card-home .doctor-banner::after {
+				content: '';
+				position: absolute;
+				bottom: -1px;
+				left: 0;
+				right: 0;
+				height: 30px;
+				background: #fff;
+				border-radius: 30px 30px 0 0;
+			}
 
 			.doctor-card-home .doctor-avatar-wrapper {
 				position: relative;
@@ -196,14 +1440,14 @@
 				border: 5px solid #fff;
 				box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 				background: #f0f4ff;
-				transition: all 0.4s ease;
+				transition: all 0.5s ease;
 				position: relative;
 			}
 
 			.doctor-card-home:hover .doctor-avatar {
 				border-color: #0e7c7b;
-				transform: scale(1.05);
-				box-shadow: 0 10px 30px rgba(14, 124, 123, 0.25);
+				transform: scale(1.1) rotate(5deg);
+				box-shadow: 0 15px 40px rgba(14, 124, 123, 0.3);
 			}
 
 			.doctor-card-home .doctor-avatar img {
@@ -215,7 +1459,7 @@
 			}
 
 			.doctor-card-home:hover .doctor-avatar img {
-				transform: scale(1.08);
+				transform: scale(1.15);
 			}
 
 			.doctor-card-home .doctor-avatar .status-dot {
@@ -293,7 +1537,6 @@
 			font-size: 0.72rem;
 			font-weight: 700;
 			margin-bottom: 10px;
-			letter-spacing: 0.3px;
 			text-transform: uppercase;
 			justify-content: center;
 		}
@@ -351,7 +1594,6 @@
 			margin-bottom: 10px;
 			min-height: 2.4rem;
 			line-height: 1.3;
-			text-align: center;
 		}
 
 		.doctor-card-home .doctor-content .qualifications {
@@ -433,6 +1675,7 @@
 				.doctor-card-home .action-buttons .btn-secondary:hover {
 					background: #0e7c7b;
 					color: #fff;
+					transform: scale(1.05);
 				}
 
 			.doctor-card-home .action-buttons .btn-primary {
@@ -452,7 +1695,7 @@
 
 				.doctor-card-home .action-buttons .btn-primary:hover {
 					background: linear-gradient(135deg, #1da851 0%, #168a42 100%);
-					transform: scale(1.02);
+					transform: scale(1.05);
 					box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
 				}
 
@@ -464,13 +1707,14 @@
 			border-radius: 50px;
 			text-decoration: none;
 			font-weight: 600;
-			transition: all 0.3s ease;
+			transition: all 0.4s ease;
 		}
 
 			.btn-view-all:hover {
 				background: #0a3a8a;
 				color: #fff;
-				transform: translateY(-2px);
+				transform: translateY(-5px) scale(1.05);
+				box-shadow: 0 15px 35px rgba(14, 124, 123, 0.4);
 			}
 
 			.btn-view-all i {
@@ -479,7 +1723,7 @@
 			}
 
 			.btn-view-all:hover i {
-				transform: translateX(5px);
+				transform: translateX(8px);
 			}
 
 		.service-item {
@@ -488,19 +1732,25 @@
 			border-radius: 16px;
 			text-align: center;
 			box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-			transition: all 0.3s ease;
+			transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 			height: 100%;
 		}
 
 			.service-item:hover {
-				transform: translateY(-5px);
-				box-shadow: 0 8px 30px rgba(13, 71, 161, 0.12);
+				transform: translateY(-12px) scale(1.03);
+				box-shadow: 0 20px 45px rgba(13, 71, 161, 0.15);
 			}
 
 			.service-item .icon {
 				font-size: 2.5rem;
 				color: #0e7c7b;
 				margin-bottom: 1rem;
+				transition: all 0.4s ease;
+			}
+
+			.service-item:hover .icon {
+				transform: scale(1.2) rotate(10deg);
+				color: #0a3a8a;
 			}
 
 			.service-item h3 {
@@ -520,12 +1770,12 @@
 			border-radius: 16px;
 			overflow: hidden;
 			box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-			transition: all 0.3s ease;
+			transition: all 0.4s ease;
 		}
 
 			.specialty-card:hover {
-				transform: translateY(-5px);
-				box-shadow: 0 8px 30px rgba(13, 71, 161, 0.12);
+				transform: translateY(-8px);
+				box-shadow: 0 15px 40px rgba(13, 71, 161, 0.15);
 			}
 
 		.specialty-image {
@@ -536,11 +1786,11 @@
 				width: 100%;
 				height: 200px;
 				object-fit: cover;
-				transition: transform 0.3s ease;
+				transition: transform 0.5s ease;
 			}
 
 		.specialty-card:hover .specialty-image img {
-			transform: scale(1.05);
+			transform: scale(1.1);
 		}
 
 		.specialty-content {
@@ -559,13 +1809,26 @@
 				font-size: 0.9rem;
 			}
 
-		/* SAI MEDICALS Section */
 		#sai-medicals {
 			background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
 			padding: 60px 0;
 			border-radius: 20px;
 			margin: 30px 0;
+			position: relative;
+			overflow: hidden;
 		}
+
+			#sai-medicals::before {
+				content: '';
+				position: absolute;
+				top: -50px;
+				right: -50px;
+				width: 200px;
+				height: 200px;
+				background: radial-gradient(circle, rgba(14, 124, 123, 0.1) 0%, transparent 70%);
+				border-radius: 50%;
+				animation: floatImage 6s ease-in-out infinite;
+			}
 
 		.badge-clinic {
 			background: #0e7c7b;
@@ -576,15 +1839,24 @@
 			display: inline-flex;
 			align-items: center;
 			gap: 0.5rem;
-			transition: all 0.3s ease;
+			transition: all 0.4s ease;
+			cursor: pointer;
 		}
 
 			.badge-clinic:hover {
 				background: #0a3a8a;
-				transform: scale(1.02);
+				transform: scale(1.08) translateY(-3px);
+				box-shadow: 0 15px 35px rgba(14, 124, 123, 0.4);
 			}
 
-		/* Responsive fixes */
+			.badge-clinic i {
+				transition: transform 0.3s ease;
+			}
+
+			.badge-clinic:hover i {
+				transform: rotate(-15deg) scale(1.2);
+			}
+
 		@media (max-width: 768px) {
 			.doctor-card-home .doctor-avatar {
 				width: 110px;
@@ -608,20 +1880,13 @@
 					min-height: auto;
 				}
 
-				.doctor-card-home .doctor-content .specialty,
-				.doctor-card-home .doctor-content .qualifications,
-				.doctor-card-home .doctor-content p,
-				.doctor-card-home .doctor-meta {
-					min-height: auto;
-				}
-
 			#sai-medicals {
 				padding: 40px 20px;
 				border-radius: 12px;
 			}
 		}
 
-		/* Footer Styles - Bright & Clean */
+		/* Footer Styles */
 		.footer-16 {
 			background: #f8f9fa;
 			border-top: 3px solid #0e7c7b;
@@ -638,7 +1903,12 @@
 				align-items: flex-start;
 				gap: 12px;
 				margin-bottom: 12px;
+				transition: all 0.3s ease;
 			}
+
+				.footer-16 .contact-item:hover {
+					transform: translateX(5px);
+				}
 
 				.footer-16 .contact-item i {
 					color: #0e7c7b;
@@ -670,7 +1940,12 @@
 					height: 3px;
 					background: #0e7c7b;
 					border-radius: 2px;
+					transition: width 0.3s ease;
 				}
+
+			.footer-16 .nav-column:hover h6::after {
+				width: 50px;
+			}
 
 			.footer-16 .footer-nav {
 				display: flex;
@@ -687,7 +1962,7 @@
 
 					.footer-16 .footer-nav a:hover {
 						color: #0e7c7b;
-						padding-left: 5px;
+						padding-left: 8px;
 					}
 
 		.footer-bottom {
@@ -700,8 +1975,6 @@
 				color: #ffffff;
 				margin-bottom: 0;
 				font-size: 0.95rem;
-				font-weight: 400;
-				letter-spacing: 0.3px;
 			}
 
 			.footer-bottom .copyright .sitename {
@@ -718,7 +1991,7 @@
 				.footer-bottom .social-links-bottom a {
 					color: #fff;
 					font-size: 1.2rem;
-					transition: all 0.3s ease;
+					transition: all 0.4s ease;
 					width: 40px;
 					height: 40px;
 					background: rgba(255,255,255,0.15);
@@ -732,7 +2005,7 @@
 					.footer-bottom .social-links-bottom a:hover {
 						background: #fff;
 						color: #0e7c7b;
-						transform: translateY(-3px);
+						transform: translateY(-5px) scale(1.15) rotate(10deg);
 					}
 
 		@media (max-width: 768px) {
@@ -746,7 +2019,6 @@
 			}
 		}
 
-		/* WhatsApp Button */
 		.whatsapp-btn {
 			display: inline-flex;
 			align-items: center;
@@ -759,21 +2031,15 @@
 			font-weight: 600;
 			font-size: 0.9rem;
 			transition: all 0.3s ease;
-			border: none;
 		}
 
 			.whatsapp-btn:hover {
 				background: #1da851;
 				color: #fff;
-				transform: scale(1.02);
-				box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+				transform: scale(1.08) translateY(-3px);
+				box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
 			}
 
-			.whatsapp-btn i {
-				font-size: 1.2rem;
-			}
-
-		/* WhatsApp Floating Button */
 		.whatsapp-float {
 			position: fixed;
 			bottom: 30px;
@@ -789,15 +2055,587 @@
 			font-size: 2rem;
 			box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
 			z-index: 999;
-			transition: all 0.3s ease;
+			transition: all 0.4s ease;
 			text-decoration: none;
+			animation: pulse-green 2s infinite;
 		}
 
 			.whatsapp-float:hover {
-				transform: scale(1.1);
-				box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+				transform: scale(1.15) rotate(10deg);
+				box-shadow: 0 10px 40px rgba(37, 211, 102, 0.6);
 				color: #fff;
 			}
+
+		/* ==========================================
+		   "YOUR HEALTH IS OUR PRIORITY" — STYLISH REDESIGN
+		   ========================================== */
+		.priority-section {
+			position: relative;
+			padding: 100px 0 80px;
+			background: linear-gradient(135deg, #0a2e2e 0%, #0e7c7b 50%, #1565c0 100%);
+			background-size: 200% 200%;
+			animation: gradientShift 10s ease infinite;
+			overflow: hidden;
+			color: #fff;
+		}
+
+			.priority-section::before {
+				content: '';
+				position: absolute;
+				top: -200px;
+				right: -200px;
+				width: 600px;
+				height: 600px;
+				background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+				border-radius: 50%;
+				animation: floatImage 12s ease-in-out infinite;
+				pointer-events: none;
+			}
+
+			.priority-section::after {
+				content: '';
+				position: absolute;
+				bottom: -150px;
+				left: -150px;
+				width: 500px;
+				height: 500px;
+				background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+				border-radius: 50%;
+				animation: floatImage 15s ease-in-out infinite reverse;
+				pointer-events: none;
+			}
+
+		.priority-grid-overlay {
+			position: absolute;
+			inset: 0;
+			background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+			background-size: 60px 60px;
+			pointer-events: none;
+		}
+
+		.priority-content-wrap {
+			position: relative;
+			z-index: 2;
+		}
+
+		.priority-badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			background: rgba(255, 255, 255, 0.12);
+			backdrop-filter: blur(10px);
+			-webkit-backdrop-filter: blur(10px);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			color: #fff;
+			padding: 8px 22px;
+			border-radius: 50px;
+			font-size: 0.85rem;
+			font-weight: 600;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+			margin-bottom: 25px;
+			animation: slideUpFade 0.8s ease-out 0.1s both;
+		}
+
+			.priority-badge i {
+				color: #ff6b6b;
+				animation: pulseHeart 1.5s ease-in-out infinite;
+				font-size: 1rem;
+			}
+
+		.priority-title {
+			font-size: 3.2rem;
+			font-weight: 900;
+			line-height: 1.15;
+			letter-spacing: -1.5px;
+			margin-bottom: 22px;
+			animation: slideUpFade 0.8s ease-out 0.25s both;
+			text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+		}
+
+			.priority-title .gradient-text {
+				background: linear-gradient(135deg, #ffd54f 0%, #ff8a65 50%, #ff6b6b 100%);
+				-webkit-background-clip: text;
+				background-clip: text;
+				-webkit-text-fill-color: transparent;
+				position: relative;
+			}
+
+				.priority-title .gradient-text::after {
+					content: '';
+					position: absolute;
+					bottom: 4px;
+					left: 0;
+					right: 0;
+					height: 10px;
+					background: linear-gradient(90deg, rgba(255, 213, 79, 0.3), rgba(255, 107, 107, 0.3));
+					border-radius: 6px;
+					z-index: -1;
+				}
+
+		.priority-lead {
+			font-size: 1.2rem;
+			line-height: 1.8;
+			color: rgba(255, 255, 255, 0.9);
+			max-width: 600px;
+			margin-bottom: 35px;
+			animation: slideUpFade 0.8s ease-out 0.4s both;
+		}
+
+		.priority-actions {
+			display: flex;
+			gap: 14px;
+			flex-wrap: wrap;
+			margin-bottom: 45px;
+			animation: slideUpFade 0.8s ease-out 0.55s both;
+		}
+
+		.btn-priority-primary {
+			display: inline-flex;
+			align-items: center;
+			gap: 12px;
+			background: #fff;
+			color: #0e7c7b;
+			padding: 16px 34px;
+			border-radius: 50px;
+			text-decoration: none;
+			font-weight: 800;
+			font-size: 0.95rem;
+			letter-spacing: 0.5px;
+			text-transform: uppercase;
+			transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+			border: none;
+			cursor: pointer;
+			position: relative;
+			overflow: hidden;
+		}
+
+			.btn-priority-primary::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(90deg, transparent, rgba(14, 124, 123, 0.15), transparent);
+				transition: left 0.6s ease;
+			}
+
+			.btn-priority-primary:hover::before {
+				left: 100%;
+			}
+
+			.btn-priority-primary:hover {
+				transform: translateY(-6px) scale(1.04);
+				box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+				color: #0a3a8a;
+				gap: 18px;
+			}
+
+			.btn-priority-primary i {
+				transition: transform 0.3s ease;
+			}
+
+			.btn-priority-primary:hover i {
+				transform: translateX(6px);
+			}
+
+		.btn-priority-outline {
+			display: inline-flex;
+			align-items: center;
+			gap: 12px;
+			background: transparent;
+			color: #fff;
+			padding: 16px 34px;
+			border-radius: 50px;
+			text-decoration: none;
+			font-weight: 700;
+			font-size: 0.95rem;
+			letter-spacing: 0.5px;
+			text-transform: uppercase;
+			transition: all 0.4s ease;
+			border: 2px solid rgba(255, 255, 255, 0.5);
+			position: relative;
+			overflow: hidden;
+			cursor: pointer;
+		}
+
+			.btn-priority-outline::before {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 0;
+				height: 0;
+				background: #fff;
+				border-radius: 50%;
+				transform: translate(-50%, -50%);
+				transition: width 0.5s ease, height 0.5s ease;
+				z-index: -1;
+			}
+
+			.btn-priority-outline:hover::before {
+				width: 400px;
+				height: 400px;
+			}
+
+			.btn-priority-outline:hover {
+				color: #0e7c7b;
+				border-color: #fff;
+				transform: translateY(-6px);
+				box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+				gap: 18px;
+			}
+
+			.btn-priority-outline i {
+				position: relative;
+				z-index: 2;
+			}
+
+			.btn-priority-outline span {
+				position: relative;
+				z-index: 2;
+			}
+
+		/* Priority features row */
+		.priority-features {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 18px;
+			animation: slideUpFade 0.8s ease-out 0.7s both;
+		}
+
+		.priority-feature {
+			background: rgba(255, 255, 255, 0.08);
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+			border: 1px solid rgba(255, 255, 255, 0.12);
+			border-radius: 18px;
+			padding: 22px 18px;
+			text-align: center;
+			transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			position: relative;
+			overflow: hidden;
+		}
+
+			.priority-feature::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 3px;
+				background: linear-gradient(90deg, #ffd54f, #ff8a65, #ff6b6b);
+				transform: scaleX(0);
+				transform-origin: left;
+				transition: transform 0.5s ease;
+			}
+
+			.priority-feature:hover::before {
+				transform: scaleX(1);
+			}
+
+			.priority-feature:hover {
+				background: rgba(255, 255, 255, 0.15);
+				transform: translateY(-8px) scale(1.04);
+				box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+				border-color: rgba(255, 255, 255, 0.3);
+			}
+
+			.priority-feature i {
+				font-size: 2rem;
+				color: #ffd54f;
+				margin-bottom: 12px;
+				display: block;
+				transition: transform 0.4s ease;
+			}
+
+			.priority-feature:hover i {
+				transform: scale(1.2) rotate(-8deg);
+				color: #fff;
+			}
+
+			.priority-feature h5 {
+				font-size: 1rem;
+				font-weight: 700;
+				margin-bottom: 5px;
+				color: #fff;
+			}
+
+			.priority-feature p {
+				font-size: 0.8rem;
+				color: rgba(255, 255, 255, 0.8);
+				margin: 0;
+				line-height: 1.5;
+			}
+
+		/* Priority image side */
+		.priority-visual {
+			position: relative;
+			animation: fadeInRight 1s ease-out 0.3s both;
+		}
+
+		.priority-img-card {
+			position: relative;
+			border-radius: 24px;
+			overflow: hidden;
+			box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+			animation: floatImage 7s ease-in-out infinite;
+		}
+
+			.priority-img-card img {
+				width: 100%;
+				height: 460px;
+				object-fit: cover;
+				display: block;
+				transition: transform 0.8s ease;
+			}
+
+			.priority-img-card:hover img {
+				transform: scale(1.08);
+			}
+
+			.priority-img-card .img-overlay {
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(180deg, rgba(10, 46, 46, 0) 0%, rgba(10, 46, 46, 0.5) 100%);
+				pointer-events: none;
+			}
+
+		.priority-float-badge {
+			position: absolute;
+			bottom: 30px;
+			left: 30px;
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(15px);
+			border-radius: 18px;
+			padding: 18px 24px;
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+			z-index: 3;
+			animation: floatCard1 5s ease-in-out infinite;
+			border: 1px solid rgba(255, 255, 255, 0.8);
+		}
+
+			.priority-float-badge .badge-icon {
+				width: 55px;
+				height: 55px;
+				background: linear-gradient(135deg, #0e7c7b, #1a9e9d);
+				border-radius: 14px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #fff;
+				font-size: 1.6rem;
+				box-shadow: 0 8px 20px rgba(14, 124, 123, 0.4);
+			}
+
+			.priority-float-badge .badge-text {
+				display: flex;
+				flex-direction: column;
+				line-height: 1.3;
+			}
+
+				.priority-float-badge .badge-text .badge-num {
+					font-size: 1.5rem;
+					font-weight: 900;
+					color: #0e7c7b;
+				}
+
+				.priority-float-badge .badge-text .badge-lbl {
+					font-size: 0.78rem;
+					font-weight: 600;
+					color: #555;
+					text-transform: uppercase;
+					letter-spacing: 0.5px;
+				}
+
+		.priority-float-badge2 {
+			position: absolute;
+			top: 30px;
+			right: -15px;
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(15px);
+			border-radius: 18px;
+			padding: 16px 22px;
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+			z-index: 3;
+			animation: floatCard2 5.5s ease-in-out infinite;
+			border: 1px solid rgba(255, 255, 255, 0.8);
+		}
+
+			.priority-float-badge2 .badge-icon2 {
+				width: 50px;
+				height: 50px;
+				background: linear-gradient(135deg, #ff6b6b, #ff8a65);
+				border-radius: 14px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #fff;
+				font-size: 1.5rem;
+				box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+			}
+
+			.priority-float-badge2 .badge-text2 {
+				display: flex;
+				flex-direction: column;
+				line-height: 1.3;
+			}
+
+				.priority-float-badge2 .badge-text2 .badge-num2 {
+					font-size: 1.3rem;
+					font-weight: 900;
+					color: #ff6b6b;
+				}
+
+				.priority-float-badge2 .badge-text2 .badge-lbl2 {
+					font-size: 0.75rem;
+					font-weight: 600;
+					color: #555;
+					text-transform: uppercase;
+					letter-spacing: 0.5px;
+				}
+
+		/* Trust strip at bottom of priority section */
+		.priority-trust-strip {
+			margin-top: 70px;
+			padding-top: 40px;
+			border-top: 1px solid rgba(255, 255, 255, 0.15);
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 25px;
+			animation: slideUpFade 0.8s ease-out 0.9s both;
+		}
+
+		.priority-trust-item {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			color: rgba(255, 255, 255, 0.9);
+		}
+
+			.priority-trust-item i {
+				font-size: 1.8rem;
+				color: #ffd54f;
+				transition: transform 0.3s ease;
+			}
+
+			.priority-trust-item:hover i {
+				transform: scale(1.2) rotate(-10deg);
+			}
+
+			.priority-trust-item .trust-text {
+				display: flex;
+				flex-direction: column;
+				line-height: 1.3;
+			}
+
+				.priority-trust-item .trust-text strong {
+					font-size: 1.1rem;
+					font-weight: 800;
+					color: #fff;
+				}
+
+				.priority-trust-item .trust-text span {
+					font-size: 0.85rem;
+					color: rgba(255, 255, 255, 0.75);
+				}
+
+		@media (max-width: 991px) {
+			.priority-title {
+				font-size: 2.4rem;
+			}
+
+			.priority-features {
+				grid-template-columns: repeat(2, 1fr);
+			}
+
+			.priority-visual {
+				margin-top: 50px;
+			}
+
+			.priority-img-card img {
+				height: 380px;
+			}
+
+			.priority-trust-strip {
+				justify-content: center;
+				text-align: center;
+			}
+		}
+
+		@media (max-width: 768px) {
+			.priority-section {
+				padding: 70px 0 60px;
+			}
+
+			.priority-title {
+				font-size: 2rem;
+				letter-spacing: -0.5px;
+			}
+
+			.priority-lead {
+				font-size: 1rem;
+			}
+
+			.priority-actions {
+				flex-direction: column;
+			}
+
+			.btn-priority-primary, .btn-priority-outline {
+				width: 100%;
+				justify-content: center;
+			}
+
+			.priority-features {
+				grid-template-columns: 1fr 1fr;
+				gap: 12px;
+			}
+
+			.priority-feature {
+				padding: 18px 12px;
+			}
+
+			.priority-float-badge {
+				left: 15px;
+				bottom: 15px;
+				padding: 14px 18px;
+			}
+
+			.priority-float-badge2 {
+				right: 15px;
+				top: 15px;
+				padding: 12px 16px;
+			}
+
+			.priority-img-card img {
+				height: 300px;
+			}
+		}
+
+		@media (max-width: 576px) {
+			.priority-features {
+				grid-template-columns: 1fr;
+			}
+
+			.priority-float-badge, .priority-float-badge2 {
+				display: none;
+			}
+
+			.priority-trust-item {
+				width: 100%;
+				justify-content: center;
+			}
+		}
 	</style>
 
 </head>
@@ -893,13 +2731,13 @@
 								</div>
 							</div>
 
-							<!--<div class="hero-actions" data-aos="fade-right" data-aos-delay="600">
+							<div class="hero-actions" data-aos="fade-right" data-aos-delay="600">
 								<a href="#" class="btn btn-primary book-appointment-btn">Book Appointment</a>
 								<a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-outline glightbox">
 									<i class="bi bi-play-circle me-2"></i>
 									Watch Our Story
 								</a>
-							</div>-->
+							</div>
 
 							<div class="emergency-contact" data-aos="fade-right" data-aos-delay="700">
 								<div class="emergency-icon">
@@ -940,76 +2778,238 @@
 			</div>
 
 		</section><!-- /Hero Section -->
-		<!-- Home About Section -->
+		<!-- ANIMATED HOME ABOUT SECTION -->
 		<section id="home-about" class="home-about section">
+			<div class="container">
+				<div class="row align-items-center g-5">
 
-			<div class="container" data-aos="fade-up" data-aos-delay="100">
+					<!-- Image Side (Left) -->
+					<div class="col-lg-6 order-lg-1 order-2">
+						<div class="about-visual-new">
+							<div class="about-main-img">
+								<img src="img/saiclini-kvp.png" alt="SAI CLINIC facility" class="img-fluid">
+								<div class="img-frame"></div>
+							</div>
 
-				<div class="row align-items-center">
-					<div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right" data-aos-delay="200">
-						<div class="about-content">
-							<h2 class="section-heading">Welcome to SAI CLINIC</h2>
-							<p class="lead-text">No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206</p>
+							<div class="exp-floating-badge">
+								<div class="badge-inner">
+									<span class="exp-number">15+</span>
+									<span class="exp-text">Years of<br>Trusted Care</span>
+								</div>
+								<div class="badge-ring"></div>
+							</div>
 
-							<p>
+							<div class="float-stat-card stat-1">
+								<div class="stat-icon">
+									<i class="bi bi-people-fill"></i>
+								</div>
+								<div class="stat-info">
+									<span class="stat-number">5000+</span>
+									<span class="stat-label">Happy Patients</span>
+								</div>
+							</div>
+
+							<div class="float-stat-card stat-2">
+								<div class="stat-icon">
+									<i class="bi bi-building"></i>
+								</div>
+								<div class="stat-info">
+									<span class="stat-number">6</span>
+									<span class="stat-label">Clinics</span>
+								</div>
+							</div>
+
+							<div class="deco-dots"></div>
+						</div>
+					</div>
+
+					<!-- Content Side (Right) -->
+					<div class="col-lg-6 order-lg-2 order-1">
+						<div class="about-content-new">
+
+							<div class="welcome-badge">
+								<i class="bi bi-shield-check"></i>
+								<span>Welcome to SAI CLINIC</span>
+							</div>
+
+							<h2 class="about-heading">
+								Excellence in <span class="heading-highlight">Healthcare</span> With
+								<span class="heading-highlight">Compassionate</span> Care
+							</h2>
+
+							<div class="heading-divider">
+								<span></span>
+								<i class="bi bi-heart-pulse-fill"></i>
+								<span></span>
+							</div>
+
+							<p class="about-address">
+								<i class="bi bi-geo-alt-fill"></i>
+								No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206
+							</p>
+
+							<p class="about-description">
 								SAI CLINIC is a multi-specialty healthcare center offering a wide range of medical services.
-								We are equipped with modern diagnostic facilities including Lab, X-Ray, and ECG.
+								We are equipped with modern diagnostic facilities including <strong>Lab</strong>, <strong>X-Ray</strong>, and <strong>ECG</strong>.
 								Our team of dedicated doctors ensures compassionate and comprehensive care for every patient.
 							</p>
 
-							<div class="stats-grid">
-								<div class="stat-item">
-									<div class="stat-number purecounter" data-purecounter-start="0" data-purecounter-end="15"
-										 data-purecounter-duration="1"></div>
-									<div class="stat-label">Years of Service</div>
+							<div class="trust-features">
+								<div class="trust-item">
+									<i class="bi bi-clock-history"></i>
+									<span>08 AM - 10 PM</span>
 								</div>
-								<div class="stat-item">
-									<div class="stat-number purecounter" data-purecounter-start="0" data-purecounter-end="6"
-										 data-purecounter-duration="1"></div>
-									<div class="stat-label">Clinics</div>
+								<div class="trust-item">
+									<i class="bi bi-flask"></i>
+									<span>Lab Services</span>
 								</div>
-								<div class="stat-item">
-									<div class="stat-number purecounter" data-purecounter-start="0" data-purecounter-end="5000"
-										 data-purecounter-duration="1"></div>
-									<div class="stat-label">Happy Patients</div>
+								<div class="trust-item">
+									<i class="bi bi-x-diamond"></i>
+									<span>Digital X-Ray</span>
+								</div>
+								<div class="trust-item">
+									<i class="bi bi-heart-pulse"></i>
+									<span>ECG Services</span>
 								</div>
 							</div>
 
-							<div class="cta-section">
-								<a href="about.html" class="btn-primary">Learn More About Us</a>
+							<div class="about-cta">
+								<a href="about.html" class="btn-about-primary">
+									<i class="bi bi-info-circle"></i>
+									<span>Learn More About Us</span>
+									<i class="bi bi-arrow-right"></i>
+								</a>
+								<a href="appointment.html" class="btn-about-outline">
+									<i class="bi bi-calendar-check"></i>
+									<span>Book Appointment</span>
+								</a>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		<!-- FOUNDERS SECTION -->
+		<section id="founders" class="founders-section">
+			<div class="container" data-aos="fade-up" data-aos-delay="100">
+
+				<div class="section-title" data-aos="fade-up">
+					<h2>Meet Our Founders</h2>
+					<p>The visionaries behind SAI CLINIC's success</p>
+				</div>
+
+				<div class="row g-4 justify-content-center">
+
+					<div class="col-lg-5 col-md-6" data-aos="fade-up" data-aos-delay="100">
+						<div class="founder-full-card">
+							<div class="founder-full-image">
+								<img src="img/drsamrajprofile.jpeg" alt="Dr. Samraj">
+							</div>
+							<div class="founder-year-badge">
+								<i class="bi bi-award-fill"></i> 12+ Years
+							</div>
+							<div class="founder-full-info">
+								<span class="founder-badge-role">
+									<i class="bi bi-person-badge"></i> Co-Founder & Director
+								</span>
+								<h4>Dr. Samraj</h4>
+								<span class="founder-full-role">Visionary Healthcare Leader</span>
+								<p class="founder-full-desc">
+									Visionary leader with 12+ years of experience in healthcare. Passionate about providing quality medical care to every patient.
+								</p>
+								<a href="FounderandDirector.html" class="founder-full-btn">
+									<i class="bi bi-person-circle"></i> View Full Profile
+								</a>
 							</div>
 						</div>
 					</div>
 
-					<div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
-						<div class="about-visual">
-							<div class="main-image">
-								<img src="assets/img/health/sai-lab-1.webp" alt="SAI CLINIC facility" class="img-fluid">
+					<div class="col-lg-5 col-md-6" data-aos="fade-up" data-aos-delay="200">
+						<div class="founder-full-card">
+							<div class="founder-full-image">
+								<img src="img/sangamifounder.png" alt="Dr. Sangami">
 							</div>
-							<div class="floating-card">
-								<div class="card-content">
-									<div class="icon">
-										<i class="bi bi-heart-pulse"></i>
-									</div>
-									<div class="card-text">
-										<h4>Comprehensive Care</h4>
-										<p>Lab, X-Ray, ECG available</p>
-									</div>
-								</div>
+							<div class="founder-year-badge">
+								<i class="bi bi-award-fill"></i> 12+ Years
 							</div>
-							<div class="experience-badge">
-								<div class="badge-content">
-									<span class="years">15+</span>
-									<span class="text">Years of Trusted Care</span>
-								</div>
+							<div class="founder-full-info">
+								<span class="founder-badge-role">
+									<i class="bi bi-heart-pulse"></i> Co-Founder & Medical Director
+								</span>
+								<h4>Dr. Sangami</h4>
+								<span class="founder-full-role">Clinical Diabetology Expert</span>
+								<p class="founder-full-desc">
+									Dedicated healthcare professional with expertise in clinical diabetology and metabolic health. Committed to patient well-being.
+								</p>
+								<a href="FounderandDirector.html" class="founder-full-btn">
+									<i class="bi bi-person-circle"></i> View Full Profile
+								</a>
 							</div>
 						</div>
 					</div>
+
+				</div>
+
+				<div class="founders-story-full" data-aos="fade-up" data-aos-delay="300">
+
+					<span class="story-quote-icon">
+						<i class="bi bi-quote"></i>
+					</span>
+
+					<span class="story-badge-top">
+						<i class="bi bi-star-fill"></i> Our Inspiring Journey
+					</span>
+
+					<h3>From a Small Room to 6 Clinics</h3>
+
+					<p class="story-main-text">
+						<span class="highlight-text">12 years ago</span>, in a small room in Kavaraipettai,
+						<span class="highlight-text">Dr. Samraj</span> and <span class="highlight-text">Dr. Sangami</span>
+						started their dream - a small clinic with a big vision. With limited resources but unlimited
+						determination, they began serving the community with compassionate healthcare.
+						Today, <span class="highlight-text">SAI CLINIC</span> has grown into a network of
+						<span class="highlight-text">6 successful clinics</span> across different locations,
+						providing quality healthcare to thousands of patients.
+					</p>
+
+					<div class="story-quote-box">
+						<i class="bi bi-quote" style="font-size: 1.5rem; color: #0e7c7b; opacity: 0.4;"></i>
+						<p>"We started with a single room, a stethoscope, and a dream. Today, we have 6 clinics across different locations. Every patient's smile is our biggest achievement."</p>
+						<footer>— Dr. Samraj & Dr. Sangami</footer>
+					</div>
+
+					<div class="story-stats-row">
+						<div class="stat-item">
+							<span class="stat-number" data-purecounter-start="0" data-purecounter-end="12" data-purecounter-duration="2">12+</span>
+							<span class="stat-label">Years of Service</span>
+						</div>
+						<div class="stat-item">
+							<span class="stat-number" data-purecounter-start="0" data-purecounter-end="6" data-purecounter-duration="2">6</span>
+							<span class="stat-label">Clinics</span>
+						</div>
+						<div class="stat-item">
+							<span class="stat-number" data-purecounter-start="0" data-purecounter-end="5000" data-purecounter-duration="2">5000+</span>
+							<span class="stat-label">Happy Patients</span>
+						</div>
+						<div class="stat-item">
+							<span class="stat-number" data-purecounter-start="0" data-purecounter-end="4.9" data-purecounter-duration="2">4.9</span>
+							<span class="stat-label">Patient Rating</span>
+						</div>
+					</div>
+
+					<a href="FounderandDirector.html" class="btn-story-cta">
+						<span>Read Full Story</span>
+						<i class="bi bi-arrow-right"></i>
+					</a>
+
 				</div>
 
 			</div>
+		</section>
 
-		</section><!-- /Home About Section -->
 		<!-- Doctors Section -->
 		<section id="doctors" class="doctors section">
 
@@ -1022,7 +3022,6 @@
 
 				<div class="row gy-4">
 
-					<!-- Doctor 1: Dr. S. Sangami -->
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
 						<div class="doctor-card-home">
 							<div class="doctor-banner"></div>
@@ -1056,7 +3055,6 @@
 						</div>
 					</div>
 
-					<!-- Doctor 2: Dr. M. Karthikeyan -->
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
 						<div class="doctor-card-home">
 							<div class="doctor-banner"></div>
@@ -1090,7 +3088,6 @@
 						</div>
 					</div>
 
-					<!-- Doctor 3: Dr. M. Salomon Themothi -->
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
 						<div class="doctor-card-home">
 							<div class="doctor-banner"></div>
@@ -1124,7 +3121,6 @@
 						</div>
 					</div>
 
-					<!-- Doctor 4: Dr. D. Tharun -->
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
 						<div class="doctor-card-home">
 							<div class="doctor-banner"></div>
@@ -1169,7 +3165,8 @@
 
 			</div>
 
-		</section><!-- /Doctors Section -->
+		</section>
+
 		<!-- Services & Facilities Section -->
 		<section id="services" class="services section">
 
@@ -1256,7 +3253,8 @@
 
 			</div>
 
-		</section><!-- /Services Section -->
+		</section>
+
 		<!-- SAI MEDICALS Section -->
 		<section id="sai-medicals" class="section">
 			<div class="container">
@@ -1280,108 +3278,136 @@
 			</div>
 		</section>
 
-		<!-- Call To Action Section -->
-		<section id="call-to-action" class="call-to-action section light-background">
+		<!-- ==========================================
+			 YOUR HEALTH IS OUR PRIORITY — STYLISH REDESIGN
+			 ========================================== -->
+		<section id="priority" class="priority-section">
+			<div class="priority-grid-overlay"></div>
 
-			<div class="container" data-aos="fade-up" data-aos-delay="100">
+			<div class="container priority-content-wrap">
+				<div class="row align-items-center g-5">
 
-				<div class="hero-content">
-					<div class="row align-items-center">
+					<!-- Left: Text Content -->
+					<div class="col-lg-6">
+						<span class="priority-badge">
+							<i class="bi bi-heart-pulse-fill"></i>
+							Your Health, Our Mission
+						</span>
 
-						<div class="col-lg-6">
-							<div class="content-wrapper" data-aos="fade-up" data-aos-delay="200">
-								<h1>Your Health is Our Priority</h1>
-								<p>
-									SAI CLINIC is committed to providing exceptional medical care with compassion and expertise.
-									Visit us for all your healthcare needs.
-								</p>
+						<h2 class="priority-title">
+							Your Health is<br>
+							<span class="gradient-text">Our Priority</span>
+						</h2>
 
-								<div class="cta-wrapper">
-									<a href="#" class="primary-cta book-appointment-btn">
-										<span>Schedule Consultation</span>
-										<i class="bi bi-arrow-right"></i>
-									</a>
-									<a href="services.html" class="secondary-cta">
-										<span>Explore Services</span>
-										<i class="bi bi-arrow-right"></i>
-									</a>
-								</div>
-							</div>
+						<p class="priority-lead">
+							At SAI CLINIC, we believe every patient deserves world-class healthcare with a human touch.
+							From advanced diagnostics to compassionate treatment, we're here for you and your family
+							— every step of the way, 7 days a week.
+						</p>
+
+						<div class="priority-actions">
+							<a href="#" class="btn-priority-primary book-appointment-btn">
+								<i class="bi bi-calendar-check"></i>
+								<span>Book Appointment</span>
+								<i class="bi bi-arrow-right"></i>
+							</a>
+							<a href="tel:+919787960590" class="btn-priority-outline">
+								<i class="bi bi-telephone-fill"></i>
+								<span>Call +91 97879 60590</span>
+							</a>
 						</div>
 
-						<div class="col-lg-6">
-							<div class="image-container" data-aos="fade-left" data-aos-delay="300">
-								<img src="assets/img/health/facilities-9.webp" alt="SAI CLINIC" class="img-fluid">
+						<!-- Feature Cards -->
+						<div class="priority-features">
+							<div class="priority-feature">
+								<i class="bi bi-shield-check"></i>
+								<h5>Trusted Care</h5>
+								<p>15+ years of trusted healthcare service</p>
+							</div>
+							<div class="priority-feature">
+								<i class="bi bi-clock-history"></i>
+								<h5>Open Daily</h5>
+								<p>08:00 AM to 10:00 PM, all 7 days</p>
+							</div>
+							<div class="priority-feature">
+								<i class="bi bi-people-fill"></i>
+								<h5>Expert Doctors</h5>
+								<p>Qualified specialists across departments</p>
+							</div>
+							<div class="priority-feature">
+								<i class="bi bi-cash-coin"></i>
+								<h5>Affordable</h5>
+								<p>Quality care at reasonable prices</p>
 							</div>
 						</div>
-
-					</div>
-				</div>
-
-				<div class="features-section">
-
-					<div class="row g-0">
-
-						<div class="col-lg-4">
-							<div class="feature-block" data-aos="fade-up" data-aos-delay="200">
-								<div class="feature-icon">
-									<i class="bi bi-shield-check"></i>
-								</div>
-								<h3>Advanced Technology</h3>
-								<p>State-of-the-art diagnostic equipment including digital X-ray and ECG.</p>
-							</div>
-						</div>
-
-						<div class="col-lg-4">
-							<div class="feature-block" data-aos="fade-up" data-aos-delay="300">
-								<div class="feature-icon">
-									<i class="bi bi-clock"></i>
-								</div>
-								<h3>Extended Hours</h3>
-								<p>Open from 08.00 AM to 10.00 PM, Monday to Sunday.</p>
-							</div>
-						</div>
-
-						<div class="col-lg-4">
-							<div class="feature-block" data-aos="fade-up" data-aos-delay="400">
-								<div class="feature-icon">
-									<i class="bi bi-people"></i>
-								</div>
-								<h3>Expert Team</h3>
-								<p>Qualified doctors with years of experience in their respective fields.</p>
-							</div>
-						</div>
-
 					</div>
 
+					<!-- Right: Image Visual -->
+					<div class="col-lg-6">
+						<div class="priority-visual">
+							<div class="priority-img-card">
+								<img src="assets/img/health/facilities-9.webp" alt="SAI CLINIC Healthcare Facility">
+								<div class="img-overlay"></div>
+							</div>
+
+							<div class="priority-float-badge">
+								<div class="badge-icon">
+									<i class="bi bi-heart-pulse-fill"></i>
+								</div>
+								<div class="badge-text">
+									<span class="badge-num">5000+</span>
+									<span class="badge-lbl">Happy Patients</span>
+								</div>
+							</div>
+
+							<div class="priority-float-badge2">
+								<div class="badge-icon2">
+									<i class="bi bi-star-fill"></i>
+								</div>
+								<div class="badge-text2">
+									<span class="badge-num2">4.9★</span>
+									<span class="badge-lbl2">Patient Rating</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</div>
 
-				<div class="contact-block">
-					<div class="row">
-
-						<div class="col-lg-8">
-							<div class="contact-content" data-aos="fade-up" data-aos-delay="200">
-								<h2>Need Immediate Medical Assistance?</h2>
-								<p>Our team is available around the clock to provide immediate medical support when you need it most.</p>
-							</div>
+				<!-- Trust Strip -->
+				<div class="priority-trust-strip">
+					<div class="priority-trust-item">
+						<i class="bi bi-patch-check-fill"></i>
+						<div class="trust-text">
+							<strong>NABL Standards</strong>
+							<span>Quality assured diagnostics</span>
 						</div>
-
-						<div class="col-lg-4">
-							<div class="contact-actions" data-aos="fade-up" data-aos-delay="300">
-								<a href="tel:+919787960590" class="emergency-call">
-									<i class="bi bi-telephone"></i>
-									<span>+91 97879 60590</span>
-								</a>
-								<a href="contact.html" class="contact-link">Find Location</a>
-							</div>
+					</div>
+					<div class="priority-trust-item">
+						<i class="bi bi-people-fill"></i>
+						<div class="trust-text">
+							<strong>6 Clinics</strong>
+							<span>Across multiple locations</span>
 						</div>
-
+					</div>
+					<div class="priority-trust-item">
+						<i class="bi bi-award-fill"></i>
+						<div class="trust-text">
+							<strong>12+ Years</strong>
+							<span>Of trusted service</span>
+						</div>
+					</div>
+					<div class="priority-trust-item">
+						<i class="bi bi-telephone-fill"></i>
+						<div class="trust-text">
+							<strong>24/7 Support</strong>
+							<span>Emergency assistance</span>
+						</div>
 					</div>
 				</div>
 
 			</div>
-
-		</section><!-- /Call To Action Section -->
+		</section>
 
 	</main>
 
@@ -1544,66 +3570,60 @@
 	<!-- Appointment Booking Script with WhatsApp -->
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
-			// Get all appointment buttons
 			const bookButtons = document.querySelectorAll('.book-appointment-btn');
 
-			// Add click event to each button
 			bookButtons.forEach(function (button) {
 				button.addEventListener('click', function (e) {
 					e.preventDefault();
-
-					// Get doctor name if available
 					let doctorName = this.getAttribute('data-doctor') || '';
 
-					// Get current date and time for the form
 					const now = new Date();
 					const dateStr = now.toISOString().split('T')[0];
 					const timeStr = now.toTimeString().slice(0, 5);
 
-					// Show SweetAlert2 appointment form
 					Swal.fire({
 						title: 'Book an Appointment',
 						html: `
-									<form id="appointmentForm" style="text-align: left;">
-										<div class="mb-3">
-											<label for="fullName" style="font-weight: 600; display: block; margin-bottom: 5px;">Full Name *</label>
-											<input type="text" id="fullName" class="swal2-input" placeholder="Your full name" required>
-										</div>
-										<div class="mb-3">
-											<label for="phoneNumber" style="font-weight: 600; display: block; margin-bottom: 5px;">Phone Number *</label>
-											<input type="tel" id="phoneNumber" class="swal2-input" placeholder="+91 98765 43210" required>
-										</div>
-										<div class="mb-3">
-											<label for="emailAddress" style="font-weight: 600; display: block; margin-bottom: 5px;">Email Address</label>
-											<input type="email" id="emailAddress" class="swal2-input" placeholder="your@email.com">
-										</div>
-										<div class="mb-3">
-											<label for="appointmentDate" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Date *</label>
-											<input type="date" id="appointmentDate" class="swal2-input" value="${dateStr}" required>
-										</div>
-										<div class="mb-3">
-											<label for="appointmentTime" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Time *</label>
-											<input type="time" id="appointmentTime" class="swal2-input" value="${timeStr}" required>
-										</div>
-										<div class="mb-3">
-											<label for="doctorSelect" style="font-weight: 600; display: block; margin-bottom: 5px;">Select Doctor</label>
-											<select id="doctorSelect" class="swal2-input">
-												<option value="">Choose a doctor</option>
-												<option value="Dr. S. Sangami" ${doctorName === 'Dr. S. Sangami' ? 'selected' : ''}>Dr. S. Sangami (Diabetology)</option>
-												<option value="Dr. M. Karthikeyan" ${doctorName === 'Dr. M. Karthikeyan' ? 'selected' : ''}>Dr. M. Karthikeyan (Orthopedics)</option>
-												<option value="Dr. M. Salomon Themothi" ${doctorName === 'Dr. M. Salomon Themothi' ? 'selected' : ''}>Dr. M. Salomon Themothi (General Surgery)</option>
-												<option value="Dr. D. Tharun" ${doctorName === 'Dr. D. Tharun' ? 'selected' : ''}>Dr. D. Tharun (Pulmonology)</option>
-												<option value="Dr. Subash Kaushik. T. G" ${doctorName === 'Dr. Subash Kaushik. T. G' ? 'selected' : ''}>Dr. Subash Kaushik. T. G (Urology)</option>
-												<option value="Dr. V. Prathapkumar" ${doctorName === 'Dr. V. Prathapkumar' ? 'selected' : ''}>Dr. V. Prathapkumar (General Medicine)</option>
-											</select>
-										</div>
-										<div class="mb-3">
-											<label for="message" style="font-weight: 600; display: block; margin-bottom: 5px;">Additional Notes</label>
-											<textarea id="message" class="swal2-textarea" placeholder="Any specific concerns or symptoms..." rows="2"></textarea>
-										</div>
-										<p style="font-size: 0.8rem; color: #666; margin-top: 10px;">* Required fields</p>
-									</form>
-								`,
+							<form id="appointmentForm" style="text-align: left;">
+								<div class="mb-3">
+									<label for="fullName" style="font-weight: 600; display: block; margin-bottom: 5px;">Full Name *</label>
+									<input type="text" id="fullName" class="swal2-input" placeholder="Your full name" required>
+								</div>
+								<div class="mb-3">
+									<label for="phoneNumber" style="font-weight: 600; display: block; margin-bottom: 5px;">Phone Number *</label>
+									<input type="tel" id="phoneNumber" class="swal2-input" placeholder="+91 98765 43210" required>
+								</div>
+								<div class="mb-3">
+									<label for="emailAddress" style="font-weight: 600; display: block; margin-bottom: 5px;">Email Address</label>
+									<input type="email" id="emailAddress" class="swal2-input" placeholder="your@email.com">
+								</div>
+								<div class="mb-3">
+									<label for="appointmentDate" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Date *</label>
+									<input type="date" id="appointmentDate" class="swal2-input" value="${dateStr}" required>
+								</div>
+								<div class="mb-3">
+									<label for="appointmentTime" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Time *</label>
+									<input type="time" id="appointmentTime" class="swal2-input" value="${timeStr}" required>
+								</div>
+								<div class="mb-3">
+									<label for="doctorSelect" style="font-weight: 600; display: block; margin-bottom: 5px;">Select Doctor</label>
+									<select id="doctorSelect" class="swal2-input">
+										<option value="">Choose a doctor</option>
+										<option value="Dr. S. Sangami" ${doctorName === 'Dr. S. Sangami' ? 'selected' : ''}>Dr. S. Sangami (Diabetology)</option>
+										<option value="Dr. M. Karthikeyan" ${doctorName === 'Dr. M. Karthikeyan' ? 'selected' : ''}>Dr. M. Karthikeyan (Orthopedics)</option>
+										<option value="Dr. M. Salomon Themothi" ${doctorName === 'Dr. M. Salomon Themothi' ? 'selected' : ''}>Dr. M. Salomon Themothi (General Surgery)</option>
+										<option value="Dr. D. Tharun" ${doctorName === 'Dr. D. Tharun' ? 'selected' : ''}>Dr. D. Tharun (Pulmonology)</option>
+										<option value="Dr. Subash Kaushik. T. G" ${doctorName === 'Dr. Subash Kaushik. T. G' ? 'selected' : ''}>Dr. Subash Kaushik. T. G (Urology)</option>
+										<option value="Dr. V. Prathapkumar" ${doctorName === 'Dr. V. Prathapkumar' ? 'selected' : ''}>Dr. V. Prathapkumar (General Medicine)</option>
+									</select>
+								</div>
+								<div class="mb-3">
+									<label for="message" style="font-weight: 600; display: block; margin-bottom: 5px;">Additional Notes</label>
+									<textarea id="message" class="swal2-textarea" placeholder="Any specific concerns or symptoms..." rows="2"></textarea>
+								</div>
+								<p style="font-size: 0.8rem; color: #666; margin-top: 10px;">* Required fields</p>
+							</form>
+						`,
 						confirmButtonText: 'Confirm & Send to WhatsApp',
 						cancelButtonText: 'Cancel',
 						showCancelButton: true,
@@ -1632,7 +3652,6 @@
 							const data = result.value;
 							const doctorDisplay = data.doctor || 'Any Available Doctor';
 
-							// Format date for WhatsApp
 							const dateObj = new Date(data.date + 'T00:00:00');
 							const formattedDate = dateObj.toLocaleDateString('en-IN', {
 								weekday: 'short',
@@ -1641,9 +3660,8 @@
 								year: 'numeric'
 							});
 
-							// Create WhatsApp message
 							let whatsappMsg = `Hi SAI CLINIC,%0A%0A`;
-							whatsappMsg += `I would like to book an appointment with the following details:%0A%0A`;
+							whatsappMsg += `I would like to book an appointment:%0A%0A`;
 							whatsappMsg += `👤 Patient Name: ${data.name}%0A`;
 							whatsappMsg += `📞 Phone: ${data.phone}%0A`;
 							whatsappMsg += `👨‍⚕️ Doctor: ${doctorDisplay}%0A`;
@@ -1657,42 +3675,37 @@
 							}
 							whatsappMsg += `%0AThank you!`;
 
-							// Open WhatsApp
 							const whatsappURL = `https://wa.me/919787960590?text=${whatsappMsg}`;
 							window.open(whatsappURL, '_blank');
 
-							// Show success message
 							Swal.fire({
 								title: 'Appointment Request Sent! ✅',
 								html: `
-											<div style="text-align: left;">
-												<p><strong>Patient:</strong> ${data.name}</p>
-												<p><strong>Doctor:</strong> ${doctorDisplay}</p>
-												<p><strong>Date:</strong> ${formattedDate} at ${data.time}</p>
-												<p><strong>Phone:</strong> ${data.phone}</p>
-												<hr>
-												<p style="color: #25D366; font-size: 0.95rem;">
-													<i class="bi bi-whatsapp"></i>
-													WhatsApp opened with your appointment details.
-												</p>
-												<p style="font-size: 0.8rem; color: #666;">
-													SAI CLINIC<br>
-													No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206
-												</p>
-											</div>
-										`,
+									<div style="text-align: left;">
+										<p><strong>Patient:</strong> ${data.name}</p>
+										<p><strong>Doctor:</strong> ${doctorDisplay}</p>
+										<p><strong>Date:</strong> ${formattedDate} at ${data.time}</p>
+										<p><strong>Phone:</strong> ${data.phone}</p>
+										<hr>
+										<p style="color: #25D366; font-size: 0.95rem;">
+											<i class="bi bi-whatsapp"></i>
+											WhatsApp opened with your appointment details.
+										</p>
+										<p style="font-size: 0.8rem; color: #666;">
+											SAI CLINIC<br>
+											No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206
+										</p>
+									</div>
+								`,
 								icon: 'success',
 								confirmButtonColor: '#0e7c7b',
 								confirmButtonText: 'OK'
 							});
-
-							console.log('Appointment Data:', data);
 						}
 					});
 				});
 			});
 
-			// View Doctor Details
 			const viewButtons = document.querySelectorAll('.view-doctor');
 			viewButtons.forEach(function (button) {
 				button.addEventListener('click', function (e) {
@@ -1707,64 +3720,34 @@
 					};
 
 					if (doctorName === 'Dr. S. Sangami') {
-						details = {
-							specialty: 'Clinical Diabetology & Metabolic Health',
-							experience: '12+ years',
-							education: 'M.B.B.S., Dip. Diabetology, FICM, MEM (GW University-USA)',
-							availability: 'Available Today'
-						};
+						details = { specialty: 'Clinical Diabetology & Metabolic Health', experience: '12+ years', education: 'M.B.B.S., Dip. Diabetology, FICM, MEM (GW University-USA)', availability: 'Available Today' };
 					} else if (doctorName === 'Dr. M. Karthikeyan') {
-						details = {
-							specialty: 'Orthopedics & Joint Replacement',
-							experience: '12+ years',
-							education: 'M.S. (Ortho)',
-							availability: 'Available Today'
-						};
+						details = { specialty: 'Orthopedics & Joint Replacement', experience: '12+ years', education: 'M.S. (Ortho)', availability: 'Available Today' };
 					} else if (doctorName === 'Dr. M. Salomon Themothi') {
-						details = {
-							specialty: 'General Surgery',
-							experience: '15+ years',
-							education: 'M.B.B.S., MS., DNB., FIAGES',
-							availability: 'On Appointment'
-						};
+						details = { specialty: 'General Surgery', experience: '15+ years', education: 'M.B.B.S., MS., DNB., FIAGES', availability: 'On Appointment' };
 					} else if (doctorName === 'Dr. D. Tharun') {
-						details = {
-							specialty: 'Pulmonology',
-							experience: '8+ years',
-							education: 'MD., Pulmonology',
-							availability: 'On Appointment'
-							};
+						details = { specialty: 'Pulmonology', experience: '8+ years', education: 'MD., Pulmonology', availability: 'On Appointment' };
 					} else if (doctorName === 'Dr. Subash Kaushik. T. G') {
-						details = {
-							specialty: 'Urology',
-							experience: '10+ years',
-							education: 'M.B.B.S., MS., Urology',
-							availability: 'On Appointment'
-						};
+						details = { specialty: 'Urology', experience: '10+ years', education: 'M.B.B.S., MS., Urology', availability: 'On Appointment' };
 					} else if (doctorName === 'Dr. V. Prathapkumar') {
-						details = {
-							specialty: 'General Medicine',
-							experience: '12+ years',
-							education: 'M.B.B.S., MD., General Medicine, DNB., CCCDM',
-							availability: 'On Appointment'
-						};
+						details = { specialty: 'General Medicine', experience: '12+ years', education: 'M.B.B.S., MD., General Medicine, DNB., CCCDM', availability: 'On Appointment' };
 					}
 
 					Swal.fire({
 						title: doctorName,
 						html: `
-									<div style="text-align: left; padding: 0 10px;">
-										<p><strong>🏥 Specialty:</strong> ${details.specialty}</p>
-										<p><strong>📚 Education:</strong> ${details.education}</p>
-										<p><strong>⏳ Experience:</strong> ${details.experience}</p>
-										<p><strong>📅 Availability:</strong> ${details.availability}</p>
-										<hr>
-										<p style="font-size: 0.9rem; color: #0e7c7b;">
-											<i class="bi bi-calendar-check"></i>
-											<a href="#" class="book-appointment-btn" style="color: #0e7c7b; text-decoration: underline;" data-doctor="${doctorName}">Book an appointment with ${doctorName}</a>
-										</p>
-									</div>
-								`,
+							<div style="text-align: left; padding: 0 10px;">
+								<p><strong>🏥 Specialty:</strong> ${details.specialty}</p>
+								<p><strong>📚 Education:</strong> ${details.education}</p>
+								<p><strong>⏳ Experience:</strong> ${details.experience}</p>
+								<p><strong>📅 Availability:</strong> ${details.availability}</p>
+								<hr>
+								<p style="font-size: 0.9rem; color: #0e7c7b;">
+									<i class="bi bi-calendar-check"></i>
+									<a href="#" class="book-appointment-btn" style="color: #0e7c7b; text-decoration: underline;" data-doctor="${doctorName}">Book an appointment with ${doctorName}</a>
+								</p>
+							</div>
+						`,
 						icon: 'info',
 						confirmButtonColor: '#0e7c7b',
 						confirmButtonText: 'Close',
@@ -1774,16 +3757,13 @@
 					}).then((result) => {
 						if (result.dismiss === Swal.DismissReason.cancel) {
 							const bookBtn = document.querySelector(`.book-appointment-btn[data-doctor="${doctorName}"]`);
-							if (bookBtn) {
-								bookBtn.click();
-							}
+							if (bookBtn) bookBtn.click();
 						}
 					});
 				});
 			});
 
-			console.log('SAI CLINIC - Home page ready!');
-			console.log('Email: info@saigroupofclinics.com | Phone: +91 97879 60590');
+			console.log('SAI CLINIC - Home page ready with animations!');
 		});
 	</script>
 

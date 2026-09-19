@@ -33,9 +33,26 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 	<style>
-		/* SAI CLINIC Custom Styles */
+		/* ===== SAI CLINIC — NEWS STYLE DESIGN ===== */
+		:root {
+			--primary: #0e7c7b;
+			--primary-dark: #0a3a8a;
+			--accent: #1565c0;
+			--whatsapp: #25D366;
+			--whatsapp-dark: #1da851;
+			--light-bg: #f0f4ff;
+			--news-dark: #1a1a2e;
+			--news-gray: #2d2d44;
+			--shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.06);
+			--shadow-md: 0 12px 40px rgba(13, 71, 161, 0.12);
+			--shadow-lg: 0 20px 60px rgba(13, 71, 161, 0.18);
+			--radius: 16px;
+			--radius-sm: 12px;
+		}
+
+		/* --- Topbar & Branding --- */
 		.topbar.dark-background {
-			background: #0e7c7b !important;
+			background: var(--primary) !important;
 		}
 
 		.topbar .contact-info i,
@@ -45,223 +62,588 @@
 		}
 
 		.branding .sitename {
-			color: #0e7c7b !important;
+			color: var(--primary) !important;
 			font-weight: 700;
 		}
 
+		/* --- Page Title — News Header --- */
 		.page-title .heading {
-			background: linear-gradient(135deg, #0e7c7b 0%, #1565c0 100%);
+			background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
 			padding: 80px 0 60px;
+			position: relative;
+			overflow: hidden;
 		}
+
+			.page-title .heading::before {
+				content: '';
+				position: absolute;
+				top: -50%;
+				right: -20%;
+				width: 500px;
+				height: 500px;
+				background: rgba(255, 255, 255, 0.05);
+				border-radius: 50%;
+				pointer-events: none;
+			}
+
+			.page-title .heading::after {
+				content: '';
+				position: absolute;
+				bottom: -30%;
+				left: -10%;
+				width: 400px;
+				height: 400px;
+				background: rgba(255, 255, 255, 0.04);
+				border-radius: 50%;
+				pointer-events: none;
+			}
 
 		.page-title .heading-title {
 			color: #fff;
+			font-weight: 800;
+			letter-spacing: -0.5px;
+			font-size: 2.8rem;
+			text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 		}
 
 		.page-title .heading p {
-			color: rgba(255, 255, 255, 0.9);
+			color: rgba(255, 255, 255, 0.95);
+			font-size: 1.15rem;
+			max-width: 700px;
+			margin: 0 auto;
+			line-height: 1.7;
 		}
 
-		.breadcrumbs {
-			background: #f0f4ff;
-			padding: 15px 0;
+		/* --- Stats Section — News Ticker --- */
+		.stats-section {
+			background: var(--news-dark);
+			padding: 40px 0;
+			position: relative;
+			overflow: hidden;
 		}
 
-			.breadcrumbs ol li a {
-				color: #0e7c7b;
+			.stats-section::before {
+				content: 'LIVE';
+				position: absolute;
+				top: 10px;
+				left: 20px;
+				background: #e53935;
+				color: #fff;
+				font-size: 0.65rem;
+				font-weight: 800;
+				padding: 3px 10px;
+				border-radius: 4px;
+				letter-spacing: 2px;
+				animation: pulseLive 1.5s ease-in-out infinite;
+				z-index: 2;
 			}
 
-			.breadcrumbs ol li.current {
-				color: #333;
+		@keyframes pulseLive {
+			0%, 100% {
+				opacity: 1;
 			}
 
-		/* Clinic Cards */
+			50% {
+				opacity: 0.5;
+			}
+		}
+
+		.stat-box {
+			text-align: center;
+			padding: 25px 15px;
+			background: rgba(255, 255, 255, 0.06);
+			border-radius: var(--radius);
+			transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			height: 100%;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			position: relative;
+			overflow: hidden;
+		}
+
+			.stat-box::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 3px;
+				background: linear-gradient(90deg, var(--primary), var(--accent), #ff6b6b);
+				transform: scaleX(0);
+				transform-origin: left;
+				transition: transform 0.5s ease;
+			}
+
+			.stat-box:hover::before {
+				transform: scaleX(1);
+			}
+
+			.stat-box:hover {
+				transform: translateY(-8px) scale(1.03);
+				background: rgba(255, 255, 255, 0.1);
+				box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+			}
+
+			.stat-box .stat-number {
+				font-size: 2.6rem;
+				font-weight: 800;
+				color: #fff;
+				display: block;
+				line-height: 1.2;
+				text-shadow: 0 2px 10px rgba(14, 124, 123, 0.4);
+			}
+
+			.stat-box .stat-label {
+				font-size: 0.95rem;
+				color: rgba(255, 255, 255, 0.75);
+				font-weight: 500;
+				letter-spacing: 0.5px;
+			}
+
+			.stat-box .stat-icon {
+				font-size: 2.2rem;
+				color: var(--primary);
+				margin-bottom: 10px;
+				display: block;
+				transition: transform 0.4s ease;
+			}
+
+			.stat-box:hover .stat-icon {
+				transform: scale(1.2) rotate(-8deg);
+				color: #fff;
+			}
+
+		/* --- Section Header — News Style --- */
+		.section-header-news {
+			text-align: center;
+			margin-bottom: 50px;
+			position: relative;
+		}
+
+			.section-header-news .news-tag {
+				display: inline-block;
+				background: #e53935;
+				color: #fff;
+				font-size: 0.7rem;
+				font-weight: 800;
+				padding: 4px 14px;
+				border-radius: 4px;
+				letter-spacing: 2px;
+				text-transform: uppercase;
+				margin-bottom: 12px;
+				animation: pulseLive 2s ease-in-out infinite;
+			}
+
+			.section-header-news h2 {
+				color: var(--news-dark);
+				font-weight: 800;
+				font-size: 2.2rem;
+				letter-spacing: -0.5px;
+				margin-bottom: 8px;
+				position: relative;
+				display: inline-block;
+			}
+
+				.section-header-news h2::after {
+					content: '';
+					position: absolute;
+					bottom: -8px;
+					left: 50%;
+					transform: translateX(-50%);
+					width: 60px;
+					height: 4px;
+					background: linear-gradient(90deg, var(--primary), var(--accent));
+					border-radius: 2px;
+				}
+
+			.section-header-news p {
+				color: #666;
+				font-size: 1.05rem;
+				margin-top: 18px;
+				max-width: 600px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+		/* --- Clinic Cards — News Card Style --- */
 		.clinic-card {
 			background: #fff;
-			border-radius: 16px;
+			border-radius: var(--radius);
 			overflow: hidden;
-			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-			transition: all 0.3s ease;
+			box-shadow: var(--shadow-sm);
+			transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 			height: 100%;
-			border: 1px solid #f0f4ff;
+			border: 1px solid #e8eef8;
+			position: relative;
+			display: flex;
+			flex-direction: column;
 		}
 
-			.clinic-card:hover {
-				transform: translateY(-8px);
-				box-shadow: 0 12px 40px rgba(13, 71, 161, 0.12);
+			.clinic-card::after {
+				content: '';
+				position: absolute;
+				inset: 0;
+				border-radius: var(--radius);
+				pointer-events: none;
+				border: 2px solid transparent;
+				transition: border-color 0.3s ease;
 			}
 
-			.clinic-card .clinic-header {
-				background: linear-gradient(135deg, #0e7c7b 0%, #1565c0 100%);
-				padding: 20px 25px;
-				color: #fff;
+			.clinic-card:hover::after {
+				border-color: rgba(14, 124, 123, 0.25);
+			}
+
+			.clinic-card:hover {
+				transform: translateY(-12px) scale(1.015);
+				box-shadow: var(--shadow-lg);
+			}
+
+			/* Featured / Main clinic highlight */
+			.clinic-card.featured {
+				border: 2px solid var(--primary);
 				position: relative;
 			}
 
-				.clinic-card .clinic-header .clinic-number {
+				.clinic-card.featured::before {
+					content: '★ MAIN BRANCH';
 					position: absolute;
-					top: 15px;
-					right: 20px;
-					background: rgba(255, 255, 255, 0.2);
-					padding: 4px 15px;
-					border-radius: 50px;
-					font-size: 0.8rem;
-					font-weight: 600;
+					top: 14px;
+					left: -34px;
+					background: #e53935;
+					color: #fff;
+					font-size: 0.6rem;
+					font-weight: 800;
+					padding: 5px 40px;
+					transform: rotate(-45deg);
+					letter-spacing: 1.5px;
+					z-index: 5;
+					box-shadow: 0 2px 8px rgba(229, 57, 53, 0.4);
 				}
 
-				.clinic-card .clinic-header h3 {
-					font-weight: 700;
-					font-size: 1.3rem;
-					margin-bottom: 2px;
+			.clinic-card .clinic-header {
+				background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+				padding: 24px 25px 20px;
+				color: #fff;
+				position: relative;
+				overflow: hidden;
+				min-height: 100px;
+			}
+
+				.clinic-card .clinic-header::before {
+					content: '';
+					position: absolute;
+					top: -60%;
+					right: -20%;
+					width: 180px;
+					height: 180px;
+					background: rgba(255, 255, 255, 0.08);
+					border-radius: 50%;
+					pointer-events: none;
+					transition: transform 0.6s ease;
 				}
 
-				.clinic-card .clinic-header .clinic-type {
-					font-size: 0.85rem;
-					opacity: 0.9;
-				}
+			.clinic-card:hover .clinic-header::before {
+				transform: scale(1.6) translate(-15px, 15px);
+			}
+
+			.clinic-card .clinic-header .clinic-number {
+				position: absolute;
+				top: 18px;
+				right: 20px;
+				background: rgba(255, 255, 255, 0.2);
+				padding: 4px 15px;
+				border-radius: 50px;
+				font-size: 0.8rem;
+				font-weight: 600;
+				backdrop-filter: blur(4px);
+				border: 1px solid rgba(255, 255, 255, 0.15);
+				transition: background 0.3s ease;
+			}
+
+			.clinic-card:hover .clinic-header .clinic-number {
+				background: rgba(255, 255, 255, 0.35);
+			}
+
+			.clinic-card .clinic-header h3 {
+				font-weight: 800;
+				font-size: 1.35rem;
+				margin-bottom: 3px;
+				position: relative;
+				z-index: 1;
+				letter-spacing: -0.3px;
+			}
+
+			.clinic-card .clinic-header .clinic-type {
+				font-size: 0.9rem;
+				opacity: 0.95;
+				position: relative;
+				z-index: 1;
+				display: inline-block;
+				transition: transform 0.3s ease;
+				font-weight: 500;
+			}
+
+			.clinic-card:hover .clinic-header .clinic-type {
+				transform: translateX(5px);
+			}
 
 			.clinic-card .clinic-body {
-				padding: 20px 25px 25px;
+				padding: 22px 25px 25px;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
 			}
 
 				.clinic-card .clinic-body .clinic-address {
 					display: flex;
 					gap: 12px;
-					margin-bottom: 12px;
+					margin-bottom: 14px;
 				}
 
 					.clinic-card .clinic-body .clinic-address i {
-						color: #0e7c7b;
+						color: var(--primary);
 						font-size: 1.2rem;
 						margin-top: 3px;
 						min-width: 20px;
+						transition: transform 0.3s ease;
 					}
 
-					.clinic-card .clinic-body .clinic-address p {
-						color: #555;
-						font-size: 0.95rem;
-						line-height: 1.6;
-						margin-bottom: 0;
+			.clinic-card:hover .clinic-body .clinic-address i {
+				transform: scale(1.2);
+			}
+
+			.clinic-card .clinic-body .clinic-address p {
+				color: #333;
+				font-size: 0.95rem;
+				line-height: 1.65;
+				margin-bottom: 0;
+				font-weight: 500;
+			}
+
+			.clinic-card .clinic-body .clinic-phone {
+				display: flex;
+				gap: 12px;
+				margin-bottom: 16px;
+				align-items: center;
+			}
+
+				.clinic-card .clinic-body .clinic-phone i {
+					color: var(--primary);
+					font-size: 1.2rem;
+					min-width: 20px;
+				}
+
+				.clinic-card .clinic-body .clinic-phone a {
+					color: var(--primary);
+					text-decoration: none;
+					font-weight: 700;
+					font-size: 1.05rem;
+					transition: color 0.3s ease;
+					letter-spacing: 0.3px;
+				}
+
+					.clinic-card .clinic-body .clinic-phone a:hover {
+						color: var(--primary-dark);
+						text-decoration: underline;
 					}
 
-				.clinic-card .clinic-body .clinic-phone {
-					display: flex;
-					gap: 12px;
-					margin-bottom: 15px;
+			.clinic-card .clinic-body .clinic-actions {
+				display: flex;
+				gap: 10px;
+				flex-wrap: wrap;
+				margin-top: auto;
+				padding-top: 14px;
+				border-top: 1px solid #e8f0fe;
+			}
+
+				.clinic-card .clinic-body .clinic-actions .btn-map,
+				.clinic-card .clinic-body .clinic-actions .btn-whatsapp-clinic,
+				.clinic-card .clinic-body .clinic-actions .btn-call {
+					display: inline-flex;
 					align-items: center;
+					gap: 8px;
+					padding: 9px 22px;
+					border-radius: 50px;
+					text-decoration: none;
+					font-weight: 700;
+					font-size: 0.82rem;
+					transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+					border: none;
+					color: #fff;
+					letter-spacing: 0.3px;
+					text-transform: uppercase;
 				}
 
-					.clinic-card .clinic-body .clinic-phone i {
-						color: #0e7c7b;
-						font-size: 1.2rem;
-						min-width: 20px;
-					}
-
-					.clinic-card .clinic-body .clinic-phone a {
-						color: #0e7c7b;
-						text-decoration: none;
-						font-weight: 600;
-						font-size: 1rem;
-						transition: color 0.3s ease;
-					}
-
-						.clinic-card .clinic-body .clinic-phone a:hover {
-							color: #0a3a8a;
-							text-decoration: underline;
-						}
-
-				.clinic-card .clinic-body .clinic-actions {
-					display: flex;
-					gap: 10px;
-					flex-wrap: wrap;
-					margin-top: 5px;
+				.clinic-card .clinic-body .clinic-actions .btn-map {
+					background: var(--primary);
 				}
 
-					.clinic-card .clinic-body .clinic-actions .btn-map {
-						display: inline-flex;
-						align-items: center;
-						gap: 8px;
-						padding: 8px 20px;
-						background: #0e7c7b;
+					.clinic-card .clinic-body .clinic-actions .btn-map:hover {
+						background: var(--primary-dark);
+						transform: scale(1.08) translateY(-3px);
+						box-shadow: 0 10px 25px rgba(14, 124, 123, 0.4);
 						color: #fff;
-						border-radius: 50px;
-						text-decoration: none;
-						font-weight: 600;
-						font-size: 0.85rem;
-						transition: all 0.3s ease;
-						border: none;
 					}
 
-						.clinic-card .clinic-body .clinic-actions .btn-map:hover {
-							background: #0a3a8a;
-							transform: scale(1.02);
-							color: #fff;
-						}
-
-					.clinic-card .clinic-body .clinic-actions .btn-whatsapp-clinic {
-						display: inline-flex;
-						align-items: center;
-						gap: 8px;
-						padding: 8px 20px;
-						background: #25D366;
-						color: #fff;
-						border-radius: 50px;
-						text-decoration: none;
-						font-weight: 600;
-						font-size: 0.85rem;
-						transition: all 0.3s ease;
-						border: none;
-					}
-
-						.clinic-card .clinic-body .clinic-actions .btn-whatsapp-clinic:hover {
-							background: #1da851;
-							transform: scale(1.02);
-							color: #fff;
-						}
-
-					.clinic-card .clinic-body .clinic-actions .btn-call {
-						display: inline-flex;
-						align-items: center;
-						gap: 8px;
-						padding: 8px 20px;
-						background: #0e7c7b;
-						color: #fff;
-						border-radius: 50px;
-						text-decoration: none;
-						font-weight: 600;
-						font-size: 0.85rem;
-						transition: all 0.3s ease;
-						border: none;
-					}
-
-						.clinic-card .clinic-body .clinic-actions .btn-call:hover {
-							background: #0a3a8a;
-							transform: scale(1.02);
-							color: #fff;
-						}
-
-				.clinic-card .clinic-body .clinic-hours {
-					display: flex;
-					gap: 12px;
-					margin-top: 12px;
-					padding-top: 12px;
-					border-top: 1px solid #e8f0fe;
+				.clinic-card .clinic-body .clinic-actions .btn-whatsapp-clinic {
+					background: var(--whatsapp);
 				}
 
-					.clinic-card .clinic-body .clinic-hours i {
-						color: #0e7c7b;
-						font-size: 1.2rem;
-						min-width: 20px;
+					.clinic-card .clinic-body .clinic-actions .btn-whatsapp-clinic:hover {
+						background: var(--whatsapp-dark);
+						transform: scale(1.08) translateY(-3px);
+						box-shadow: 0 10px 25px rgba(37, 211, 102, 0.45);
+						color: #fff;
 					}
 
-					.clinic-card .clinic-body .clinic-hours span {
-						color: #555;
-						font-size: 0.9rem;
+				.clinic-card .clinic-body .clinic-actions .btn-call {
+					background: var(--primary);
+				}
+
+					.clinic-card .clinic-body .clinic-actions .btn-call:hover {
+						background: var(--primary-dark);
+						transform: scale(1.08) translateY(-3px);
+						box-shadow: 0 10px 25px rgba(14, 124, 123, 0.4);
+						color: #fff;
 					}
 
-		/* Footer Styles */
+		/* --- SAI MEDICALS Section --- */
+		.medical-section {
+			padding: 50px 0;
+			background: #f8f9fa;
+		}
+
+		.medical-card {
+			background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+			padding: 45px;
+			border-radius: 20px;
+			position: relative;
+			overflow: hidden;
+			transition: box-shadow 0.4s ease, transform 0.4s ease;
+			border: 1px solid rgba(14, 124, 123, 0.1);
+			box-shadow: var(--shadow-sm);
+		}
+
+			.medical-card::before {
+				content: '';
+				position: absolute;
+				top: -40%;
+				right: -10%;
+				width: 350px;
+				height: 350px;
+				background: rgba(14, 124, 123, 0.04);
+				border-radius: 50%;
+				pointer-events: none;
+			}
+
+			.medical-card::after {
+				content: 'PHARMACY';
+				position: absolute;
+				bottom: 15px;
+				right: 25px;
+				font-size: 3.5rem;
+				font-weight: 900;
+				color: rgba(14, 124, 123, 0.04);
+				letter-spacing: 4px;
+				pointer-events: none;
+			}
+
+			.medical-card:hover {
+				box-shadow: var(--shadow-lg);
+				transform: translateY(-5px);
+			}
+
+			.medical-card h3 {
+				color: var(--primary);
+				font-weight: 800;
+				font-size: 1.6rem;
+				letter-spacing: -0.3px;
+			}
+
+			.medical-card p {
+				color: #444;
+				font-size: 1.05rem;
+				line-height: 1.7;
+			}
+
+			.medical-card .contact-info i {
+				color: var(--primary);
+			}
+
+			.medical-card .contact-info strong {
+				color: var(--primary);
+				font-size: 1.1rem;
+			}
+
+		/* --- WhatsApp Floating Button --- */
+		.whatsapp-float {
+			position: fixed;
+			bottom: 30px;
+			right: 30px;
+			background: var(--whatsapp);
+			color: #fff;
+			width: 62px;
+			height: 62px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 2rem;
+			box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+			z-index: 999;
+			transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			text-decoration: none;
+			animation: floatPulse 2.5s ease-in-out infinite;
+		}
+
+			.whatsapp-float:hover {
+				transform: scale(1.15) rotate(5deg);
+				box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+				color: #fff;
+				animation: none;
+			}
+
+		@keyframes floatPulse {
+			0%, 100% {
+				box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+			}
+
+			50% {
+				box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7);
+			}
+		}
+
+		/* --- WhatsApp Button --- */
+		.whatsapp-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			background: var(--whatsapp);
+			color: #fff;
+			padding: 12px 28px;
+			border-radius: 50px;
+			text-decoration: none;
+			font-weight: 700;
+			transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			border: none;
+			font-size: 0.95rem;
+			letter-spacing: 0.3px;
+			text-transform: uppercase;
+		}
+
+			.whatsapp-btn:hover {
+				background: var(--whatsapp-dark);
+				color: #fff;
+				transform: scale(1.06) translateY(-3px);
+				box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+			}
+
+			.whatsapp-btn i {
+				font-size: 1.2rem;
+			}
+
+		/* --- Footer --- */
 		.footer-16 .sitename {
-			color: #0e7c7b !important;
+			color: var(--primary) !important;
 		}
 
 		.footer-16 .brand-description {
@@ -269,26 +651,28 @@
 		}
 
 		.footer-16 .contact-item i {
-			color: #0e7c7b;
+			color: var(--primary);
 		}
 
 		.footer-16 .footer-nav a {
 			color: #555;
 			text-decoration: none;
-			transition: color 0.3s ease;
+			transition: color 0.3s ease, transform 0.3s ease;
+			display: inline-block;
 		}
 
 			.footer-16 .footer-nav a:hover {
-				color: #0e7c7b;
+				color: var(--primary);
+				transform: translateX(4px);
 			}
 
 		.footer-16 .nav-column h6 {
-			color: #0e7c7b;
+			color: var(--primary);
 			font-weight: 700;
 		}
 
 		.footer-bottom {
-			background: #0e7c7b;
+			background: var(--primary);
 			padding: 20px 0;
 			margin-top: 30px;
 		}
@@ -315,7 +699,7 @@
 				.footer-bottom .social-links-bottom a {
 					color: #fff;
 					font-size: 1.2rem;
-					transition: all 0.3s ease;
+					transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 					width: 40px;
 					height: 40px;
 					background: rgba(255, 255, 255, 0.15);
@@ -328,11 +712,78 @@
 
 					.footer-bottom .social-links-bottom a:hover {
 						background: #fff;
-						color: #0e7c7b;
-						transform: translateY(-3px);
+						color: var(--primary);
+						transform: translateY(-4px) scale(1.1);
 					}
 
+		/* --- Animations --- */
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(30px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes slideInLeft {
+			from {
+				opacity: 0;
+				transform: translateX(-30px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+
+		@keyframes scaleIn {
+			from {
+				opacity: 0;
+				transform: scale(0.9);
+			}
+
+			to {
+				opacity: 1;
+				transform: scale(1);
+			}
+		}
+
+		/* --- Responsive --- */
 		@media (max-width: 768px) {
+			.page-title .heading {
+				padding: 60px 0 40px;
+			}
+
+			.page-title .heading-title {
+				font-size: 2rem;
+			}
+
+			.clinic-card .clinic-header {
+				padding: 20px;
+			}
+
+			.clinic-card .clinic-body {
+				padding: 18px 20px 20px;
+			}
+
+			.clinic-card .clinic-header .clinic-number {
+				font-size: 0.7rem;
+				padding: 3px 12px;
+				top: 14px;
+				right: 15px;
+			}
+
+			.clinic-card.featured::before {
+				font-size: 0.5rem;
+				padding: 4px 30px;
+				left: -28px;
+			}
+
 			.footer-bottom .social-links-bottom {
 				justify-content: center;
 				margin-top: 15px;
@@ -341,144 +792,19 @@
 			.footer-bottom .copyright {
 				text-align: center;
 			}
-		}
 
-		/* Responsive */
-		@media (max-width: 768px) {
-			.page-title .heading {
-				padding: 60px 0 40px;
+			.medical-card {
+				padding: 25px;
 			}
 
-			.clinic-card .clinic-header {
-				padding: 15px 20px;
-			}
+				.medical-card::after {
+					font-size: 2rem;
+				}
 
-			.clinic-card .clinic-body {
-				padding: 15px 20px 20px;
-			}
-
-			.clinic-card .clinic-header .clinic-number {
-				font-size: 0.7rem;
-				padding: 3px 12px;
-				top: 12px;
-				right: 15px;
+			.section-header-news h2 {
+				font-size: 1.6rem;
 			}
 		}
-
-		/* WhatsApp Floating Button */
-		.whatsapp-float {
-			position: fixed;
-			bottom: 30px;
-			right: 30px;
-			background: #25D366;
-			color: #fff;
-			width: 60px;
-			height: 60px;
-			border-radius: 50%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			font-size: 2rem;
-			box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-			z-index: 999;
-			transition: all 0.3s ease;
-			text-decoration: none;
-		}
-
-			.whatsapp-float:hover {
-				transform: scale(1.1);
-				box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
-				color: #fff;
-			}
-
-		.hours-badge {
-			background: rgba(255, 255, 255, 0.2);
-			color: #fff;
-			padding: 8px 20px;
-			border-radius: 50px;
-			display: inline-flex;
-			align-items: center;
-			gap: 10px;
-			font-weight: 600;
-			font-size: 0.9rem;
-			backdrop-filter: blur(10px);
-		}
-
-			.hours-badge i {
-				font-size: 1.1rem;
-			}
-
-		.whatsapp-btn {
-			display: inline-flex;
-			align-items: center;
-			gap: 10px;
-			background: #25D366;
-			color: #fff;
-			padding: 10px 25px;
-			border-radius: 50px;
-			text-decoration: none;
-			font-weight: 600;
-			transition: all 0.3s ease;
-			border: none;
-			font-size: 0.95rem;
-		}
-
-			.whatsapp-btn:hover {
-				background: #1da851;
-				color: #fff;
-				transform: scale(1.02);
-				box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
-			}
-
-			.whatsapp-btn i {
-				font-size: 1.2rem;
-			}
-
-		/* Book Appointment Button */
-		.book-appointment-btn {
-			cursor: pointer;
-		}
-
-		/* Stats Section */
-		.stats-section {
-			background: #f8f9fa;
-			padding: 50px 0;
-		}
-
-		.stat-box {
-			text-align: center;
-			padding: 25px;
-			background: #fff;
-			border-radius: 16px;
-			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-			transition: all 0.3s ease;
-			height: 100%;
-		}
-
-			.stat-box:hover {
-				transform: translateY(-5px);
-				box-shadow: 0 8px 30px rgba(13, 71, 161, 0.1);
-			}
-
-			.stat-box .stat-number {
-				font-size: 2.5rem;
-				font-weight: 700;
-				color: #0e7c7b;
-				display: block;
-			}
-
-			.stat-box .stat-label {
-				font-size: 1rem;
-				color: #555;
-				font-weight: 500;
-			}
-
-			.stat-box .stat-icon {
-				font-size: 2rem;
-				color: #0e7c7b;
-				margin-bottom: 10px;
-				display: block;
-			}
 	</style>
 
 </head>
@@ -512,24 +838,26 @@
 				<nav id="navmenu" class="navmenu">
 					<ul>
 						<li><a href="index.html">Home</a></li>
-						<li><a href="FounderandDirector.html">Founder</a></li> <li><a href="about.html">About</a></li>
+						<li><a href="FounderandDirector.html">Founder</a></li>
+						<li><a href="about.html">About</a></li>
 						<li><a href="departments.html">Departments</a></li>
 						<li><a href="services.html">Services</a></li>
 						<li><a href="doctors.html">Doctors</a></li>
-						
+
 						<li><a href="clinics.html" class="active">Our Clinics</a></li>
 						<!--<li class="dropdown">
-		<a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-		<ul>
-			<li><a href="department-details.html">Department Details</a></li>
-			<li><a href="service-details.html">Service Details</a></li>
-			<li><a href="appointment.html">Appointment</a></li>
-			<li><a href="testimonials.html">Testimonials</a></li>
-			<li><a href="faq.html">Frequently Asked Questions</a></li>
-			<li><a href="gallery.html">Gallery</a></li>
-		</ul>
-	</li>-->
-							<li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li>
+							<a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+							<ul>
+								<li><a href="department-details.html">Department Details</a></li>
+								<li><a href="service-details.html">Service Details</a></li>
+								<li><a href="appointment.html">Appointment</a></li>
+								<li><a href="testimonials.html">Testimonials</a></li>
+								<li><a href="faq.html">Frequently Asked Questions</a></li>
+								<li><a href="gallery.html">Gallery</a></li>
+							</ul>
+						</li>-->
+						<li><a href="blog.html">Blog</a></li>
+						<li><a href="contact.html">Contact</a></li>
 					</ul>
 					<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 				</nav>
@@ -547,35 +875,18 @@
 			<div class="heading">
 				<div class="container">
 					<div class="row d-flex justify-content-center text-center">
-						<div class="col-lg-8">
+						<div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
 							<h1 class="heading-title">Our Clinics</h1>
 							<p class="mb-0">
 								SAI CLINIC has grown into a network of 6 successful clinics across different locations,
 								providing quality healthcare to thousands of patients. Find a clinic near you.
 							</p>
-							<!--<div class="mt-3 d-flex flex-wrap justify-content-center gap-2">
-								<span class="hours-badge">
-									<i class="bi bi-clock"></i> 08.00 AM - 10.00 PM
-								</span>
-								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20know%20about%20your%20clinics"
-								   target="_blank" class="whatsapp-btn">
-									<i class="bi bi-whatsapp"></i> Contact via WhatsApp
-								</a>
-							</div>-->
 						</div>
 					</div>
 				</div>
 			</div>
-			<!--<nav class="breadcrumbs">
-				<div class="container">
-					<ol>
-						<li><a href="index.html">Home</a></li>
-						<li class="current">Clinics</li>
-					</ol>
-				</div>
-			</nav>-->
 		</div><!-- End Page Title -->
-		<!-- Stats Section -->
+		<!-- Stats Section — News Ticker Style -->
 		<section class="stats-section">
 			<div class="container" data-aos="fade-up" data-aos-delay="100">
 				<div class="row g-4">
@@ -614,187 +925,22 @@
 		<!-- Clinics Section -->
 		<section id="clinics" class="section" style="padding: 60px 0;">
 			<div class="container" data-aos="fade-up" data-aos-delay="100">
-				<div class="row text-center mb-5">
-					<div class="col-lg-12">
-						<h2 style="color: #0e7c7b; font-weight: 700;">Find a Clinic Near You</h2>
-						<p style="color: #555; font-size: 1.1rem;">We have 6 clinics across different locations to serve you better</p>
-					</div>
+
+				<div class="section-header-news" data-aos="fade-up" data-aos-delay="100">
+					<span class="news-tag">● BREAKING</span>
+					<h2>Find a Clinic Near You</h2>
+					<p>We have 6 clinics across different locations to serve you better. All clinics open from 08:00 AM to 10:00 PM.</p>
 				</div>
 
 				<div class="row g-4">
 
-					<!-- Clinic 1: SAI CLINIC - Kannikaiper -->
+					<!-- Clinic 1: MAIN CLINIC - Kavaraipettai (First) -->
 					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-						<div class="clinic-card">
-							<div class="clinic-header">
-								<h3>SAI CLINIC</h3>
-								<span class="clinic-type">📍 Kannikaiper</span>
-								<span class="clinic-number">#1</span>
-							</div>
-							<div class="clinic-body">
-								<div class="clinic-address">
-									<i class="bi bi-geo-alt"></i>
-									<p>No. 6, Karunya School Opposite<br>Kannikaiper - 601102<br>Ellapuram Block, Uthukottai Taluk<br>Thiruvallur Dist</p>
-								</div>
-								<div class="clinic-phone">
-									<i class="bi bi-telephone"></i>
-									<a href="tel:+916380203933">+91 63802 03933</a>
-								</div>
-								<div class="clinic-hours">
-									<i class="bi bi-clock"></i>
-									<span>08:00 AM - 10:00 PM</span>
-								</div>
-								<div class="clinic-actions">
-									<a href="https://www.google.com/maps?q=13.2738607,80.0956766&z=17&hl=en" target="_blank" class="btn-map">
-										<i class="bi bi-map"></i> Get Directions
-									</a>
-									<a href="https://wa.me/916380203933?text=Hi%20SAI%20CLINIC%20Kannikaiper%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="btn-whatsapp-clinic">
-										<i class="bi bi-whatsapp"></i> WhatsApp
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Clinic 2: SAI CLINIC - Arambakkam -->
-					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-						<div class="clinic-card">
-							<div class="clinic-header">
-								<h3>SAI CLINIC</h3>
-								<span class="clinic-type">📍 Arambakkam</span>
-								<span class="clinic-number">#2</span>
-							</div>
-							<div class="clinic-body">
-								<div class="clinic-address">
-									<i class="bi bi-geo-alt"></i>
-									<p>No - 278/2, MGR Nagar Road<br>ARAMBAKKAM - 601201<br>(Jayavel Rice Mill Opposite)</p>
-								</div>
-								<div class="clinic-phone">
-									<i class="bi bi-telephone"></i>
-									<a href="tel:+919003823377">+91 90038 23377</a>
-								</div>
-								<div class="clinic-hours">
-									<i class="bi bi-clock"></i>
-									<span>08:00 AM - 10:00 PM</span>
-								</div>
-								<div class="clinic-actions">
-									<a href="https://www.google.com/maps/place//@13.5389378,80.067957,18.5z/data=!4m6!1m5!3m4!2zMTPCsDMyJzIwLjkiTiA4MMKwMDQnMDcuOSJF!8m2!3d13.5391389!4d80.0688611?hl=en&entry=ttu" target="_blank" class="btn-map">
-										<i class="bi bi-map"></i> Get Directions
-									</a>
-									<a href="https://wa.me/919003823377?text=Hi%20SAI%20CLINIC%20Arambakkam%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="btn-whatsapp-clinic">
-										<i class="bi bi-whatsapp"></i> WhatsApp
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Clinic 3: VETRI CLINIC - Periyapalayam -->
-					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-						<div class="clinic-card">
-							<div class="clinic-header">
-								<h3>VETRI CLINIC</h3>
-								<span class="clinic-type">📍 Periyapalayam</span>
-								<span class="clinic-number">#3</span>
-							</div>
-							<div class="clinic-body">
-								<div class="clinic-address">
-									<i class="bi bi-geo-alt"></i>
-									<p>No - 18, Bazaar Street<br>(Near Old Bank of Baroda Branch)<br>Periyapalayam - 601102</p>
-								</div>
-								<div class="clinic-phone">
-									<i class="bi bi-telephone"></i>
-									<a href="tel:+919003804477">+91 90038 04477</a>
-								</div>
-								<div class="clinic-hours">
-									<i class="bi bi-clock"></i>
-									<span>08:00 AM - 10:00 PM</span>
-								</div>
-								<div class="clinic-actions">
-									<a href="https://www.google.com/maps?q=Ns+VETRI+CLINIC,+Periyapalayam,+Tamil+Nadu+601102" target="_blank" class="btn-map">
-										<i class="bi bi-map"></i> Get Directions
-									</a>
-									<a href="https://wa.me/919003804477?text=Hi%20VETRI%20CLINIC%20Periyapalayam%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="btn-whatsapp-clinic">
-										<i class="bi bi-whatsapp"></i> WhatsApp
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Clinic 4: SAI CLINIC - Pazhaverkadu -->
-					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-						<div class="clinic-card">
-							<div class="clinic-header">
-								<h3>SAI CLINIC</h3>
-								<span class="clinic-type">📍 Pazhaverkadu</span>
-								<span class="clinic-number">#4</span>
-							</div>
-							<div class="clinic-body">
-								<div class="clinic-address">
-									<i class="bi bi-geo-alt"></i>
-									<p>No - 37/2, Kottai Street<br>Pazhaverkadu - 601205</p>
-								</div>
-								<div class="clinic-phone">
-									<i class="bi bi-telephone"></i>
-									<a href="tel:+919789345645">+91 97893 45645</a>
-								</div>
-								<div class="clinic-hours">
-									<i class="bi bi-clock"></i>
-									<span>08:00 AM - 10:00 PM</span>
-								</div>
-								<div class="clinic-actions">
-									<a href="https://www.google.com/maps?q=13.4182377,80.3152731&z=17&hl=en" target="_blank" class="btn-map">
-										<i class="bi bi-map"></i> Get Directions
-									</a>
-									<a href="https://wa.me/919789345645?text=Hi%20SAI%20CLINIC%20Pazhaverkadu%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="btn-whatsapp-clinic">
-										<i class="bi bi-whatsapp"></i> WhatsApp
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Clinic 5: ANNAI CLINIC - Madhavaram -->
-					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-						<div class="clinic-card">
-							<div class="clinic-header">
-								<h3>ANNAI CLINIC</h3>
-								<span class="clinic-type">📍 Madhavaram</span>
-								<span class="clinic-number">#5</span>
-							</div>
-							<div class="clinic-body">
-								<div class="clinic-address">
-									<i class="bi bi-geo-alt"></i>
-									<p>No - 3, Thalur Avenue<br>Madhavaram (Po)<br>Near Apollo Pharmacy - 601204</p>
-								</div>
-								<div class="clinic-phone">
-									<i class="bi bi-telephone"></i>
-									<a href="tel:+919159152770">+91 91591 52770</a>
-								</div>
-								<div class="clinic-hours">
-									<i class="bi bi-clock"></i>
-									<span>08:00 AM - 10:00 PM</span>
-								</div>
-								<div class="clinic-actions">
-									<a href="https://www.google.com/maps/search/Annai%20Clinic/@13.30109718,80.16027613,17z?hl=en" target="_blank" class="btn-map">
-										<i class="bi bi-map"></i> Get Directions
-									</a>
-									<a href="https://wa.me/919159152770?text=Hi%20ANNAI%20CLINIC%20Madhavaram%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="btn-whatsapp-clinic">
-										<i class="bi bi-whatsapp"></i> WhatsApp
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Clinic 6: Main Clinic - Kavaraipettai -->
-					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-						<div class="clinic-card">
+						<div class="clinic-card featured">
 							<div class="clinic-header">
 								<h3>SAI CLINIC</h3>
 								<span class="clinic-type">📍 Kavaraipettai (Main)</span>
-								<span class="clinic-number">#6</span>
+								<span class="clinic-number">#1</span>
 							</div>
 							<div class="clinic-body">
 								<div class="clinic-address">
@@ -805,15 +951,156 @@
 									<i class="bi bi-telephone"></i>
 									<a href="tel:+919787960590">+91 97879 60590</a>
 								</div>
-								<div class="clinic-hours">
-									<i class="bi bi-clock"></i>
-									<span>08:00 AM - 10:00 PM</span>
-								</div>
 								<div class="clinic-actions">
 									<a href="https://www.google.com/maps?q=253A+Railway+Station+Road+Kavaraipettai+Chennai" target="_blank" class="btn-map">
-										<i class="bi bi-map"></i> Get Directions
+										<i class="bi bi-map"></i> Directions
 									</a>
 									<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%20Kavaraipettai%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="btn-whatsapp-clinic">
+										<i class="bi bi-whatsapp"></i> WhatsApp
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Clinic 2: SAI CLINIC - Kannikaiper -->
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+						<div class="clinic-card">
+							<div class="clinic-header">
+								<h3>SAI CLINIC</h3>
+								<span class="clinic-type">📍 Kannikaiper</span>
+								<span class="clinic-number">#2</span>
+							</div>
+							<div class="clinic-body">
+								<div class="clinic-address">
+									<i class="bi bi-geo-alt"></i>
+									<p>No. 6, Karunya School Opposite<br>Kannikaiper - 601102<br>Ellapuram Block, Uthukottai Taluk<br>Thiruvallur Dist</p>
+								</div>
+								<div class="clinic-phone">
+									<i class="bi bi-telephone"></i>
+									<a href="tel:+916380203933">+91 63802 03933</a>
+								</div>
+								<div class="clinic-actions">
+									<a href="https://www.google.com/maps?q=13.2738607,80.0956766&z=17&hl=en" target="_blank" class="btn-map">
+										<i class="bi bi-map"></i> Directions
+									</a>
+									<a href="https://wa.me/916380203933?text=Hi%20SAI%20CLINIC%20Kannikaiper%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="btn-whatsapp-clinic">
+										<i class="bi bi-whatsapp"></i> WhatsApp
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Clinic 3: SAI CLINIC - Arambakkam -->
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+						<div class="clinic-card">
+							<div class="clinic-header">
+								<h3>SAI CLINIC</h3>
+								<span class="clinic-type">📍 Arambakkam</span>
+								<span class="clinic-number">#3</span>
+							</div>
+							<div class="clinic-body">
+								<div class="clinic-address">
+									<i class="bi bi-geo-alt"></i>
+									<p>No - 278/2, MGR Nagar Road<br>ARAMBAKKAM - 601201<br>(Jayavel Rice Mill Opposite)</p>
+								</div>
+								<div class="clinic-phone">
+									<i class="bi bi-telephone"></i>
+									<a href="tel:+919003823377">+91 90038 23377</a>
+								</div>
+								<div class="clinic-actions">
+									<a href="https://www.google.com/maps/place//@13.5389378,80.067957,18.5z/data=!4m6!1m5!3m4!2zMTPCsDMyJzIwLjkiTiA4MMKwMDQnMDcuOSJF!8m2!3d13.5391389!4d80.0688611?hl=en&entry=ttu" target="_blank" class="btn-map">
+										<i class="bi bi-map"></i> Directions
+									</a>
+									<a href="https://wa.me/919003823377?text=Hi%20SAI%20CLINIC%20Arambakkam%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="btn-whatsapp-clinic">
+										<i class="bi bi-whatsapp"></i> WhatsApp
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Clinic 4: VETRI CLINIC - Periyapalayam -->
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+						<div class="clinic-card">
+							<div class="clinic-header">
+								<h3>VETRI CLINIC</h3>
+								<span class="clinic-type">📍 Periyapalayam</span>
+								<span class="clinic-number">#4</span>
+							</div>
+							<div class="clinic-body">
+								<div class="clinic-address">
+									<i class="bi bi-geo-alt"></i>
+									<p>No - 18, Bazaar Street<br>(Near Old Bank of Baroda Branch)<br>Periyapalayam - 601102</p>
+								</div>
+								<div class="clinic-phone">
+									<i class="bi bi-telephone"></i>
+									<a href="tel:+919003804477">+91 90038 04477</a>
+								</div>
+								<div class="clinic-actions">
+									<a href="https://www.google.com/maps?q=Ns+VETRI+CLINIC,+Periyapalayam,+Tamil+Nadu+601102" target="_blank" class="btn-map">
+										<i class="bi bi-map"></i> Directions
+									</a>
+									<a href="https://wa.me/919003804477?text=Hi%20VETRI%20CLINIC%20Periyapalayam%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="btn-whatsapp-clinic">
+										<i class="bi bi-whatsapp"></i> WhatsApp
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Clinic 5: SAI CLINIC - Pazhaverkadu -->
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+						<div class="clinic-card">
+							<div class="clinic-header">
+								<h3>SAI CLINIC</h3>
+								<span class="clinic-type">📍 Pazhaverkadu</span>
+								<span class="clinic-number">#5</span>
+							</div>
+							<div class="clinic-body">
+								<div class="clinic-address">
+									<i class="bi bi-geo-alt"></i>
+									<p>No - 37/2, Kottai Street<br>Pazhaverkadu - 601205</p>
+								</div>
+								<div class="clinic-phone">
+									<i class="bi bi-telephone"></i>
+									<a href="tel:+919789345645">+91 97893 45645</a>
+								</div>
+								<div class="clinic-actions">
+									<a href="https://www.google.com/maps?q=13.4182377,80.3152731&z=17&hl=en" target="_blank" class="btn-map">
+										<i class="bi bi-map"></i> Directions
+									</a>
+									<a href="https://wa.me/919789345645?text=Hi%20SAI%20CLINIC%20Pazhaverkadu%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="btn-whatsapp-clinic">
+										<i class="bi bi-whatsapp"></i> WhatsApp
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Clinic 6: ANNAI CLINIC - Ponneri -->
+					<div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+						<div class="clinic-card">
+							<div class="clinic-header">
+								<h3>ANNAI CLINIC</h3>
+								<span class="clinic-type">📍 Ponneri</span>
+								<span class="clinic-number">#6</span>
+							</div>
+							<div class="clinic-body">
+								<div class="clinic-address">
+									<i class="bi bi-geo-alt"></i>
+									<p>No.3, Thalur Avenue, Post<br>Ponneri, 601204, TN, IN</p>
+								</div>
+								<div class="clinic-phone">
+									<i class="bi bi-telephone"></i>
+									<a href="tel:+919159152770">+91 91591 52770</a>
+								</div>
+								<div class="clinic-actions">
+									<a href="https://www.google.com/maps/search/Annai%20Clinic/@13.30109718,80.16027613,17z?hl=en" target="_blank" class="btn-map">
+										<i class="bi bi-map"></i> Directions
+									</a>
+									<a href="https://wa.me/919159152770?text=Hi%20ANNAI%20CLINIC%20Ponneri%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" class="btn-whatsapp-clinic">
 										<i class="bi bi-whatsapp"></i> WhatsApp
 									</a>
 								</div>
@@ -826,23 +1113,25 @@
 		</section>
 
 		<!-- SAI MEDICALS Section -->
-		<section class="section" style="padding: 40px 0; background: #f8f9fa;">
+		<section class="medical-section">
 			<div class="container">
-				<div class="row align-items-center" style="background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%); padding: 40px; border-radius: 20px;">
-					<div class="col-lg-8">
-						<h3 style="color: #0e7c7b; font-weight: 700;"><i class="bi bi-shop" style="color: #0e7c7b;"></i> SAI MEDICALS</h3>
-						<p style="font-size: 1.1rem; color: #333;">Your trusted pharmacy partner located within SAI CLINIC premises.</p>
-						<p style="color: #555;">Quality medicines and healthcare products available at competitive prices. Our pharmacy is fully stocked with genuine medications and healthcare essentials.</p>
-						<div class="contact-info mt-3">
-							<i class="bi bi-telephone" style="color: #0e7c7b;"></i> <strong style="color: #0e7c7b;">+91 97879 60590</strong>
-							<span style="margin-left: 1.5rem;"><i class="bi bi-clock" style="color: #0e7c7b;"></i> 08:00 AM - 10:00 PM</span>
+				<div class="medical-card" data-aos="fade-up" data-aos-delay="200">
+					<div class="row align-items-center">
+						<div class="col-lg-8">
+							<h3 style="color: #0e7c7b; font-weight: 800;"><i class="bi bi-shop" style="color: #0e7c7b;"></i> SAI MEDICALS</h3>
+							<p style="font-size: 1.1rem; color: #333; font-weight: 500;">Your trusted pharmacy partner located within SAI CLINIC premises.</p>
+							<p style="color: #555;">Quality medicines and healthcare products available at competitive prices. Our pharmacy is fully stocked with genuine medications and healthcare essentials.</p>
+							<div class="contact-info mt-3">
+								<i class="bi bi-telephone" style="color: #0e7c7b;"></i> <strong style="color: #0e7c7b;">+91 97879 60590</strong>
+								<span style="margin-left: 1.5rem;"><i class="bi bi-clock" style="color: #0e7c7b;"></i> 08:00 AM - 10:00 PM</span>
+							</div>
 						</div>
-					</div>
-					<div class="col-lg-4 text-center">
-						<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20know%20about%20SAI%20MEDICALS"
-						   target="_blank" class="whatsapp-btn">
-							<i class="bi bi-whatsapp"></i> Contact via WhatsApp
-						</a>
+						<div class="col-lg-4 text-center">
+							<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20know%20about%20SAI%20MEDICALS"
+							   target="_blank" class="whatsapp-btn">
+								<i class="bi bi-whatsapp"></i> Contact via WhatsApp
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -33,7 +33,14 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 	<style>
-		/* SAI CLINIC Custom Styles */
+		/* Logo */
+		.logo img {
+			max-height: 55px;
+			width: auto;
+			object-fit: contain;
+		}
+
+		/* Base */
 		.topbar.dark-background {
 			background: #0e7c7b !important;
 		}
@@ -52,115 +59,96 @@
 		.page-title .heading {
 			background: linear-gradient(135deg, #0e7c7b 0%, #1565c0 100%);
 			padding: 80px 0 60px;
+			position: relative;
+			overflow: hidden;
 		}
+
+			.page-title .heading::before {
+				content: '';
+				position: absolute;
+				top: -100px;
+				right: -100px;
+				width: 400px;
+				height: 400px;
+				background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+				border-radius: 50%;
+				animation: floatImage 8s ease-in-out infinite;
+			}
 
 		.page-title .heading-title {
 			color: #fff;
+			position: relative;
+			z-index: 2;
 		}
 
 		.page-title .heading p {
 			color: rgba(255, 255, 255, 0.9);
+			position: relative;
+			z-index: 2;
 		}
 
 		/* ==========================================
-		   STYLISH ROUND DOCTOR CARD - SAME HEIGHT
+		   ANIMATIONS KEYFRAMES
 		   ========================================== */
-		.doctor-card {
-			background: #fff;
-			border-radius: 20px;
-			overflow: hidden;
-			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-			transition: all 0.4s ease;
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-			border: 1px solid #f0f4ff;
-			position: relative;
+		@keyframes floatImage {
+			0%, 100% {
+				transform: translateY(0px);
+			}
+
+			50% {
+				transform: translateY(-20px);
+			}
 		}
 
-			.doctor-card:hover {
-				transform: translateY(-10px);
-				box-shadow: 0 20px 50px rgba(14, 124, 123, 0.15);
-				border-color: #0e7c7b;
+		@keyframes floatAvatar {
+			0%, 100% {
+				transform: translateY(0px);
 			}
 
-			/* Top Decorative Banner */
-			.doctor-card .doctor-banner {
-				height: 85px;
-				background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
-				position: relative;
-				flex-shrink: 0;
+			50% {
+				transform: translateY(-8px);
+			}
+		}
+
+		@keyframes rotateRing {
+			0% {
+				transform: translate(-50%, -50%) rotate(0deg);
 			}
 
-				.doctor-card .doctor-banner::after {
-					content: '';
-					position: absolute;
-					bottom: -1px;
-					left: 0;
-					right: 0;
-					height: 30px;
-					background: #fff;
-					border-radius: 30px 30px 0 0;
-				}
+			100% {
+				transform: translate(-50%, -50%) rotate(360deg);
+			}
+		}
 
-			/* Round Avatar */
-			.doctor-card .doctor-avatar-wrapper {
-				position: relative;
-				margin-top: -75px;
-				display: flex;
-				justify-content: center;
-				z-index: 2;
-				flex-shrink: 0;
+		@keyframes rotateSlow {
+			0% {
+				transform: rotate(0deg);
 			}
 
-			.doctor-card .doctor-avatar {
-				width: 130px;
-				height: 130px;
-				border-radius: 50%;
-				overflow: hidden;
-				border: 5px solid #fff;
-				box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-				background: #f0f4ff;
-				transition: all 0.4s ease;
-				position: relative;
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		@keyframes gradientShift {
+			0%, 100% {
+				background-position: 0% 50%;
 			}
 
-			.doctor-card:hover .doctor-avatar {
-				border-color: #0e7c7b;
-				transform: scale(1.05);
-				box-shadow: 0 10px 30px rgba(14, 124, 123, 0.25);
+			50% {
+				background-position: 100% 50%;
+			}
+		}
+
+		@keyframes shineSweep {
+			0% {
+				left: -100%;
 			}
 
-			.doctor-card .doctor-avatar img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				object-position: center top;
-				transition: transform 0.5s ease;
+			100% {
+				left: 100%;
 			}
-
-			.doctor-card:hover .doctor-avatar img {
-				transform: scale(1.08);
-			}
-
-			/* Online Status Dot */
-			.doctor-card .doctor-avatar .status-dot {
-				position: absolute;
-				bottom: 8px;
-				right: 8px;
-				width: 20px;
-				height: 20px;
-				border-radius: 50%;
-				border: 3px solid #fff;
-				background: #2e7d32;
-				z-index: 3;
-				animation: pulse-green 2s infinite;
-			}
-
-				.doctor-card .doctor-avatar .status-dot.appointment {
-					background: #ed6c02;
-					animation: pulse-orange 2s infinite;
-				}
+		}
 
 		@keyframes pulse-green {
 			0% {
@@ -190,71 +178,6 @@
 			}
 		}
 
-		/* Doctor Content */
-		.doctor-card .doctor-content {
-			padding: 10px 22px 22px;
-			display: flex;
-			flex-direction: column;
-			flex-grow: 1;
-			text-align: center;
-		}
-
-			.doctor-card .doctor-content h4 {
-				color: #0e7c7b;
-				font-weight: 700;
-				font-size: 1.15rem;
-				margin-bottom: 8px;
-				margin-top: 8px;
-				min-height: 2.3rem;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			}
-
-		/* Status Badge */
-		.doctor-card .status-badge {
-			display: inline-flex;
-			align-items: center;
-			gap: 5px;
-			padding: 5px 15px;
-			border-radius: 50px;
-			font-size: 0.72rem;
-			font-weight: 700;
-			margin-bottom: 10px;
-			letter-spacing: 0.3px;
-			text-transform: uppercase;
-		}
-
-			.doctor-card .status-badge.available {
-				background: #e8f5e9;
-				color: #2e7d32;
-				border: 1px solid #c8e6c9;
-			}
-
-				.doctor-card .status-badge.available::before {
-					content: '';
-					width: 7px;
-					height: 7px;
-					border-radius: 50%;
-					background: #2e7d32;
-					animation: blink 1.5s infinite;
-				}
-
-			.doctor-card .status-badge.appointment {
-				background: #fff3e0;
-				color: #e65100;
-				border: 1px solid #ffe0b2;
-			}
-
-				.doctor-card .status-badge.appointment::before {
-					content: '';
-					width: 7px;
-					height: 7px;
-					border-radius: 50%;
-					background: #e65100;
-					animation: blink 1.5s infinite;
-				}
-
 		@keyframes blink {
 			0%, 100% {
 				opacity: 1;
@@ -265,60 +188,383 @@
 			}
 		}
 
-		.doctor-card .doctor-content .specialty {
-			color: #1565c0;
-			font-weight: 600;
-			font-size: 0.82rem;
-			display: inline-block;
-			background: #f0f4ff;
-			padding: 5px 14px;
-			border-radius: 50px;
-			margin-bottom: 10px;
-			min-height: 2.4rem;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			line-height: 1.3;
+		@keyframes slideUpFade {
+			from {
+				opacity: 0;
+				transform: translateY(30px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
 		}
 
-		.doctor-card .doctor-content .qualifications {
-			font-size: 0.78rem;
-			color: #666;
-			margin-bottom: 12px;
-			line-height: 1.5;
-			background: #f8f9fa;
-			padding: 10px 12px;
-			border-radius: 10px;
-			border-left: 3px solid #0e7c7b;
-			text-align: left;
-			min-height: 3.6rem;
-			display: flex;
-			align-items: center;
+		@keyframes glowPulse {
+			0%, 100% {
+				box-shadow: 0 0 20px rgba(14, 124, 123, 0.3);
+			}
+
+			50% {
+				box-shadow: 0 0 40px rgba(14, 124, 123, 0.6);
+			}
 		}
 
-		.doctor-card .doctor-content p {
-			color: #555;
-			font-size: 0.85rem;
-			line-height: 1.6;
-			margin-bottom: 15px;
-			min-height: 4.2rem;
-			display: flex;
-			align-items: center;
-			text-align: center;
+		@keyframes bounceIcon {
+			0%, 100% {
+				transform: translateY(0);
+			}
+
+			50% {
+				transform: translateY(-5px);
+			}
 		}
 
-		.doctor-card .doctor-meta {
+		/* ==========================================
+		   STYLISH ANIMATED DOCTOR CARD
+		   ========================================== */
+		.doctor-card {
+			background: #fff;
+			border-radius: 24px;
+			overflow: hidden;
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+			transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+			height: 100%;
 			display: flex;
 			flex-direction: column;
-			gap: 6px;
-			margin-bottom: 15px;
-			text-align: left;
-			padding: 10px 12px;
-			background: #fafbfc;
-			border-radius: 10px;
-			min-height: 4.5rem;
-			justify-content: center;
+			border: 2px solid #f0f4ff;
+			position: relative;
+			opacity: 0;
+			animation: slideUpFade 0.8s ease-out forwards;
 		}
+
+			/* Stagger Animation Delays */
+			.doctor-card.d1 {
+				animation-delay: 0.1s;
+			}
+
+			.doctor-card.d2 {
+				animation-delay: 0.25s;
+			}
+
+			.doctor-card.d3 {
+				animation-delay: 0.4s;
+			}
+
+			.doctor-card.d4 {
+				animation-delay: 0.55s;
+			}
+
+			.doctor-card.d5 {
+				animation-delay: 0.7s;
+			}
+
+			.doctor-card.d6 {
+				animation-delay: 0.85s;
+			}
+
+			/* Hover Lift */
+			.doctor-card:hover {
+				transform: translateY(-15px) scale(1.02);
+				box-shadow: 0 30px 70px rgba(14, 124, 123, 0.25);
+				border-color: #0e7c7b;
+			}
+
+			/* Animated Gradient Banner */
+			.doctor-card .doctor-banner {
+				height: 90px;
+				background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 50%, #1565c0 100%);
+				background-size: 200% 200%;
+				position: relative;
+				flex-shrink: 0;
+				animation: gradientShift 6s ease-in-out infinite;
+				overflow: hidden;
+			}
+
+				/* Animated Sparkles in Banner */
+				.doctor-card .doctor-banner::before {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-image: radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px), radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px);
+					background-size: 30px 30px, 50px 50px;
+					background-position: 0 0, 15px 15px;
+					opacity: 0.5;
+					animation: rotateSlow 40s linear infinite;
+				}
+
+				.doctor-card .doctor-banner::after {
+					content: '';
+					position: absolute;
+					bottom: -1px;
+					left: 0;
+					right: 0;
+					height: 35px;
+					background: #fff;
+					border-radius: 35px 35px 0 0;
+				}
+
+			/* Round Avatar with Rotating Ring */
+			.doctor-card .doctor-avatar-wrapper {
+				position: relative;
+				margin-top: -85px;
+				display: flex;
+				justify-content: center;
+				z-index: 2;
+				flex-shrink: 0;
+				height: 150px;
+				align-items: flex-end;
+			}
+
+				/* Rotating Dashed Ring Around Avatar */
+				.doctor-card .doctor-avatar-wrapper::before {
+					content: '';
+					position: absolute;
+					bottom: 0;
+					left: 50%;
+					transform: translateX(-50%);
+					width: 145px;
+					height: 145px;
+					border: 2px dashed rgba(14, 124, 123, 0.3);
+					border-radius: 50%;
+					animation: rotateSlow 20s linear infinite;
+					opacity: 0;
+					transition: opacity 0.5s ease;
+				}
+
+			.doctor-card:hover .doctor-avatar-wrapper::before {
+				opacity: 1;
+			}
+
+			.doctor-card .doctor-avatar {
+				width: 140px;
+				height: 140px;
+				border-radius: 50%;
+				overflow: hidden;
+				border: 5px solid #fff;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+				background: #f0f4ff;
+				transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+				position: relative;
+				animation: floatAvatar 4s ease-in-out infinite;
+			}
+
+			/* Pause Float on Hover */
+			.doctor-card:hover .doctor-avatar {
+				animation-play-state: paused;
+				border-color: #0e7c7b;
+				transform: scale(1.1) rotate(5deg);
+				box-shadow: 0 20px 45px rgba(14, 124, 123, 0.4);
+			}
+
+			.doctor-card .doctor-avatar img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center top;
+				transition: transform 0.6s ease;
+			}
+
+			.doctor-card:hover .doctor-avatar img {
+				transform: scale(1.15);
+			}
+
+			/* Glow Ring Animation on Hover */
+			.doctor-card .doctor-avatar::after {
+				content: '';
+				position: absolute;
+				top: -5px;
+				left: -5px;
+				right: -5px;
+				bottom: -5px;
+				border-radius: 50%;
+				background: linear-gradient(135deg, #0e7c7b, #1a9e9d, #1565c0, #0e7c7b);
+				background-size: 300% 300%;
+				z-index: -1;
+				opacity: 0;
+				transition: opacity 0.5s ease;
+				animation: gradientShift 3s ease infinite;
+			}
+
+			.doctor-card:hover .doctor-avatar::after {
+				opacity: 1;
+			}
+
+			/* Status Dot */
+			.doctor-card .doctor-avatar .status-dot {
+				position: absolute;
+				bottom: 8px;
+				right: 8px;
+				width: 20px;
+				height: 20px;
+				border-radius: 50%;
+				border: 3px solid #fff;
+				background: #2e7d32;
+				z-index: 3;
+				animation: pulse-green 2s infinite;
+			}
+
+				.doctor-card .doctor-avatar .status-dot.appointment {
+					background: #ed6c02;
+					animation: pulse-orange 2s infinite;
+				}
+
+			/* Doctor Content */
+			.doctor-card .doctor-content {
+				padding: 10px 22px 22px;
+				display: flex;
+				flex-direction: column;
+				flex-grow: 1;
+				text-align: center;
+			}
+
+				.doctor-card .doctor-content h4 {
+					color: #0e7c7b;
+					font-weight: 700;
+					font-size: 1.2rem;
+					margin-bottom: 8px;
+					margin-top: 10px;
+					min-height: 2.3rem;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					transition: all 0.3s ease;
+				}
+
+			.doctor-card:hover .doctor-content h4 {
+				color: #0a3a8a;
+				letter-spacing: 0.5px;
+			}
+
+			/* Status Badge */
+			.doctor-card .status-badge {
+				display: inline-flex;
+				align-items: center;
+				gap: 5px;
+				padding: 6px 16px;
+				border-radius: 50px;
+				font-size: 0.72rem;
+				font-weight: 700;
+				margin-bottom: 10px;
+				letter-spacing: 0.3px;
+				text-transform: uppercase;
+				transition: all 0.4s ease;
+			}
+
+				.doctor-card .status-badge.available {
+					background: #e8f5e9;
+					color: #2e7d32;
+					border: 1px solid #c8e6c9;
+				}
+
+					.doctor-card .status-badge.available::before {
+						content: '';
+						width: 7px;
+						height: 7px;
+						border-radius: 50%;
+						background: #2e7d32;
+						animation: blink 1.5s infinite;
+					}
+
+				.doctor-card .status-badge.appointment {
+					background: #fff3e0;
+					color: #e65100;
+					border: 1px solid #ffe0b2;
+				}
+
+					.doctor-card .status-badge.appointment::before {
+						content: '';
+						width: 7px;
+						height: 7px;
+						border-radius: 50%;
+						background: #e65100;
+						animation: blink 1.5s infinite;
+					}
+
+			.doctor-card:hover .status-badge {
+				transform: scale(1.08);
+				box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+			}
+
+			/* Specialty */
+			.doctor-card .doctor-content .specialty {
+				color: #1565c0;
+				font-weight: 600;
+				font-size: 0.82rem;
+				background: #f0f4ff;
+				padding: 6px 14px;
+				border-radius: 50px;
+				margin-bottom: 10px;
+				min-height: 2.4rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				line-height: 1.3;
+				transition: all 0.4s ease;
+			}
+
+			.doctor-card:hover .specialty {
+				background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
+				color: #fff;
+				transform: translateY(-2px);
+			}
+
+			/* Qualifications */
+			.doctor-card .doctor-content .qualifications {
+				font-size: 0.78rem;
+				color: #666;
+				margin-bottom: 12px;
+				line-height: 1.5;
+				background: #f8f9fa;
+				padding: 10px 12px;
+				border-radius: 10px;
+				border-left: 3px solid #0e7c7b;
+				text-align: left;
+				min-height: 3.6rem;
+				display: flex;
+				align-items: center;
+				transition: all 0.3s ease;
+			}
+
+			.doctor-card:hover .qualifications {
+				background: #f0f4ff;
+				border-left-width: 5px;
+			}
+
+			/* Description */
+			.doctor-card .doctor-content p {
+				color: #555;
+				font-size: 0.85rem;
+				line-height: 1.6;
+				margin-bottom: 15px;
+				min-height: 4.2rem;
+				display: flex;
+				align-items: center;
+				text-align: center;
+			}
+
+			/* Meta Info */
+			.doctor-card .doctor-meta {
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+				margin-bottom: 15px;
+				text-align: left;
+				padding: 12px 14px;
+				background: #fafbfc;
+				border-radius: 12px;
+				min-height: 4.5rem;
+				justify-content: center;
+				transition: all 0.4s ease;
+			}
+
+			.doctor-card:hover .doctor-meta {
+				background: #f0f4ff;
+				transform: translateY(-2px);
+			}
 
 			.doctor-card .doctor-meta .experience,
 			.doctor-card .doctor-meta .department {
@@ -327,58 +573,94 @@
 				gap: 8px;
 				font-size: 0.82rem;
 				color: #555;
+				font-weight: 500;
 			}
 
 			.doctor-card .doctor-meta i {
 				color: #0e7c7b;
-				font-size: 0.88rem;
+				font-size: 0.95rem;
 				min-width: 16px;
+				transition: all 0.3s ease;
 			}
 
-		/* Button */
-		.doctor-card .btn-appointment {
-			display: inline-flex;
-			align-items: center;
-			gap: 8px;
-			background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
-			color: #fff;
-			padding: 11px 25px;
-			border-radius: 50px;
-			text-decoration: none;
-			font-weight: 600;
-			font-size: 0.88rem;
-			transition: all 0.3s ease;
-			width: 100%;
-			justify-content: center;
-			border: none;
-			cursor: pointer;
-			margin-top: auto;
-		}
+			.doctor-card:hover .doctor-meta i {
+				animation: bounceIcon 1s ease infinite;
+				color: #0a3a8a;
+			}
 
-			.doctor-card .btn-appointment:hover {
-				background: linear-gradient(135deg, #1da851 0%, #168a42 100%);
+			/* Book Button */
+			.doctor-card .btn-appointment {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
+				background-size: 200% 200%;
 				color: #fff;
-				transform: scale(1.02);
-				box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+				padding: 12px 25px;
+				border-radius: 50px;
+				text-decoration: none;
+				font-weight: 600;
+				font-size: 0.88rem;
+				transition: all 0.4s ease;
+				width: 100%;
+				justify-content: center;
+				border: none;
+				cursor: pointer;
+				margin-top: auto;
+				position: relative;
+				overflow: hidden;
+				animation: gradientShift 4s ease infinite;
 			}
 
-			.doctor-card .btn-appointment i {
-				font-size: 1.15rem;
+				/* Shine Sweep Effect */
+				.doctor-card .btn-appointment::before {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: -100%;
+					width: 100%;
+					height: 100%;
+					background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+					transition: left 0.6s ease;
+				}
+
+				.doctor-card .btn-appointment:hover::before {
+					left: 100%;
+				}
+
+				.doctor-card .btn-appointment:hover {
+					transform: scale(1.05);
+					box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
+					gap: 12px;
+				}
+
+				.doctor-card .btn-appointment i {
+					font-size: 1.15rem;
+					transition: transform 0.3s ease;
+				}
+
+				.doctor-card .btn-appointment:hover i {
+					transform: rotate(-15deg) scale(1.2);
+				}
+
+			/* Social Icons */
+			.doctor-card .doctor-social {
+				display: flex;
+				justify-content: center;
+				gap: 10px;
+				margin-top: 12px;
+				padding-top: 12px;
+				border-top: 1px solid #f0f4ff;
+				transition: all 0.3s ease;
 			}
 
-		/* Social Icons Row */
-		.doctor-card .doctor-social {
-			display: flex;
-			justify-content: center;
-			gap: 10px;
-			margin-top: 12px;
-			padding-top: 12px;
-			border-top: 1px solid #f0f4ff;
-		}
+			.doctor-card:hover .doctor-social {
+				border-top-color: #0e7c7b;
+			}
 
 			.doctor-card .doctor-social a {
-				width: 34px;
-				height: 34px;
+				width: 36px;
+				height: 36px;
 				border-radius: 50%;
 				background: #f0f4ff;
 				color: #0e7c7b;
@@ -386,21 +668,23 @@
 				align-items: center;
 				justify-content: center;
 				text-decoration: none;
-				transition: all 0.3s ease;
-				font-size: 0.9rem;
+				transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+				font-size: 0.95rem;
 			}
 
 				.doctor-card .doctor-social a:hover {
 					background: #0e7c7b;
 					color: #fff;
-					transform: translateY(-3px);
+					transform: translateY(-5px) scale(1.15) rotate(10deg);
+					box-shadow: 0 8px 20px rgba(14, 124, 123, 0.3);
 				}
 
 				.doctor-card .doctor-social a.whatsapp:hover {
 					background: #25D366;
+					box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
 				}
 
-		/* Footer Styles */
+		/* Footer */
 		.footer-16 .sitename {
 			color: #0e7c7b !important;
 		}
@@ -438,8 +722,6 @@
 				color: #ffffff;
 				margin-bottom: 0;
 				font-size: 0.95rem;
-				font-weight: 400;
-				letter-spacing: 0.3px;
 			}
 
 			.footer-bottom .copyright .sitename {
@@ -456,7 +738,7 @@
 				.footer-bottom .social-links-bottom a {
 					color: #fff;
 					font-size: 1.2rem;
-					transition: all 0.3s ease;
+					transition: all 0.4s ease;
 					width: 40px;
 					height: 40px;
 					background: rgba(255, 255, 255, 0.15);
@@ -470,57 +752,36 @@
 					.footer-bottom .social-links-bottom a:hover {
 						background: #fff;
 						color: #0e7c7b;
-						transform: translateY(-3px);
+						transform: translateY(-5px) rotate(10deg) scale(1.1);
 					}
 
-		@media (max-width: 768px) {
-			.footer-bottom .social-links-bottom {
-				justify-content: center;
-				margin-top: 15px;
-			}
-
-			.footer-bottom .copyright {
-				text-align: center;
-			}
+		/* WhatsApp Buttons */
+		.whatsapp-btn {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			background: #25D366;
+			color: #fff;
+			padding: 10px 25px;
+			border-radius: 50px;
+			text-decoration: none;
+			font-weight: 600;
+			transition: all 0.4s ease;
+			border: none;
+			font-size: 0.95rem;
 		}
 
-		/* Responsive */
-		@media (max-width: 768px) {
-			.page-title .heading {
-				padding: 60px 0 40px;
+			.whatsapp-btn:hover {
+				background: #1da851;
+				color: #fff;
+				transform: scale(1.05) translateY(-3px);
+				box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
 			}
 
-			.doctor-card .doctor-avatar {
-				width: 110px;
-				height: 110px;
+			.whatsapp-btn i {
+				font-size: 1.2rem;
 			}
 
-			.doctor-card .doctor-avatar-wrapper {
-				margin-top: -65px;
-			}
-
-			.doctor-card .doctor-banner {
-				height: 75px;
-			}
-
-			.doctor-card .doctor-content {
-				padding: 10px 18px 18px;
-			}
-
-				.doctor-card .doctor-content h4 {
-					font-size: 1.05rem;
-					min-height: auto;
-				}
-
-				.doctor-card .doctor-content .specialty,
-				.doctor-card .doctor-content .qualifications,
-				.doctor-card .doctor-content p,
-				.doctor-card .doctor-meta {
-					min-height: auto;
-				}
-		}
-
-		/* WhatsApp Floating Button */
 		.whatsapp-float {
 			position: fixed;
 			bottom: 30px;
@@ -536,13 +797,14 @@
 			font-size: 2rem;
 			box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
 			z-index: 999;
-			transition: all 0.3s ease;
+			transition: all 0.4s ease;
 			text-decoration: none;
+			animation: pulse-green 2s infinite;
 		}
 
 			.whatsapp-float:hover {
-				transform: scale(1.1);
-				box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+				transform: scale(1.15) rotate(10deg);
+				box-shadow: 0 10px 40px rgba(37, 211, 102, 0.6);
 				color: #fff;
 			}
 
@@ -557,45 +819,17 @@
 			font-weight: 600;
 			font-size: 0.9rem;
 			backdrop-filter: blur(10px);
+			position: relative;
+			z-index: 2;
 		}
 
 			.hours-badge i {
 				font-size: 1.1rem;
 			}
 
-		.whatsapp-btn {
-			display: inline-flex;
-			align-items: center;
-			gap: 10px;
-			background: #25D366;
-			color: #fff;
-			padding: 10px 25px;
-			border-radius: 50px;
-			text-decoration: none;
-			font-weight: 600;
-			transition: all 0.3s ease;
-			border: none;
-			font-size: 0.95rem;
-		}
-
-			.whatsapp-btn:hover {
-				background: #1da851;
-				color: #fff;
-				transform: scale(1.02);
-				box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
-			}
-
-			.whatsapp-btn i {
-				font-size: 1.2rem;
-			}
-
-		/* Date Picker Modal Styles */
+		/* Modal Styles */
 		.date-picker-modal .swal2-popup {
 			padding: 20px;
-		}
-
-		.date-picker-modal .swal2-html-container {
-			margin: 10px 0;
 		}
 
 		.date-picker-input {
@@ -611,7 +845,7 @@
 			.date-picker-input:focus {
 				border-color: #0e7c7b;
 				outline: none;
-				box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.1);
+				box-shadow: 0 0 0 3px rgba(14, 124, 123, 0.1);
 			}
 
 		.time-select {
@@ -628,7 +862,7 @@
 			.time-select:focus {
 				border-color: #0e7c7b;
 				outline: none;
-				box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.1);
+				box-shadow: 0 0 0 3px rgba(14, 124, 123, 0.1);
 			}
 
 		.doctor-info-display {
@@ -655,6 +889,59 @@
 		.book-appointment-btn {
 			cursor: pointer;
 		}
+
+		/* ==========================================
+		   RESPONSIVE
+		   ========================================== */
+		@media (max-width: 768px) {
+			.page-title .heading {
+				padding: 60px 0 40px;
+			}
+
+			.doctor-card .doctor-avatar {
+				width: 120px;
+				height: 120px;
+			}
+
+			.doctor-card .doctor-avatar-wrapper {
+				margin-top: -75px;
+				height: 130px;
+			}
+
+				.doctor-card .doctor-avatar-wrapper::before {
+					width: 125px;
+					height: 125px;
+				}
+
+			.doctor-card .doctor-banner {
+				height: 80px;
+			}
+
+			.doctor-card .doctor-content {
+				padding: 10px 18px 18px;
+			}
+
+				.doctor-card .doctor-content h4 {
+					font-size: 1.05rem;
+					min-height: auto;
+				}
+
+				.doctor-card .doctor-content .specialty,
+				.doctor-card .doctor-content .qualifications,
+				.doctor-card .doctor-content p,
+				.doctor-card .doctor-meta {
+					min-height: auto;
+				}
+
+			.footer-bottom .social-links-bottom {
+				justify-content: center;
+				margin-top: 15px;
+			}
+
+			.footer-bottom .copyright {
+				text-align: center;
+			}
+		}
 	</style>
 
 </head>
@@ -676,7 +963,7 @@
 					<a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
 				</div>
 			</div>
-		</div><!-- End Top Bar -->
+		</div>
 
 		<div class="branding d-flex align-items-cente">
 
@@ -732,15 +1019,16 @@
 					</div>
 				</div>
 			</div>
-		</div><!-- End Page Title -->
+		</div>
+
 		<!-- Doctors Section -->
 		<section id="doctors" class="doctors section">
-			<div class="container" data-aos="fade-up" data-aos-delay="100">
+			<div class="container">
 				<div class="row gy-4">
 
 					<!-- Doctor 1: Dr. S. Sangami -->
-					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-						<div class="doctor-card">
+					<div class="col-lg-3 col-md-6">
+						<div class="doctor-card d1">
 							<div class="doctor-banner"></div>
 							<div class="doctor-avatar-wrapper">
 								<div class="doctor-avatar">
@@ -774,10 +1062,11 @@
 								</div>
 							</div>
 						</div>
-					</div><!-- End Doctor Card -->
+					</div>
+
 					<!-- Doctor 2: Dr. M. Karthikeyan -->
-					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-						<div class="doctor-card">
+					<div class="col-lg-3 col-md-6">
+						<div class="doctor-card d2">
 							<div class="doctor-banner"></div>
 							<div class="doctor-avatar-wrapper">
 								<div class="doctor-avatar">
@@ -811,10 +1100,11 @@
 								</div>
 							</div>
 						</div>
-					</div><!-- End Doctor Card -->
+					</div>
+
 					<!-- Doctor 3: Dr. M. Salomon Themothi -->
-					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-						<div class="doctor-card">
+					<div class="col-lg-3 col-md-6">
+						<div class="doctor-card d3">
 							<div class="doctor-banner"></div>
 							<div class="doctor-avatar-wrapper">
 								<div class="doctor-avatar">
@@ -848,10 +1138,11 @@
 								</div>
 							</div>
 						</div>
-					</div><!-- End Doctor Card -->
+					</div>
+
 					<!-- Doctor 4: Dr. D. Tharun -->
-					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
-						<div class="doctor-card">
+					<div class="col-lg-3 col-md-6">
+						<div class="doctor-card d4">
 							<div class="doctor-banner"></div>
 							<div class="doctor-avatar-wrapper">
 								<div class="doctor-avatar">
@@ -885,10 +1176,11 @@
 								</div>
 							</div>
 						</div>
-					</div><!-- End Doctor Card -->
+					</div>
+
 					<!-- Doctor 5: Dr. Subash Kaushik. T. G -->
-					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="500">
-						<div class="doctor-card">
+					<div class="col-lg-3 col-md-6">
+						<div class="doctor-card d5">
 							<div class="doctor-banner"></div>
 							<div class="doctor-avatar-wrapper">
 								<div class="doctor-avatar">
@@ -922,10 +1214,11 @@
 								</div>
 							</div>
 						</div>
-					</div><!-- End Doctor Card -->
+					</div>
+
 					<!-- Doctor 6: Dr. V. Prathapkumar -->
-					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="600">
-						<div class="doctor-card">
+					<div class="col-lg-3 col-md-6">
+						<div class="doctor-card d6">
 							<div class="doctor-banner"></div>
 							<div class="doctor-avatar-wrapper">
 								<div class="doctor-avatar">
@@ -959,11 +1252,12 @@
 								</div>
 							</div>
 						</div>
-					</div><!-- End Doctor Card -->
+					</div>
 
 				</div>
 			</div>
-		</section><!-- /Doctors Section -->
+		</section>
+
 		<!-- SAI MEDICALS Section -->
 		<section class="section" style="padding: 40px 0; background: #f8f9fa;">
 			<div class="container">
@@ -1045,7 +1339,7 @@
 											<a href="services.html">X-Ray</a>
 											<a href="services.html">ECG</a>
 											<a href="services.html">Vaccination</a>
-											<a href="services.html">Dental Care</a>
+											<a href="services.html">General Medicine</a>
 										</nav>
 									</div>
 								</div>
@@ -1140,186 +1434,167 @@
 	<!-- Main JS File -->
 	<script src="assets/js/main.js"></script>
 
-	<!-- Appointment Booking Script with WhatsApp -->
+	<!-- Appointment Booking Script -->
 	<script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get all book appointment buttons
-            const bookButtons = document.querySelectorAll('.book-appointment');
+		document.addEventListener('DOMContentLoaded', function () {
+			const bookButtons = document.querySelectorAll('.book-appointment');
 
-            bookButtons.forEach(function(button) {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
+			bookButtons.forEach(function (button) {
+				button.addEventListener('click', function (e) {
+					e.preventDefault();
 
-                    const doctorName = this.getAttribute('data-doctor');
-                    const specialty = this.getAttribute('data-specialty');
+					const doctorName = this.getAttribute('data-doctor');
+					const specialty = this.getAttribute('data-specialty');
 
-                    // Get today's date for min date
-                    const today = new Date();
-                    const todayStr = today.toISOString().split('T')[0];
+					const today = new Date();
+					const todayStr = today.toISOString().split('T')[0];
+					const maxDate = new Date(today);
+					maxDate.setDate(maxDate.getDate() + 30);
+					const maxDateStr = maxDate.toISOString().split('T')[0];
 
-                    // Get max date (30 days from now)
-                    const maxDate = new Date(today);
-                    maxDate.setDate(maxDate.getDate() + 30);
-                    const maxDateStr = maxDate.toISOString().split('T')[0];
+					Swal.fire({
+						title: 'Book Appointment',
+						html: `
+							<div class="doctor-info-display">
+								<i class="bi bi-person-circle"></i>
+								<span><strong>${doctorName}</strong> - ${specialty}</span>
+							</div>
+							<div style="text-align: left;">
+								<label style="font-weight: 600; display: block; margin-bottom: 5px; color: #333;">
+									<i class="bi bi-calendar3" style="color: #0e7c7b;"></i> Select Date *
+								</label>
+								<input type="date" id="appointmentDate" class="date-picker-input"
+									   min="${todayStr}" max="${maxDateStr}" value="${todayStr}" required>
 
-                    // Show SweetAlert2 with date picker
-                    Swal.fire({
-                        title: 'Book Appointment',
-                        html: `
-                            <div class="doctor-info-display">
-                                <i class="bi bi-person-circle"></i>
-                                <span><strong>${doctorName}</strong> - ${specialty}</span>
-                            </div>
-                            <div style="text-align: left;">
-                                <label style="font-weight: 600; display: block; margin-bottom: 5px; color: #333;">
-                                    <i class="bi bi-calendar3" style="color: #0e7c7b;"></i> Select Date *
-                                </label>
-                                <input type="date" id="appointmentDate" class="date-picker-input"
-                                       min="${todayStr}" max="${maxDateStr}" value="${todayStr}" required>
+								<label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
+									<i class="bi bi-clock" style="color: #0e7c7b;"></i> Select Time *
+								</label>
+								<select id="appointmentTime" class="time-select">
+									<option value="09:00">09:00 AM</option>
+									<option value="09:30">09:30 AM</option>
+									<option value="10:00">10:00 AM</option>
+									<option value="10:30">10:30 AM</option>
+									<option value="11:00">11:00 AM</option>
+									<option value="11:30">11:30 AM</option>
+									<option value="12:00">12:00 PM</option>
+									<option value="12:30">12:30 PM</option>
+									<option value="13:00">01:00 PM</option>
+									<option value="13:30">01:30 PM</option>
+									<option value="14:00">02:00 PM</option>
+									<option value="14:30">02:30 PM</option>
+									<option value="15:00">03:00 PM</option>
+									<option value="15:30">03:30 PM</option>
+									<option value="16:00">04:00 PM</option>
+									<option value="16:30">04:30 PM</option>
+									<option value="17:00">05:00 PM</option>
+									<option value="17:30">05:30 PM</option>
+									<option value="18:00">06:00 PM</option>
+									<option value="18:30">06:30 PM</option>
+									<option value="19:00">07:00 PM</option>
+									<option value="19:30">07:30 PM</option>
+									<option value="20:00">08:00 PM</option>
+									<option value="20:30">08:30 PM</option>
+									<option value="21:00">09:00 PM</option>
+								</select>
 
-                                <label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
-                                    <i class="bi bi-clock" style="color: #0e7c7b;"></i> Select Time *
-                                </label>
-                                <select id="appointmentTime" class="time-select">
-                                    <option value="09:00">09:00 AM</option>
-                                    <option value="09:30">09:30 AM</option>
-                                    <option value="10:00">10:00 AM</option>
-                                    <option value="10:30">10:30 AM</option>
-                                    <option value="11:00">11:00 AM</option>
-                                    <option value="11:30">11:30 AM</option>
-                                    <option value="12:00">12:00 PM</option>
-                                    <option value="12:30">12:30 PM</option>
-                                    <option value="13:00">01:00 PM</option>
-                                    <option value="13:30">01:30 PM</option>
-                                    <option value="14:00">02:00 PM</option>
-                                    <option value="14:30">02:30 PM</option>
-                                    <option value="15:00">03:00 PM</option>
-                                    <option value="15:30">03:30 PM</option>
-                                    <option value="16:00">04:00 PM</option>
-                                    <option value="16:30">04:30 PM</option>
-                                    <option value="17:00">05:00 PM</option>
-                                    <option value="17:30">05:30 PM</option>
-                                    <option value="18:00">06:00 PM</option>
-                                    <option value="18:30">06:30 PM</option>
-                                    <option value="19:00">07:00 PM</option>
-                                    <option value="19:30">07:30 PM</option>
-                                    <option value="20:00">08:00 PM</option>
-                                    <option value="20:30">08:30 PM</option>
-                                    <option value="21:00">09:00 PM</option>
-                                </select>
+								<label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
+									<i class="bi bi-person" style="color: #0e7c7b;"></i> Your Name *
+								</label>
+								<input type="text" id="patientName" class="date-picker-input" placeholder="Enter your full name" required>
 
-                                <label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
-                                    <i class="bi bi-person" style="color: #0e7c7b;"></i> Your Name *
-                                </label>
-                                <input type="text" id="patientName" class="date-picker-input" placeholder="Enter your full name" required>
+								<label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
+									<i class="bi bi-phone" style="color: #0e7c7b;"></i> Phone Number *
+								</label>
+								<input type="tel" id="patientPhone" class="date-picker-input" placeholder="+91 98765 43210" required>
+							</div>
+						`,
+						confirmButtonText: 'Confirm & Send to WhatsApp',
+						cancelButtonText: 'Cancel',
+						showCancelButton: true,
+						confirmButtonColor: '#0e7c7b',
+						cancelButtonColor: '#dc3545',
+						customClass: {
+							popup: 'date-picker-modal'
+						},
+						preConfirm: () => {
+							const date = document.getElementById('appointmentDate').value;
+							const time = document.getElementById('appointmentTime').value;
+							const name = document.getElementById('patientName').value;
+							const phone = document.getElementById('patientPhone').value;
 
-                                <label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
-                                    <i class="bi bi-phone" style="color: #0e7c7b;"></i> Phone Number *
-                                </label>
-                                <input type="tel" id="patientPhone" class="date-picker-input" placeholder="+91 98765 43210" required>
-                            </div>
-                        `,
-                        confirmButtonText: 'Confirm & Send to WhatsApp',
-                        cancelButtonText: 'Cancel',
-                        showCancelButton: true,
-                        confirmButtonColor: '#0e7c7b',
-                        cancelButtonColor: '#dc3545',
-                        customClass: {
-                            popup: 'date-picker-modal'
-                        },
-                        preConfirm: () => {
-                            const date = document.getElementById('appointmentDate').value;
-                            const time = document.getElementById('appointmentTime').value;
-                            const name = document.getElementById('patientName').value;
-                            const phone = document.getElementById('patientPhone').value;
+							if (!date) {
+								Swal.showValidationMessage('Please select a date');
+								return false;
+							}
+							if (!name || name.trim() === '') {
+								Swal.showValidationMessage('Please enter your name');
+								return false;
+							}
+							if (!phone || phone.trim() === '' || phone.length < 10) {
+								Swal.showValidationMessage('Please enter a valid phone number');
+								return false;
+							}
 
-                            if (!date) {
-                                Swal.showValidationMessage('Please select a date');
-                                return false;
-                            }
-                            if (!name || name.trim() === '') {
-                                Swal.showValidationMessage('Please enter your name');
-                                return false;
-                            }
-                            if (!phone || phone.trim() === '' || phone.length < 10) {
-                                Swal.showValidationMessage('Please enter a valid phone number');
-                                return false;
-                            }
+							return { date, time, name, phone, doctor: doctorName, specialty: specialty };
+						}
+					}).then((result) => {
+						if (result.isConfirmed) {
+							const data = result.value;
 
-                            return { date, time, name, phone, doctor: doctorName, specialty: specialty };
-                        }
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            const data = result.value;
+							const dateObj = new Date(data.date + 'T00:00:00');
+							const formattedDate = dateObj.toLocaleDateString('en-IN', {
+								weekday: 'short',
+								day: '2-digit',
+								month: 'short',
+								year: 'numeric'
+							});
 
-                            // Format date for display
-                            const dateObj = new Date(data.date + 'T00:00:00');
-                            const formattedDate = dateObj.toLocaleDateString('en-IN', {
-                                weekday: 'short',
-                                day: '2-digit',
-                                month: 'short',
-                                year: 'numeric'
-                            });
+							let whatsappMsg = `Hi SAI CLINIC,%0A%0A`;
+							whatsappMsg += `I would like to book an appointment:%0A%0A`;
+							whatsappMsg += `👤 Patient Name: ${data.name}%0A`;
+							whatsappMsg += `📞 Phone: ${data.phone}%0A`;
+							whatsappMsg += `👨‍⚕️ Doctor: ${data.doctor}%0A`;
+							whatsappMsg += `📅 Date: ${formattedDate}%0A`;
+							whatsappMsg += `🕐 Time: ${data.time}%0A`;
+							whatsappMsg += `🏥 Specialty: ${data.specialty}%0A`;
+							whatsappMsg += `%0AThank you!`;
 
-                            // Create WhatsApp message
-                            let whatsappMsg = `Hi SAI CLINIC,%0A%0A`;
-                            whatsappMsg += `I would like to book an appointment with the following details:%0A%0A`;
-                            whatsappMsg += `👤 Patient Name: ${data.name}%0A`;
-                            whatsappMsg += `📞 Phone: ${data.phone}%0A`;
-                            whatsappMsg += `👨‍⚕️ Doctor: ${data.doctor}%0A`;
-                            whatsappMsg += `📅 Date: ${formattedDate}%0A`;
-                            whatsappMsg += `🕐 Time: ${data.time}%0A`;
-                            whatsappMsg += `🏥 Specialty: ${data.specialty}%0A`;
-                            whatsappMsg += `%0AThank you!`;
+							window.open(`https://wa.me/919787960590?text=${whatsappMsg}`, '_blank');
 
-                            // Open WhatsApp
-                            const whatsappURL = `https://wa.me/919787960590?text=${whatsappMsg}`;
-                            window.open(whatsappURL, '_blank');
+							Swal.fire({
+								title: 'Appointment Request Sent! ✅',
+								html: `
+									<div style="text-align: left; padding: 10px 0;">
+										<div style="background: #f0f4ff; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+											<p style="margin-bottom: 5px;"><strong>👨‍⚕️ Doctor:</strong> ${data.doctor}</p>
+											<p style="margin-bottom: 5px;"><strong>🏥 Specialty:</strong> ${data.specialty}</p>
+											<p style="margin-bottom: 5px;"><strong>📅 Date:</strong> ${formattedDate}</p>
+											<p style="margin-bottom: 0;"><strong>🕐 Time:</strong> ${data.time}</p>
+										</div>
+										<div style="background: #e8f5e9; padding: 12px; border-radius: 10px; border-left: 4px solid #2e7d32;">
+											<p style="margin-bottom: 0; color: #2e7d32;">
+												<i class="bi bi-check-circle-fill"></i>
+												Appointment confirmed for <strong>${data.name}</strong>
+											</p>
+										</div>
+										<hr>
+										<p style="color: #25D366; font-size: 0.95rem; text-align: center;">
+											<i class="bi bi-whatsapp"></i>
+											WhatsApp opened with your appointment details.
+										</p>
+									</div>
+								`,
+								icon: 'success',
+								confirmButtonColor: '#0e7c7b',
+								confirmButtonText: 'OK'
+							});
+						}
+					});
+				});
+			});
 
-                            // Show success message
-                            Swal.fire({
-                                title: 'Appointment Request Sent! ✅',
-                                html: `
-                                    <div style="text-align: left; padding: 10px 0;">
-                                        <div style="background: #f0f4ff; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                                            <p style="margin-bottom: 5px;"><strong>👨‍⚕️ Doctor:</strong> ${data.doctor}</p>
-                                            <p style="margin-bottom: 5px;"><strong>🏥 Specialty:</strong> ${data.specialty}</p>
-                                            <p style="margin-bottom: 5px;"><strong>📅 Date:</strong> ${formattedDate}</p>
-                                            <p style="margin-bottom: 0;"><strong>🕐 Time:</strong> ${data.time}</p>
-                                        </div>
-                                        <div style="background: #e8f5e9; padding: 12px; border-radius: 10px; border-left: 4px solid #2e7d32;">
-                                            <p style="margin-bottom: 0; color: #2e7d32;">
-                                                <i class="bi bi-check-circle-fill"></i>
-                                                Appointment confirmed for <strong>${data.name}</strong>
-                                            </p>
-                                        </div>
-                                        <hr>
-                                        <p style="color: #25D366; font-size: 0.95rem; text-align: center;">
-                                            <i class="bi bi-whatsapp"></i>
-                                            WhatsApp opened with your appointment details.
-                                        </p>
-                                        <p style="font-size: 0.8rem; color: #666; text-align: center;">
-                                            SAI CLINIC<br>
-                                            No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206
-                                        </p>
-                                    </div>
-                                `,
-                                icon: 'success',
-                                confirmButtonColor: '#0e7c7b',
-                                confirmButtonText: 'OK'
-                            });
-
-                            console.log('Appointment Booked:', data);
-                        }
-                    });
-                });
-            });
-
-            console.log('SAI CLINIC - Doctors page ready!');
-            console.log('WhatsApp: +91 97879 60590');
-            console.log('Email: info@saigroupofclinics.com');
-            console.log('Hours: 08.00 AM - 10.00 PM');
-        });
+			console.log('SAI CLINIC - Doctors page ready!');
+		});
 	</script>
 
 </body>
