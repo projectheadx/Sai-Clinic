@@ -205,67 +205,481 @@
 				display: block;
 			}
 
-		/* Journey Timeline */
+		/* ==========================================
+		   JOURNEY TIMELINE — STYLISH & ANIMATED
+		   ========================================== */
 		.timeline-section {
-			padding: 60px 0;
-			background: #fff;
-		}
-
-		.timeline-item {
-			display: flex;
-			gap: 30px;
-			margin-bottom: 40px;
+			padding: 80px 0;
+			background: linear-gradient(135deg, #f8f9fa 0%, #f0f4ff 100%);
 			position: relative;
-			padding-left: 30px;
+			overflow: hidden;
 		}
 
-			.timeline-item::before {
+			.timeline-section::before {
 				content: '';
 				position: absolute;
-				left: 0;
+				top: -150px;
+				right: -150px;
+				width: 450px;
+				height: 450px;
+				background: radial-gradient(circle, rgba(14, 124, 123, 0.06) 0%, transparent 70%);
+				border-radius: 50%;
+				animation: floatImage 10s ease-in-out infinite;
+				pointer-events: none;
+			}
+
+			.timeline-section::after {
+				content: '';
+				position: absolute;
+				bottom: -120px;
+				left: -120px;
+				width: 350px;
+				height: 350px;
+				background: radial-gradient(circle, rgba(21, 101, 192, 0.05) 0%, transparent 70%);
+				border-radius: 50%;
+				animation: floatImage 12s ease-in-out infinite reverse;
+				pointer-events: none;
+			}
+
+			.timeline-section .section-header-timeline {
+				text-align: center;
+				margin-bottom: 60px;
+				position: relative;
+				z-index: 2;
+			}
+
+				.timeline-section .section-header-timeline .timeline-tag {
+					display: inline-flex;
+					align-items: center;
+					gap: 8px;
+					background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
+					color: #fff;
+					padding: 8px 22px;
+					border-radius: 50px;
+					font-size: 0.8rem;
+					font-weight: 700;
+					letter-spacing: 1.5px;
+					text-transform: uppercase;
+					margin-bottom: 18px;
+					box-shadow: 0 8px 25px rgba(14, 124, 123, 0.25);
+					animation: slideUpFade 0.8s ease-out 0.1s both;
+				}
+
+					.timeline-section .section-header-timeline .timeline-tag i {
+						animation: pulseHeart 1.5s ease-in-out infinite;
+					}
+
+				.timeline-section .section-header-timeline h2 {
+					color: #0e7c7b;
+					font-weight: 800;
+					font-size: 2.5rem;
+					letter-spacing: -0.5px;
+					margin-bottom: 12px;
+					animation: slideUpFade 0.8s ease-out 0.25s both;
+				}
+
+				.timeline-section .section-header-timeline p {
+					color: #555;
+					font-size: 1.1rem;
+					max-width: 600px;
+					margin: 0 auto;
+					animation: slideUpFade 0.8s ease-out 0.4s both;
+				}
+
+		/* Timeline Container */
+		.timeline-container {
+			position: relative;
+			max-width: 950px;
+			margin: 0 auto;
+			padding: 20px 0;
+		}
+
+			/* Central Line */
+			.timeline-container::before {
+				content: '';
+				position: absolute;
 				top: 0;
 				bottom: 0;
-				width: 3px;
-				background: #0e7c7b;
-				opacity: 0.2;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 4px;
+				background: linear-gradient(180deg, #0e7c7b 0%, #1a9e9d 30%, #1565c0 70%, #0e7c7b 100%);
+				background-size: 100% 200%;
+				border-radius: 4px;
+				animation: gradientShift 6s ease infinite;
+				opacity: 0.25;
 			}
 
-			.timeline-item .timeline-year {
-				min-width: 80px;
-				font-size: 1.5rem;
-				font-weight: 700;
-				color: #0e7c7b;
+			/* Animated progress line */
+			.timeline-container::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 4px;
+				height: 0;
+				background: linear-gradient(180deg, #0e7c7b 0%, #1a9e9d 50%, #1565c0 100%);
+				border-radius: 4px;
+				animation: timelineProgress 8s ease-in-out infinite;
+				box-shadow: 0 0 20px rgba(14, 124, 123, 0.4);
 			}
 
-			.timeline-item .timeline-content {
-				background: #f8f9fa;
-				padding: 20px 25px;
-				border-radius: 12px;
-				flex: 1;
-				transition: all 0.3s ease;
+		@keyframes timelineProgress {
+			0% {
+				height: 0%;
+				opacity: 1;
 			}
 
-				.timeline-item .timeline-content:hover {
-					background: #f0f4ff;
-					transform: translateX(5px);
+			80% {
+				height: 100%;
+				opacity: 1;
+			}
+
+			100% {
+				height: 100%;
+				opacity: 0.3;
+			}
+		}
+
+		/* Timeline Item */
+		.timeline-item-new {
+			position: relative;
+			display: flex;
+			align-items: flex-start;
+			margin-bottom: 50px;
+			opacity: 0;
+			animation: slideUpFade 0.8s ease-out forwards;
+		}
+
+			.timeline-item-new:nth-child(1) {
+				animation-delay: 0.2s;
+			}
+
+			.timeline-item-new:nth-child(2) {
+				animation-delay: 0.4s;
+			}
+
+			.timeline-item-new:nth-child(3) {
+				animation-delay: 0.6s;
+			}
+
+			.timeline-item-new:nth-child(4) {
+				animation-delay: 0.8s;
+			}
+
+			.timeline-item-new:nth-child(5) {
+				animation-delay: 1.0s;
+			}
+
+			.timeline-item-new:nth-child(6) {
+				animation-delay: 1.2s;
+			}
+
+			/* Alternate left/right */
+			.timeline-item-new:nth-child(odd) {
+				flex-direction: row;
+				padding-right: calc(50% + 40px);
+			}
+
+			.timeline-item-new:nth-child(even) {
+				flex-direction: row-reverse;
+				padding-left: calc(50% + 40px);
+			}
+
+			/* Timeline Dot */
+			.timeline-item-new .timeline-dot {
+				position: absolute;
+				left: 50%;
+				transform: translateX(-50%);
+				top: 24px;
+				width: 22px;
+				height: 22px;
+				background: #fff;
+				border: 4px solid #0e7c7b;
+				border-radius: 50%;
+				z-index: 3;
+				transition: all 0.4s ease;
+				box-shadow: 0 0 0 6px rgba(14, 124, 123, 0.12);
+				animation: pulseDot 2.5s ease-in-out infinite;
+			}
+
+		@keyframes pulseDot {
+			0%, 100% {
+				box-shadow: 0 0 0 6px rgba(14, 124, 123, 0.12);
+			}
+
+			50% {
+				box-shadow: 0 0 0 12px rgba(14, 124, 123, 0.06);
+			}
+		}
+
+		.timeline-item-new .timeline-dot.active {
+			background: #0e7c7b;
+			border-color: #0e7c7b;
+			box-shadow: 0 0 0 8px rgba(14, 124, 123, 0.2), 0 0 25px rgba(14, 124, 123, 0.5);
+		}
+
+		.timeline-item-new:hover .timeline-dot {
+			transform: translateX(-50%) scale(1.3);
+			box-shadow: 0 0 0 12px rgba(14, 124, 123, 0.15);
+		}
+
+		/* Year Badge */
+		.timeline-item-new .timeline-year-badge {
+			position: absolute;
+			top: 18px;
+			left: 50%;
+			transform: translateX(-50%) translateY(-50%);
+			background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
+			color: #fff;
+			padding: 4px 16px;
+			border-radius: 50px;
+			font-size: 0.85rem;
+			font-weight: 800;
+			letter-spacing: 1px;
+			z-index: 4;
+			box-shadow: 0 6px 20px rgba(14, 124, 123, 0.35);
+			transition: all 0.4s ease;
+			white-space: nowrap;
+			top: 24px;
+		}
+
+		.timeline-item-new:hover .timeline-year-badge {
+			transform: translateX(-50%) translateY(-50%) scale(1.1);
+			box-shadow: 0 10px 30px rgba(14, 124, 123, 0.5);
+		}
+
+		/* Timeline Card */
+		.timeline-item-new .timeline-card {
+			background: #fff;
+			border-radius: 18px;
+			padding: 28px 30px;
+			box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+			border: 1px solid #f0f4ff;
+			transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			position: relative;
+			overflow: hidden;
+			width: 100%;
+		}
+
+			.timeline-item-new .timeline-card::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 4px;
+				background: linear-gradient(90deg, #0e7c7b 0%, #1a9e9d 50%, #1565c0 100%);
+				background-size: 200% 100%;
+				transform: scaleX(0);
+				transform-origin: left;
+				transition: transform 0.5s ease;
+				animation: gradientShift 3s ease infinite;
+			}
+
+		.timeline-item-new:hover .timeline-card::before {
+			transform: scaleX(1);
+		}
+
+		.timeline-item-new .timeline-card:hover {
+			transform: translateY(-6px);
+			box-shadow: 0 20px 50px rgba(14, 124, 123, 0.18);
+			border-color: rgba(14, 124, 123, 0.25);
+		}
+
+		/* Card Icon */
+		.timeline-item-new .timeline-card .card-icon-wrap {
+			width: 55px;
+			height: 55px;
+			background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
+			border-radius: 14px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #fff;
+			font-size: 1.5rem;
+			margin-bottom: 16px;
+			box-shadow: 0 8px 20px rgba(14, 124, 123, 0.25);
+			transition: all 0.4s ease;
+		}
+
+		.timeline-item-new:hover .timeline-card .card-icon-wrap {
+			transform: scale(1.12) rotate(-8deg);
+			box-shadow: 0 12px 30px rgba(14, 124, 123, 0.4);
+		}
+
+		/* Card Content */
+		.timeline-item-new .timeline-card h4 {
+			color: #0e7c7b;
+			font-weight: 800;
+			font-size: 1.2rem;
+			margin-bottom: 10px;
+			letter-spacing: -0.3px;
+		}
+
+		.timeline-item-new .timeline-card p {
+			color: #555;
+			font-size: 0.95rem;
+			line-height: 1.7;
+			margin-bottom: 0;
+		}
+
+		.timeline-item-new .timeline-card .card-meta {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			margin-top: 14px;
+			padding: 5px 14px;
+			background: #f0f4ff;
+			border-radius: 50px;
+			font-size: 0.78rem;
+			font-weight: 700;
+			color: #1565c0;
+			letter-spacing: 0.5px;
+			text-transform: uppercase;
+		}
+
+			.timeline-item-new .timeline-card .card-meta i {
+				font-size: 0.85rem;
+			}
+
+		/* Highlight card (2026) */
+		.timeline-item-new .timeline-card.highlight-card {
+			background: linear-gradient(135deg, #ffffff 0%, #f0f8f8 100%);
+			border: 2px solid #0e7c7b;
+			box-shadow: 0 12px 40px rgba(14, 124, 123, 0.2);
+		}
+
+			.timeline-item-new .timeline-card.highlight-card::after {
+				content: '★ NEW';
+				position: absolute;
+				top: 16px;
+				right: -30px;
+				background: #ff6b6b;
+				color: #fff;
+				font-size: 0.6rem;
+				font-weight: 800;
+				padding: 4px 35px;
+				transform: rotate(45deg);
+				letter-spacing: 1.5px;
+				box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+			}
+
+			.timeline-item-new .timeline-card.highlight-card .card-icon-wrap {
+				background: linear-gradient(135deg, #ff6b6b 0%, #ff8a65 100%);
+				box-shadow: 0 8px 20px rgba(255, 107, 107, 0.35);
+			}
+
+			.timeline-item-new .timeline-card.highlight-card h4 {
+				color: #ff6b6b;
+			}
+
+		/* Connector arrow from dot to card */
+		.timeline-item-new .timeline-connector {
+			position: absolute;
+			top: 32px;
+			width: 40px;
+			height: 2px;
+			background: linear-gradient(90deg, #0e7c7b, transparent);
+			z-index: 2;
+		}
+
+		.timeline-item-new:nth-child(odd) .timeline-connector {
+			right: calc(50% + 18px);
+			background: linear-gradient(90deg, transparent, #0e7c7b);
+		}
+
+		.timeline-item-new:nth-child(even) .timeline-connector {
+			left: calc(50% + 18px);
+			background: linear-gradient(90deg, #0e7c7b, transparent);
+		}
+
+		/* ==========================================
+		   TIMELINE RESPONSIVE
+		   ========================================== */
+		@media (max-width: 768px) {
+			.timeline-container::before,
+			.timeline-container::after {
+				left: 28px;
+			}
+
+			.timeline-item-new:nth-child(odd),
+			.timeline-item-new:nth-child(even) {
+				flex-direction: row;
+				padding-left: 65px;
+				padding-right: 0;
+			}
+
+			.timeline-item-new .timeline-dot {
+				left: 28px;
+				top: 28px;
+				width: 18px;
+				height: 18px;
+			}
+
+			.timeline-item-new .timeline-year-badge {
+				left: 28px;
+				top: 28px;
+				transform: translateX(-50%) translateY(-50%);
+				font-size: 0.75rem;
+				padding: 3px 12px;
+			}
+
+			.timeline-item-new:nth-child(odd) .timeline-connector,
+			.timeline-item-new:nth-child(even) .timeline-connector {
+				display: none;
+			}
+
+			.timeline-item-new .timeline-card {
+				padding: 22px 20px;
+			}
+
+				.timeline-item-new .timeline-card h4 {
+					font-size: 1.05rem;
 				}
 
-				.timeline-item .timeline-content h4 {
-					color: #0e7c7b;
-					font-weight: 700;
-					margin-bottom: 5px;
+				.timeline-item-new .timeline-card p {
+					font-size: 0.88rem;
 				}
 
-				.timeline-item .timeline-content p {
-					color: #555;
-					margin-bottom: 0;
+			.timeline-section .section-header-timeline h2 {
+				font-size: 1.8rem;
+			}
+
+			.timeline-item-new {
+				margin-bottom: 35px;
+			}
+		}
+
+		@media (max-width: 576px) {
+			.timeline-section {
+				padding: 50px 0;
+			}
+
+			.timeline-item-new .timeline-card {
+				padding: 18px 16px;
+			}
+
+				.timeline-item-new .timeline-card .card-icon-wrap {
+					width: 45px;
+					height: 45px;
+					font-size: 1.2rem;
 				}
 
-				.timeline-item .timeline-content .timeline-icon {
-					font-size: 1.5rem;
-					color: #0e7c7b;
-					margin-right: 10px;
+				.timeline-item-new .timeline-card h4 {
+					font-size: 0.95rem;
 				}
+
+				.timeline-item-new .timeline-card p {
+					font-size: 0.82rem;
+				}
+
+			.timeline-item-new .timeline-year-badge {
+				font-size: 0.7rem;
+				padding: 3px 10px;
+			}
+		}
 
 		/* Founder Card */
 		.founder-card {
@@ -429,17 +843,6 @@
 				font-size: 1.8rem;
 			}
 
-			.timeline-item {
-				flex-direction: column;
-				gap: 10px;
-				padding-left: 20px;
-			}
-
-				.timeline-item .timeline-year {
-					font-size: 1.2rem;
-					min-width: auto;
-				}
-
 			.stat-box .stat-number {
 				font-size: 2.2rem;
 			}
@@ -523,6 +926,51 @@
 		.book-appointment-btn {
 			cursor: pointer;
 		}
+
+		/* ==========================================
+		   ANIMATION KEYFRAMES
+		   ========================================== */
+		@keyframes floatImage {
+			0%, 100% {
+				transform: translateY(0px);
+			}
+
+			50% {
+				transform: translateY(-20px);
+			}
+		}
+
+		@keyframes slideUpFade {
+			from {
+				opacity: 0;
+				transform: translateY(30px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes pulseHeart {
+			0%, 100% {
+				transform: scale(1);
+			}
+
+			50% {
+				transform: scale(1.2);
+			}
+		}
+
+		@keyframes gradientShift {
+			0%, 100% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+		}
 	</style>
 
 </head>
@@ -556,14 +1004,16 @@
 				<nav id="navmenu" class="navmenu">
 					<ul>
 						<li><a href="index.html">Home</a></li>
-						<li><a href="FounderandDirector.html"class="active">Founder</a>
-						
-						
-						</li> <li><a href="about.html">About</a></li>
+						<li>
+							<a href="FounderandDirector.html" class="active">Founder</a>
+
+
+						</li>
+						<li><a href="about.html">About</a></li>
 						<li><a href="departments.html">Departments</a></li>
 						<li><a href="services.html">Services</a></li>
 						<li><a href="doctors.html">Doctors</a></li>
-						
+
 						<li><a href="clinics.html">Our Clinics</a></li>
 						<!--<li class="dropdown">
 							<a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -576,7 +1026,8 @@
 								<li><a href="gallery.html">Gallery</a></li>
 							</ul>
 						</li>-->
-							<li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li>
+						<li><a href="blog.html">Blog</a></li>
+						<li><a href="contact.html">Contact</a></li>
 					</ul>
 					<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 				</nav>
@@ -600,27 +1051,10 @@
 								The inspiring journey of Dr. Samraj and Dr. Sangami - from a small clinic in Kavaraipettai
 								to a network of 6 successful healthcare centers across different locations.
 							</p>
-							<!--<div class="mt-3 d-flex flex-wrap justify-content-center gap-2">
-								<span class="hours-badge">
-									<i class="bi bi-clock"></i> 08.00 AM - 10.00 PM
-								</span>
-								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20know%20more%20about%20the%20founders"
-								   target="_blank" class="whatsapp-btn">
-									<i class="bi bi-whatsapp"></i> Contact via WhatsApp
-								</a>
-							</div>-->
 						</div>
 					</div>
 				</div>
 			</div>
-			<!--<nav class="breadcrumbs">
-				<div class="container">
-					<ol>
-						<li><a href="index.html">Home</a></li>
-						<li class="current">Founder & Director</li>
-					</ol>
-				</div>
-			</nav>-->
 		</div><!-- End Page Title -->
 		<!-- Founder Story Section -->
 		<section class="founder-section">
@@ -628,18 +1062,11 @@
 				<div class="row g-5 align-items-center">
 					<div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
 						<div class="founder-image-wrapper">
-
-							
-
-							<!--<img src="assets/img/health/dr-sangami-pro33.webp" alt="Dr. Samraj and Dr. Sangami - Founders of SAI CLINIC">-->
-
-
 							<img src="img/samraj-doctor1.png" alt="Dr. Samraj and Dr. Sangami - Founders of SAI CLINIC">
-
 							<div class="founder-badge">
 								<i class="bi bi-trophy"></i>
 								<div class="badge-text">
-									<strong>12+ Years</strong>
+									<strong>14+ Years</strong>
 									<span>Of Trusted Healthcare</span>
 								</div>
 							</div>
@@ -650,7 +1077,7 @@
 							<span class="founder-title"><i class="bi bi-star-fill" style="color: #ffc107;"></i> Our Inspiring Journey</span>
 							<h2>Dr. Samraj & Dr. Sangami</h2>
 							<p class="founder-story">
-								<span class="highlight-text">12 years ago</span>, in a small room in Kavaraipettai,
+								<span class="highlight-text">14 years ago</span>, in a small room in Kavaraipettai,
 								<span class="highlight-text">Dr. Samraj</span> and <span class="highlight-text">Dr. Sangami</span>
 								started their dream - a small clinic with a big vision. With limited resources but unlimited
 								determination, they began serving the community with compassionate healthcare.
@@ -690,7 +1117,7 @@
 					<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
 						<div class="stat-box">
 							<span class="stat-icon"><i class="bi bi-calendar3"></i></span>
-							<span class="stat-number" data-purecounter-start="0" data-purecounter-end="12" data-purecounter-duration="2">12+</span>
+							<span class="stat-number" data-purecounter-start="0" data-purecounter-end="14" data-purecounter-duration="2">14+</span>
 							<span class="stat-label">Years of Service</span>
 						</div>
 					</div>
@@ -719,56 +1146,118 @@
 			</div>
 		</section>
 
-		<!-- Timeline Section -->
+		<!-- ==========================================
+			 OUR JOURNEY TIMELINE — STYLISH & ANIMATED
+			 ========================================== -->
 		<section class="timeline-section">
 			<div class="container" data-aos="fade-up" data-aos-delay="100">
-				<div class="row text-center mb-5">
-					<div class="col-lg-12">
-						<h2 style="color: #0e7c7b; font-weight: 700;">Our Journey Timeline</h2>
-						<p style="color: #555; font-size: 1.1rem;">The story of SAI CLINIC - from one room to six locations</p>
-					</div>
+
+				<div class="section-header-timeline">
+					<span class="timeline-tag">
+						<i class="bi bi-clock-history"></i>
+						Our Journey
+					</span>
+					<h2>Our Journey Timeline</h2>
+					<p>The story of SAI CLINIC — from one room to six locations, and still growing.</p>
 				</div>
-				<div class="row justify-content-center">
-					<div class="col-lg-10">
-						<div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
-							<div class="timeline-year">2012</div>
-							<div class="timeline-content">
-								<h4><span class="timeline-icon">🏥</span> The Beginning</h4>
-								<p>Dr. Samraj and Dr. Sangami started SAI CLINIC in a small room at Kavaraipettai with just basic medical equipment and unlimited passion for healthcare.</p>
+
+				<div class="timeline-container">
+
+					<!-- 2012 -->
+					<div class="timeline-item-new" data-aos="fade-up" data-aos-delay="100">
+						<div class="timeline-dot active"></div>
+						<span class="timeline-year-badge">2012</span>
+						<div class="timeline-connector"></div>
+						<div class="timeline-card">
+							<div class="card-icon-wrap">
+								<i class="bi bi-house-heart-fill"></i>
 							</div>
-						</div>
-						<div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
-							<div class="timeline-year">2015</div>
-							<div class="timeline-content">
-								<h4><span class="timeline-icon">📈</span> First Expansion</h4>
-								<p>Moved to a larger facility in Kavaraipettai with improved infrastructure. Added Lab services and basic diagnostic equipment.</p>
-							</div>
-						</div>
-						<div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
-							<div class="timeline-year">2018</div>
-							<div class="timeline-content">
-								<h4><span class="timeline-icon">🏢</span> Second Clinic</h4>
-								<p>Opened the second SAI CLINIC branch in a nearby location. Started offering X-Ray and ECG services.</p>
-							</div>
-						</div>
-						<div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
-							<div class="timeline-year">2021</div>
-							<div class="timeline-content">
-								<h4><span class="timeline-icon">🏥</span> Network Expansion</h4>
-								<p>Expanded to 4 clinics with full-fledged diagnostic facilities including digital X-Ray, ECG, and full laboratory services.</p>
-							</div>
-						</div>
-						<div class="timeline-item" data-aos="fade-up" data-aos-delay="500">
-							<div class="timeline-year">2024</div>
-							<div class="timeline-content">
-								<h4><span class="timeline-icon">⭐</span> 6 Clinics & Growing</h4>
-								<p>Today, SAI CLINIC operates 6 successful clinics across different locations, serving thousands of patients with quality healthcare.</p>
-							</div>
+							<h4>The Beginning</h4>
+							<p>Dr. Samraj and Dr. Sangami started SAI CLINIC in a small room at Kavaraipettai with just basic medical equipment and unlimited passion for healthcare.</p>
+							<span class="card-meta"><i class="bi bi-geo-alt-fill"></i> Kavaraipettai</span>
 						</div>
 					</div>
+
+					<!-- 2015 -->
+					<div class="timeline-item-new" data-aos="fade-up" data-aos-delay="200">
+						<div class="timeline-dot"></div>
+						<span class="timeline-year-badge">2015</span>
+						<div class="timeline-connector"></div>
+						<div class="timeline-card">
+							<div class="card-icon-wrap">
+								<i class="bi bi-graph-up-arrow"></i>
+							</div>
+							<h4>First Expansion</h4>
+							<p>Moved to a larger facility in Kavaraipettai with improved infrastructure. Added Lab services and basic diagnostic equipment.</p>
+							<span class="card-meta"><i class="bi bi-flask"></i> Lab Services Added</span>
+						</div>
+					</div>
+
+					<!-- 2018 -->
+					<div class="timeline-item-new" data-aos="fade-up" data-aos-delay="300">
+						<div class="timeline-dot"></div>
+						<span class="timeline-year-badge">2018</span>
+						<div class="timeline-connector"></div>
+						<div class="timeline-card">
+							<div class="card-icon-wrap">
+								<i class="bi bi-building-add"></i>
+							</div>
+							<h4>Second Clinic</h4>
+							<p>Opened the second SAI CLINIC branch in a nearby location. Started offering X-Ray and ECG services.</p>
+							<span class="card-meta"><i class="bi bi-x-diamond"></i> X-Ray &amp; ECG</span>
+						</div>
+					</div>
+
+					<!-- 2021 -->
+					<div class="timeline-item-new" data-aos="fade-up" data-aos-delay="400">
+						<div class="timeline-dot"></div>
+						<span class="timeline-year-badge">2021</span>
+						<div class="timeline-connector"></div>
+						<div class="timeline-card">
+							<div class="card-icon-wrap">
+								<i class="bi bi-diagram-3-fill"></i>
+							</div>
+							<h4>Network Expansion</h4>
+							<p>Expanded to 4 clinics with full-fledged diagnostic facilities including digital X-Ray, ECG, and full laboratory services.</p>
+							<span class="card-meta"><i class="bi bi-hospital"></i> 4 Clinics</span>
+						</div>
+					</div>
+
+					<!-- 2024 -->
+					<div class="timeline-item-new" data-aos="fade-up" data-aos-delay="500">
+						<div class="timeline-dot"></div>
+						<span class="timeline-year-badge">2024</span>
+						<div class="timeline-connector"></div>
+						<div class="timeline-card">
+							<div class="card-icon-wrap">
+								<i class="bi bi-trophy-fill"></i>
+							</div>
+							<h4>6 Clinics &amp; Growing</h4>
+							<p>Today, SAI CLINIC operates 6 successful clinics across different locations, serving thousands of patients with quality healthcare.</p>
+							<span class="card-meta"><i class="bi bi-star-fill"></i> 6 Clinics</span>
+						</div>
+					</div>
+
+					<!-- 2026 — NEW -->
+					<div class="timeline-item-new" data-aos="fade-up" data-aos-delay="600">
+						<div class="timeline-dot active"></div>
+						<span class="timeline-year-badge">2026</span>
+						<div class="timeline-connector"></div>
+						<div class="timeline-card highlight-card">
+							<div class="card-icon-wrap">
+								<i class="bi bi-rocket-takeoff-fill"></i>
+							</div>
+							<h4>Next Chapter — Growing Stronger</h4>
+							<p>SAI CLINIC continues to expand with new specialties, advanced diagnostics, and a mission to bring compassionate healthcare to even more communities across Tamil Nadu.</p>
+							<span class="card-meta"><i class="bi bi-arrow-up-right-circle-fill"></i> The Future</span>
+						</div>
+					</div>
+
 				</div>
+
 			</div>
 		</section>
+
 		<style>
 			.founder-card .founder-avatar {
 				width: 150px;
@@ -792,17 +1281,15 @@
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
-				object-position: top center; /* ⭐ FACE FOCUS - IDHU MUKKIYAM! */
+				object-position: top center;
 				transition: transform 0.3s ease;
 			}
 
 			.founder-card:hover .founder-avatar img {
 				transform: scale(1.05);
 			}
-
-
-
 		</style>
+
 		<!-- Founders Section -->
 		<section class="section" style="background: #f8f9fa; padding: 60px 0;">
 			<div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -820,7 +1307,7 @@
 							</div>
 							<h4>Dr. Samraj</h4>
 							<p class="founder-role">Co-Founder & Director</p>
-							<p>Visionary leader with 12+ years of experience in healthcare. Passionate about providing quality medical care to every patient.</p>
+							<p>Visionary leader with 14+ years of experience in healthcare. Passionate about providing quality medical care to every patient.</p>
 							<div style="margin-top: 15px;">
 								<span class="status-badge available" style="background: #e8f5e9; color: #2e7d32; padding: 3px 15px; border-radius: 50px; font-size: 0.8rem;">Available for Consultation</span>
 							</div>
@@ -855,29 +1342,6 @@
 				</div>
 			</div>
 		</section>
-
-		<!-- SAI MEDICALS Section -->
-		<!--<section class="section" style="padding: 40px 0; background: #fff;">
-			<div class="container">
-				<div class="row align-items-center" style="background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%); padding: 40px; border-radius: 20px;">
-					<div class="col-lg-8">
-						<h3 style="color: #0e7c7b; font-weight: 700;"><i class="bi bi-shop" style="color: #0e7c7b;"></i> SAI MEDICALS</h3>
-						<p style="font-size: 1.1rem; color: #333;">Your trusted pharmacy partner located within SAI CLINIC premises.</p>
-						<p style="color: #555;">Quality medicines and healthcare products available at competitive prices. Our pharmacy is fully stocked with genuine medications and healthcare essentials.</p>
-						<div class="contact-info mt-3">
-							<i class="bi bi-telephone" style="color: #0e7c7b;"></i> <strong style="color: #0e7c7b;">+91 97879 60590</strong>
-							<span style="margin-left: 1.5rem;"><i class="bi bi-clock" style="color: #0e7c7b;"></i> 08:00 AM - 10:00 PM</span>
-						</div>
-					</div>
-					<div class="col-lg-4 text-center">
-						<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20know%20about%20SAI%20MEDICALS"
-						   target="_blank" class="whatsapp-btn">
-							<i class="bi bi-whatsapp"></i> Contact via WhatsApp
-						</a>
-					</div>
-				</div>
-			</div>
-		</section>-->
 
 	</main>
 
