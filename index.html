@@ -9,13 +9,13 @@
 	<meta name="keywords" content="Sai Clinic, SAI MEDICALS, Kavaraipettai, Chennai, doctors, lab, X-ray, ECG">
 
 	<!-- Favicons -->
-	<link href="assets/img/favicon.png" rel="icon">
-	<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+	<link href="https://saigroupofclinics.com/img/saigroupofcliniclogo.png" rel="icon">
+	<link href="https://saigroupofclinics.com/img/saigroupofcliniclogo.png" rel="apple-touch-icon">
 
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com" rel="preconnect">
 	<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:wght@400;600;700;800;900&display=swap"
 		  rel="stylesheet">
 
 	<!-- Vendor CSS Files -->
@@ -33,11 +33,50 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 	<style>
+		/* ==========================================
+		   SAI CLINIC STYLISH BRAND FONT
+		   ========================================== */
+		.brand-text,
+		.footer-16 .sitename,
+		.footer-bottom .copyright .sitename {
+			font-family: 'Poppins', 'Montserrat', sans-serif;
+			font-weight: 900;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+			background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 50%, #1565c0 100%);
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+			position: relative;
+			display: inline-block;
+			text-shadow: none;
+			transition: all 0.4s ease;
+		}
+
+			.brand-text:hover,
+			.footer-16 .sitename:hover {
+				transform: scale(1.05);
+				letter-spacing: 3px;
+			}
+
+		/* Footer bottom sitename needs white */
+		.footer-bottom .copyright .sitename {
+			background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
 		/* Logo Styles */
 		.logo img {
 			max-height: 55px;
 			width: auto;
 			object-fit: contain;
+		}
+
+		/* Fallback text if image fails */
+		.logo .brand-text {
+			font-size: 1.6rem;
 		}
 
 		.specialties-grid .row {
@@ -56,6 +95,10 @@
 
 			.logo img {
 				max-height: 45px;
+			}
+
+			.logo .brand-text {
+				font-size: 1.3rem;
 			}
 		}
 
@@ -159,9 +202,11 @@
 		}
 
 		.preloader-logo img {
-			max-height: 90px;
+			max-height: 110px;
+			width: auto;
 			animation: preloaderPulse 1.5s ease-in-out infinite;
 			filter: brightness(0) invert(1);
+			drop-shadow: 0 10px 30px rgba(0,0,0,0.3);
 		}
 
 		.preloader-spinner {
@@ -175,13 +220,19 @@
 		}
 
 		.preloader-text {
-			color: rgba(255,255,255,0.9);
+			color: rgba(255,255,255,0.95);
+			font-family: 'Poppins', 'Montserrat', sans-serif;
 			font-size: 0.9rem;
-			font-weight: 600;
-			letter-spacing: 2px;
+			font-weight: 700;
+			letter-spacing: 4px;
 			text-transform: uppercase;
 			animation: preloaderBlink 1.5s ease-in-out infinite;
 		}
+
+			.preloader-text::before {
+				content: '● ';
+				color: #ffd54f;
+			}
 
 		@keyframes preloaderSpin {
 			to {
@@ -2736,10 +2787,10 @@
 	<div id="preloader">
 		<div class="preloader-content">
 			<div class="preloader-logo">
-				<img src="img/saigroupofcliniclogo.png" alt="SAI CLINIC Logo">
+				<img src="https://saigroupofclinics.com/img/saigroupofcliniclogo.png" alt="SAI CLINIC Logo">
 			</div>
 			<div class="preloader-spinner"></div>
-			<p class="preloader-text">Loading SAI CLINIC...</p>
+			<p class="preloader-text">SAI CLINIC</p>
 		</div>
 	</div>
 
@@ -2764,7 +2815,7 @@
 
 			<div class="container position-relative d-flex align-items-center justify-content-between">
 				<a href="index.html" class="logo d-flex align-items-center">
-					<img src="img/saigroupofcliniclogo.png" alt="SAI CLINIC Logo">
+					<img src="https://saigroupofclinics.com/img/saigroupofcliniclogo.png" alt="SAI CLINIC Logo">
 				</a>
 
 				<nav id="navmenu" class="navmenu">
@@ -3894,7 +3945,6 @@
 			});
 
 			console.log('SAI CLINIC - Home page ready with animations!');
-			console.log('Dr. S. Sangami: MBBS, AFIH, C. DIAB, MEM - Emergency & Occupational Physician');
 		});
 	</script>
 
