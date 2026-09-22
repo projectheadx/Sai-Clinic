@@ -134,6 +134,94 @@
 		}
 
 		/* ==========================================
+		   PRELOADER — 5 SECOND AUTO CLOSE
+		   ========================================== */
+		#preloader {
+			position: fixed;
+			inset: 0;
+			background: linear-gradient(135deg, #0e7c7b 0%, #1565c0 100%);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 99999;
+			transition: opacity 0.6s ease, visibility 0.6s ease;
+		}
+
+			#preloader.hidden {
+				opacity: 0;
+				visibility: hidden;
+				pointer-events: none;
+			}
+
+		.preloader-content {
+			text-align: center;
+			animation: preloaderFadeIn 0.5s ease;
+		}
+
+		.preloader-logo img {
+			max-height: 90px;
+			animation: preloaderPulse 1.5s ease-in-out infinite;
+			filter: brightness(0) invert(1);
+		}
+
+		.preloader-spinner {
+			width: 50px;
+			height: 50px;
+			border: 4px solid rgba(255,255,255,0.2);
+			border-top-color: #fff;
+			border-radius: 50%;
+			margin: 25px auto 15px;
+			animation: preloaderSpin 1s linear infinite;
+		}
+
+		.preloader-text {
+			color: rgba(255,255,255,0.9);
+			font-size: 0.9rem;
+			font-weight: 600;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+			animation: preloaderBlink 1.5s ease-in-out infinite;
+		}
+
+		@keyframes preloaderSpin {
+			to {
+				transform: rotate(360deg);
+			}
+		}
+
+		@keyframes preloaderPulse {
+			0%, 100% {
+				transform: scale(1);
+			}
+
+			50% {
+				transform: scale(1.05);
+			}
+		}
+
+		@keyframes preloaderBlink {
+			0%, 100% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0.5;
+			}
+		}
+
+		@keyframes preloaderFadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		/* ==========================================
 		   ANIMATIONS KEYFRAMES
 		   ========================================== */
 		@keyframes floatImage {
@@ -2642,6 +2730,19 @@
 
 <body class="index-page">
 
+	<!-- ==========================================
+		 PRELOADER — 5 SECOND AUTO CLOSE
+		 ========================================== -->
+	<div id="preloader">
+		<div class="preloader-content">
+			<div class="preloader-logo">
+				<img src="img/saigroupofcliniclogo.png" alt="SAI CLINIC Logo">
+			</div>
+			<div class="preloader-spinner"></div>
+			<p class="preloader-text">Loading SAI CLINIC...</p>
+		</div>
+	</div>
+
 	<header id="header" class="header fixed-top">
 
 		<div class="topbar d-flex align-items-center dark-background" style="background: #0e7c7b;">
@@ -2731,14 +2832,6 @@
 								</div>
 							</div>
 
-							<!--<div class="hero-actions" data-aos="fade-right" data-aos-delay="600">
-								<a href="#" class="btn btn-primary book-appointment-btn">Book Appointment</a>
-								<a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-outline glightbox">
-									<i class="bi bi-play-circle me-2"></i>
-									Watch Our Story
-								</a>
-							</div>-->
-
 							<div class="emergency-contact" data-aos="fade-right" data-aos-delay="700">
 								<div class="emergency-icon">
 									<i class="bi bi-telephone-fill"></i>
@@ -2761,8 +2854,8 @@
 									</div>
 									<div class="card-content">
 										<h6>Dr. S. Sangami</h6>
-										<p>M.B.B.S., Dip. Diabetology, FICM</p>
-										<small>Clinical Diabetology & Metabolic Health</small>
+										<p>MBBS, AFIH, C. DIAB, MEM</p>
+										<small>Emergency Physician and Occupational Physician</small>
 									</div>
 								</div>
 							</div>
@@ -2940,9 +3033,9 @@
 									<i class="bi bi-heart-pulse"></i> Co-Founder & Medical Director
 								</span>
 								<h4>Dr. Sangami</h4>
-								<span class="founder-full-role">Clinical Diabetology Expert</span>
+								<span class="founder-full-role">Emergency & Occupational Physician</span>
 								<p class="founder-full-desc">
-									Dedicated healthcare professional with expertise in clinical diabetology and metabolic health. Committed to patient well-being.
+									Dedicated healthcare professional with expertise in Emergency Medicine and Occupational Health. Committed to patient well-being.
 								</p>
 								<a href="FounderandDirector.html" class="founder-full-btn">
 									<i class="bi bi-person-circle"></i> View Full Profile
@@ -2991,7 +3084,7 @@
 							<span class="stat-label">Clinics</span>
 						</div>
 						<div class="stat-item">
-							<span class="stat-number" data-purecounter-start="0" data-purecounter-end="5000" data-purecounter-duration="2">100000+</span>
+							<span class="stat-number" data-purecounter-start="0" data-purecounter-end="100000" data-purecounter-duration="2">100000+</span>
 							<span class="stat-label">Happy Patients</span>
 						</div>
 						<div class="stat-item">
@@ -3034,17 +3127,17 @@
 							<div class="doctor-content">
 								<h4>Dr. S. Sangami</h4>
 								<span class="status-badge available">Available</span>
-								<span class="specialty">Clinical Diabetology & Metabolic Health</span>
-								<div class="qualifications">M.B.B.S., Dip. Diabetology, FICM<br>MEM (GW University-USA)</div>
-								<p>Expert in clinical diabetology and metabolic health management.</p>
+								<span class="specialty">Emergency &amp; Occupational Medicine</span>
+								<div class="qualifications">MBBS, AFIH, C. DIAB, MEM</div>
+								<p>Expert Emergency Physician and Occupational Physician.</p>
 								<div class="doctor-meta">
 									<div class="experience">
 										<i class="bi bi-award"></i>
-										<span>10+ Years Experience</span>
+										<span>12+ Years Experience</span>
 									</div>
 									<div class="department">
 										<i class="bi bi-building"></i>
-										<span>Diabetology Dept.</span>
+										<span>Emergency &amp; Occupational Dept.</span>
 									</div>
 								</div>
 								<div class="action-buttons">
@@ -3553,9 +3646,6 @@
 		<i class="bi bi-arrow-up-short"></i>
 	</a>
 
-	<!-- Preloader -->
-	<div id="preloader"></div>
-
 	<!-- Vendor JS Files -->
 	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="assets/vendor/php-email-form/validate.js"></script>
@@ -3567,9 +3657,41 @@
 	<!-- Main JS File -->
 	<script src="assets/js/main.js"></script>
 
-	<!-- Appointment Booking Script with WhatsApp -->
+	<!-- ==========================================
+		 PRELOADER + APPOINTMENT BOOKING SCRIPT
+		 ========================================== -->
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
+
+			/* ==========================================
+			   PRELOADER — 5 SECOND AUTO CLOSE
+			   ========================================== */
+			const preloader = document.getElementById('preloader');
+			const startTime = Date.now();
+			const MIN_DISPLAY_TIME = 5000; // 5 seconds
+
+			function hidePreloader() {
+				if (preloader && !preloader.classList.contains('hidden')) {
+					preloader.classList.add('hidden');
+					setTimeout(function () {
+						preloader.style.display = 'none';
+					}, 600);
+				}
+			}
+
+			// Hide when window fully loaded (but keep minimum 5s)
+			window.addEventListener('load', function () {
+				const elapsed = Date.now() - startTime;
+				const remaining = Math.max(0, MIN_DISPLAY_TIME - elapsed);
+				setTimeout(hidePreloader, remaining);
+			});
+
+			// Fallback: force close after 5.5 seconds maximum
+			setTimeout(hidePreloader, MIN_DISPLAY_TIME + 500);
+
+			/* ==========================================
+			   APPOINTMENT BOOKING
+			   ========================================== */
 			const bookButtons = document.querySelectorAll('.book-appointment-btn');
 
 			bookButtons.forEach(function (button) {
@@ -3609,7 +3731,7 @@
 									<label for="doctorSelect" style="font-weight: 600; display: block; margin-bottom: 5px;">Select Doctor</label>
 									<select id="doctorSelect" class="swal2-input">
 										<option value="">Choose a doctor</option>
-										<option value="Dr. S. Sangami" ${doctorName === 'Dr. S. Sangami' ? 'selected' : ''}>Dr. S. Sangami (Diabetology)</option>
+										<option value="Dr. S. Sangami" ${doctorName === 'Dr. S. Sangami' ? 'selected' : ''}>Dr. S. Sangami (Emergency & Occupational Medicine)</option>
 										<option value="Dr. M. Karthikeyan" ${doctorName === 'Dr. M. Karthikeyan' ? 'selected' : ''}>Dr. M. Karthikeyan (Orthopedics)</option>
 										<option value="Dr. M. Salomon Themothi" ${doctorName === 'Dr. M. Salomon Themothi' ? 'selected' : ''}>Dr. M. Salomon Themothi (General Surgery)</option>
 										<option value="Dr. D. Tharun" ${doctorName === 'Dr. D. Tharun' ? 'selected' : ''}>Dr. D. Tharun (Pulmonology)</option>
@@ -3706,6 +3828,9 @@
 				});
 			});
 
+			/* ==========================================
+			   VIEW DOCTOR DETAILS
+			   ========================================== */
 			const viewButtons = document.querySelectorAll('.view-doctor');
 			viewButtons.forEach(function (button) {
 				button.addEventListener('click', function (e) {
@@ -3720,7 +3845,12 @@
 					};
 
 					if (doctorName === 'Dr. S. Sangami') {
-						details = { specialty: 'Clinical Diabetology & Metabolic Health', experience: '12+ years', education: 'M.B.B.S., Dip. Diabetology, FICM, MEM (GW University-USA)', availability: 'Available Today' };
+						details = {
+							specialty: 'Emergency Physician and Occupational Physician',
+							experience: '12+ years',
+							education: 'MBBS, AFIH, C. DIAB, MEM',
+							availability: 'Available Today'
+						};
 					} else if (doctorName === 'Dr. M. Karthikeyan') {
 						details = { specialty: 'Orthopedics & Joint Replacement', experience: '12+ years', education: 'M.S. (Ortho)', availability: 'Available Today' };
 					} else if (doctorName === 'Dr. M. Salomon Themothi') {
@@ -3764,6 +3894,7 @@
 			});
 
 			console.log('SAI CLINIC - Home page ready with animations!');
+			console.log('Dr. S. Sangami: MBBS, AFIH, C. DIAB, MEM - Emergency & Occupational Physician');
 		});
 	</script>
 
