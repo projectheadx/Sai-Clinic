@@ -110,16 +110,6 @@
 			}
 		}
 
-		@keyframes rotateRing {
-			0% {
-				transform: translate(-50%, -50%) rotate(0deg);
-			}
-
-			100% {
-				transform: translate(-50%, -50%) rotate(360deg);
-			}
-		}
-
 		@keyframes rotateSlow {
 			0% {
 				transform: rotate(0deg);
@@ -137,16 +127,6 @@
 
 			50% {
 				background-position: 100% 50%;
-			}
-		}
-
-		@keyframes shineSweep {
-			0% {
-				left: -100%;
-			}
-
-			100% {
-				left: 100%;
 			}
 		}
 
@@ -200,16 +180,6 @@
 			}
 		}
 
-		@keyframes glowPulse {
-			0%, 100% {
-				box-shadow: 0 0 20px rgba(14, 124, 123, 0.3);
-			}
-
-			50% {
-				box-shadow: 0 0 40px rgba(14, 124, 123, 0.6);
-			}
-		}
-
 		@keyframes bounceIcon {
 			0%, 100% {
 				transform: translateY(0);
@@ -217,6 +187,30 @@
 
 			50% {
 				transform: translateY(-5px);
+			}
+		}
+
+		@keyframes discountPulse {
+			0%, 100% {
+				box-shadow: 0 6px 20px rgba(255, 152, 0, 0.18);
+			}
+
+			50% {
+				box-shadow: 0 6px 30px rgba(255, 152, 0, 0.4);
+			}
+		}
+
+		@keyframes discountShine {
+			0% {
+				left: -100%;
+			}
+
+			60% {
+				left: 100%;
+			}
+
+			100% {
+				left: 100%;
 			}
 		}
 
@@ -238,7 +232,6 @@
 			animation: slideUpFade 0.8s ease-out forwards;
 		}
 
-			/* Stagger Animation Delays */
 			.doctor-card.d1 {
 				animation-delay: 0.1s;
 			}
@@ -263,14 +256,12 @@
 				animation-delay: 0.85s;
 			}
 
-			/* Hover Lift */
 			.doctor-card:hover {
 				transform: translateY(-15px) scale(1.02);
 				box-shadow: 0 30px 70px rgba(14, 124, 123, 0.25);
 				border-color: #0e7c7b;
 			}
 
-			/* Animated Gradient Banner */
 			.doctor-card .doctor-banner {
 				height: 90px;
 				background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 50%, #1565c0 100%);
@@ -281,7 +272,6 @@
 				overflow: hidden;
 			}
 
-				/* Animated Sparkles in Banner */
 				.doctor-card .doctor-banner::before {
 					content: '';
 					position: absolute;
@@ -307,7 +297,6 @@
 					border-radius: 35px 35px 0 0;
 				}
 
-			/* Round Avatar with Rotating Ring */
 			.doctor-card .doctor-avatar-wrapper {
 				position: relative;
 				margin-top: -85px;
@@ -319,7 +308,6 @@
 				align-items: flex-end;
 			}
 
-				/* Rotating Dashed Ring Around Avatar */
 				.doctor-card .doctor-avatar-wrapper::before {
 					content: '';
 					position: absolute;
@@ -352,7 +340,6 @@
 				animation: floatAvatar 4s ease-in-out infinite;
 			}
 
-			/* Pause Float on Hover */
 			.doctor-card:hover .doctor-avatar {
 				animation-play-state: paused;
 				border-color: #0e7c7b;
@@ -372,7 +359,6 @@
 				transform: scale(1.15);
 			}
 
-			/* Glow Ring Animation on Hover */
 			.doctor-card .doctor-avatar::after {
 				content: '';
 				position: absolute;
@@ -393,7 +379,6 @@
 				opacity: 1;
 			}
 
-			/* Status Dot */
 			.doctor-card .doctor-avatar .status-dot {
 				position: absolute;
 				bottom: 8px;
@@ -412,7 +397,6 @@
 					animation: pulse-orange 2s infinite;
 				}
 
-			/* Doctor Content */
 			.doctor-card .doctor-content {
 				padding: 10px 22px 22px;
 				display: flex;
@@ -439,7 +423,6 @@
 				letter-spacing: 0.5px;
 			}
 
-			/* Status Badge */
 			.doctor-card .status-badge {
 				display: inline-flex;
 				align-items: center;
@@ -489,7 +472,6 @@
 				box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 			}
 
-			/* Specialty */
 			.doctor-card .doctor-content .specialty {
 				color: #1565c0;
 				font-weight: 600;
@@ -512,7 +494,6 @@
 				transform: translateY(-2px);
 			}
 
-			/* Qualifications */
 			.doctor-card .doctor-content .qualifications {
 				font-size: 0.78rem;
 				color: #666;
@@ -534,7 +515,6 @@
 				border-left-width: 5px;
 			}
 
-			/* Description */
 			.doctor-card .doctor-content p {
 				color: #555;
 				font-size: 0.85rem;
@@ -546,7 +526,6 @@
 				text-align: center;
 			}
 
-			/* Meta Info */
 			.doctor-card .doctor-meta {
 				display: flex;
 				flex-direction: column;
@@ -588,7 +567,6 @@
 				color: #0a3a8a;
 			}
 
-			/* Book Button */
 			.doctor-card .btn-appointment {
 				display: inline-flex;
 				align-items: center;
@@ -612,7 +590,6 @@
 				animation: gradientShift 4s ease infinite;
 			}
 
-				/* Shine Sweep Effect */
 				.doctor-card .btn-appointment::before {
 					content: '';
 					position: absolute;
@@ -643,7 +620,6 @@
 					transform: rotate(-15deg) scale(1.2);
 				}
 
-			/* Social Icons */
 			.doctor-card .doctor-social {
 				display: flex;
 				justify-content: center;
@@ -683,6 +659,96 @@
 					background: #25D366;
 					box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
 				}
+
+		/* ==========================================
+		   SAI MEDICALS — 10% DISCOUNT HIGHLIGHT
+		   ========================================== */
+		.sai-medicals-inner {
+			background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+			padding: 40px;
+			border-radius: 20px;
+			position: relative;
+			overflow: hidden;
+		}
+
+			.sai-medicals-inner::before {
+				content: '';
+				position: absolute;
+				top: -50px;
+				right: -50px;
+				width: 200px;
+				height: 200px;
+				background: radial-gradient(circle, rgba(14, 124, 123, 0.1) 0%, transparent 70%);
+				border-radius: 50%;
+				animation: floatImage 6s ease-in-out infinite;
+			}
+
+		.discount-highlight {
+			display: inline-flex;
+			align-items: center;
+			gap: 14px;
+			margin-top: 18px;
+			padding: 14px 22px;
+			background: linear-gradient(135deg, #fff8e1 0%, #ffe0b2 100%);
+			border: 2px dashed #ff9800;
+			border-radius: 14px;
+			box-shadow: 0 6px 20px rgba(255, 152, 0, 0.18);
+			animation: discountPulse 2.5s ease-in-out infinite;
+			position: relative;
+			overflow: hidden;
+		}
+
+			.discount-highlight::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+				animation: discountShine 3s ease-in-out infinite;
+			}
+
+		.discount-icon {
+			width: 48px;
+			height: 48px;
+			background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+			border-radius: 12px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #fff;
+			font-size: 1.5rem;
+			flex-shrink: 0;
+			box-shadow: 0 6px 16px rgba(255, 152, 0, 0.4);
+			transition: transform 0.4s ease;
+		}
+
+		.discount-highlight:hover .discount-icon {
+			transform: scale(1.15) rotate(-10deg);
+		}
+
+		.discount-text {
+			display: flex;
+			flex-direction: column;
+			line-height: 1.3;
+			position: relative;
+			z-index: 2;
+		}
+
+			.discount-text strong {
+				font-size: 1.3rem;
+				font-weight: 800;
+				color: #e65100;
+				letter-spacing: -0.3px;
+			}
+
+			.discount-text span {
+				font-size: 0.88rem;
+				font-weight: 600;
+				color: #bf360c;
+				margin-top: 2px;
+			}
 
 		/* Footer */
 		.footer-16 .sitename {
@@ -941,6 +1007,25 @@
 			.footer-bottom .copyright {
 				text-align: center;
 			}
+
+			.discount-highlight {
+				padding: 12px 16px;
+				gap: 10px;
+			}
+
+			.discount-icon {
+				width: 40px;
+				height: 40px;
+				font-size: 1.2rem;
+			}
+
+			.discount-text strong {
+				font-size: 1.1rem;
+			}
+
+			.discount-text span {
+				font-size: 0.78rem;
+			}
 		}
 	</style>
 
@@ -1039,20 +1124,20 @@
 							<div class="doctor-content">
 								<h4>Dr. S. Sangami</h4>
 								<span class="status-badge available">Available</span>
-								<span class="specialty">Clinical Diabetology & Metabolic Health</span>
-								<div class="qualifications">M.B.B.S., Dip. Diabetology, FICM<br>MEM (GW University-USA)</div>
-								<p>Expert in clinical diabetology and metabolic health management with comprehensive care for diabetes patients.</p>
+								<span class="specialty">Emergency &amp; Occupational Medicine</span>
+								<div class="qualifications">MBBS, AFIH, C. DIAB, MEM</div>
+								<p>Expert Emergency Physician and Occupational Physician with comprehensive care for critical conditions.</p>
 								<div class="doctor-meta">
 									<div class="experience">
 										<i class="bi bi-award"></i>
-										<span>10+ Years Experience</span>
+										<span>12+ Years Experience</span>
 									</div>
 									<div class="department">
 										<i class="bi bi-building"></i>
-										<span>Diabetology Dept.</span>
+										<span>Emergency &amp; Occupational Dept.</span>
 									</div>
 								</div>
-								<button class="btn-appointment book-appointment" data-doctor="Dr. S. Sangami" data-specialty="Clinical Diabetology & Metabolic Health">
+								<button class="btn-appointment book-appointment" data-doctor="Dr. S. Sangami" data-specialty="Emergency & Occupational Medicine">
 									<i class="bi bi-calendar-check"></i> Book Appointment
 								</button>
 								<div class="doctor-social">
@@ -1261,21 +1346,38 @@
 		<!-- SAI MEDICALS Section -->
 		<section class="section" style="padding: 40px 0; background: #f8f9fa;">
 			<div class="container">
-				<div class="row align-items-center" style="background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%); padding: 40px; border-radius: 20px;">
-					<div class="col-lg-8">
-						<h3 style="color: #0e7c7b; font-weight: 700;"><i class="bi bi-shop" style="color: #0e7c7b;"></i> SAI MEDICALS</h3>
-						<p style="font-size: 1.1rem; color: #333;">Your trusted pharmacy partner located within SAI CLINIC premises.</p>
-						<p style="color: #555;">Quality medicines and healthcare products available at competitive prices. Our pharmacy is fully stocked with genuine medications and healthcare essentials.</p>
-						<div class="contact-info mt-3">
-							<i class="bi bi-telephone" style="color: #0e7c7b;"></i> <strong style="color: #0e7c7b;">+91 97879 60590</strong>
-							<span style="margin-left: 1.5rem;"><i class="bi bi-clock" style="color: #0e7c7b;"></i> 08:00 AM - 10:00 PM</span>
+				<div class="sai-medicals-inner">
+					<div class="row align-items-center" style="position: relative; z-index: 2;">
+						<div class="col-lg-8">
+							<h3 style="color: #0e7c7b; font-weight: 700;"><i class="bi bi-shop" style="color: #0e7c7b;"></i> SAI MEDICALS</h3>
+							<p style="font-size: 1.1rem; color: #333;">Your trusted pharmacy partner located within SAI CLINIC premises.</p>
+							<p style="color: #555;">
+								Quality branded medicines and healthcare products available at competitive prices.
+								Our pharmacy is fully stocked with trusted branded medicines and everyday healthcare essentials.
+							</p>
+
+							<!-- 10% Discount Highlight -->
+							<div class="discount-highlight">
+								<div class="discount-icon">
+									<i class="bi bi-tag-fill"></i>
+								</div>
+								<div class="discount-text">
+									<strong>10% Discount</strong>
+									<span>For Senior Citizens &amp; Physically Challenged People</span>
+								</div>
+							</div>
+
+							<div class="contact-info mt-3">
+								<i class="bi bi-telephone" style="color: #0e7c7b;"></i> <strong style="color: #0e7c7b;">+91 97879 60590</strong>
+								<span style="margin-left: 1.5rem;"><i class="bi bi-clock" style="color: #0e7c7b;"></i> 08:00 AM - 10:00 PM</span>
+							</div>
 						</div>
-					</div>
-					<div class="col-lg-4 text-center">
-						<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20know%20about%20SAI%20MEDICALS"
-						   target="_blank" class="whatsapp-btn">
-							<i class="bi bi-whatsapp"></i> Contact via WhatsApp
-						</a>
+						<div class="col-lg-4 text-center">
+							<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20know%20about%20SAI%20MEDICALS"
+							   target="_blank" class="whatsapp-btn">
+								<i class="bi bi-whatsapp"></i> Contact via WhatsApp
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -1455,59 +1557,59 @@
 					Swal.fire({
 						title: 'Book Appointment',
 						html: `
-							<div class="doctor-info-display">
-								<i class="bi bi-person-circle"></i>
-								<span><strong>${doctorName}</strong> - ${specialty}</span>
-							</div>
-							<div style="text-align: left;">
-								<label style="font-weight: 600; display: block; margin-bottom: 5px; color: #333;">
-									<i class="bi bi-calendar3" style="color: #0e7c7b;"></i> Select Date *
-								</label>
-								<input type="date" id="appointmentDate" class="date-picker-input"
-									   min="${todayStr}" max="${maxDateStr}" value="${todayStr}" required>
+								<div class="doctor-info-display">
+									<i class="bi bi-person-circle"></i>
+									<span><strong>${doctorName}</strong> - ${specialty}</span>
+								</div>
+								<div style="text-align: left;">
+									<label style="font-weight: 600; display: block; margin-bottom: 5px; color: #333;">
+										<i class="bi bi-calendar3" style="color: #0e7c7b;"></i> Select Date *
+									</label>
+									<input type="date" id="appointmentDate" class="date-picker-input"
+										   min="${todayStr}" max="${maxDateStr}" value="${todayStr}" required>
 
-								<label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
-									<i class="bi bi-clock" style="color: #0e7c7b;"></i> Select Time *
-								</label>
-								<select id="appointmentTime" class="time-select">
-									<option value="09:00">09:00 AM</option>
-									<option value="09:30">09:30 AM</option>
-									<option value="10:00">10:00 AM</option>
-									<option value="10:30">10:30 AM</option>
-									<option value="11:00">11:00 AM</option>
-									<option value="11:30">11:30 AM</option>
-									<option value="12:00">12:00 PM</option>
-									<option value="12:30">12:30 PM</option>
-									<option value="13:00">01:00 PM</option>
-									<option value="13:30">01:30 PM</option>
-									<option value="14:00">02:00 PM</option>
-									<option value="14:30">02:30 PM</option>
-									<option value="15:00">03:00 PM</option>
-									<option value="15:30">03:30 PM</option>
-									<option value="16:00">04:00 PM</option>
-									<option value="16:30">04:30 PM</option>
-									<option value="17:00">05:00 PM</option>
-									<option value="17:30">05:30 PM</option>
-									<option value="18:00">06:00 PM</option>
-									<option value="18:30">06:30 PM</option>
-									<option value="19:00">07:00 PM</option>
-									<option value="19:30">07:30 PM</option>
-									<option value="20:00">08:00 PM</option>
-									<option value="20:30">08:30 PM</option>
-									<option value="21:00">09:00 PM</option>
-								</select>
+									<label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
+										<i class="bi bi-clock" style="color: #0e7c7b;"></i> Select Time *
+									</label>
+									<select id="appointmentTime" class="time-select">
+										<option value="09:00">09:00 AM</option>
+										<option value="09:30">09:30 AM</option>
+										<option value="10:00">10:00 AM</option>
+										<option value="10:30">10:30 AM</option>
+										<option value="11:00">11:00 AM</option>
+										<option value="11:30">11:30 AM</option>
+										<option value="12:00">12:00 PM</option>
+										<option value="12:30">12:30 PM</option>
+										<option value="13:00">01:00 PM</option>
+										<option value="13:30">01:30 PM</option>
+										<option value="14:00">02:00 PM</option>
+										<option value="14:30">02:30 PM</option>
+										<option value="15:00">03:00 PM</option>
+										<option value="15:30">03:30 PM</option>
+										<option value="16:00">04:00 PM</option>
+										<option value="16:30">04:30 PM</option>
+										<option value="17:00">05:00 PM</option>
+										<option value="17:30">05:30 PM</option>
+										<option value="18:00">06:00 PM</option>
+										<option value="18:30">06:30 PM</option>
+										<option value="19:00">07:00 PM</option>
+										<option value="19:30">07:30 PM</option>
+										<option value="20:00">08:00 PM</option>
+										<option value="20:30">08:30 PM</option>
+										<option value="21:00">09:00 PM</option>
+									</select>
 
-								<label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
-									<i class="bi bi-person" style="color: #0e7c7b;"></i> Your Name *
-								</label>
-								<input type="text" id="patientName" class="date-picker-input" placeholder="Enter your full name" required>
+									<label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
+										<i class="bi bi-person" style="color: #0e7c7b;"></i> Your Name *
+									</label>
+									<input type="text" id="patientName" class="date-picker-input" placeholder="Enter your full name" required>
 
-								<label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
-									<i class="bi bi-phone" style="color: #0e7c7b;"></i> Phone Number *
-								</label>
-								<input type="tel" id="patientPhone" class="date-picker-input" placeholder="+91 98765 43210" required>
-							</div>
-						`,
+									<label style="font-weight: 600; display: block; margin-bottom: 5px; margin-top: 15px; color: #333;">
+										<i class="bi bi-phone" style="color: #0e7c7b;"></i> Phone Number *
+									</label>
+									<input type="tel" id="patientPhone" class="date-picker-input" placeholder="+91 98765 43210" required>
+								</div>
+							`,
 						confirmButtonText: 'Confirm & Send to WhatsApp',
 						cancelButtonText: 'Cancel',
 						showCancelButton: true,
@@ -1564,26 +1666,26 @@
 							Swal.fire({
 								title: 'Appointment Request Sent! ✅',
 								html: `
-									<div style="text-align: left; padding: 10px 0;">
-										<div style="background: #f0f4ff; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-											<p style="margin-bottom: 5px;"><strong>👨‍⚕️ Doctor:</strong> ${data.doctor}</p>
-											<p style="margin-bottom: 5px;"><strong>🏥 Specialty:</strong> ${data.specialty}</p>
-											<p style="margin-bottom: 5px;"><strong>📅 Date:</strong> ${formattedDate}</p>
-											<p style="margin-bottom: 0;"><strong>🕐 Time:</strong> ${data.time}</p>
-										</div>
-										<div style="background: #e8f5e9; padding: 12px; border-radius: 10px; border-left: 4px solid #2e7d32;">
-											<p style="margin-bottom: 0; color: #2e7d32;">
-												<i class="bi bi-check-circle-fill"></i>
-												Appointment confirmed for <strong>${data.name}</strong>
+										<div style="text-align: left; padding: 10px 0;">
+											<div style="background: #f0f4ff; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+												<p style="margin-bottom: 5px;"><strong>👨‍⚕️ Doctor:</strong> ${data.doctor}</p>
+												<p style="margin-bottom: 5px;"><strong>🏥 Specialty:</strong> ${data.specialty}</p>
+												<p style="margin-bottom: 5px;"><strong>📅 Date:</strong> ${formattedDate}</p>
+												<p style="margin-bottom: 0;"><strong>🕐 Time:</strong> ${data.time}</p>
+											</div>
+											<div style="background: #e8f5e9; padding: 12px; border-radius: 10px; border-left: 4px solid #2e7d32;">
+												<p style="margin-bottom: 0; color: #2e7d32;">
+													<i class="bi bi-check-circle-fill"></i>
+													Appointment confirmed for <strong>${data.name}</strong>
+												</p>
+											</div>
+											<hr>
+											<p style="color: #25D366; font-size: 0.95rem; text-align: center;">
+												<i class="bi bi-whatsapp"></i>
+												WhatsApp opened with your appointment details.
 											</p>
 										</div>
-										<hr>
-										<p style="color: #25D366; font-size: 0.95rem; text-align: center;">
-											<i class="bi bi-whatsapp"></i>
-											WhatsApp opened with your appointment details.
-										</p>
-									</div>
-								`,
+									`,
 								icon: 'success',
 								confirmButtonColor: '#0e7c7b',
 								confirmButtonText: 'OK'
