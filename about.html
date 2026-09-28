@@ -178,16 +178,6 @@
 			}
 		}
 
-		@keyframes bounceShield {
-			0%, 100% {
-				transform: translateY(0);
-			}
-
-			50% {
-				transform: translateY(-5px);
-			}
-		}
-
 		@keyframes rotateDots {
 			0% {
 				transform: rotate(0deg);
@@ -216,7 +206,7 @@
 		}
 
 		/* ==========================================
-		   STYLISH ABOUT SECTION - NEW LAYOUT
+		   STYLISH ABOUT SECTION
 		   ========================================== */
 		.about-section-new {
 			padding: 80px 0;
@@ -251,9 +241,6 @@
 				animation: floatImage 10s ease-in-out infinite reverse;
 			}
 
-		/* ==========================================
-		   CENTERED HEADING BLOCK (NEW)
-		   ========================================== */
 		.about-heading-block {
 			text-align: center;
 			margin-bottom: 60px;
@@ -319,7 +306,6 @@
 			align-items: center;
 			justify-content: center;
 			gap: 15px;
-			margin-bottom: 0;
 			opacity: 0;
 			animation: slideUpFade 0.8s ease-out 0.6s forwards;
 		}
@@ -337,9 +323,6 @@
 				animation: pulseHeart 1.5s ease-in-out infinite;
 			}
 
-		/* ==========================================
-		   IMAGE SIDE - STYLISH ANIMATED
-		   ========================================== */
 		.about-visual-new {
 			position: relative;
 			padding: 30px 30px 60px 30px;
@@ -411,9 +394,6 @@
 				border-color: rgba(14, 124, 123, 0.6);
 			}
 
-		/* ==========================================
-		   EXPERIENCE FLOATING BADGE
-		   ========================================== */
 		.exp-floating-badge-new {
 			position: absolute;
 			top: 0;
@@ -471,9 +451,6 @@
 				animation: rotateRing 20s linear infinite;
 			}
 
-		/* ==========================================
-		   FLOATING STAT CARDS
-		   ========================================== */
 		.float-stat-card-new {
 			position: absolute;
 			background: rgba(255, 255, 255, 0.95);
@@ -554,9 +531,6 @@
 			animation: rotateDots 20s linear infinite;
 		}
 
-		/* ==========================================
-		   CONTENT SIDE - STYLISH
-		   ========================================== */
 		.about-content-new {
 			padding-left: 20px;
 			animation: fadeInRight 1s ease-out;
@@ -602,7 +576,6 @@
 					opacity: 0.5;
 				}
 
-		/* Stats Grid */
 		.about-stats-new {
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
@@ -661,7 +634,6 @@
 				margin-top: 5px;
 			}
 
-		/* Features Mini */
 		.about-features-mini {
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
@@ -706,7 +678,6 @@
 				font-size: 0.88rem;
 			}
 
-		/* CTA Buttons */
 		.about-cta-new {
 			display: flex;
 			gap: 12px;
@@ -788,9 +759,7 @@
 				box-shadow: 0 15px 40px rgba(14, 124, 123, 0.4);
 			}
 
-		/* ==========================================
-		   VALUES SECTION
-		   ========================================== */
+		/* VALUES SECTION */
 		.values-section-new {
 			margin-top: 80px;
 			padding-top: 60px;
@@ -883,9 +852,7 @@
 				line-height: 1.7;
 			}
 
-		/* ==========================================
-		   SERVICES SECTION
-		   ========================================== */
+		/* SERVICES SECTION */
 		.services-section-new {
 			margin-top: 80px;
 			padding-top: 60px;
@@ -1000,6 +967,100 @@
 			.badge-clinic-new:hover i {
 				transform: rotate(-15deg) scale(1.2);
 			}
+
+		/* ==========================================
+		   SAI MEDICALS — 10% DISCOUNT HIGHLIGHT
+		   ========================================== */
+		.discount-highlight {
+			display: inline-flex;
+			align-items: center;
+			gap: 14px;
+			margin-top: 18px;
+			padding: 14px 22px;
+			background: linear-gradient(135deg, #fff8e1 0%, #ffe0b2 100%);
+			border: 2px dashed #ff9800;
+			border-radius: 14px;
+			box-shadow: 0 6px 20px rgba(255, 152, 0, 0.18);
+			animation: discountPulse 2.5s ease-in-out infinite;
+			position: relative;
+			overflow: hidden;
+		}
+
+			.discount-highlight::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+				animation: discountShine 3s ease-in-out infinite;
+			}
+
+		.discount-icon {
+			width: 48px;
+			height: 48px;
+			background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+			border-radius: 12px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #fff;
+			font-size: 1.5rem;
+			flex-shrink: 0;
+			box-shadow: 0 6px 16px rgba(255, 152, 0, 0.4);
+			transition: transform 0.4s ease;
+		}
+
+		.discount-highlight:hover .discount-icon {
+			transform: scale(1.15) rotate(-10deg);
+		}
+
+		.discount-text {
+			display: flex;
+			flex-direction: column;
+			line-height: 1.3;
+			position: relative;
+			z-index: 2;
+		}
+
+			.discount-text strong {
+				font-size: 1.3rem;
+				font-weight: 800;
+				color: #e65100;
+				letter-spacing: -0.3px;
+			}
+
+			.discount-text span {
+				font-size: 0.88rem;
+				font-weight: 600;
+				color: #bf360c;
+				margin-top: 2px;
+			}
+
+		@keyframes discountPulse {
+			0%, 100% {
+				box-shadow: 0 6px 20px rgba(255, 152, 0, 0.18);
+			}
+
+			50% {
+				box-shadow: 0 6px 30px rgba(255, 152, 0, 0.4);
+			}
+		}
+
+		@keyframes discountShine {
+			0% {
+				left: -100%;
+			}
+
+			60% {
+				left: 100%;
+			}
+
+			100% {
+				left: 100%;
+			}
+		}
 
 		/* ==========================================
 		   RESPONSIVE
@@ -1136,6 +1197,25 @@
 
 			.sai-medicals-new {
 				padding: 25px 20px;
+			}
+
+			.discount-highlight {
+				padding: 12px 16px;
+				gap: 10px;
+			}
+
+			.discount-icon {
+				width: 40px;
+				height: 40px;
+				font-size: 1.2rem;
+			}
+
+			.discount-text strong {
+				font-size: 1.1rem;
+			}
+
+			.discount-text span {
+				font-size: 0.78rem;
 			}
 		}
 
@@ -1331,13 +1411,10 @@
 			</div>
 		</div>
 
-		<!-- STYLISH ABOUT SECTION - NEW LAYOUT -->
+		<!-- STYLISH ABOUT SECTION -->
 		<section id="about" class="about-section-new">
 			<div class="container">
 
-				<!-- ==========================================
-					 CENTERED HEADING BLOCK (NEW)
-					 ========================================== -->
 				<div class="about-heading-block">
 					<div class="about-badge-center">
 						<i class="bi bi-heart-fill"></i>
@@ -1355,10 +1432,8 @@
 					</div>
 				</div>
 
-				<!-- Image + Text Row -->
 				<div class="row align-items-center g-5">
 
-					<!-- Image Side -->
 					<div class="col-lg-6">
 						<div class="about-visual-new">
 							<div class="about-main-img-new">
@@ -1398,7 +1473,6 @@
 						</div>
 					</div>
 
-					<!-- Content Side -->
 					<div class="col-lg-6">
 						<div class="about-content-new">
 
@@ -1422,7 +1496,6 @@
 								</p>
 							</div>
 
-							<!-- Stats Grid -->
 							<div class="about-stats-new">
 								<div class="about-stat-card-new">
 									<span class="stat-num-new" data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="2">15+</span>
@@ -1438,7 +1511,6 @@
 								</div>
 							</div>
 
-							<!-- Features -->
 							<div class="about-features-mini">
 								<div class="about-feature-mini">
 									<i class="bi bi-clock-history"></i>
@@ -1458,7 +1530,6 @@
 								</div>
 							</div>
 
-							<!-- CTA -->
 							<div class="about-cta-new">
 								<a href="#" class="btn-about-primary-new book-appointment-btn">
 									<i class="bi bi-calendar-check"></i>
@@ -1573,7 +1644,22 @@
 							<div class="col-lg-8">
 								<h3 style="color: #0e7c7b; font-weight: 700;"><i class="bi bi-shop" style="color: #0e7c7b;"></i> SAI MEDICALS</h3>
 								<p style="font-size: 1.1rem; color: #333;">Your trusted pharmacy partner located within SAI CLINIC premises.</p>
-								<p style="color: #555;">Quality medicines and healthcare products available at competitive prices. Our pharmacy is fully stocked with genuine medications and healthcare essentials.</p>
+								<p style="color: #555;">
+									Quality branded medicines and healthcare products available at competitive prices.
+									Our pharmacy is fully stocked with trusted branded medicines and everyday healthcare essentials.
+								</p>
+
+								<!-- 10% Discount Highlight -->
+								<div class="discount-highlight">
+									<div class="discount-icon">
+										<i class="bi bi-tag-fill"></i>
+									</div>
+									<div class="discount-text">
+										<strong>10% Discount</strong>
+										<span>For Senior Citizens &amp; Physically Challenged People</span>
+									</div>
+								</div>
+
 								<div class="contact-info mt-3">
 									<i class="bi bi-telephone" style="color: #0e7c7b;"></i> <strong style="color: #0e7c7b;">+91 97879 60590</strong>
 									<span style="margin-left: 1.5rem;"><i class="bi bi-clock" style="color: #0e7c7b;"></i> 08:00 AM - 10:00 PM</span>
@@ -1762,41 +1848,41 @@
 					Swal.fire({
 						title: 'Book an Appointment',
 						html: `
-							<form id="appointmentForm" style="text-align: left;">
-								<div class="mb-3">
-									<label for="fullName" style="font-weight: 600; display: block; margin-bottom: 5px;">Full Name *</label>
-									<input type="text" id="fullName" class="swal2-input" placeholder="Your full name" required>
-								</div>
-								<div class="mb-3">
-									<label for="phoneNumber" style="font-weight: 600; display: block; margin-bottom: 5px;">Phone Number *</label>
-									<input type="tel" id="phoneNumber" class="swal2-input" placeholder="+91 98765 43210" required>
-								</div>
-								<div class="mb-3">
-									<label for="appointmentDate" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Date *</label>
-									<input type="date" id="appointmentDate" class="swal2-input" value="${dateStr}" required>
-								</div>
-								<div class="mb-3">
-									<label for="appointmentTime" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Time *</label>
-									<input type="time" id="appointmentTime" class="swal2-input" value="${timeStr}" required>
-								</div>
-								<div class="mb-3">
-									<label for="doctorSelect" style="font-weight: 600; display: block; margin-bottom: 5px;">Select Doctor</label>
-									<select id="doctorSelect" class="swal2-input">
-										<option value="">Choose a doctor</option>
-										<option value="Dr. S. Sangami">Dr. S. Sangami (Diabetology)</option>
-										<option value="Dr. M. Karthikeyan">Dr. M. Karthikeyan (Orthopedics)</option>
-										<option value="Dr. M. Salomon Themothi">Dr. M. Salomon Themothi (Surgery)</option>
-										<option value="Dr. D. Tharun">Dr. D. Tharun (Pulmonology)</option>
-										<option value="Dr. Subash Kaushik. T. G">Dr. Subash Kaushik. T. G (Urology)</option>
-										<option value="Dr. V. Prathapkumar">Dr. V. Prathapkumar (General Medicine)</option>
-									</select>
-								</div>
-								<div class="mb-3">
-									<label for="message" style="font-weight: 600; display: block; margin-bottom: 5px;">Additional Notes</label>
-									<textarea id="message" class="swal2-textarea" placeholder="Any specific concerns..." rows="2"></textarea>
-								</div>
-							</form>
-						`,
+								<form id="appointmentForm" style="text-align: left;">
+									<div class="mb-3">
+										<label for="fullName" style="font-weight: 600; display: block; margin-bottom: 5px;">Full Name *</label>
+										<input type="text" id="fullName" class="swal2-input" placeholder="Your full name" required>
+									</div>
+									<div class="mb-3">
+										<label for="phoneNumber" style="font-weight: 600; display: block; margin-bottom: 5px;">Phone Number *</label>
+										<input type="tel" id="phoneNumber" class="swal2-input" placeholder="+91 98765 43210" required>
+									</div>
+									<div class="mb-3">
+										<label for="appointmentDate" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Date *</label>
+										<input type="date" id="appointmentDate" class="swal2-input" value="${dateStr}" required>
+									</div>
+									<div class="mb-3">
+										<label for="appointmentTime" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Time *</label>
+										<input type="time" id="appointmentTime" class="swal2-input" value="${timeStr}" required>
+									</div>
+									<div class="mb-3">
+										<label for="doctorSelect" style="font-weight: 600; display: block; margin-bottom: 5px;">Select Doctor</label>
+										<select id="doctorSelect" class="swal2-input">
+											<option value="">Choose a doctor</option>
+											<option value="Dr. S. Sangami">Dr. S. Sangami (Emergency & Occupational Medicine)</option>
+											<option value="Dr. M. Karthikeyan">Dr. M. Karthikeyan (Orthopedics)</option>
+											<option value="Dr. M. Salomon Themothi">Dr. M. Salomon Themothi (Surgery)</option>
+											<option value="Dr. D. Tharun">Dr. D. Tharun (Pulmonology)</option>
+											<option value="Dr. Subash Kaushik. T. G">Dr. Subash Kaushik. T. G (Urology)</option>
+											<option value="Dr. V. Prathapkumar">Dr. V. Prathapkumar (General Medicine)</option>
+										</select>
+									</div>
+									<div class="mb-3">
+										<label for="message" style="font-weight: 600; display: block; margin-bottom: 5px;">Additional Notes</label>
+										<textarea id="message" class="swal2-textarea" placeholder="Any specific concerns..." rows="2"></textarea>
+									</div>
+								</form>
+							`,
 						confirmButtonText: 'Confirm & Send to WhatsApp',
 						cancelButtonText: 'Cancel',
 						showCancelButton: true,
@@ -1843,17 +1929,17 @@
 							Swal.fire({
 								title: 'Appointment Request Sent! ✅',
 								html: `
-									<div style="text-align: left;">
-										<p><strong>Patient:</strong> ${data.name}</p>
-										<p><strong>Doctor:</strong> ${doctorDisplay}</p>
-										<p><strong>Date:</strong> ${formattedDate} at ${data.time}</p>
-										<hr>
-										<p style="color: #25D366; font-size: 0.95rem;">
-											<i class="bi bi-whatsapp"></i>
-											WhatsApp opened with your appointment details.
-										</p>
-									</div>
-								`,
+										<div style="text-align: left;">
+											<p><strong>Patient:</strong> ${data.name}</p>
+											<p><strong>Doctor:</strong> ${doctorDisplay}</p>
+											<p><strong>Date:</strong> ${formattedDate} at ${data.time}</p>
+											<hr>
+											<p style="color: #25D366; font-size: 0.95rem;">
+												<i class="bi bi-whatsapp"></i>
+												WhatsApp opened with your appointment details.
+											</p>
+										</div>
+									`,
 								icon: 'success',
 								confirmButtonColor: '#0e7c7b',
 								confirmButtonText: 'OK'
