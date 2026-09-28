@@ -5,12 +5,12 @@
 	<meta charset="utf-8">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<title>Gallery - SAI CLINIC</title>
-	<meta name="description" content="SAI CLINIC & SAI MEDICALS - Photo Gallery of our clinics, doctors, camps, and events.">
+	<meta name="description" content="SAI CLINIC & SAI MEDICALS - Comprehensive healthcare services in Kavaraipettai, Chennai.">
 	<meta name="keywords" content="Sai Clinic, SAI MEDICALS, Kavaraipettai, Chennai, gallery, photos">
 
 	<!-- Favicons -->
-	<link href="img/favicon.png" rel="icon">
-	<link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+	<link href="assets/img/favicon.png" rel="icon">
+	<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com" rel="preconnect">
@@ -29,18 +29,18 @@
 	<!-- Main CSS File -->
 	<link href="assets/css/main.css" rel="stylesheet">
 
-	<!-- SweetAlert2 -->
+	<!-- SweetAlert2 for appointment -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 	<style>
-		/* Logo Styles */
+		/* Logo */
 		.logo img {
 			max-height: 55px;
 			width: auto;
 			object-fit: contain;
 		}
 
-		/* SAI CLINIC Custom Styles */
+		/* Base */
 		.topbar.dark-background {
 			background: #0e7c7b !important;
 		}
@@ -57,242 +57,723 @@
 		}
 
 		.page-title .heading {
-			background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
+			background: linear-gradient(135deg, #0e7c7b 0%, #1565c0 100%);
 			padding: 80px 0 60px;
+			position: relative;
+			overflow: hidden;
 		}
+
+			.page-title .heading::before {
+				content: '';
+				position: absolute;
+				top: -100px;
+				right: -100px;
+				width: 400px;
+				height: 400px;
+				background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+				border-radius: 50%;
+				animation: floatImage 8s ease-in-out infinite;
+			}
+
+			.page-title .heading::after {
+				content: '';
+				position: absolute;
+				bottom: -100px;
+				left: -100px;
+				width: 300px;
+				height: 300px;
+				background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+				border-radius: 50%;
+				animation: floatImage 10s ease-in-out infinite reverse;
+			}
 
 		.page-title .heading-title {
 			color: #fff;
+			font-weight: 800;
+			position: relative;
+			z-index: 2;
 		}
 
 		.page-title .heading p {
 			color: rgba(255, 255, 255, 0.9);
+			position: relative;
+			z-index: 2;
 		}
 
-		.breadcrumbs {
-			background: #f0f4ff;
-			padding: 15px 0;
-		}
-
-			.breadcrumbs ol li a {
-				color: #0e7c7b;
+		/* ==========================================
+		   ANIMATIONS
+		   ========================================== */
+		@keyframes floatImage {
+			0%, 100% {
+				transform: translateY(0px);
 			}
 
-			.breadcrumbs ol li.current {
-				color: #333;
+			50% {
+				transform: translateY(-20px);
+			}
+		}
+
+		@keyframes slideUpFade {
+			from {
+				opacity: 0;
+				transform: translateY(30px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes pulseIcon {
+			0%, 100% {
+				transform: scale(1);
+			}
+
+			50% {
+				transform: scale(1.15);
+			}
+		}
+
+		@keyframes pulseGlow {
+			0%, 100% {
+				box-shadow: 0 0 20px rgba(14, 124, 123, 0.3);
+			}
+
+			50% {
+				box-shadow: 0 0 40px rgba(14, 124, 123, 0.6);
+			}
+		}
+
+		/* ==========================================
+		   GALLERY SECTION
+		   ========================================== */
+		.gallery-section {
+			padding: 80px 0;
+			background: linear-gradient(135deg, #f8f9fa 0%, #f0f4ff 100%);
+			position: relative;
+			overflow: hidden;
+		}
+
+			.gallery-section::before {
+				content: '';
+				position: absolute;
+				top: -150px;
+				right: -150px;
+				width: 400px;
+				height: 400px;
+				background: radial-gradient(circle, rgba(14,124,123,0.08) 0%, transparent 70%);
+				border-radius: 50%;
+				pointer-events: none;
+				animation: floatImage 8s ease-in-out infinite;
+			}
+
+		.gallery-header {
+			text-align: center;
+			margin-bottom: 50px;
+			position: relative;
+			z-index: 2;
+		}
+
+		.gallery-badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+			color: #0e7c7b;
+			padding: 8px 22px;
+			border-radius: 50px;
+			font-size: 0.85rem;
+			font-weight: 700;
+			letter-spacing: 0.5px;
+			margin-bottom: 18px;
+			border: 1px solid #d4e3ff;
+			box-shadow: 0 4px 15px rgba(14, 124, 123, 0.08);
+		}
+
+			.gallery-badge i {
+				animation: pulseIcon 1.5s ease-in-out infinite;
+			}
+
+		.gallery-header h2 {
+			color: #0e7c7b;
+			font-weight: 800;
+			font-size: 2.5rem;
+			margin-bottom: 15px;
+			position: relative;
+			display: inline-block;
+		}
+
+			.gallery-header h2::after {
+				content: '';
+				position: absolute;
+				bottom: -8px;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 80px;
+				height: 4px;
+				background: linear-gradient(90deg, #0e7c7b 0%, #1a9e9d 100%);
+				border-radius: 2px;
+			}
+
+		.gallery-header p {
+			color: #666;
+			font-size: 1.05rem;
+			margin-top: 20px;
+			max-width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		/* ==========================================
+		   GALLERY FILTER BUTTONS
+		   ========================================== */
+		.gallery-filters {
+			display: flex;
+			justify-content: center;
+			gap: 12px;
+			flex-wrap: wrap;
+			margin-bottom: 40px;
+			position: relative;
+			z-index: 2;
+		}
+
+		.filter-btn {
+			background: #fff;
+			color: #555;
+			border: 2px solid #e8eef8;
+			padding: 10px 24px;
+			border-radius: 50px;
+			font-weight: 600;
+			font-size: 0.85rem;
+			cursor: pointer;
+			transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			letter-spacing: 0.3px;
+		}
+
+			.filter-btn i {
+				font-size: 1rem;
+			}
+
+			.filter-btn:hover,
+			.filter-btn.active {
+				background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
+				color: #fff;
+				border-color: #0e7c7b;
+				transform: translateY(-3px) scale(1.05);
+				box-shadow: 0 10px 25px rgba(14, 124, 123, 0.3);
 			}
 
 		/* ==========================================
-		   IFRAME GALLERY STYLES
+		   GALLERY GRID
 		   ========================================== */
-		.iframe-container {
+		.gallery-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+			gap: 22px;
 			position: relative;
-			width: 100%;
-			border-radius: 20px;
-			overflow: hidden;
-			box-shadow: 0 8px 40px rgba(14, 124, 123, 0.15);
-			background: #fff;
-			margin-bottom: 30px;
+			z-index: 2;
 		}
 
-			.iframe-container .iframe-header {
-				background: linear-gradient(135deg, #0e7c7b 0%, #1a9e9d 100%);
-				padding: 15px 25px;
+		.gallery-item {
+			position: relative;
+			border-radius: 18px;
+			overflow: hidden;
+			box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+			cursor: pointer;
+			transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			aspect-ratio: 4/3;
+			background: #f0f4ff;
+			opacity: 0;
+			animation: slideUpFade 0.7s ease-out forwards;
+		}
+
+			.gallery-item:nth-child(1) {
+				animation-delay: 0.05s;
+			}
+
+			.gallery-item:nth-child(2) {
+				animation-delay: 0.1s;
+			}
+
+			.gallery-item:nth-child(3) {
+				animation-delay: 0.15s;
+			}
+
+			.gallery-item:nth-child(4) {
+				animation-delay: 0.2s;
+			}
+
+			.gallery-item:nth-child(5) {
+				animation-delay: 0.25s;
+			}
+
+			.gallery-item:nth-child(6) {
+				animation-delay: 0.3s;
+			}
+
+			.gallery-item:nth-child(7) {
+				animation-delay: 0.35s;
+			}
+
+			.gallery-item:nth-child(8) {
+				animation-delay: 0.4s;
+			}
+
+			.gallery-item:nth-child(9) {
+				animation-delay: 0.45s;
+			}
+
+			.gallery-item:nth-child(10) {
+				animation-delay: 0.5s;
+			}
+
+			.gallery-item:nth-child(11) {
+				animation-delay: 0.55s;
+			}
+
+			.gallery-item:nth-child(12) {
+				animation-delay: 0.6s;
+			}
+
+			.gallery-item:nth-child(13) {
+				animation-delay: 0.65s;
+			}
+
+			.gallery-item:nth-child(14) {
+				animation-delay: 0.7s;
+			}
+
+			.gallery-item:nth-child(15) {
+				animation-delay: 0.75s;
+			}
+
+			.gallery-item:nth-child(16) {
+				animation-delay: 0.8s;
+			}
+
+			.gallery-item:hover {
+				transform: translateY(-10px) scale(1.02);
+				box-shadow: 0 20px 50px rgba(14, 124, 123, 0.25);
+				z-index: 3;
+			}
+
+			.gallery-item img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+				display: block;
+			}
+
+			.gallery-item:hover img {
+				transform: scale(1.15) rotate(2deg);
+			}
+
+			/* Overlay */
+			.gallery-item .gallery-overlay {
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(180deg, transparent 0%, rgba(14, 124, 123, 0.15) 50%, rgba(14, 124, 123, 0.9) 100%);
+				opacity: 0;
+				transition: opacity 0.4s ease;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-end;
+				padding: 22px;
+				pointer-events: none;
+			}
+
+			.gallery-item:hover .gallery-overlay {
+				opacity: 1;
+			}
+
+			.gallery-item .gallery-overlay .gallery-category {
+				position: absolute;
+				top: 18px;
+				left: 18px;
+				background: rgba(255, 255, 255, 0.95);
+				backdrop-filter: blur(10px);
+				color: #0e7c7b;
+				padding: 5px 14px;
+				border-radius: 50px;
+				font-size: 0.7rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+				transform: translateY(-10px);
+				opacity: 0;
+				transition: all 0.4s ease 0.1s;
+			}
+
+			.gallery-item:hover .gallery-overlay .gallery-category {
+				transform: translateY(0);
+				opacity: 1;
+			}
+
+			.gallery-item .gallery-overlay .gallery-title {
+				color: #fff;
+				font-size: 1.05rem;
+				font-weight: 700;
+				margin-bottom: 5px;
+				transform: translateY(15px);
+				opacity: 0;
+				transition: all 0.4s ease 0.15s;
+			}
+
+			.gallery-item:hover .gallery-overlay .gallery-title {
+				transform: translateY(0);
+				opacity: 1;
+			}
+
+			.gallery-item .gallery-overlay .gallery-zoom {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%) scale(0.5);
+				width: 60px;
+				height: 60px;
+				background: rgba(255, 255, 255, 0.95);
+				backdrop-filter: blur(10px);
+				border-radius: 50%;
 				display: flex;
 				align-items: center;
-				justify-content: space-between;
-				color: #fff;
+				justify-content: center;
+				color: #0e7c7b;
+				font-size: 1.5rem;
+				opacity: 0;
+				transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 			}
 
-				.iframe-container .iframe-header h3 {
-					color: #fff;
-					font-weight: 700;
-					margin: 0;
-					font-size: 1.2rem;
-					display: flex;
-					align-items: center;
-					gap: 10px;
-				}
-
-					.iframe-container .iframe-header h3 i {
-						font-size: 1.4rem;
-					}
-
-				.iframe-container .iframe-header .btn-open-new {
-					background: rgba(255, 255, 255, 0.2);
-					color: #fff;
-					padding: 8px 18px;
-					border-radius: 50px;
-					text-decoration: none;
-					font-size: 0.85rem;
-					font-weight: 600;
-					display: inline-flex;
-					align-items: center;
-					gap: 6px;
-					transition: all 0.3s ease;
-					backdrop-filter: blur(10px);
-				}
-
-					.iframe-container .iframe-header .btn-open-new:hover {
-						background: #fff;
-						color: #0e7c7b;
-						transform: translateY(-2px);
-					}
-
-			.iframe-container .gallery-iframe {
-				width: 100%;
-				height: 1200px;
-				border: 0;
-				display: block;
-				background: #fff;
+			.gallery-item:hover .gallery-overlay .gallery-zoom {
+				transform: translate(-50%, -50%) scale(1);
+				opacity: 1;
+				animation: pulseGlow 2s ease-in-out infinite;
 			}
 
-		/* Iframe Loading */
-		.iframe-loading {
+		/* ==========================================
+		   CUSTOM LIGHTBOX
+		   ========================================== */
+		.custom-lightbox {
+			position: fixed;
+			inset: 0;
+			background: rgba(10, 20, 30, 0.95);
+			backdrop-filter: blur(15px);
+			-webkit-backdrop-filter: blur(15px);
+			z-index: 9999;
+			display: none;
+			align-items: center;
+			justify-content: center;
+			opacity: 0;
+			transition: opacity 0.35s ease;
+			padding: 20px;
+		}
+
+			.custom-lightbox.active {
+				display: flex;
+				opacity: 1;
+			}
+
+		/* Image Container */
+		.lightbox-image-wrap {
+			position: relative;
+			max-width: 90vw;
+			max-height: 85vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transform: scale(0.85);
+			opacity: 0;
+			transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		}
+
+		.custom-lightbox.active .lightbox-image-wrap {
+			transform: scale(1);
+			opacity: 1;
+		}
+
+		.lightbox-image-wrap img {
+			max-width: 90vw;
+			max-height: 85vh;
+			object-fit: contain;
+			border-radius: 12px;
+			box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+			display: block;
+			transition: opacity 0.3s ease;
+		}
+
+		/* Info Bar */
+		.lightbox-info {
+			position: absolute;
+			bottom: -65px;
+			left: 50%;
+			transform: translateX(-50%);
+			background: rgba(255, 255, 255, 0.1);
+			backdrop-filter: blur(15px);
+			-webkit-backdrop-filter: blur(15px);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			padding: 12px 28px;
+			border-radius: 50px;
+			display: flex;
+			align-items: center;
+			gap: 20px;
+			color: #fff;
+			white-space: nowrap;
+		}
+
+			.lightbox-info .lightbox-title {
+				font-weight: 700;
+				font-size: 1rem;
+				letter-spacing: 0.3px;
+			}
+
+			.lightbox-info .lightbox-counter {
+				background: rgba(255, 255, 255, 0.15);
+				padding: 4px 14px;
+				border-radius: 50px;
+				font-size: 0.85rem;
+				font-weight: 600;
+				letter-spacing: 1px;
+			}
+
+		/* Navigation Arrows */
+		.lightbox-arrow {
 			position: absolute;
 			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			text-align: center;
-			display: none;
+			transform: translateY(-50%);
+			width: 60px;
+			height: 60px;
+			background: rgba(255, 255, 255, 0.1);
+			backdrop-filter: blur(15px);
+			-webkit-backdrop-filter: blur(15px);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #fff;
+			font-size: 1.8rem;
+			cursor: pointer;
+			transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			z-index: 10;
+			user-select: none;
 		}
 
-			.iframe-loading.active {
-				display: block;
+			.lightbox-arrow:hover {
+				background: #0e7c7b;
+				border-color: #0e7c7b;
+				transform: translateY(-50%) scale(1.15);
+				box-shadow: 0 10px 30px rgba(14, 124, 123, 0.5);
 			}
 
-			.iframe-loading .spinner-border {
-				color: #0e7c7b;
-				width: 3rem;
-				height: 3rem;
+			.lightbox-arrow:active {
+				transform: translateY(-50%) scale(0.95);
 			}
 
-		/* Info Box */
-		.info-box {
-			background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
-			padding: 30px 40px;
-			border-radius: 20px;
-			margin-bottom: 40px;
-			border-left: 5px solid #0e7c7b;
+			.lightbox-arrow.prev {
+				left: 30px;
+			}
+
+			.lightbox-arrow.next {
+				right: 30px;
+			}
+
+		/* Close Button */
+		.lightbox-close {
+			position: absolute;
+			top: 25px;
+			right: 30px;
+			width: 50px;
+			height: 50px;
+			background: rgba(255, 255, 255, 0.1);
+			backdrop-filter: blur(15px);
+			-webkit-backdrop-filter: blur(15px);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #fff;
+			font-size: 1.5rem;
+			cursor: pointer;
+			transition: all 0.4s ease;
+			z-index: 10;
 		}
 
-			.info-box h4 {
-				color: #0e7c7b;
-				font-weight: 700;
-				margin-bottom: 10px;
-				display: flex;
-				align-items: center;
+			.lightbox-close:hover {
+				background: #e53935;
+				border-color: #e53935;
+				transform: rotate(90deg) scale(1.1);
+				box-shadow: 0 10px 30px rgba(229, 57, 53, 0.4);
+			}
+
+		/* Image Counter Badge (top-left) */
+		.lightbox-counter-top {
+			position: absolute;
+			top: 25px;
+			left: 30px;
+			background: rgba(255, 255, 255, 0.1);
+			backdrop-filter: blur(15px);
+			-webkit-backdrop-filter: blur(15px);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			padding: 10px 20px;
+			border-radius: 50px;
+			color: #fff;
+			font-weight: 700;
+			font-size: 0.9rem;
+			letter-spacing: 1px;
+			z-index: 10;
+		}
+
+			.lightbox-counter-top i {
+				color: #4dd0e1;
+				margin-right: 6px;
+			}
+
+		/* Animation for Image Change */
+		.lightbox-image-wrap img.changing {
+			opacity: 0;
+			transform: scale(0.95);
+		}
+
+		/* ==========================================
+		   RESPONSIVE
+		   ========================================== */
+		@media (max-width: 991px) {
+			.gallery-header h2 {
+				font-size: 2rem;
+			}
+
+			.gallery-grid {
+				grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+				gap: 18px;
+			}
+
+			.lightbox-arrow {
+				width: 50px;
+				height: 50px;
+				font-size: 1.5rem;
+			}
+
+				.lightbox-arrow.prev {
+					left: 15px;
+				}
+
+				.lightbox-arrow.next {
+					right: 15px;
+				}
+		}
+
+		@media (max-width: 768px) {
+			.page-title .heading {
+				padding: 60px 0 40px;
+			}
+
+			.gallery-section {
+				padding: 60px 0;
+			}
+
+			.gallery-header h2 {
+				font-size: 1.6rem;
+			}
+
+			.gallery-grid {
+				grid-template-columns: repeat(2, 1fr);
+				gap: 12px;
+			}
+
+			.gallery-item .gallery-overlay {
+				padding: 15px;
+			}
+
+				.gallery-item .gallery-overlay .gallery-title {
+					font-size: 0.9rem;
+				}
+
+				.gallery-item .gallery-overlay .gallery-zoom {
+					width: 45px;
+					height: 45px;
+					font-size: 1.2rem;
+				}
+
+			.lightbox-arrow {
+				width: 45px;
+				height: 45px;
+				font-size: 1.3rem;
+			}
+
+				.lightbox-arrow.prev {
+					left: 10px;
+				}
+
+				.lightbox-arrow.next {
+					right: 10px;
+				}
+
+			.lightbox-close {
+				width: 42px;
+				height: 42px;
+				font-size: 1.2rem;
+				top: 15px;
+				right: 15px;
+			}
+
+			.lightbox-counter-top {
+				top: 15px;
+				left: 15px;
+				padding: 8px 14px;
+				font-size: 0.8rem;
+			}
+
+			.lightbox-info {
+				bottom: -55px;
+				padding: 10px 20px;
+				flex-direction: column;
+				gap: 6px;
+			}
+
+				.lightbox-info .lightbox-title {
+					font-size: 0.9rem;
+				}
+
+			.lightbox-image-wrap img {
+				border-radius: 8px;
+			}
+		}
+
+		@media (max-width: 576px) {
+			.filter-btn {
+				padding: 8px 16px;
+				font-size: 0.75rem;
+			}
+
+			.gallery-grid {
+				grid-template-columns: 1fr 1fr;
 				gap: 10px;
 			}
 
-				.info-box h4 i {
-					font-size: 1.3rem;
-				}
-
-			.info-box p {
-				color: #555;
-				margin-bottom: 8px;
-				font-size: 0.95rem;
+			.lightbox-arrow {
+				width: 40px;
+				height: 40px;
+				font-size: 1.1rem;
 			}
 
-				.info-box p:last-child {
-					margin-bottom: 0;
+				.lightbox-arrow.prev {
+					left: 8px;
 				}
 
-		/* Gallery Stats */
-		.gallery-stats {
-			background: #f8f9fa;
-			padding: 40px 0;
+				.lightbox-arrow.next {
+					right: 8px;
+				}
 		}
 
-		.gallery-stat-box {
-			text-align: center;
-			padding: 20px;
-			background: #fff;
-			border-radius: 16px;
-			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-			transition: all 0.3s ease;
-			height: 100%;
-		}
-
-			.gallery-stat-box:hover {
-				transform: translateY(-5px);
-				box-shadow: 0 8px 30px rgba(14, 124, 123, 0.1);
-			}
-
-			.gallery-stat-box i {
-				font-size: 2rem;
-				color: #0e7c7b;
-				margin-bottom: 10px;
-				display: block;
-			}
-
-			.gallery-stat-box .stat-number {
-				font-size: 2rem;
-				font-weight: 700;
-				color: #0e7c7b;
-				display: block;
-			}
-
-			.gallery-stat-box .stat-label {
-				font-size: 0.9rem;
-				color: #555;
-				font-weight: 500;
-			}
-
-		/* CTA Section */
-		.gallery-cta {
-			background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
-			padding: 50px 40px;
-			border-radius: 20px;
-			margin: 40px 0;
-			text-align: center;
-		}
-
-			.gallery-cta h3 {
-				color: #0e7c7b;
-				font-weight: 700;
-				margin-bottom: 10px;
-			}
-
-			.gallery-cta p {
-				color: #555;
-				margin-bottom: 20px;
-			}
-
-			.gallery-cta .social-btn {
-				display: inline-flex;
-				align-items: center;
-				gap: 8px;
-				background: #0e7c7b;
-				color: #fff;
-				padding: 12px 25px;
-				border-radius: 50px;
-				text-decoration: none;
-				font-weight: 600;
-				transition: all 0.3s ease;
-				margin: 5px;
-			}
-
-				.gallery-cta .social-btn:hover {
-					background: #0a3a8a;
-					color: #fff;
-					transform: translateY(-3px);
-				}
-
-				.gallery-cta .social-btn.facebook {
-					background: #1877f2;
-				}
-
-				.gallery-cta .social-btn.instagram {
-					background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-				}
-
-				.gallery-cta .social-btn.whatsapp {
-					background: #25D366;
-				}
-
-		/* Footer Styles */
+		/* ==========================================
+		   FOOTER STYLES
+		   ========================================== */
 		.footer-16 .sitename {
 			color: #0e7c7b !important;
 		}
@@ -330,8 +811,6 @@
 				color: #ffffff;
 				margin-bottom: 0;
 				font-size: 0.95rem;
-				font-weight: 400;
-				letter-spacing: 0.3px;
 			}
 
 			.footer-bottom .copyright .sitename {
@@ -348,7 +827,7 @@
 				.footer-bottom .social-links-bottom a {
 					color: #fff;
 					font-size: 1.2rem;
-					transition: all 0.3s ease;
+					transition: all 0.4s ease;
 					width: 40px;
 					height: 40px;
 					background: rgba(255, 255, 255, 0.15);
@@ -362,10 +841,21 @@
 					.footer-bottom .social-links-bottom a:hover {
 						background: #fff;
 						color: #0e7c7b;
-						transform: translateY(-3px);
+						transform: translateY(-5px) rotate(10deg) scale(1.1);
 					}
 
-		/* WhatsApp Floating Button */
+		@media (max-width: 768px) {
+			.footer-bottom .social-links-bottom {
+				justify-content: center;
+				margin-top: 15px;
+			}
+
+			.footer-bottom .copyright {
+				text-align: center;
+			}
+		}
+
+		/* WhatsApp Float */
 		.whatsapp-float {
 			position: fixed;
 			bottom: 30px;
@@ -381,13 +871,14 @@
 			font-size: 2rem;
 			box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
 			z-index: 999;
-			transition: all 0.3s ease;
+			transition: all 0.4s ease;
 			text-decoration: none;
+			animation: pulseGlow 2s ease-in-out infinite;
 		}
 
 			.whatsapp-float:hover {
-				transform: scale(1.1);
-				box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+				transform: scale(1.15) rotate(10deg);
+				box-shadow: 0 10px 40px rgba(37, 211, 102, 0.6);
 				color: #fff;
 			}
 
@@ -402,6 +893,8 @@
 			font-weight: 600;
 			font-size: 0.9rem;
 			backdrop-filter: blur(10px);
+			position: relative;
+			z-index: 2;
 		}
 
 			.hours-badge i {
@@ -418,16 +911,18 @@
 			border-radius: 50px;
 			text-decoration: none;
 			font-weight: 600;
-			transition: all 0.3s ease;
+			transition: all 0.4s ease;
 			border: none;
 			font-size: 0.95rem;
+			position: relative;
+			z-index: 2;
 		}
 
 			.whatsapp-btn:hover {
 				background: #1da851;
 				color: #fff;
-				transform: scale(1.02);
-				box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+				transform: scale(1.05) translateY(-3px);
+				box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
 			}
 
 			.whatsapp-btn i {
@@ -438,58 +933,9 @@
 			cursor: pointer;
 		}
 
-		/* Responsive */
-		@media (max-width: 768px) {
-			.page-title .heading {
-				padding: 60px 0 40px;
-			}
-
-			.logo img {
-				max-height: 45px;
-			}
-
-			.iframe-container .gallery-iframe {
-				height: 800px;
-			}
-
-			.iframe-container .iframe-header {
-				padding: 12px 15px;
-				flex-direction: column;
-				gap: 10px;
-				text-align: center;
-			}
-
-				.iframe-container .iframe-header h3 {
-					font-size: 1rem;
-				}
-
-				.iframe-container .iframe-header .btn-open-new {
-					font-size: 0.75rem;
-					padding: 6px 14px;
-				}
-
-			.info-box {
-				padding: 20px 25px;
-			}
-
-			.gallery-cta {
-				padding: 35px 20px;
-			}
-
-			.footer-bottom .social-links-bottom {
-				justify-content: center;
-				margin-top: 15px;
-			}
-
-			.footer-bottom .copyright {
-				text-align: center;
-			}
-		}
-
-		@media (max-width: 576px) {
-			.iframe-container .gallery-iframe {
-				height: 600px;
-			}
+		/* Hide gallery items that don't match filter */
+		.gallery-item.hidden {
+			display: none;
 		}
 	</style>
 
@@ -499,20 +945,20 @@
 
 	<header id="header" class="header fixed-top">
 
-		<div class="topbar d-flex align-items-center dark-background" style="background: #0e7c7b;">
+		<div class="topbar d-flex align-items-center dark-background">
 			<div class="container d-flex justify-content-center justify-content-md-between">
 				<div class="contact-info d-flex align-items-center">
-					<i class="bi bi-envelope d-flex align-items-center"><a href="mailto:info@saigroupofclinics.com" style="color:#fff;">info@saigroupofclinics.com</a></i>
-					<i class="bi bi-phone d-flex align-items-center ms-4"><span style="color:#fff;">+91 97879 60590</span></i>
+					<i class="bi bi-envelope d-flex align-items-center"><a href="mailto:info@saigroupofclinics.com">info@saigroupofclinics.com</a></i>
+					<i class="bi bi-phone d-flex align-items-center ms-4"><span>+91 97879 60590</span></i>
 				</div>
 				<div class="social-links d-none d-md-flex align-items-center">
-					<a href="#" class="twitter" style="color:#fff;"><i class="bi bi-twitter-x"></i></a>
-					<a href="#" class="facebook" style="color:#fff;"><i class="bi bi-facebook"></i></a>
-					<a href="#" class="instagram" style="color:#fff;"><i class="bi bi-instagram"></i></a>
-					<a href="#" class="linkedin" style="color:#fff;"><i class="bi bi-linkedin"></i></a>
+					<a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+					<a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+					<a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+					<a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
 				</div>
 			</div>
-		</div><!-- End Top Bar -->
+		</div>
 
 		<div class="branding d-flex align-items-cente">
 
@@ -530,8 +976,8 @@
 						<li><a href="services.html">Services</a></li>
 						<li><a href="doctors.html">Doctors</a></li>
 						<li><a href="clinics.html">Our Clinics</a></li>
-						<li><a href="blog.html">Blog</a></li>
 						<li><a href="gallery.html" class="active">Gallery</a></li>
+						<li><a href="blog.html">Blog</a></li>
 						<li><a href="contact.html">Contact</a></li>
 					</ul>
 					<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -553,107 +999,258 @@
 						<div class="col-lg-8">
 							<h1 class="heading-title">Our Gallery</h1>
 							<p class="mb-0">
-								Explore our journey through pictures - from health camps and events to our clinics and dedicated doctors.
-								Every photo tells a story of our commitment to healthcare.
+								Explore moments from SAI CLINIC — our facilities, our team, our events and the patients
+								we proudly serve. Click any image to view in full size.
 							</p>
 							<div class="mt-3 d-flex flex-wrap justify-content-center gap-2">
 								<span class="hours-badge">
-									<i class="bi bi-clock"></i> 08.00 AM - 10.00 PM
+									<i class="bi bi-images"></i> <span id="imageCount">16</span> Photos
 								</span>
-								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services"
-								   target="_blank" class="whatsapp-btn">
-									<i class="bi bi-whatsapp"></i> Contact via WhatsApp
-								</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
 		</div>
-		
-		
-		<!-- End Page Title -->
-		
 
 		<!-- Gallery Section -->
-		<section id="gallery" class="gallery section" style="padding: 60px 0;">
-			<div class="container" data-aos="fade-up" data-aos-delay="100">
+		<section class="gallery-section">
+			<div class="container">
 
-				<!-- Info Box -->
-				<div class="info-box">
-					<h4><i class="bi bi-info-circle"></i> Photo Gallery</h4>
-					<p>Explore all our photos in the gallery below. Click any photo to view it in full size.</p>
-					<p>New photos are added regularly - visit often to see our latest events and activities!</p>
+				<div class="gallery-header">
+					<div class="gallery-badge">
+						<i class="bi bi-camera-fill"></i>
+						<span>Photo Gallery</span>
+					</div>
+					<h2>Life at SAI CLINIC</h2>
+					<p>Browse through our collection of photos showcasing our facilities, team, and healthcare services.</p>
 				</div>
 
-				<!-- ==========================================
-					 IFRAME CONTAINER - BLOGGER GALLERY
-					 ========================================== -->
-				<div class="iframe-container">
-					<div class="iframe-header">
-						<h3><i class="bi bi-images"></i> SAI CLINIC Photo Gallery</h3>
-						<a href="https://saigroupofclinics.blogspot.com/p/gallery.html"
-						   target="_blank"
-						   class="btn-open-new">
-							<i class="bi bi-box-arrow-up-right"></i> Open in New Tab
-						</a>
-					</div>
+				<!-- Filter Buttons -->
+				<div class="gallery-filters">
+					<button class="filter-btn active" data-filter="all">
+						<i class="bi bi-grid-3x3-gap-fill"></i> All Photos
+					</button>
+					<button class="filter-btn" data-filter="facility">
+						<i class="bi bi-building"></i> Facilities
+					</button>
+					<button class="filter-btn" data-filter="team">
+						<i class="bi bi-people-fill"></i> Our Team
+					</button>
+					<button class="filter-btn" data-filter="events">
+						<i class="bi bi-calendar-event"></i> Events
+					</button>
+					<button class="filter-btn" data-filter="services">
+						<i class="bi bi-heart-pulse"></i> Services
+					</button>
+				</div>
 
-					<!-- Loading Spinner -->
-					<div class="iframe-loading" id="iframeLoading">
-						<div class="spinner-border" role="status">
-							<span class="visually-hidden">Loading...</span>
+				<!-- Gallery Grid -->
+				<div class="gallery-grid" id="galleryGrid">
+
+					<!-- Image 1 -->
+					<div class="gallery-item" data-category="facility">
+						<img src="img/saiclini-kvp.png" alt="SAI CLINIC Main Building">
+						<div class="gallery-overlay">
+							<span class="gallery-category">Facility</span>
+							<span class="gallery-zoom"><i class="bi bi-zoom-in"></i></span>
+							<h4 class="gallery-title">SAI CLINIC Main Branch</h4>
 						</div>
-						<p class="mt-3" style="color: #0e7c7b; font-weight: 600;">Loading Gallery...</p>
 					</div>
 
-					<!-- BLOGGER GALLERY IFRAME -->
-					<iframe id="galleryIframe"
-							class="gallery-iframe"
-							src="https://saigroupofclinics.blogspot.com/p/gallery.html"
-							title="SAI CLINIC Gallery"
-							loading="lazy"
-							allowfullscreen
-							referrerpolicy="no-referrer-when-downgrade">
-					</iframe>
-				</div>
-				<!-- END IFRAME CONTAINER -->
-				<!-- Mobile App View Button -->
-				<div class="text-center mb-4">
-					<a href="https://saigroupofclinics.blogspot.com/?view=flipcard"
-					   target="_blank"
-					   class="whatsapp-btn"
-					   style="background: #0e7c7b;">
-						<i class="bi bi-phone"></i> View in Flipcard Mode
-					</a>
-					<a href="https://www.saigroupofclinics.blogspot.com"
-					   target="_blank"
-					   class="whatsapp-btn"
-					   style="background: #1565c0;">
-						<i class="bi bi-box-arrow-up-right"></i> Open Full Blog
-					</a>
-				</div>
+					<!-- Image 2 -->
+					<div class="gallery-item" data-category="team">
+						<img src="img/drsamrajprofile.jpeg" alt="Dr. Samraj - Founder">
+						<div class="gallery-overlay">
+							<span class="gallery-category">Team</span>
+							<span class="gallery-zoom"><i class="bi bi-zoom-in"></i></span>
+							<h4 class="gallery-title">Dr. Samraj - Founder</h4>
+						</div>
+					</div>
 
-				<!-- CTA Section -->
-				<div class="gallery-cta" data-aos="fade-up">
-					<h3><i class="bi bi-camera"></i> Follow Us on Social Media</h3>
-					<p>Stay updated with our latest events, camps, and health tips</p>
-					<a href="#" class="social-btn facebook" target="_blank">
-						<i class="bi bi-facebook"></i> Facebook
-					</a>
-					<a href="#" class="social-btn instagram" target="_blank">
-						<i class="bi bi-instagram"></i> Instagram
-					</a>
-					<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20know%20more" class="social-btn whatsapp" target="_blank">
-						<i class="bi bi-whatsapp"></i> WhatsApp
-					</a>
+					<!-- Image 3 -->
+					<div class="gallery-item" data-category="team">
+						<img src="img/sangamifounder.png" alt="Dr. Sangami - Co-Founder">
+						<div class="gallery-overlay">
+							<span class="gallery-category">Team</span>
+							<span class="gallery-zoom"><i class="bi bi-zoom-in"></i></span>
+							<h4 class="gallery-title">Dr. Sangami - Co-Founder</h4>
+						</div>
+					</div>
+
+					<!-- Image 4 -->
+					<div class="gallery-item" data-category="facility">
+						<img src="assets/img/health/facilities-9.webp" alt="Modern Facilities">
+						<div class="gallery-overlay">
+							<span class="gallery-category">Facility</span>
+							<span class="gallery-zoom"><i class="bi bi-zoom-in"></i></span>
+							<h4 class="gallery-title">Modern Facilities</h4>
+						</div>
+					</div>
+
+					<!-- Image 5 -->
+					<div class="gallery-item" data-category="services">
+						<img src="assets/img/health/sai-lab-1.webp" alt="Lab Services">
+						<div class="gallery-overlay">
+							<span class="gallery-category">Services</span>
+							<span class="gallery-zoom"><i class="bi bi-zoom-in"></i></span>
+							<h4 class="gallery-title">Lab Services</h4>
+						</div>
+					</div>
+
+					<!-- Image 6 -->
+					<div class="gallery-item" data-category="services">
+						<img src="assets/img/health/laboratory-3.webp" alt="Diagnostic Lab">
+						<div class="gallery-overlay">
+							<span class="gallery-category">Services</span>
+							<span class="gallery-zoom"><i class="bi bi-zoom-in"></i></span>
+							<h4 class="gallery-title">Diagnostic Lab</h4>
+						</div>
+					</div>
+
+					<!-- Image 7 -->
+					<div class="gallery-item" data-category="team">
+						<img src="assets/img/health/staff-6.webp" alt="Our Medical Team">
+						<div class="gallery-overlay">
+							<span class="gallery-category">Team</span>
+							<span class="gallery-zoom"><i class="bi bi-zoom-in"></i></span>
+							<h4 class="gallery-title">Our Medical Team</h4>
+						</div>
+					</div>
+
+					<!-- Image 8 -->
+					<div class="gallery-item" data-category="events">
+						<img src="assets/img/health/vaccination-3.webp" alt="Vaccination Drive">
+						<div class="gallery-overlay">
+							<span class="gallery-category">Events</span>
+							<span class="gallery-zoom"><i class="bi bi-zoom-in"></i></span>
+							<h4 class="gallery-title">Vaccination Drive</h4>
+						</div>
+					</div>
+
+					<!-- Image 9 -->
+					<div class="gallery-item" data-category="services">
+						<img src="assets/img/health/cardiology-2.webp" alt="ECG Services">
+						<div class="gallery-overlay">
+							<span class="gallery-category">Services</span>
+							<span class="gallery-zoom"><i class="bi bi-zoom-in"></i></span>
+							<h4 class="gallery-title">ECG Services</h4>
+						</div>
+					</div>
+
+					<!-- Image 10 -->
+					<div class="gallery-item" data-category="facility">
+						<img src="assets/img/health/neurology-3.webp" alt="Digital X-Ray Unit">
+						<div class="gallery-overlay">
+							<span class="gallery-category">Facility</span>
+							<span class="gallery-zoom"><i class="bi bi-zoom-in"></i></span>
+							<h4 class="gallery-title">Digital X-Ray Unit</h4>
+						</div>
+					</div>
+
+					<!-- Image 11 -->
+					<div class="gallery-item" data-category="team">
+						<img src="img/drsangami1.jfif" alt="Dr. S. Sangami">
+						<div class="gallery-overlay">
+							<span class="gallery-category">Team</span>
+							<span class="gallery-zoom"><i class="bi bi-zoom-in"></i></span>
+							<h4 class="gallery-title">Dr. S. Sangami</h4>
+						</div>
+					</div>
+
+					<!-- Image 12 -->
+					<div class="gallery-item" data-category="events">
+						<img src="assets/img/health/emergency-1.webp" alt="Emergency Care Team">
+						<div class="gallery-overlay">
+							<span class="gallery-category">Events</span>
+							<span class="gallery-zoom"><i class="bi bi-zoom-in"></i></span>
+							<h4 class="gallery-title">Emergency Care Team</h4>
+						</div>
+					</div>
+
+					<!-- Image 13 -->
+					<div class="gallery-item" data-category="services">
+						<img src="assets/img/health/maternal-2.webp" alt="Maternal Care">
+						<div class="gallery-overlay">
+							<span class="gallery-category">Services</span>
+							<span class="gallery-zoom"><i class="bi bi-zoom-in"></i></span>
+							<h4 class="gallery-title">Maternal Care</h4>
+						</div>
+					</div>
+
+					<!-- Image 14 -->
+					<div class="gallery-item" data-category="facility">
+						<img src="assets/img/health/emergency-2.webp" alt="Emergency Room">
+						<div class="gallery-overlay">
+							<span class="gallery-category">Facility</span>
+							<span class="gallery-zoom"><i class="bi bi-zoom-in"></i></span>
+							<h4 class="gallery-title">Emergency Room</h4>
+						</div>
+					</div>
+
+					<!-- Image 15 -->
+					<div class="gallery-item" data-category="team">
+						<img src="img/pradeepkumr.jfif" alt="Dr. M. Karthikeyan">
+						<div class="gallery-overlay">
+							<span class="gallery-category">Team</span>
+							<span class="gallery-zoom"><i class="bi bi-zoom-in"></i></span>
+							<h4 class="gallery-title">Dr. M. Karthikeyan</h4>
+						</div>
+					</div>
+
+					<!-- Image 16 -->
+					<div class="gallery-item" data-category="services">
+						<img src="assets/img/health/surgery-2.webp" alt="Surgical Services">
+						<div class="gallery-overlay">
+							<span class="gallery-category">Services</span>
+							<span class="gallery-zoom"><i class="bi bi-zoom-in"></i></span>
+							<h4 class="gallery-title">Surgical Services</h4>
+						</div>
+					</div>
+
 				</div>
 
 			</div>
 		</section>
 
 	</main>
+
+	<!-- ==========================================
+		 CUSTOM LIGHTBOX WITH PREV/NEXT NAVIGATION
+		 ========================================== -->
+	<div class="custom-lightbox" id="customLightbox">
+
+		<!-- Top-left counter -->
+		<div class="lightbox-counter-top">
+			<i class="bi bi-images"></i>
+			<span id="lbCounterTop">1 / 16</span>
+		</div>
+
+		<!-- Close Button -->
+		<div class="lightbox-close" id="lbClose">
+			<i class="bi bi-x-lg"></i>
+		</div>
+
+		<!-- Previous Arrow -->
+		<div class="lightbox-arrow prev" id="lbPrev">
+			<i class="bi bi-chevron-left"></i>
+		</div>
+
+		<!-- Image Container -->
+		<div class="lightbox-image-wrap">
+			<img src="" alt="Gallery Image" id="lbImage">
+			<div class="lightbox-info">
+				<span class="lightbox-title" id="lbTitle">Gallery Image</span>
+				<span class="lightbox-counter" id="lbCounter">1 / 16</span>
+			</div>
+		</div>
+
+		<!-- Next Arrow -->
+		<div class="lightbox-arrow next" id="lbNext">
+			<i class="bi bi-chevron-right"></i>
+		</div>
+
+	</div>
 
 	<footer id="footer" class="footer-16 footer position-relative">
 
@@ -707,11 +1304,11 @@
 									<div class="nav-column">
 										<h6>Services</h6>
 										<nav class="footer-nav">
-											<a href="services.html">Lab Services</a>
-											<a href="services.html">X-Ray</a>
-											<a href="services.html">ECG</a>
-											<a href="services.html">Vaccination</a>
-											<a href="services.html">Maternal Care</a>
+											<a href="services.html">Emergency Medicine</a>
+											<a href="services.html">Diabetic Care</a>
+											<a href="services.html">General Surgery</a>
+											<a href="services.html">Orthopedics</a>
+											<a href="services.html">Pulmonology</a>
 										</nav>
 									</div>
 								</div>
@@ -806,172 +1403,317 @@
 	<!-- Main JS File -->
 	<script src="assets/js/main.js"></script>
 
-	<!-- Iframe and Appointment Script -->
+	<!-- Gallery + Appointment Script -->
 	<script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // ============ IFRAME LOADING ============
-            const galleryIframe = document.getElementById('galleryIframe');
-            const iframeLoading = document.getElementById('iframeLoading');
+		document.addEventListener('DOMContentLoaded', function () {
 
-            if (galleryIframe) {
-                // Show loading
-                iframeLoading.classList.add('active');
+			/* ==========================================
+			   GALLERY FILTER
+			   ========================================== */
+			const filterButtons = document.querySelectorAll('.filter-btn');
+			const galleryItems = document.querySelectorAll('.gallery-item');
 
-                // Hide loading when iframe loads
-                galleryIframe.addEventListener('load', function () {
-                    iframeLoading.classList.remove('active');
-                    console.log('Gallery iframe loaded successfully');
-                });
+			filterButtons.forEach(function (btn) {
+				btn.addEventListener('click', function () {
+					// Remove active from all
+					filterButtons.forEach(b => b.classList.remove('active'));
+					this.classList.add('active');
 
-                // Auto-resize iframe based on content (optional)
-                galleryIframe.addEventListener('load', function () {
-                    try {
-                        // Try to resize to content height
-                        const iframeDoc = galleryIframe.contentDocument || galleryIframe.contentWindow.document;
-                        if (iframeDoc) {
-                            const height = iframeDoc.body.scrollHeight;
-                            if (height > 400) {
-                                galleryIframe.style.height = height + 'px';
-                            }
-                        }
-                    } catch (e) {
-                        // Cross-origin, can't access - use fixed height
-                        console.log('Cannot auto-resize iframe (cross-origin)');
-                    }
-                });
-            }
+					const filter = this.getAttribute('data-filter');
 
-            // ============ APPOINTMENT BOOKING ============
-            const bookButtons = document.querySelectorAll('.book-appointment-btn');
+					galleryItems.forEach(function (item) {
+						if (filter === 'all') {
+							item.classList.remove('hidden');
+						} else {
+							if (item.getAttribute('data-category') === filter) {
+								item.classList.remove('hidden');
+							} else {
+								item.classList.add('hidden');
+							}
+						}
+					});
+				});
+			});
 
-            bookButtons.forEach(function (button) {
-                button.addEventListener('click', function (e) {
-                    e.preventDefault();
+			/* ==========================================
+			   CUSTOM LIGHTBOX WITH NAVIGATION
+			   ========================================== */
+			const lightbox = document.getElementById('customLightbox');
+			const lbImage = document.getElementById('lbImage');
+			const lbTitle = document.getElementById('lbTitle');
+			const lbCounter = document.getElementById('lbCounter');
+			const lbCounterTop = document.getElementById('lbCounterTop');
+			const lbPrev = document.getElementById('lbPrev');
+			const lbNext = document.getElementById('lbNext');
+			const lbClose = document.getElementById('lbClose');
 
-                    const now = new Date();
-                    const dateStr = now.toISOString().split('T')[0];
-                    const timeStr = now.toTimeString().slice(0, 5);
+			let visibleImages = [];  // images currently visible (after filter)
+			let currentIndex = 0;
 
-                    Swal.fire({
-                        title: 'Book an Appointment',
-                        html: `
-                            <form id="appointmentForm" style="text-align: left;">
-                                <div class="mb-3">
-                                    <label for="fullName" style="font-weight: 600; display: block; margin-bottom: 5px;">Full Name *</label>
-                                    <input type="text" id="fullName" class="swal2-input" placeholder="Your full name" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="phoneNumber" style="font-weight: 600; display: block; margin-bottom: 5px;">Phone Number *</label>
-                                    <input type="tel" id="phoneNumber" class="swal2-input" placeholder="+91 98765 43210" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="appointmentDate" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Date *</label>
-                                    <input type="date" id="appointmentDate" class="swal2-input" value="${dateStr}" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="appointmentTime" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Time *</label>
-                                    <input type="time" id="appointmentTime" class="swal2-input" value="${timeStr}" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="doctorSelect" style="font-weight: 600; display: block; margin-bottom: 5px;">Select Doctor</label>
-                                    <select id="doctorSelect" class="swal2-input">
-                                        <option value="">Any Available Doctor</option>
-                                        <option value="Dr. S. Sangami">Dr. S. Sangami (Diabetology)</option>
-                                        <option value="Dr. M. Karthikeyan">Dr. M. Karthikeyan (Orthopedics)</option>
-                                        <option value="Dr. M. Salomon Themothi">Dr. M. Salomon Themothi (General Surgery)</option>
-                                        <option value="Dr. D. Tharun">Dr. D. Tharun (Pulmonology)</option>
-                                        <option value="Dr. Subash Kaushik. T. G">Dr. Subash Kaushik. T. G (Urology)</option>
-                                        <option value="Dr. V. Prathapkumar">Dr. V. Prathapkumar (General Medicine)</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="message" style="font-weight: 600; display: block; margin-bottom: 5px;">Additional Notes</label>
-                                    <textarea id="message" class="swal2-textarea" placeholder="Any specific concerns..." rows="2"></textarea>
-                                </div>
-                                <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">* Required fields</p>
-                            </form>
-                        `,
-                        confirmButtonText: 'Confirm & Send to WhatsApp',
-                        cancelButtonText: 'Cancel',
-                        showCancelButton: true,
-                        focusConfirm: false,
-                        preConfirm: () => {
-                            const name = document.getElementById('fullName').value;
-                            const phone = document.getElementById('phoneNumber').value;
-                            const date = document.getElementById('appointmentDate').value;
-                            const time = document.getElementById('appointmentTime').value;
-                            const doctor = document.getElementById('doctorSelect').value;
-                            const message = document.getElementById('message').value;
+			// Build the list of visible images whenever filter changes or page loads
+			function buildVisibleList() {
+				visibleImages = [];
+				galleryItems.forEach(function (item) {
+					if (!item.classList.contains('hidden')) {
+						const img = item.querySelector('img');
+						const title = item.querySelector('.gallery-title');
+						visibleImages.push({
+							src: img.getAttribute('src'),
+							alt: img.getAttribute('alt'),
+							title: title ? title.textContent : 'Gallery Image'
+						});
+					}
+				});
+			}
 
-                            if (!name || !phone || !date || !time) {
-                                Swal.showValidationMessage('Please fill in all required fields');
-                                return false;
-                            }
-                            if (phone.length < 10) {
-                                Swal.showValidationMessage('Please enter a valid phone number');
-                                return false;
-                            }
-                            return { name, phone, date, time, doctor, message };
-                        }
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            const data = result.value;
-                            const doctorDisplay = data.doctor || 'Any Available Doctor';
+			// Open lightbox
+			function openLightbox(index) {
+				buildVisibleList();
+				currentIndex = index;
+				updateLightboxImage();
+				lightbox.classList.add('active');
+				document.body.style.overflow = 'hidden';
+			}
 
-                            const dateObj = new Date(data.date + 'T00:00:00');
-                            const formattedDate = dateObj.toLocaleDateString('en-IN', {
-                                weekday: 'short',
-                                day: '2-digit',
-                                month: 'short',
-                                year: 'numeric'
-                            });
+			// Close lightbox
+			function closeLightbox() {
+				lightbox.classList.remove('active');
+				document.body.style.overflow = '';
+			}
 
-                            let whatsappMsg = `Hi SAI CLINIC,%0A%0A`;
-                            whatsappMsg += `I would like to book an appointment:%0A%0A`;
-                            whatsappMsg += `👤 Patient Name: ${data.name}%0A`;
-                            whatsappMsg += `📞 Phone: ${data.phone}%0A`;
-                            whatsappMsg += `👨‍⚕️ Doctor: ${doctorDisplay}%0A`;
-                            whatsappMsg += `📅 Date: ${formattedDate}%0A`;
-                            whatsappMsg += `🕐 Time: ${data.time}%0A`;
-                            if (data.message) {
-                                whatsappMsg += `📝 Notes: ${data.message}%0A`;
-                            }
-                            whatsappMsg += `%0AThank you!`;
+			// Update image in lightbox
+			function updateLightboxImage() {
+				if (visibleImages.length === 0) return;
+				const current = visibleImages[currentIndex];
+				lbImage.classList.add('changing');
 
-                            const whatsappURL = `https://wa.me/919787960590?text=${whatsappMsg}`;
-                            window.open(whatsappURL, '_blank');
+				setTimeout(function () {
+					lbImage.setAttribute('src', current.src);
+					lbImage.setAttribute('alt', current.alt);
+					lbTitle.textContent = current.title;
+					lbCounter.textContent = (currentIndex + 1) + ' / ' + visibleImages.length;
+					lbCounterTop.textContent = (currentIndex + 1) + ' / ' + visibleImages.length;
+					lbImage.classList.remove('changing');
+				}, 200);
+			}
 
-                            Swal.fire({
-                                title: 'Appointment Request Sent! ✅',
-                                html: `
-                                    <div style="text-align: left;">
-                                        <p><strong>Patient:</strong> ${data.name}</p>
-                                        <p><strong>Doctor:</strong> ${doctorDisplay}</p>
-                                        <p><strong>Date:</strong> ${formattedDate} at ${data.time}</p>
-                                        <hr>
-                                        <p style="color: #25D366; font-size: 0.95rem;">
-                                            <i class="bi bi-whatsapp"></i>
-                                            WhatsApp opened with your appointment details.
-                                        </p>
-                                        <p style="font-size: 0.8rem; color: #666;">
-                                            SAI CLINIC<br>
-                                            No. 253A, Railway Station Road, Kavaraipettai, Chennai - 601206
-                                        </p>
-                                    </div>
-                                `,
-                                icon: 'success',
-                                confirmButtonColor: '#0e7c7b',
-                                confirmButtonText: 'OK'
-                            });
-                        }
-                    });
-                });
-            });
+			// Go to next image
+			function goNext() {
+				if (visibleImages.length === 0) return;
+				currentIndex = (currentIndex + 1) % visibleImages.length;
+				updateLightboxImage();
+			}
 
-            console.log('SAI CLINIC - Gallery page ready!');
-            console.log('WhatsApp: +91 97879 60590');
-            console.log('Email: info@saigroupofclinics.com');
-        });
+			// Go to previous image
+			function goPrev() {
+				if (visibleImages.length === 0) return;
+				currentIndex = (currentIndex - 1 + visibleImages.length) % visibleImages.length;
+				updateLightboxImage();
+			}
+
+			// Attach click to each gallery item
+			galleryItems.forEach(function (item, index) {
+				item.addEventListener('click', function () {
+					buildVisibleList();
+					const imgSrc = item.querySelector('img').getAttribute('src');
+					// Find index of this image in visible list
+					const visibleIdx = visibleImages.findIndex(vi => vi.src === imgSrc);
+					openLightbox(visibleIdx !== -1 ? visibleIdx : 0);
+				});
+			});
+
+			// Navigation Events
+			lbNext.addEventListener('click', function (e) {
+				e.stopPropagation();
+				goNext();
+			});
+
+			lbPrev.addEventListener('click', function (e) {
+				e.stopPropagation();
+				goPrev();
+			});
+
+			lbClose.addEventListener('click', function (e) {
+				e.stopPropagation();
+				closeLightbox();
+			});
+
+			// Click outside image to close
+			lightbox.addEventListener('click', function (e) {
+				if (e.target === lightbox) {
+					closeLightbox();
+				}
+			});
+
+			// Keyboard navigation
+			document.addEventListener('keydown', function (e) {
+				if (!lightbox.classList.contains('active')) return;
+				if (e.key === 'ArrowRight') goNext();
+				if (e.key === 'ArrowLeft') goPrev();
+				if (e.key === 'Escape') closeLightbox();
+			});
+
+			// Touch Swipe Support (Mobile)
+			let touchStartX = 0;
+			let touchEndX = 0;
+
+			lightbox.addEventListener('touchstart', function (e) {
+				touchStartX = e.changedTouches[0].screenX;
+			}, { passive: true });
+
+			lightbox.addEventListener('touchend', function (e) {
+				touchEndX = e.changedTouches[0].screenX;
+				handleSwipe();
+			}, { passive: true });
+
+			function handleSwipe() {
+				const swipeThreshold = 50;
+				const diff = touchStartX - touchEndX;
+				if (Math.abs(diff) < swipeThreshold) return;
+				if (diff > 0) {
+					// Swipe left → next
+					goNext();
+				} else {
+					// Swipe right → prev
+					goPrev();
+				}
+			}
+
+			// Update count on page load
+			function updateCount() {
+				const visible = document.querySelectorAll('.gallery-item:not(.hidden)').length;
+				const counter = document.getElementById('imageCount');
+				if (counter) counter.textContent = visible;
+			}
+
+			// Re-count when filter changes
+			filterButtons.forEach(function (btn) {
+				btn.addEventListener('click', function () {
+					setTimeout(updateCount, 50);
+				});
+			});
+
+			updateCount();
+
+			/* ==========================================
+			   APPOINTMENT BOOKING
+			   ========================================== */
+			const bookButtons = document.querySelectorAll('.book-appointment-btn');
+
+			bookButtons.forEach(function (button) {
+				button.addEventListener('click', function (e) {
+					e.preventDefault();
+
+					const now = new Date();
+					const dateStr = now.toISOString().split('T')[0];
+					const timeStr = now.toTimeString().slice(0, 5);
+
+					Swal.fire({
+						title: 'Book an Appointment',
+						html: `
+								<form id="appointmentForm" style="text-align: left;">
+									<div class="mb-3">
+										<label for="fullName" style="font-weight: 600; display: block; margin-bottom: 5px;">Full Name *</label>
+										<input type="text" id="fullName" class="swal2-input" placeholder="Your full name" required>
+									</div>
+									<div class="mb-3">
+										<label for="phoneNumber" style="font-weight: 600; display: block; margin-bottom: 5px;">Phone Number *</label>
+										<input type="tel" id="phoneNumber" class="swal2-input" placeholder="+91 98765 43210" required>
+									</div>
+									<div class="mb-3">
+										<label for="appointmentDate" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Date *</label>
+										<input type="date" id="appointmentDate" class="swal2-input" value="${dateStr}" required>
+									</div>
+									<div class="mb-3">
+										<label for="appointmentTime" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Time *</label>
+										<input type="time" id="appointmentTime" class="swal2-input" value="${timeStr}" required>
+									</div>
+									<div class="mb-3">
+										<label for="doctorSelect" style="font-weight: 600; display: block; margin-bottom: 5px;">Select Doctor</label>
+										<select id="doctorSelect" class="swal2-input">
+											<option value="">Choose a doctor</option>
+											<option value="Dr. S. Sangami">Dr. S. Sangami (Emergency & Occupational Medicine)</option>
+											<option value="Dr. M. Karthikeyan">Dr. M. Karthikeyan (Orthopedics)</option>
+											<option value="Dr. M. Salomon Themothi">Dr. M. Salomon Themothi (Surgery)</option>
+											<option value="Dr. D. Tharun">Dr. D. Tharun (Pulmonology)</option>
+											<option value="Dr. Subash Kaushik. T. G">Dr. Subash Kaushik. T. G (Urology)</option>
+											<option value="Dr. V. Prathapkumar">Dr. V. Prathapkumar (General Medicine)</option>
+										</select>
+									</div>
+									<div class="mb-3">
+										<label for="message" style="font-weight: 600; display: block; margin-bottom: 5px;">Additional Notes</label>
+										<textarea id="message" class="swal2-textarea" placeholder="Any specific concerns..." rows="2"></textarea>
+									</div>
+								</form>
+							`,
+						confirmButtonText: 'Confirm & Send to WhatsApp',
+						cancelButtonText: 'Cancel',
+						showCancelButton: true,
+						focusConfirm: false,
+						preConfirm: () => {
+							const name = document.getElementById('fullName').value;
+							const phone = document.getElementById('phoneNumber').value;
+							const date = document.getElementById('appointmentDate').value;
+							const time = document.getElementById('appointmentTime').value;
+							const doctor = document.getElementById('doctorSelect').value;
+							const message = document.getElementById('message').value;
+
+							if (!name || !phone || !date || !time) {
+								Swal.showValidationMessage('Please fill in all required fields');
+								return false;
+							}
+							if (phone.length < 10) {
+								Swal.showValidationMessage('Please enter a valid phone number');
+								return false;
+							}
+							return { name, phone, date, time, doctor, message };
+						}
+					}).then((result) => {
+						if (result.isConfirmed) {
+							const data = result.value;
+							const doctorDisplay = data.doctor || 'Any Available Doctor';
+							const dateObj = new Date(data.date + 'T00:00:00');
+							const formattedDate = dateObj.toLocaleDateString('en-IN', {
+								weekday: 'short', day: '2-digit', month: 'short', year: 'numeric'
+							});
+
+							let whatsappMsg = `Hi SAI CLINIC,%0A%0A`;
+							whatsappMsg += `I would like to book an appointment:%0A%0A`;
+							whatsappMsg += `👤 Patient Name: ${data.name}%0A`;
+							whatsappMsg += `📞 Phone: ${data.phone}%0A`;
+							whatsappMsg += `👨‍⚕️ Doctor: ${doctorDisplay}%0A`;
+							whatsappMsg += `📅 Date: ${formattedDate}%0A`;
+							whatsappMsg += `🕐 Time: ${data.time}%0A`;
+							if (data.message) whatsappMsg += `📝 Notes: ${data.message}%0A`;
+							whatsappMsg += `%0AThank you!`;
+
+							window.open(`https://wa.me/919787960590?text=${whatsappMsg}`, '_blank');
+
+							Swal.fire({
+								title: 'Appointment Request Sent! ✅',
+								html: `
+										<div style="text-align: left;">
+											<p><strong>Patient:</strong> ${data.name}</p>
+											<p><strong>Doctor:</strong> ${doctorDisplay}</p>
+											<p><strong>Date:</strong> ${formattedDate} at ${data.time}</p>
+											<hr>
+											<p style="color: #25D366; font-size: 0.95rem;">
+												<i class="bi bi-whatsapp"></i>
+												WhatsApp opened with your appointment details.
+											</p>
+										</div>
+									`,
+								icon: 'success',
+								confirmButtonColor: '#0e7c7b',
+								confirmButtonText: 'OK'
+							});
+						}
+					});
+				});
+			});
+
+			console.log('SAI CLINIC - Gallery page ready with lightbox!');
+		});
 	</script>
 
 </body>
