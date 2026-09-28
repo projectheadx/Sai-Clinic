@@ -122,16 +122,6 @@
 			}
 		}
 
-		@keyframes rotateSlow {
-			0% {
-				transform: rotate(0deg);
-			}
-
-			100% {
-				transform: rotate(360deg);
-			}
-		}
-
 		@keyframes gradientShift {
 			0%, 100% {
 				background-position: 0% 50%;
@@ -139,16 +129,6 @@
 
 			50% {
 				background-position: 100% 50%;
-			}
-		}
-
-		@keyframes shineSweep {
-			0% {
-				left: -100%;
-			}
-
-			100% {
-				left: 100%;
 			}
 		}
 
@@ -265,19 +245,47 @@
 			}
 
 			.service-item-new.s2 {
-				animation-delay: 0.25s;
+				animation-delay: 0.2s;
 			}
 
 			.service-item-new.s3 {
-				animation-delay: 0.4s;
+				animation-delay: 0.3s;
 			}
 
 			.service-item-new.s4 {
-				animation-delay: 0.55s;
+				animation-delay: 0.4s;
 			}
 
 			.service-item-new.s5 {
+				animation-delay: 0.5s;
+			}
+
+			.service-item-new.s6 {
+				animation-delay: 0.6s;
+			}
+
+			.service-item-new.s7 {
 				animation-delay: 0.7s;
+			}
+
+			.service-item-new.s8 {
+				animation-delay: 0.8s;
+			}
+
+			.service-item-new.s9 {
+				animation-delay: 0.9s;
+			}
+
+			.service-item-new.s10 {
+				animation-delay: 1.0s;
+			}
+
+			.service-item-new.s11 {
+				animation-delay: 1.1s;
+			}
+
+			.service-item-new.s12 {
+				animation-delay: 1.2s;
 			}
 
 			.service-item-new:hover {
@@ -290,7 +298,7 @@
 			.service-item-new .service-image-new {
 				position: relative;
 				overflow: hidden;
-				height: 220px;
+				height: 210px;
 			}
 
 				.service-item-new .service-image-new img {
@@ -323,18 +331,18 @@
 			/* Floating Icon Badge */
 			.service-item-new .service-icon-badge {
 				position: absolute;
-				top: 20px;
-				right: 20px;
+				top: 18px;
+				right: 18px;
 				background: rgba(255, 255, 255, 0.95);
 				backdrop-filter: blur(10px);
 				-webkit-backdrop-filter: blur(10px);
-				width: 60px;
-				height: 60px;
+				width: 58px;
+				height: 58px;
 				border-radius: 50%;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				font-size: 1.7rem;
+				font-size: 1.6rem;
 				color: #0e7c7b;
 				z-index: 3;
 				box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
@@ -353,15 +361,15 @@
 			/* Category Badge */
 			.service-item-new .service-category {
 				position: absolute;
-				bottom: 20px;
-				left: 20px;
+				bottom: 18px;
+				left: 18px;
 				background: rgba(255, 255, 255, 0.25);
 				backdrop-filter: blur(10px);
 				-webkit-backdrop-filter: blur(10px);
 				color: #fff;
-				padding: 6px 16px;
+				padding: 6px 15px;
 				border-radius: 50px;
-				font-size: 0.72rem;
+				font-size: 0.7rem;
 				font-weight: 700;
 				text-transform: uppercase;
 				letter-spacing: 0.5px;
@@ -378,7 +386,7 @@
 
 			/* Content */
 			.service-item-new .service-content-new {
-				padding: 25px;
+				padding: 22px;
 				display: flex;
 				flex-direction: column;
 				flex-grow: 1;
@@ -387,10 +395,10 @@
 				.service-item-new .service-content-new h3 {
 					color: #0e7c7b;
 					font-weight: 700;
-					font-size: 1.3rem;
-					margin-bottom: 12px;
+					font-size: 1.2rem;
+					margin-bottom: 10px;
 					position: relative;
-					padding-bottom: 12px;
+					padding-bottom: 10px;
 					transition: all 0.3s ease;
 				}
 
@@ -412,9 +420,9 @@
 
 			.service-item-new .service-content-new p {
 				color: #555;
-				font-size: 0.92rem;
-				line-height: 1.7;
-				margin-bottom: 18px;
+				font-size: 0.88rem;
+				line-height: 1.65;
+				margin-bottom: 16px;
 				flex-grow: 1;
 			}
 
@@ -422,20 +430,20 @@
 			.service-item-new .service-features-new {
 				display: flex;
 				flex-wrap: wrap;
-				gap: 8px;
-				margin-bottom: 20px;
+				gap: 6px;
+				margin-bottom: 18px;
 			}
 
 				.service-item-new .service-features-new .feature-item-new {
 					background: #f0f4ff;
 					color: #0e7c7b;
-					padding: 6px 14px;
+					padding: 4px 12px;
 					border-radius: 50px;
-					font-size: 0.72rem;
+					font-size: 0.7rem;
 					font-weight: 600;
 					display: inline-flex;
 					align-items: center;
-					gap: 5px;
+					gap: 4px;
 					transition: all 0.4s ease;
 				}
 
@@ -446,7 +454,7 @@
 			}
 
 			.service-item-new .service-features-new .feature-item-new i {
-				font-size: 0.65rem;
+				font-size: 0.6rem;
 			}
 
 			/* CTA Button */
@@ -454,15 +462,15 @@
 				display: inline-flex;
 				align-items: center;
 				justify-content: center;
-				gap: 10px;
+				gap: 8px;
 				background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
 				background-size: 200% 200%;
 				color: #fff;
-				padding: 12px 25px;
+				padding: 10px 22px;
 				border-radius: 50px;
 				text-decoration: none;
 				font-weight: 600;
-				font-size: 0.9rem;
+				font-size: 0.85rem;
 				transition: all 0.4s ease;
 				border: none;
 				cursor: pointer;
@@ -472,7 +480,6 @@
 				animation: gradientShift 4s ease infinite;
 			}
 
-				/* Shine Sweep */
 				.service-item-new .service-btn-new::before {
 					content: '';
 					position: absolute;
@@ -491,17 +498,111 @@
 				.service-item-new .service-btn-new:hover {
 					transform: scale(1.05);
 					box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
-					gap: 15px;
+					gap: 12px;
 				}
 
 				.service-item-new .service-btn-new i {
-					font-size: 1.1rem;
+					font-size: 1.05rem;
 					transition: transform 0.3s ease;
 				}
 
 				.service-item-new .service-btn-new:hover i {
 					transform: rotate(-15deg) scale(1.2);
 				}
+
+		/* ==========================================
+		   SAI MEDICALS — 10% DISCOUNT HIGHLIGHT
+		   ========================================== */
+		.discount-highlight {
+			display: inline-flex;
+			align-items: center;
+			gap: 14px;
+			margin-top: 18px;
+			padding: 14px 22px;
+			background: linear-gradient(135deg, #fff8e1 0%, #ffe0b2 100%);
+			border: 2px dashed #ff9800;
+			border-radius: 14px;
+			box-shadow: 0 6px 20px rgba(255, 152, 0, 0.18);
+			animation: discountPulse 2.5s ease-in-out infinite;
+			position: relative;
+			overflow: hidden;
+		}
+
+			.discount-highlight::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+				animation: discountShine 3s ease-in-out infinite;
+			}
+
+		.discount-icon {
+			width: 48px;
+			height: 48px;
+			background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+			border-radius: 12px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #fff;
+			font-size: 1.5rem;
+			flex-shrink: 0;
+			box-shadow: 0 6px 16px rgba(255, 152, 0, 0.4);
+			transition: transform 0.4s ease;
+		}
+
+		.discount-highlight:hover .discount-icon {
+			transform: scale(1.15) rotate(-10deg);
+		}
+
+		.discount-text {
+			display: flex;
+			flex-direction: column;
+			line-height: 1.3;
+			position: relative;
+			z-index: 2;
+		}
+
+			.discount-text strong {
+				font-size: 1.3rem;
+				font-weight: 800;
+				color: #e65100;
+				letter-spacing: -0.3px;
+			}
+
+			.discount-text span {
+				font-size: 0.88rem;
+				font-weight: 600;
+				color: #bf360c;
+				margin-top: 2px;
+			}
+
+		@keyframes discountPulse {
+			0%, 100% {
+				box-shadow: 0 6px 20px rgba(255, 152, 0, 0.18);
+			}
+
+			50% {
+				box-shadow: 0 6px 30px rgba(255, 152, 0, 0.4);
+			}
+		}
+
+		@keyframes discountShine {
+			0% {
+				left: -100%;
+			}
+
+			60% {
+				left: 100%;
+			}
+
+			100% {
+				left: 100%;
+			}
+		}
 
 		/* Footer */
 		.footer-16 .sitename {
@@ -696,24 +797,24 @@
 			}
 
 			.service-item-new .service-icon-badge {
-				width: 50px;
-				height: 50px;
-				font-size: 1.4rem;
-				top: 15px;
-				right: 15px;
+				width: 48px;
+				height: 48px;
+				font-size: 1.3rem;
+				top: 14px;
+				right: 14px;
 			}
 
 			.service-item-new .service-content-new {
-				padding: 20px;
+				padding: 18px;
 			}
 
 				.service-item-new .service-content-new h3 {
-					font-size: 1.15rem;
+					font-size: 1.05rem;
 				}
 
 			.service-item-new .service-features-new .feature-item-new {
 				font-size: 0.65rem;
-				padding: 4px 12px;
+				padding: 4px 10px;
 			}
 
 			.footer-bottom .social-links-bottom {
@@ -723,6 +824,25 @@
 
 			.footer-bottom .copyright {
 				text-align: center;
+			}
+
+			.discount-highlight {
+				padding: 12px 16px;
+				gap: 10px;
+			}
+
+			.discount-icon {
+				width: 40px;
+				height: 40px;
+				font-size: 1.2rem;
+			}
+
+			.discount-text strong {
+				font-size: 1.1rem;
+			}
+
+			.discount-text span {
+				font-size: 0.78rem;
 			}
 		}
 	</style>
@@ -786,7 +906,7 @@
 						<div class="col-lg-8">
 							<h1 class="heading-title">Our Services</h1>
 							<p class="mb-0">
-								SAI CLINIC offers comprehensive healthcare services with modern diagnostic facilities
+								SAI CLINIC offers 12 comprehensive healthcare services with modern diagnostic facilities
 								including Lab, X-Ray, and ECG. We are committed to providing quality medical care
 								with compassion and expertise.
 							</p>
@@ -815,31 +935,31 @@
 						<i class="bi bi-stars"></i>
 						<span>What We Offer</span>
 					</div>
-					<h2>Comprehensive Healthcare Services</h2>
+					<h2>12 Comprehensive Healthcare Services</h2>
 					<p>Modern diagnostic and treatment services available at SAI CLINIC</p>
 				</div>
 
 				<div class="row gy-4">
 
-					<!-- Service 1: General Medicine -->
+					<!-- 1. Emergency Medicine -->
 					<div class="col-lg-4 col-md-6">
 						<div class="service-item-new s1">
 							<div class="service-image-new">
-								<img src="assets/img/health/cardiology-2.webp" alt="General Medicine">
+								<img src="assets/img/health/emergency-1.webp" alt="Emergency Medicine">
 								<div class="service-icon-badge">
-									<i class="fas fa-stethoscope"></i>
+									<i class="fas fa-ambulance"></i>
 								</div>
-								<span class="service-category">Primary Care</span>
+								<span class="service-category">24/7 Care</span>
 							</div>
 							<div class="service-content-new">
-								<h3>General Medicine</h3>
-								<p>Comprehensive primary care services including routine check-ups, chronic disease management, and preventive healthcare for all ages.</p>
+								<h3>Emergency Medicine</h3>
+								<p>Round-the-clock emergency care for acute illnesses, injuries, and critical conditions with rapid response team.</p>
 								<div class="service-features-new">
-									<span class="feature-item-new"><i class="fas fa-check"></i> Health Check-ups</span>
-									<span class="feature-item-new"><i class="fas fa-check"></i> Chronic Care</span>
-									<span class="feature-item-new"><i class="fas fa-check"></i> Vaccination</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> 24/7 Support</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Critical Care</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Trauma Care</span>
 								</div>
-								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment%20for%20General%20Medicine"
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20need%20Emergency%20Medicine%20assistance"
 								   target="_blank" class="service-btn-new">
 									<i class="bi bi-whatsapp"></i>
 									<span>Book via WhatsApp</span>
@@ -848,9 +968,36 @@
 						</div>
 					</div>
 
-					<!-- Service 2: General Surgery -->
+					<!-- 2. Diabetic Care -->
 					<div class="col-lg-4 col-md-6">
 						<div class="service-item-new s2">
+							<div class="service-image-new">
+								<img src="assets/img/health/cardiology-3.webp" alt="Diabetic Care">
+								<div class="service-icon-badge">
+									<i class="fas fa-droplet"></i>
+								</div>
+								<span class="service-category">Metabolic Health</span>
+							</div>
+							<div class="service-content-new">
+								<h3>Diabetic Care</h3>
+								<p>Expert clinical diabetology and metabolic health management with personalized treatment plans for diabetes care.</p>
+								<div class="service-features-new">
+									<span class="feature-item-new"><i class="fas fa-check"></i> Blood Sugar</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Diet Plan</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Insulin Care</span>
+								</div>
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20Diabetic%20Care"
+								   target="_blank" class="service-btn-new">
+									<i class="bi bi-whatsapp"></i>
+									<span>Book via WhatsApp</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- 3. General Surgery -->
+					<div class="col-lg-4 col-md-6">
+						<div class="service-item-new s3">
 							<div class="service-image-new">
 								<img src="assets/img/health/surgery-2.webp" alt="General Surgery">
 								<div class="service-icon-badge">
@@ -860,13 +1007,13 @@
 							</div>
 							<div class="service-content-new">
 								<h3>General Surgery</h3>
-								<p>Comprehensive surgical services including minor and major surgeries with expert pre- and post-operative care for best outcomes.</p>
+								<p>Comprehensive surgical services including minor and major surgeries with expert pre- and post-operative care.</p>
 								<div class="service-features-new">
-									<span class="feature-item-new"><i class="fas fa-check"></i> Minor Surgeries</span>
-									<span class="feature-item-new"><i class="fas fa-check"></i> Major Surgeries</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Minor Surgery</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Major Surgery</span>
 									<span class="feature-item-new"><i class="fas fa-check"></i> Laparoscopic</span>
 								</div>
-								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment%20for%20General%20Surgery"
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20General%20Surgery"
 								   target="_blank" class="service-btn-new">
 									<i class="bi bi-whatsapp"></i>
 									<span>Book via WhatsApp</span>
@@ -875,9 +1022,144 @@
 						</div>
 					</div>
 
-					<!-- Service 3: Lab Services -->
+					<!-- 4. Orthopedics -->
 					<div class="col-lg-4 col-md-6">
-						<div class="service-item-new s3">
+						<div class="service-item-new s4">
+							<div class="service-image-new">
+								<img src="assets/img/health/maternal-2.webp" alt="Orthopedics">
+								<div class="service-icon-badge">
+									<i class="fas fa-bone"></i>
+								</div>
+								<span class="service-category">Bone &amp; Joint</span>
+							</div>
+							<div class="service-content-new">
+								<h3>Orthopedics</h3>
+								<p>Specialized orthopedic care for bones, joints, and muscles including joint replacement and fracture treatment.</p>
+								<div class="service-features-new">
+									<span class="feature-item-new"><i class="fas fa-check"></i> Joint Care</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Fracture Care</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Replacement</span>
+								</div>
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20Orthopedics"
+								   target="_blank" class="service-btn-new">
+									<i class="bi bi-whatsapp"></i>
+									<span>Book via WhatsApp</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- 5. General Medicine -->
+					<div class="col-lg-4 col-md-6">
+						<div class="service-item-new s5">
+							<div class="service-image-new">
+								<img src="assets/img/health/facilities-9.webp" alt="General Medicine">
+								<div class="service-icon-badge">
+									<i class="fas fa-stethoscope"></i>
+								</div>
+								<span class="service-category">Primary Care</span>
+							</div>
+							<div class="service-content-new">
+								<h3>General Medicine</h3>
+								<p>Comprehensive primary care services including routine check-ups, chronic disease management, and preventive healthcare.</p>
+								<div class="service-features-new">
+									<span class="feature-item-new"><i class="fas fa-check"></i> Health Check-ups</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Chronic Care</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Preventive</span>
+								</div>
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20General%20Medicine"
+								   target="_blank" class="service-btn-new">
+									<i class="bi bi-whatsapp"></i>
+									<span>Book via WhatsApp</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- 6. Pulmonology -->
+					<div class="col-lg-4 col-md-6">
+						<div class="service-item-new s6">
+							<div class="service-image-new">
+								<img src="assets/img/health/emergency-2.webp" alt="Pulmonology">
+								<div class="service-icon-badge">
+									<i class="fas fa-lungs"></i>
+								</div>
+								<span class="service-category">Respiratory</span>
+							</div>
+							<div class="service-content-new">
+								<h3>Pulmonology</h3>
+								<p>Specialized care for respiratory conditions including asthma, COPD, and other lung-related health issues.</p>
+								<div class="service-features-new">
+									<span class="feature-item-new"><i class="fas fa-check"></i> Asthma Care</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> COPD</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Lung Health</span>
+								</div>
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20Pulmonology"
+								   target="_blank" class="service-btn-new">
+									<i class="bi bi-whatsapp"></i>
+									<span>Book via WhatsApp</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- 7. Urology -->
+					<div class="col-lg-4 col-md-6">
+						<div class="service-item-new s7">
+							<div class="service-image-new">
+								<img src="assets/img/health/sai-lab-1.webp" alt="Urology">
+								<div class="service-icon-badge">
+									<i class="fas fa-kidneys"></i>
+								</div>
+								<span class="service-category">Urology Care</span>
+							</div>
+							<div class="service-content-new">
+								<h3>Urology</h3>
+								<p>Expert urological care with modern diagnostic and treatment facilities for various urological conditions.</p>
+								<div class="service-features-new">
+									<span class="feature-item-new"><i class="fas fa-check"></i> Kidney Health</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Stone Treatment</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Urology Surgery</span>
+								</div>
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20Urology"
+								   target="_blank" class="service-btn-new">
+									<i class="bi bi-whatsapp"></i>
+									<span>Book via WhatsApp</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- 8. Vaccination -->
+					<div class="col-lg-4 col-md-6">
+						<div class="service-item-new s8">
+							<div class="service-image-new">
+								<img src="assets/img/health/vaccination-3.webp" alt="Vaccination">
+								<div class="service-icon-badge">
+									<i class="fas fa-shield-virus"></i>
+								</div>
+								<span class="service-category">Immunization</span>
+							</div>
+							<div class="service-content-new">
+								<h3>Vaccination Center</h3>
+								<p>Complete immunization programs for all age groups with safe and effective vaccines administered by trained professionals.</p>
+								<div class="service-features-new">
+									<span class="feature-item-new"><i class="fas fa-check"></i> Child Vaccines</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Adult Vaccines</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Travel Vaccines</span>
+								</div>
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20Vaccination"
+								   target="_blank" class="service-btn-new">
+									<i class="bi bi-whatsapp"></i>
+									<span>Book via WhatsApp</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- 9. Lab Services -->
+					<div class="col-lg-4 col-md-6">
+						<div class="service-item-new s9">
 							<div class="service-image-new">
 								<img src="assets/img/health/laboratory-3.webp" alt="Lab Services">
 								<div class="service-icon-badge">
@@ -887,13 +1169,13 @@
 							</div>
 							<div class="service-content-new">
 								<h3>Lab Services</h3>
-								<p>Full-service clinical laboratory for accurate and timely diagnostic testing with comprehensive testing panels and rapid result delivery.</p>
+								<p>Full-service clinical laboratory for accurate and timely diagnostic testing with comprehensive testing panels.</p>
 								<div class="service-features-new">
 									<span class="feature-item-new"><i class="fas fa-check"></i> Blood Tests</span>
 									<span class="feature-item-new"><i class="fas fa-check"></i> Pathology</span>
 									<span class="feature-item-new"><i class="fas fa-check"></i> Health Screenings</span>
 								</div>
-								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment%20for%20Lab%20Services"
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20Lab%20Services"
 								   target="_blank" class="service-btn-new">
 									<i class="bi bi-whatsapp"></i>
 									<span>Book via WhatsApp</span>
@@ -902,9 +1184,9 @@
 						</div>
 					</div>
 
-					<!-- Service 4: Digital X-Ray -->
+					<!-- 10. Digital X-Ray -->
 					<div class="col-lg-4 col-md-6">
-						<div class="service-item-new s4">
+						<div class="service-item-new s10">
 							<div class="service-image-new">
 								<img src="assets/img/health/neurology-3.webp" alt="Digital X-Ray">
 								<div class="service-icon-badge">
@@ -914,13 +1196,13 @@
 							</div>
 							<div class="service-content-new">
 								<h3>Digital X-Ray</h3>
-								<p>State-of-the-art digital X-Ray services for quick and precise imaging diagnostics with minimal radiation exposure and instant results.</p>
+								<p>State-of-the-art digital X-Ray services for quick and precise imaging diagnostics with minimal radiation.</p>
 								<div class="service-features-new">
 									<span class="feature-item-new"><i class="fas fa-check"></i> Digital Imaging</span>
 									<span class="feature-item-new"><i class="fas fa-check"></i> Quick Results</span>
 									<span class="feature-item-new"><i class="fas fa-check"></i> Low Radiation</span>
 								</div>
-								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment%20for%20X-Ray"
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20Digital%20X-Ray"
 								   target="_blank" class="service-btn-new">
 									<i class="bi bi-whatsapp"></i>
 									<span>Book via WhatsApp</span>
@@ -929,11 +1211,11 @@
 						</div>
 					</div>
 
-					<!-- Service 5: ECG Services -->
+					<!-- 11. ECG Services -->
 					<div class="col-lg-4 col-md-6">
-						<div class="service-item-new s5">
+						<div class="service-item-new s11">
 							<div class="service-image-new">
-								<img src="assets/img/health/emergency-2.webp" alt="ECG Services">
+								<img src="assets/img/health/cardiology-2.webp" alt="ECG Services">
 								<div class="service-icon-badge">
 									<i class="fas fa-heartbeat"></i>
 								</div>
@@ -941,13 +1223,13 @@
 							</div>
 							<div class="service-content-new">
 								<h3>ECG Services</h3>
-								<p>Electrocardiogram services for accurate heart function assessment and monitoring with advanced equipment and expert interpretation.</p>
+								<p>Electrocardiogram services for accurate heart function assessment and monitoring with instant reports.</p>
 								<div class="service-features-new">
 									<span class="feature-item-new"><i class="fas fa-check"></i> Heart Monitoring</span>
-									<span class="feature-item-new"><i class="fas fa-check"></i> Cardiac Assessment</span>
-									<span class="feature-item-new"><i class="fas fa-check"></i> Expert Analysis</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Instant Report</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Cardiac Care</span>
 								</div>
-								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment%20for%20ECG"
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20ECG%20Services"
 								   target="_blank" class="service-btn-new">
 									<i class="bi bi-whatsapp"></i>
 									<span>Book via WhatsApp</span>
@@ -956,28 +1238,28 @@
 						</div>
 					</div>
 
-					<!-- Service 6: Vaccination -->
+					<!-- 12. SAI MEDICALS -->
 					<div class="col-lg-4 col-md-6">
-						<div class="service-item-new s6">
+						<div class="service-item-new s12">
 							<div class="service-image-new">
-								<img src="assets/img/health/vaccination-3.webp" alt="Vaccination">
+								<img src="assets/img/health/sai-lab-1.webp" alt="SAI MEDICALS">
 								<div class="service-icon-badge">
-									<i class="fas fa-shield-virus"></i>
+									<i class="fas fa-shop"></i>
 								</div>
-								<span class="service-category">Preventive</span>
+								<span class="service-category">Pharmacy</span>
 							</div>
 							<div class="service-content-new">
-								<h3>Vaccination Center</h3>
-								<p>Complete immunization programs for all age groups with safe and effective vaccines administered by trained healthcare professionals.</p>
+								<h3>SAI MEDICALS</h3>
+								<p>Your trusted pharmacy partner with branded medicines and healthcare products at competitive prices.</p>
 								<div class="service-features-new">
-									<span class="feature-item-new"><i class="fas fa-check"></i> Child Vaccines</span>
-									<span class="feature-item-new"><i class="fas fa-check"></i> Adult Vaccines</span>
-									<span class="feature-item-new"><i class="fas fa-check"></i> Travel Vaccines</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Branded Medicines</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> 10% Discount*</span>
+									<span class="feature-item-new"><i class="fas fa-check"></i> Daily Essentials</span>
 								</div>
-								<a href="https://wa.me/919787960590?text=Hi%20SAI%20CLINIC%2C%20I%20would%20like%20to%20book%20an%20appointment%20for%20Vaccination"
+								<a href="https://wa.me/919787960590?text=Hi%20SAI%20MEDICALS%2C%20I%20would%20like%20to%20know%20about%20your%20products"
 								   target="_blank" class="service-btn-new">
 									<i class="bi bi-whatsapp"></i>
-									<span>Book via WhatsApp</span>
+									<span>Contact Pharmacy</span>
 								</a>
 							</div>
 						</div>
@@ -996,7 +1278,22 @@
 						<div class="col-lg-8">
 							<h3 style="color: #0e7c7b; font-weight: 700;"><i class="bi bi-shop" style="color: #0e7c7b;"></i> SAI MEDICALS</h3>
 							<p style="font-size: 1.1rem; color: #333;">Your trusted pharmacy partner located within SAI CLINIC premises.</p>
-							<p style="color: #555;">Quality medicines and healthcare products available at competitive prices. Our pharmacy is fully stocked with genuine medications and healthcare essentials.</p>
+							<p style="color: #555;">
+								Quality branded medicines and healthcare products available at competitive prices.
+								Our pharmacy is fully stocked with trusted branded medicines and everyday healthcare essentials.
+							</p>
+
+							<!-- 10% Discount Highlight -->
+							<div class="discount-highlight">
+								<div class="discount-icon">
+									<i class="bi bi-tag-fill"></i>
+								</div>
+								<div class="discount-text">
+									<strong>10% Discount</strong>
+									<span>For Senior Citizens &amp; Physically Challenged People</span>
+								</div>
+							</div>
+
 							<div class="contact-info mt-3">
 								<i class="bi bi-telephone" style="color: #0e7c7b;"></i> <strong style="color: #0e7c7b;">+91 97879 60590</strong>
 								<span style="margin-left: 1.5rem;"><i class="bi bi-clock" style="color: #0e7c7b;"></i> 08:00 AM - 10:00 PM</span>
@@ -1067,11 +1364,11 @@
 									<div class="nav-column">
 										<h6>Services</h6>
 										<nav class="footer-nav">
-											<a href="services.html">Lab Services</a>
-											<a href="services.html">X-Ray</a>
-											<a href="services.html">ECG</a>
-											<a href="services.html">Vaccination</a>
-											<a href="services.html">General Medicine</a>
+											<a href="services.html">Emergency Medicine</a>
+											<a href="services.html">Diabetic Care</a>
+											<a href="services.html">General Surgery</a>
+											<a href="services.html">Orthopedics</a>
+											<a href="services.html">Pulmonology</a>
 										</nav>
 									</div>
 								</div>
@@ -1168,11 +1465,11 @@
 
 	<!-- Appointment Booking Script -->
 	<script>
-		document.addEventListener('DOMContentLoaded', function() {
+		document.addEventListener('DOMContentLoaded', function () {
 			const bookButtons = document.querySelectorAll('.book-appointment-btn');
 
-			bookButtons.forEach(function(button) {
-				button.addEventListener('click', function(e) {
+			bookButtons.forEach(function (button) {
+				button.addEventListener('click', function (e) {
 					e.preventDefault();
 
 					const now = new Date();
@@ -1182,41 +1479,41 @@
 					Swal.fire({
 						title: 'Book an Appointment',
 						html: `
-							<form id="appointmentForm" style="text-align: left;">
-								<div class="mb-3">
-									<label for="fullName" style="font-weight: 600; display: block; margin-bottom: 5px;">Full Name *</label>
-									<input type="text" id="fullName" class="swal2-input" placeholder="Your full name" required>
-								</div>
-								<div class="mb-3">
-									<label for="phoneNumber" style="font-weight: 600; display: block; margin-bottom: 5px;">Phone Number *</label>
-									<input type="tel" id="phoneNumber" class="swal2-input" placeholder="+91 98765 43210" required>
-								</div>
-								<div class="mb-3">
-									<label for="appointmentDate" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Date *</label>
-									<input type="date" id="appointmentDate" class="swal2-input" value="${dateStr}" required>
-								</div>
-								<div class="mb-3">
-									<label for="appointmentTime" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Time *</label>
-									<input type="time" id="appointmentTime" class="swal2-input" value="${timeStr}" required>
-								</div>
-								<div class="mb-3">
-									<label for="doctorSelect" style="font-weight: 600; display: block; margin-bottom: 5px;">Select Doctor</label>
-									<select id="doctorSelect" class="swal2-input">
-										<option value="">Any Available Doctor</option>
-										<option value="Dr. S. Sangami">Dr. S. Sangami (Diabetology)</option>
-										<option value="Dr. M. Karthikeyan">Dr. M. Karthikeyan (Orthopedics)</option>
-										<option value="Dr. M. Salomon Themothi">Dr. M. Salomon Themothi (Surgery)</option>
-										<option value="Dr. D. Tharun">Dr. D. Tharun (Pulmonology)</option>
-										<option value="Dr. Subash Kaushik. T. G">Dr. Subash Kaushik. T. G (Urology)</option>
-										<option value="Dr. V. Prathapkumar">Dr. V. Prathapkumar (General Medicine)</option>
-									</select>
-								</div>
-								<div class="mb-3">
-									<label for="message" style="font-weight: 600; display: block; margin-bottom: 5px;">Additional Notes</label>
-									<textarea id="message" class="swal2-textarea" placeholder="Any specific concerns..." rows="2"></textarea>
-								</div>
-							</form>
-						`,
+								<form id="appointmentForm" style="text-align: left;">
+									<div class="mb-3">
+										<label for="fullName" style="font-weight: 600; display: block; margin-bottom: 5px;">Full Name *</label>
+										<input type="text" id="fullName" class="swal2-input" placeholder="Your full name" required>
+									</div>
+									<div class="mb-3">
+										<label for="phoneNumber" style="font-weight: 600; display: block; margin-bottom: 5px;">Phone Number *</label>
+										<input type="tel" id="phoneNumber" class="swal2-input" placeholder="+91 98765 43210" required>
+									</div>
+									<div class="mb-3">
+										<label for="appointmentDate" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Date *</label>
+										<input type="date" id="appointmentDate" class="swal2-input" value="${dateStr}" required>
+									</div>
+									<div class="mb-3">
+										<label for="appointmentTime" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Time *</label>
+										<input type="time" id="appointmentTime" class="swal2-input" value="${timeStr}" required>
+									</div>
+									<div class="mb-3">
+										<label for="doctorSelect" style="font-weight: 600; display: block; margin-bottom: 5px;">Select Doctor</label>
+										<select id="doctorSelect" class="swal2-input">
+											<option value="">Any Available Doctor</option>
+											<option value="Dr. S. Sangami">Dr. S. Sangami (Emergency & Occupational Medicine)</option>
+											<option value="Dr. M. Karthikeyan">Dr. M. Karthikeyan (Orthopedics)</option>
+											<option value="Dr. M. Salomon Themothi">Dr. M. Salomon Themothi (Surgery)</option>
+											<option value="Dr. D. Tharun">Dr. D. Tharun (Pulmonology)</option>
+											<option value="Dr. Subash Kaushik. T. G">Dr. Subash Kaushik. T. G (Urology)</option>
+											<option value="Dr. V. Prathapkumar">Dr. V. Prathapkumar (General Medicine)</option>
+										</select>
+									</div>
+									<div class="mb-3">
+										<label for="message" style="font-weight: 600; display: block; margin-bottom: 5px;">Additional Notes</label>
+										<textarea id="message" class="swal2-textarea" placeholder="Any specific concerns..." rows="2"></textarea>
+									</div>
+								</form>
+							`,
 						confirmButtonText: 'Confirm & Send to WhatsApp',
 						cancelButtonText: 'Cancel',
 						showCancelButton: true,
@@ -1263,17 +1560,17 @@
 							Swal.fire({
 								title: 'Appointment Request Sent! ✅',
 								html: `
-									<div style="text-align: left;">
-										<p><strong>Patient:</strong> ${data.name}</p>
-										<p><strong>Doctor:</strong> ${doctorDisplay}</p>
-										<p><strong>Date:</strong> ${formattedDate} at ${data.time}</p>
-										<hr>
-										<p style="color: #25D366; font-size: 0.95rem;">
-											<i class="bi bi-whatsapp"></i>
-											WhatsApp opened with your appointment details.
-										</p>
-									</div>
-								`,
+										<div style="text-align: left;">
+											<p><strong>Patient:</strong> ${data.name}</p>
+											<p><strong>Doctor:</strong> ${doctorDisplay}</p>
+											<p><strong>Date:</strong> ${formattedDate} at ${data.time}</p>
+											<hr>
+											<p style="color: #25D366; font-size: 0.95rem;">
+												<i class="bi bi-whatsapp"></i>
+												WhatsApp opened with your appointment details.
+											</p>
+										</div>
+									`,
 								icon: 'success',
 								confirmButtonColor: '#0e7c7b',
 								confirmButtonText: 'OK'
@@ -1283,7 +1580,7 @@
 				});
 			});
 
-			console.log('SAI CLINIC - Services page ready!');
+			console.log('SAI CLINIC - Services page ready with 12 services!');
 		});
 	</script>
 
