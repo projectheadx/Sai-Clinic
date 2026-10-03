@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<title>About - SAI CLINIC</title>
-	<meta name="description" content="SAI CLINIC & SAI MEDICALS - Comprehensive healthcare services in Kavaraipettai, Chennai.">
+	<meta name="description" content="SAI CLINIC & SAI MEDICALS - Comprehensive healthcare services in Kavaraipettai, Chennai. 7 branches, 20+ specialist doctors, 12+ years of trusted service.">
 	<meta name="keywords" content="Sai Clinic, SAI MEDICALS, Kavaraipettai, Chennai, doctors, lab, X-ray, ECG">
 
 	<!-- Favicons -->
@@ -31,6 +31,63 @@
 
 	<!-- SweetAlert2 -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<!-- ==========================================
+		 STRUCTURED DATA — AI-READABLE VALUE BOOSTER
+		 ========================================== -->
+	<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "MedicalClinic",
+		  "name": "SAI CLINIC",
+		  "alternateName": "SAI CLINIC & SAI MEDICALS",
+		  "url": "https://saigroupofclinics.com",
+		  "logo": "https://saigroupofclinics.com/img/saigroupofcliniclogo.png",
+		  "description": "Multi-specialty healthcare network with 7 branches across Tamil Nadu, providing Lab, X-Ray, ECG, Emergency Medicine, Diabetic Care, and 20+ specialist doctors.",
+		  "foundingDate": "2012",
+		  "numberOfEmployees": "20+",
+		  "address": {
+			"@type": "PostalAddress",
+			"streetAddress": "No. 253A, Railway Station Road",
+			"addressLocality": "Kavaraipettai",
+			"addressRegion": "Tamil Nadu",
+			"postalCode": "601206",
+			"addressCountry": "IN"
+		  },
+		  "telephone": "+91-97879-60590",
+		  "email": "info@saigroupofclinics.com",
+		  "openingHours": "Mo-Su 08:00-22:00",
+		  "medicalSpecialty": [
+			"Emergency Medicine",
+			"Diabetic Care",
+			"General Surgery",
+			"Orthopedics",
+			"Pulmonology",
+			"Urology",
+			"General Medicine",
+			"Vaccination"
+		  ],
+		  "availableService": [
+			{"@type": "MedicalTest", "name": "Lab Services"},
+			{"@type": "MedicalTest", "name": "Digital X-Ray"},
+			{"@type": "MedicalTest", "name": "ECG"},
+			{"@type": "MedicalProcedure", "name": "General Surgery"},
+			{"@type": "MedicalProcedure", "name": "Vaccination"}
+		  ],
+		  "aggregateRating": {
+			"@type": "AggregateRating",
+			"ratingValue": "4.9",
+			"reviewCount": "5000",
+			"bestRating": "5"
+		  },
+		  "numberOfBranches": 7,
+		  "priceRange": "₹₹",
+		  "founder": [
+			{"@type": "Person", "name": "Dr. Samraj", "jobTitle": "Founder & Director"},
+			{"@type": "Person", "name": "Dr. Sangami", "jobTitle": "Co-Founder & Medical Director"}
+		  ]
+		}
+	</script>
 
 	<style>
 		/* Logo Styles */
@@ -1379,7 +1436,8 @@
 						<li><a href="departments.html">Departments</a></li>
 						<li><a href="services.html">Services</a></li>
 						<li><a href="doctors.html">Doctors</a></li>
-						<li><a href="clinics.html">Our Clinics</a></li> <li><a href="gallery.html">Gallery</a></li>
+						<li><a href="clinics.html">Our Clinics</a></li>
+						<li><a href="gallery.html">Gallery</a></li>
 						<li><a href="blog.html">Blog</a></li>
 						<li><a href="contact.html">Contact</a></li>
 					</ul>
@@ -1464,7 +1522,7 @@
 									<i class="bi bi-building"></i>
 								</div>
 								<div class="stat-info-new">
-									<span class="stat-number-new" data-purecounter-start="0" data-purecounter-end="6" data-purecounter-duration="2">6</span>
+									<span class="stat-number-new" data-purecounter-start="0" data-purecounter-end="7" data-purecounter-duration="2">7</span>
 									<span class="stat-label-new">Clinics</span>
 								</div>
 							</div>
@@ -1506,7 +1564,7 @@
 									<span class="stat-lbl-new">Patients Treated</span>
 								</div>
 								<div class="about-stat-card-new">
-									<span class="stat-num-new" data-purecounter-start="0" data-purecounter-end="6" data-purecounter-duration="2">6</span>
+									<span class="stat-num-new" data-purecounter-start="0" data-purecounter-end="7" data-purecounter-duration="2">7</span>
 									<span class="stat-lbl-new">Clinics</span>
 								</div>
 							</div>
@@ -1848,41 +1906,41 @@
 					Swal.fire({
 						title: 'Book an Appointment',
 						html: `
-								<form id="appointmentForm" style="text-align: left;">
-									<div class="mb-3">
-										<label for="fullName" style="font-weight: 600; display: block; margin-bottom: 5px;">Full Name *</label>
-										<input type="text" id="fullName" class="swal2-input" placeholder="Your full name" required>
-									</div>
-									<div class="mb-3">
-										<label for="phoneNumber" style="font-weight: 600; display: block; margin-bottom: 5px;">Phone Number *</label>
-										<input type="tel" id="phoneNumber" class="swal2-input" placeholder="+91 98765 43210" required>
-									</div>
-									<div class="mb-3">
-										<label for="appointmentDate" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Date *</label>
-										<input type="date" id="appointmentDate" class="swal2-input" value="${dateStr}" required>
-									</div>
-									<div class="mb-3">
-										<label for="appointmentTime" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Time *</label>
-										<input type="time" id="appointmentTime" class="swal2-input" value="${timeStr}" required>
-									</div>
-									<div class="mb-3">
-										<label for="doctorSelect" style="font-weight: 600; display: block; margin-bottom: 5px;">Select Doctor</label>
-										<select id="doctorSelect" class="swal2-input">
-											<option value="">Choose a doctor</option>
-											<option value="Dr. S. Sangami">Dr. S. Sangami (Emergency & Occupational Medicine)</option>
-											<option value="Dr. M. Karthikeyan">Dr. M. Karthikeyan (Orthopedics)</option>
-											<option value="Dr. M. Salomon Themothi">Dr. M. Salomon Themothi (Surgery)</option>
-											<option value="Dr. D. Tharun">Dr. D. Tharun (Pulmonology)</option>
-											<option value="Dr. Subash Kaushik. T. G">Dr. Subash Kaushik. T. G (Urology)</option>
-											<option value="Dr. V. Prathapkumar">Dr. V. Prathapkumar (General Medicine)</option>
-										</select>
-									</div>
-									<div class="mb-3">
-										<label for="message" style="font-weight: 600; display: block; margin-bottom: 5px;">Additional Notes</label>
-										<textarea id="message" class="swal2-textarea" placeholder="Any specific concerns..." rows="2"></textarea>
-									</div>
-								</form>
-							`,
+									<form id="appointmentForm" style="text-align: left;">
+										<div class="mb-3">
+											<label for="fullName" style="font-weight: 600; display: block; margin-bottom: 5px;">Full Name *</label>
+											<input type="text" id="fullName" class="swal2-input" placeholder="Your full name" required>
+										</div>
+										<div class="mb-3">
+											<label for="phoneNumber" style="font-weight: 600; display: block; margin-bottom: 5px;">Phone Number *</label>
+											<input type="tel" id="phoneNumber" class="swal2-input" placeholder="+91 98765 43210" required>
+										</div>
+										<div class="mb-3">
+											<label for="appointmentDate" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Date *</label>
+											<input type="date" id="appointmentDate" class="swal2-input" value="${dateStr}" required>
+										</div>
+										<div class="mb-3">
+											<label for="appointmentTime" style="font-weight: 600; display: block; margin-bottom: 5px;">Preferred Time *</label>
+											<input type="time" id="appointmentTime" class="swal2-input" value="${timeStr}" required>
+										</div>
+										<div class="mb-3">
+											<label for="doctorSelect" style="font-weight: 600; display: block; margin-bottom: 5px;">Select Doctor</label>
+											<select id="doctorSelect" class="swal2-input">
+												<option value="">Choose a doctor</option>
+												<option value="Dr. S. Sangami">Dr. S. Sangami (Emergency & Occupational Medicine)</option>
+												<option value="Dr. M. Karthikeyan">Dr. M. Karthikeyan (Orthopedics)</option>
+												<option value="Dr. M. Salomon Themothi">Dr. M. Salomon Themothi (Surgery)</option>
+												<option value="Dr. D. Tharun">Dr. D. Tharun (Pulmonology)</option>
+												<option value="Dr. Subash Kaushik. T. G">Dr. Subash Kaushik. T. G (Urology)</option>
+												<option value="Dr. V. Prathapkumar">Dr. V. Prathapkumar (General Medicine)</option>
+											</select>
+										</div>
+										<div class="mb-3">
+											<label for="message" style="font-weight: 600; display: block; margin-bottom: 5px;">Additional Notes</label>
+											<textarea id="message" class="swal2-textarea" placeholder="Any specific concerns..." rows="2"></textarea>
+										</div>
+									</form>
+								`,
 						confirmButtonText: 'Confirm & Send to WhatsApp',
 						cancelButtonText: 'Cancel',
 						showCancelButton: true,
@@ -1929,17 +1987,17 @@
 							Swal.fire({
 								title: 'Appointment Request Sent! ✅',
 								html: `
-										<div style="text-align: left;">
-											<p><strong>Patient:</strong> ${data.name}</p>
-											<p><strong>Doctor:</strong> ${doctorDisplay}</p>
-											<p><strong>Date:</strong> ${formattedDate} at ${data.time}</p>
-											<hr>
-											<p style="color: #25D366; font-size: 0.95rem;">
-												<i class="bi bi-whatsapp"></i>
-												WhatsApp opened with your appointment details.
-											</p>
-										</div>
-									`,
+											<div style="text-align: left;">
+												<p><strong>Patient:</strong> ${data.name}</p>
+												<p><strong>Doctor:</strong> ${doctorDisplay}</p>
+												<p><strong>Date:</strong> ${formattedDate} at ${data.time}</p>
+												<hr>
+												<p style="color: #25D366; font-size: 0.95rem;">
+													<i class="bi bi-whatsapp"></i>
+													WhatsApp opened with your appointment details.
+												</p>
+											</div>
+										`,
 								icon: 'success',
 								confirmButtonColor: '#0e7c7b',
 								confirmButtonText: 'OK'
